@@ -1,0 +1,83 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="To_Do.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:To_Do"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:Key="ImageTemplate"                                 >
+            <Grid x:ConnectionId='3'                                       Width="50" Height="50">
+                <Border x:ConnectionId='4' VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent"                                    BorderThickness="3"/>
+                <Polygon x:ConnectionId='5' Points="50,0 50,50 0,50" Stroke="Transparent"                                             />
+                <Polygon x:ConnectionId='6' Points="47,3 47,47 3,47" Stroke="Transparent"                                                 />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <Grid.BackgroundTransition>
+            <BrushTransition/>
+        </Grid.BackgroundTransition>
+        <Border HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8" VerticalAlignment="Top" Margin="34,33,34,41" Background="{ThemeResource TextControlBackground}">
+            <ScrollViewer>
+                <StackPanel Padding="20,0,20,20" Spacing="10">
+                    <TextBlock
+                         Style="{StaticResource TitleTextBlockStyle}"
+                         Margin="0,10,0,0"
+                         FontWeight="Normal"
+                         Text="Visuals" />
+                    <ComboBox x:ConnectionId='7'                                                   x:Name="navStyleCombo" Margin="0,10,0,0" Header="Navigation Transition Style">
+                        <ComboBox.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0,0,0,5" Text="Navigation Transition Style"/>
+                            </DataTemplate>
+                        </ComboBox.HeaderTemplate>
+                        <ComboBoxItem Content="Entrance"/>
+                        <ComboBoxItem Content="Drill"/>
+                        <ComboBoxItem Content="Suppress"/>
+                        <ComboBoxItem Content="Slide from left"/>
+                        <ComboBoxItem Content="Slide from right"/>
+                    </ComboBox>
+                    <TextBlock Margin="1,10,0,0" Text="App Theme"/>
+                    <StackPanel x:ConnectionId='8' x:Name="ThemePanel" Margin="1,0,0,0">
+                        <RadioButton x:ConnectionId='15' Tag="Light"                                     Content="Light"/>
+                        <RadioButton x:ConnectionId='16' Tag="Dark"                                     Content="Dark" />
+                        <RadioButton x:ConnectionId='17' Tag="Default"                                     Content="Use system setting" />
+                    </StackPanel>
+                    <TextBlock Margin="1,10,0,0" Text="Color Theme"/>
+                    <GridView x:ConnectionId='9'                                                                  ItemTemplate="{StaticResource ImageTemplate}" SelectionMode="None" IsItemClickEnabled="True" x:Name="themeGrid">
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="Margin" Value="3, 3, 3, 3"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
+                                   MaximumRowsOrColumns="6"
+                                   Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                    <ToggleSwitch x:ConnectionId='10' x:Name="btntoggle"                          Header="Use image as background (Note: Some images have bad contrast with some colors)"/>
+                    <StackPanel x:ConnectionId='11' Visibility="Collapsed" x:Name="Fallbackpanel" Spacing="10">
+                        <TextBlock Text="*Allow access to file system to use custom images." Foreground="{ThemeResource SystemErrorTextColor}"/>
+                        <Button x:ConnectionId='13'                       >
+                            <Button.Content>
+                                <StackPanel Spacing="10" Orientation="Horizontal">
+                                    <FontIcon Glyph="&#xE8A7;"/>
+                                    <TextBlock Text="Launch Settings"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                    <Button x:ConnectionId='12' x:Name="bgimgbutton"                   Content="Choose Image"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        <TextBlock Margin="35,-45,35,10" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{ThemeResource TitleTextBlockStyle}" Text="Settings" Foreground="{ThemeResource SystemAccentColorDark2}" />
+    </Grid>
+</Page>
+
