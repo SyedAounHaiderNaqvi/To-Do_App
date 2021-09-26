@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\VS Projects\\To-Do\\To-Do\\To-Do.csproj": {}
+    "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj": {}
   },
   "projects": {
-    "E:\\VS Projects\\To-Do\\To-Do\\To-Do.csproj": {
+    "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\VS Projects\\To-Do\\To-Do\\To-Do.csproj",
+        "projectUniqueName": "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
         "projectName": "To-Do",
-        "projectPath": "E:\\VS Projects\\To-Do\\To-Do\\To-Do.csproj",
+        "projectPath": "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
         "packagesPath": "C:\\Users\\Aoun\\.nuget\\packages\\",
-        "outputPath": "E:\\VS Projects\\To-Do\\To-Do\\obj\\",
+        "outputPath": "E:\\VS Projects\\To-Do_App\\To-Do\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [

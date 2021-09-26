@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BszxGdk/ABIrcz+pfClx1UP4vwKpLe7zT5VbLQF1mY0tgZtT0NUGLG9MlK0I/RQOlRn/OVKGO5kgUixeGJg8vQ==",
+  "dgSpecHash": "Sa0+hRso5nOdj3mgbujbPHJ16aN58RGjwIdAz0+BDIGMJYJtACfgNBSfcD3OBeiH2s87ibYKo/GdJ1nUHEuB4w==",
   "success": true,
-  "projectFilePath": "E:\\VS Projects\\To-Do\\To-Do\\To-Do.csproj",
+  "projectFilePath": "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aoun\\.nuget\\packages\\microsoft.net.native.compiler\\2.2.10-rel-29722-00\\microsoft.net.native.compiler.2.2.10-rel-29722-00.nupkg.sha512",
     "C:\\Users\\Aoun\\.nuget\\packages\\microsoft.net.uwpcoreruntimesdk\\2.2.12\\microsoft.net.uwpcoreruntimesdk.2.2.12.nupkg.sha512",

@@ -393,9 +393,9 @@ namespace To_Do
             openPicker.FileTypeFilter.Add(".png");
 
             StorageFile file = await openPicker.PickSingleFileAsync();
-            localSettings.Values["imgPath"] = file.Path;
             if (file != null)
             {
+                localSettings.Values["imgPath"] = file.Path;
                 using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
                 {
                     BitmapImage bitmapImage = new BitmapImage();

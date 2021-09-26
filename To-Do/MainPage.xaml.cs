@@ -17,6 +17,8 @@ using Windows.UI.Xaml.Media;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Security.Authorization.AppCapabilityAccess;
+using Windows.UI.Xaml.Navigation;
+using System.Threading.Tasks;
 
 namespace To_Do
 {
@@ -203,6 +205,24 @@ namespace To_Do
         private void CoreTitlebar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
         {
             AppTitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            string argument = e.Parameter.ToString();
+            if (argument == "GoToPending")
+            {
+                ContentFrame.Navigate(typeof(PendingTasks));
+                nview.SelectedItem = nview.MenuItems[0];
+            }
+            else if (argument == "GoToCompleted")
+            {
+                ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                await Task.Delay(10);
+                ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
+                nview.SelectedItem = nview.MenuItems[1];
+            }
         }
 
         public void CreateThreeTileNotifications()
@@ -594,12 +614,10 @@ namespace To_Do
                     break;
             }
             Type pageType;
-            //Debug.WriteLine(args.SelectedItem.GetType().FullName);
             var selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
             if (args.IsSettingsSelected)
             {
                 pageType = Type.GetType("To_Do.Settings");
-                //nview.Header = "Settings";
                 ContentFrame.Navigate(pageType, null, info);
             }
             else
@@ -610,12 +628,10 @@ namespace To_Do
                 switch (selectedItemTag)
                 {
                     case "CompletedTasks":
-                        //nview.Header = "Completed Tasks";
                         ContentFrame.Navigate(pageType, tasksToParse, info);
                         tasksToParse.Clear();
                         break;
                     case "PendingTasks":
-                        //nview.Header = "Pending Tasks";
                         ContentFrame.Navigate(pageType, null, info);
                         break;
                     default:

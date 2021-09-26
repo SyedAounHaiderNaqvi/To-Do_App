@@ -1,5 +1,4 @@
 WinMetadata\Windows.winmd
-Assets\BrushAssets\NoiseTexture.png
 Assets\LargeTile.scale-100.png
 Assets\LargeTile.scale-125.png
 Assets\LargeTile.scale-150.png
@@ -58,10 +57,9 @@ NavigationPages\CompletedTasks.xbf
 NavigationPages\PendingTasks.xbf
 Settings.xbf
 To-Do.xr.xml
-Images\appicon (3).png
-Images\appicon512x512.png
 Images\appicon512x5122 (1).png
-Images\appicon512x5122.png
+Images\clock.png
+Images\complete.png
 Images\eek.png
 Images\tileIcon.png
 Images\yay.png

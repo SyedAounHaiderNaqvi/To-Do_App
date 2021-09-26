@@ -64,6 +64,8 @@ namespace To_Do.NavigationPages
                     AddATask(item[0], item[1]);
                 }
             }
+
+            ClearListBtn.Visibility = CompleteTasks.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public void AddATask(string taskDescription, string date)
@@ -82,6 +84,7 @@ namespace To_Do.NavigationPages
         private void ClearCompletedTaskList(object sender, RoutedEventArgs e)
         {
             CompleteTasks.Clear();
+            ClearListBtn.Visibility = Visibility.Collapsed;
         }
 
         private void UserControl_PointerEntered(object sender, PointerRoutedEventArgs e)

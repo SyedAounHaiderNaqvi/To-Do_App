@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using To_Do.NavigationPages;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace To_Do
 {
@@ -26,8 +30,25 @@ namespace To_Do
             return (TEnum)Enum.Parse(typeof(TEnum), text);
         }
 
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        private async Task ConfigureJumpList()
         {
+            JumpList jumpList = await JumpList.LoadCurrentAsync();
+            jumpList.Items.Clear();
+            JumpListItem jl1 = JumpListItem.CreateWithArguments("GoToPending", "Pending Tasks");
+            jl1.Logo = new Uri("ms-appx:///Images/clock.png");
+            jl1.GroupName = "Quick Actions";
+            jumpList.Items.Add(jl1);
+            JumpListItem jl2 = JumpListItem.CreateWithArguments("GoToCompleted", "Completed Tasks");
+            jl2.Logo = new Uri("ms-appx:///Images/complete.png");
+            jl2.GroupName = "Quick Actions";
+            jumpList.Items.Add(jl2);
+
+            await jumpList.SaveAsync();
+        }
+
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
+        {
+            await ConfigureJumpList();
             Frame rootFrame = Window.Current.Content as Frame;
 
             if (rootFrame == null)
@@ -53,11 +74,26 @@ namespace To_Do
                 {
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
+                else
+                {
+                    if (e.Arguments == "GoToPending")
+                    {
+                        MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
+                        MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[0];
+
+                    }
+                    else if (e.Arguments == "GoToCompleted")
+                    {
+                        MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                        await Task.Delay(10);
+                        MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
+                        MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[1];
+                    }
+                }
                 // Ensure the current window is active
                 ThemeHelper.Initialize();
                 Window.Current.Activate();
             }
-            
             ThemeHelper.Initialize();
         }
 
