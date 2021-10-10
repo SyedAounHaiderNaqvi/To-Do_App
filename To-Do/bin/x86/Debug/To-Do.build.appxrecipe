@@ -220,9 +220,6 @@
       <PackagePath>Assets\Wide310x150Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\appicon512x5122 %281%29.png">
-      <PackagePath>Images\appicon512x5122 %281%29.png</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\clock.png">
       <PackagePath>Images\clock.png</PackagePath>
     </AppxPackagedFile>
@@ -231,6 +228,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\eek.png">
       <PackagePath>Images\eek.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\New Project.png">
+      <PackagePath>Images\New Project.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\settingsIcon.png">
+      <PackagePath>Images\settingsIcon.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\tileIcon.png">
       <PackagePath>Images\tileIcon.png</PackagePath>
@@ -260,6 +263,15 @@
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\clock %282%29.tiff">
+      <PackagePath>Images\clock %282%29.tiff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\complete %284%29.tiff">
+      <PackagePath>Images\complete %284%29.tiff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\settingsIcon %284%29.tiff">
+      <PackagePath>Images\settingsIcon %284%29.tiff</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>

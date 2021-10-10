@@ -8,7 +8,6 @@
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
         <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
@@ -472,25 +471,25 @@
         <Border x:ConnectionId='109' IsHitTestVisible="True" Canvas.ZIndex="1" Margin="48,8,0,0" Height="40" VerticalAlignment="Top" Background="Transparent" x:Name="AppTitleBar">
             <StackPanel Orientation="Horizontal">
                 <FontIcon
-                    HorizontalAlignment="Left" 
-                    VerticalAlignment="Center"
-                    Foreground="{ThemeResource NavigationViewItemForegroundSelected}"
-                    Glyph="&#xE73E;"
-                    FontWeight="ExtraBold"
-                    />
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center"
+                        Foreground="{ThemeResource NavigationViewItemForegroundSelected}"
+                        Glyph="&#xE73E;"
+                        FontWeight="ExtraBold"
+                        />
                 <TextBlock
-                    Text="To-Do"
-                    VerticalAlignment="Center"
-                    Margin="8, 0, 0, 0"
-                    Style="{ThemeResource CaptionTextBlockStyle}"/>
+                        Text="To-Do"
+                        VerticalAlignment="Center"
+                        Margin="8, 0, 0, 0"
+                        Style="{ThemeResource CaptionTextBlockStyle}"/>
             </StackPanel>
         </Border>
-
-        <controls:NavigationView x:ConnectionId='110' Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False"                                               x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto"                                                   >
+        <controls:NavigationView x:ConnectionId='110'                       x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False"                                               x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto"                                                   >
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem ToolTipService.ToolTip="Pending Tasks" Tag="PendingTasks" IsSelected="True">
                     <controls:NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE823;"/>
+                        <!--<FontIcon Glyph="&#xE823;"/>-->
+                        <controls:ImageIcon Source="/Images/clock (2).tiff"/>
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.InfoBadge>
                         <controls:InfoBadge x:ConnectionId='112' x:FieldModifier="public" x:Name="inf"/>
@@ -501,7 +500,8 @@
                 </controls:NavigationViewItem>
                 <controls:NavigationViewItem ToolTipService.ToolTip="Completed Tasks" Tag="CompletedTasks">
                     <controls:NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE73E;"/>
+                        <!--<FontIcon Glyph="&#xE73E;"/>-->
+                        <controls:ImageIcon Source="/Images/complete (4).tiff"/>
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.Content>
                         <TextBlock Text="Completed Tasks"/>
@@ -511,8 +511,8 @@
             <Grid>
 
                 <Image x:ConnectionId='113' x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" Margin="0,-82,0,0" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
-                <Rectangle x:ConnectionId='114' x:FieldModifier="public" x:Name="acrylic" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Stroke="Transparent" Fill="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Rectangle x:ConnectionId='115' x:FieldModifier="public" x:Name="acrylictint" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Opacity="0.1" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Rectangle x:ConnectionId='114' Fill="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:FieldModifier="public" x:Name="acrylic" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Stroke="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Rectangle x:ConnectionId='115' x:FieldModifier="public" x:Name="acrylictint" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Opacity="0.2" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 <Frame x:ConnectionId='116' x:FieldModifier="public" x:Name="ContentFrame"/>
             </Grid>
 

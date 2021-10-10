@@ -116,7 +116,6 @@ E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\NavigationPages\PendingTasks.xbf
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\Settings.xbf
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\XamlSaveStateFile.xml
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\To-Do.csproj.CoreCompileInputs.cache
-E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\To-Do.csproj.CopyComplete
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\Microsoft.Toolkit.Uwp.Notifications.pri.xml
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\Microsoft.UI.Xaml.pri.xml
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\To-Do.exe

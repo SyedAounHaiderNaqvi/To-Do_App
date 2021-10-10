@@ -38,10 +38,16 @@ namespace To_Do
             jl1.Logo = new Uri("ms-appx:///Images/clock.png");
             jl1.GroupName = "Quick Actions";
             jumpList.Items.Add(jl1);
+
             JumpListItem jl2 = JumpListItem.CreateWithArguments("GoToCompleted", "Completed Tasks");
             jl2.Logo = new Uri("ms-appx:///Images/complete.png");
             jl2.GroupName = "Quick Actions";
             jumpList.Items.Add(jl2);
+
+            JumpListItem jl3 = JumpListItem.CreateWithArguments("GoToSettings", "Settings");
+            jl3.Logo = new Uri("ms-appx:///Images/settingsIcon.png");
+            jl3.GroupName = "Quick Actions";
+            jumpList.Items.Add(jl3);
 
             await jumpList.SaveAsync();
         }
@@ -88,6 +94,13 @@ namespace To_Do
                         await Task.Delay(10);
                         MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
                         MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[1];
+                    }
+                    else if (e.Arguments == "GoToSettings")
+                    {
+                        MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                        await Task.Delay(10);
+                        MainPage.ins.ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
+                        MainPage.ins.nview.SelectedItem = MainPage.ins.nview.SettingsItem;
                     }
                 }
                 // Ensure the current window is active

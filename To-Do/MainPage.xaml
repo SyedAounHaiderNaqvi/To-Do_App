@@ -484,11 +484,12 @@
                         Style="{ThemeResource CaptionTextBlockStyle}"/>
             </StackPanel>
         </Border>
-        <controls:NavigationView x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
+        <controls:NavigationView Loaded="nview_Loaded" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem ToolTipService.ToolTip="Pending Tasks" Tag="PendingTasks" IsSelected="True">
                     <controls:NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE823;"/>
+                        <!--<FontIcon Glyph="&#xE823;"/>-->
+                        <controls:ImageIcon Source="/Images/clock (2).tiff"/>
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.InfoBadge>
                         <controls:InfoBadge x:FieldModifier="public" x:Name="inf"/>
@@ -499,7 +500,8 @@
                 </controls:NavigationViewItem>
                 <controls:NavigationViewItem ToolTipService.ToolTip="Completed Tasks" Tag="CompletedTasks">
                     <controls:NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE73E;"/>
+                        <!--<FontIcon Glyph="&#xE73E;"/>-->
+                        <controls:ImageIcon Source="/Images/complete (4).tiff"/>
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.Content>
                         <TextBlock Text="Completed Tasks"/>

@@ -10,258 +10,267 @@
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>41c791cc-adc2-4dc9-9148-fb74a5aec780</PackageIdentityName>
     <PackageIdentityPublisher>CN=Aoun</PackageIdentityPublisher>
-    <IntermediateOutputPath>E:\VS Projects\To-Do\To-Do\obj\x64\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>E:\VS Projects\To-Do\To-Do\bin\x64\Release\AppX</LayoutDir>
+    <LayoutDir>E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\AppxManifest.xml">
+    <AppXManifest Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-100.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-100.png">
       <PackagePath>Assets\LargeTile.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-125.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-125.png">
       <PackagePath>Assets\LargeTile.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-150.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-150.png">
       <PackagePath>Assets\LargeTile.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-200.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-200.png">
       <PackagePath>Assets\LargeTile.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-400.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\LargeTile.scale-400.png">
       <PackagePath>Assets\LargeTile.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-100.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-100.png">
       <PackagePath>Assets\SmallTile.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-125.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-125.png">
       <PackagePath>Assets\SmallTile.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-150.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-150.png">
       <PackagePath>Assets\SmallTile.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-200.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-200.png">
       <PackagePath>Assets\SmallTile.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-400.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SmallTile.scale-400.png">
       <PackagePath>Assets\SmallTile.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-100.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-100.png">
       <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-125.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-125.png">
       <PackagePath>Assets\SplashScreen.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-150.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-150.png">
       <PackagePath>Assets\SplashScreen.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-400.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\SplashScreen.scale-400.png">
       <PackagePath>Assets\SplashScreen.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-100.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-100.png">
       <PackagePath>Assets\Square150x150Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-125.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-125.png">
       <PackagePath>Assets\Square150x150Logo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-150.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-150.png">
       <PackagePath>Assets\Square150x150Logo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-400.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square150x150Logo.scale-400.png">
       <PackagePath>Assets\Square150x150Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-16.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-256.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-32.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-48.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-100.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-100.png">
       <PackagePath>Assets\Square44x44Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-125.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-125.png">
       <PackagePath>Assets\Square44x44Logo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-150.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-150.png">
       <PackagePath>Assets\Square44x44Logo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-400.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.scale-400.png">
       <PackagePath>Assets\Square44x44Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-16.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-16.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-16.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-24.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-24.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-256.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-256.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-256.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-32.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-32.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-32.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-48.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Square44x44Logo.targetsize-48.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-48.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-100.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-100.png">
       <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-125.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-125.png">
       <PackagePath>Assets\StoreLogo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-150.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-150.png">
       <PackagePath>Assets\StoreLogo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-200.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-200.png">
       <PackagePath>Assets\StoreLogo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-400.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\StoreLogo.scale-400.png">
       <PackagePath>Assets\StoreLogo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-100.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-100.png">
       <PackagePath>Assets\Wide310x150Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-125.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-125.png">
       <PackagePath>Assets\Wide310x150Logo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-150.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-150.png">
       <PackagePath>Assets\Wide310x150Logo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-400.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Assets\Wide310x150Logo.scale-400.png">
       <PackagePath>Assets\Wide310x150Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\clrcompression.dll">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\clrcompression.dll">
       <PackagePath>clrcompression.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Images\appicon %283%29.png">
-      <PackagePath>Images\appicon %283%29.png</PackagePath>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\clock %282%29.tiff">
+      <PackagePath>Images\clock %282%29.tiff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Images\appicon512x512.png">
-      <PackagePath>Images\appicon512x512.png</PackagePath>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\clock.png">
+      <PackagePath>Images\clock.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Images\appicon512x5122 %281%29.png">
-      <PackagePath>Images\appicon512x5122 %281%29.png</PackagePath>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\complete %284%29.tiff">
+      <PackagePath>Images\complete %284%29.tiff</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Images\appicon512x5122.png">
-      <PackagePath>Images\appicon512x5122.png</PackagePath>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\complete.png">
+      <PackagePath>Images\complete.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Images\eek.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\eek.png">
       <PackagePath>Images\eek.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Images\tileIcon.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\New Project.png">
+      <PackagePath>Images\New Project.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\settingsIcon %284%29.tiff">
+      <PackagePath>Images\settingsIcon %284%29.tiff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\settingsIcon.png">
+      <PackagePath>Images\settingsIcon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\tileIcon.png">
       <PackagePath>Images\tileIcon.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\Images\yay.png">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\yay.png">
       <PackagePath>Images\yay.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\resources.pri">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\To-Do.dll">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\To-Do.dll">
       <PackagePath>To-Do.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\To-Do.exe">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\To-Do.exe">
       <PackagePath>To-Do.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do\To-Do\bin\x64\Release\ilc\To-Do.pdb">
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\To-Do.pdb">
       <PackagePath>To-Do.pdb</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.ui.xaml\2.7.0\buildTransitive\..\lib\uap10.0\Microsoft.UI.Xaml.winmd">

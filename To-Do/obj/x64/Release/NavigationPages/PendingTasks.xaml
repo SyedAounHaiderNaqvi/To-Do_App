@@ -373,7 +373,179 @@
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-            
+            <Style x:Key="StarCheck" TargetType="CheckBox">
+                <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
+                <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource CheckBoxBorderBrushUnchecked}"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="VerticalContentAlignment" Value="Top"/>
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                <Setter Property="MinWidth" Value="0"/>
+                <Setter Property="MinHeight" Value="0"/>
+                <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+                <Setter Property="FocusVisualMargin" Value="-7,-3,-7,-3"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CheckBox">
+                            <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CombinedStates">
+                                        <VisualState x:Name="UncheckedNormal">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBorderBrushUnchecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Glyph">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE734;"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="UncheckedPointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxForegroundUncheckedPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBackgroundUncheckedPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBorderBrushUncheckedPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Glyph">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE735;"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="UncheckedPressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxForegroundUncheckedPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBackgroundUncheckedPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBorderBrushUncheckedPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Glyph">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE735;"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        
+                                        <VisualState x:Name="CheckedNormal">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Glyph">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE735;"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxForegroundChecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBackgroundChecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBorderBrushChecked}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedPointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxForegroundCheckedPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBackgroundCheckedPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBorderBrushCheckedPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Glyph">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE735;"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedPressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxForegroundCheckedPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBackgroundCheckedPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBorderBrushCheckedPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Glyph">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE734;"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid Height="25" VerticalAlignment="Top">
+                                    <Rectangle Visibility="Collapsed" x:Name="NormalRectangle" Fill="{ThemeResource CheckBoxCheckBackgroundFillUnchecked}" Height="20" StrokeThickness="{ThemeResource CheckBoxBorderThemeThickness}" Stroke="{ThemeResource CheckBoxCheckBackgroundStrokeUnchecked}" UseLayoutRounding="False" Width="20"/>
+                                    <FontIcon x:Name="CheckGlyph" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="#eeac00" FontSize="20" Glyph="&#xE734;" Opacity="0"/>
+                                </Grid>
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </Page.Resources>
     <Grid Margin="0,0,0,20">
@@ -381,20 +553,32 @@
             <RowDefinition/>
             <RowDefinition MinHeight="80" Height="80"/>
         </Grid.RowDefinitions>
-        <ScrollViewer x:ConnectionId='26' Margin="20,20,20,0" IsVerticalScrollChainingEnabled="False" Grid.Row="0" x:Name="scroll" VerticalScrollBarVisibility="Auto">
-            <ListView x:ConnectionId='33' CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0" Margin="15,10,15,0"                                           x:Name="listOfTasks"                                 >
+        <ScrollViewer x:ConnectionId='38' Margin="20,20,20,0" IsVerticalScrollChainingEnabled="False" Grid.Row="0" x:Name="scroll" VerticalScrollBarVisibility="Auto">
+            <ListView x:ConnectionId='45' CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0" Margin="15,10,15,0"                                           x:Name="listOfTasks"                                 >
                 <ListView.ItemTemplate>
                     <DataTemplate                            >
-                        <UserControl x:ConnectionId='35'                                                                                       x:Name="UserControl">
+                        <UserControl x:ConnectionId='47'                                                                                       x:Name="UserControl">
                             <Border CornerRadius="4" BorderThickness="1" Background="{ThemeResource TextControlBackground}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                 <Grid x:Name="rootGrid">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="75"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <CheckBox x:ConnectionId='37'                                                  Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}"                            Margin="28,0,10,0" Grid.Column="0" CornerRadius="10"/>
-                                    <StackPanel Spacing="10" VerticalAlignment="Center" Margin="0,0,80,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
-                                        <TextBlock x:ConnectionId='41' Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}"                                         >
+                                    <FontIcon x:Name="DockIcon" Translation="-30,0,0" Opacity="0.7" Glyph="&#xE784;" Margin="-40,0,5,0" Grid.Column="0">
+                                        <FontIcon.TranslationTransition>
+                                            <Vector3Transition Duration="0:0:0.2"/>
+                                        </FontIcon.TranslationTransition>
+                                        <FontIcon.OpacityTransition>
+                                            <ScalarTransition/>
+                                        </FontIcon.OpacityTransition>
+                                    </FontIcon>
+                                    <CheckBox x:ConnectionId='50' x:Name="completecheckbox" Translation="-10,0,0"                                                  Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}"                            Margin="38,0,10,0" Grid.Column="0" CornerRadius="10">
+                                        <CheckBox.TranslationTransition>
+                                            <Vector3Transition Duration="0:0:0.2"/>
+                                        </CheckBox.TranslationTransition>
+                                    </CheckBox>
+                                    <StackPanel Spacing="10" VerticalAlignment="Center" Margin="10,0,120,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
+                                        <TextBlock x:ConnectionId='56' Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}"                                         >
                                             <TextBlock.TranslationTransition>
                                                 <Vector3Transition Duration="0:0:0.2"/>
                                             </TextBlock.TranslationTransition>
@@ -407,35 +591,38 @@
                                                 <ScalarTransition/>
                                             </StackPanel.OpacityTransition>
                                             <TextBlock Text="Created on:" Foreground="{ThemeResource SystemAccentColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                            <TextBlock x:ConnectionId='43' x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"                                  />
+                                            <TextBlock x:ConnectionId='58' x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"                                  />
                                         </StackPanel>
                                     </StackPanel>
-                                    <Button Translation="60,0,0" Opacity="0" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More Options" x:Name="DeleteTaskButton" Grid.Column="1" Margin="5,10,20,10" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                        <Button.TranslationTransition>
+                                    <StackPanel x:Name="BtnPanel" Spacing="20" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="5,10,20,10" Translation="60,0,0" Orientation="Horizontal">
+                                        <StackPanel.TranslationTransition>
                                             <Vector3Transition Duration="0:0:0.2"/>
-                                        </Button.TranslationTransition>
-                                        <Button.OpacityTransition>
+                                        </StackPanel.TranslationTransition>
+                                        <StackPanel.OpacityTransition>
                                             <ScalarTransition/>
-                                        </Button.OpacityTransition>
-                                        <Button.Content>
+                                        </StackPanel.OpacityTransition>
+                                        <CheckBox x:ConnectionId='52'                                               Style="{ThemeResource StarCheck}"                                                                                 ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
+                                        <Button Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More Options" x:Name="DeleteTaskButton">
+                                            <Button.Content>
                                             <FontIcon FontSize="14" Glyph="&#xE712;"/>
                                         </Button.Content>
-                                        <Button.Flyout>
+                                            <Button.Flyout>
                                             <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                                <MenuFlyoutItem x:ConnectionId='39' DataContext="{Binding ElementName=UserControl}"                       Text="Edit Task">
+                                                <MenuFlyoutItem x:ConnectionId='54' DataContext="{Binding ElementName=UserControl}"                       Text="Edit Task">
                                                     <MenuFlyoutItem.Icon>
                                                         <SymbolIcon Symbol="Edit"/>
                                                     </MenuFlyoutItem.Icon>
                                                 </MenuFlyoutItem>
 
-                                                <MenuFlyoutItem x:ConnectionId='40'                              DataContext="{Binding ElementName=UserControl}" Text="Delete Task">
+                                                <MenuFlyoutItem x:ConnectionId='55'                              DataContext="{Binding ElementName=UserControl}" Text="Delete Task">
                                                     <MenuFlyoutItem.Icon>
                                                         <SymbolIcon Symbol="Delete"/>
                                                     </MenuFlyoutItem.Icon>
                                                 </MenuFlyoutItem>
                                             </MenuFlyout>
                                         </Button.Flyout>
-                                    </Button>
+                                        </Button>
+                                    </StackPanel>
                                 </Grid>
                             </Border>
                         </UserControl>
@@ -453,7 +640,7 @@
                 </ListView.ItemContainerStyle>
             </ListView>
         </ScrollViewer>
-        <StackPanel x:ConnectionId='27' Margin="5,5,5,0" Padding="20,40,20,20" Background="Transparent" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
+        <StackPanel x:ConnectionId='39' Margin="5,5,5,0" Padding="20,40,20,20" Background="Transparent" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Width="70" Height="70" Stretch="Uniform" Source="/Images/yay.png" />
             </Grid>
@@ -461,13 +648,13 @@
             <TextBlock Foreground="{ThemeResource SystemAccentColorDark2}" HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="Create a new task so that you won't forget it later on."/>
         </StackPanel>
         <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Grid.Row="0" HorizontalAlignment="Left" Margin="35,-45,35,10" VerticalAlignment="Top" Text="Pending Tasks" Foreground="{ThemeResource SystemAccentColorDark2}" />
-        <TextBox x:ConnectionId='28'                                                                                              IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" VerticalContentAlignment="Center" PlaceholderText="Add a new task" Height="50" Padding="50,15,10,10" Margin="35,5,35,20" x:Name="NewTaskBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-        <FontIcon x:ConnectionId='29' IsHitTestVisible="False" x:Name="boxIcon" Width="20" Height="20" Margin="55,0,0,15" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Glyph="&#xE710;">
+        <TextBox x:ConnectionId='40'                                                                                              IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" VerticalContentAlignment="Center" PlaceholderText="Add a new task" Height="50" Padding="50,15,10,10" Margin="35,5,35,20" x:Name="NewTaskBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <FontIcon x:ConnectionId='41' IsHitTestVisible="False" x:Name="boxIcon" Width="20" Height="20" Margin="55,0,0,15" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Glyph="&#xE710;">
             <FontIcon.OpacityTransition>
                 <ScalarTransition/>
             </FontIcon.OpacityTransition>
         </FontIcon>
-        <Grid x:ConnectionId='30' x:Name="notif" Opacity="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10,10,10,95" Grid.RowSpan="2" Translation="0,170,0">
+        <Grid x:ConnectionId='42' x:Name="notif" Opacity="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10,10,10,95" Grid.RowSpan="2" Translation="0,170,0">
             <Grid.TranslationTransition>
                 <Vector3Transition Duration="0:0:0.2"/>
             </Grid.TranslationTransition>
@@ -475,10 +662,10 @@
                 <ScalarTransition/>
             </Grid.OpacityTransition>
             <Border Background="Transparent" BorderBrush="{ThemeResource SystemBaseHighColor}" Opacity="0.3" BorderThickness="3" CornerRadius="4"/>
-            <controls:InfoBar x:ConnectionId='31' CornerRadius="4" IsClosable="False" IsOpen="True" Background="{ThemeResource SystemControlAcrylicElementBrush}" Severity="Informational" Message="Marked task as complete." x:Name="confirmDoneNotif">
+            <controls:InfoBar x:ConnectionId='43' CornerRadius="4" IsClosable="False" IsOpen="True" Background="{ThemeResource SystemControlAcrylicElementBrush}" Severity="Informational" Message="Marked task as complete." x:Name="confirmDoneNotif">
 
                 <controls:InfoBar.ActionButton>
-                    <Button x:ConnectionId='32'                    HorizontalAlignment="Right" Margin="50,0,0,0" Content="Undo" Style="{ThemeResource AccentButtonStyle}"/>
+                    <Button x:ConnectionId='44'                    HorizontalAlignment="Right" Margin="50,0,0,0" Content="Undo" Style="{ThemeResource AccentButtonStyle}"/>
                 </controls:InfoBar.ActionButton>
             </controls:InfoBar>
 

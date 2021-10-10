@@ -116,14 +116,10 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="MinWidth" />
       <RootProperty Name="VerticalContentAlignment" />
-      <RootProperty Name="Translation" />
-      <RootProperty Name="Opacity" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Background" />
       <RootProperty Name="Height" />
       <RootProperty Name="CornerRadius" />
-      <RootProperty Name="TranslationTransition" />
-      <RootProperty Name="OpacityTransition" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
@@ -277,6 +273,7 @@
       <RootProperty Name="PaneDisplayMode" />
       <RootProperty Name="MenuItems" />
       <RootProperty Name="Content" />
+      <RootEvent Name="Loaded" />
       <RootEvent Name="DisplayModeChanged" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
@@ -402,6 +399,7 @@
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="Opacity" />
+      <RootProperty Name="Width" />
       <RootProperty Name="HorizontalAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Flyout">
@@ -461,20 +459,8 @@
       <RootProperty Name="InfoBadge" />
       <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.FontIcon">
-      <RootProperty Name="Glyph" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="FontWeight" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="FontFamily" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="IsHitTestVisible" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="OpacityTransition" />
+    <RootType FullName="Microsoft.UI.Xaml.Controls.ImageIcon">
+      <RootProperty Name="Source" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.InfoBadge" />
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
@@ -503,8 +489,26 @@
       <RootProperty Name="StrokeThickness" />
       <RootProperty Name="UseLayoutRounding" />
       <RootProperty Name="Width" />
+      <RootProperty Name="Visibility" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Frame" />
+    <RootType FullName="Windows.UI.Xaml.Controls.FontIcon">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Glyph" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="IsHitTestVisible" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="OpacityTransition" />
+      <RootProperty Name="Translation" />
+      <RootProperty Name="TranslationTransition" />
+    </RootType>
     <RootType FullName="To_Do.MainPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.SymbolIcon">
       <RootProperty Name="Symbol" />
@@ -535,12 +539,16 @@
     <RootType FullName="Windows.UI.Xaml.ScalarTransition" />
     <RootType FullName="To_Do.NavigationPages.CompletedTasks" />
     <RootType FullName="Windows.UI.Xaml.Controls.CheckBox">
+      <RootProperty Name="Translation" />
       <RootProperty Name="Style" />
       <RootProperty Name="DataContext" />
       <RootProperty Name="Margin" />
       <RootProperty Name="CornerRadius" />
+      <RootProperty Name="TranslationTransition" />
+      <RootProperty Name="IsChecked" />
       <RootEvent Name="PointerCaptureLost" />
       <RootEvent Name="Checked" />
+      <RootEvent Name="Unchecked" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
@@ -569,6 +577,12 @@
     <RootType FullName="Windows.UI.Xaml.Shapes.Polygon">
       <RootProperty Name="Points" />
       <RootProperty Name="Stroke" />
+      <RootProperty Name="Fill" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Shapes.Ellipse">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
       <RootProperty Name="Fill" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.BrushTransition" />

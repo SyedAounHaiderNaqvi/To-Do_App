@@ -5,13 +5,29 @@
     xmlns:local="using:To_Do"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate x:Key="ImageTemplate" x:DataType="local:GridThemeItem">
-            <Grid Background="{x:Bind backgroundBrush}" Width="50" Height="50">
-                <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{x:Bind borderBrush}" BorderThickness="3"/>
-                <Polygon Points="50,0 50,50 0,50" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
-                <Polygon Points="47,3 47,47 3,47" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.backgroundBrush}"/>
+            <Grid ToolTipService.ToolTip="{x:Bind tooltip}" Width="150" Height="100">
+                <Polygon Points="50,50 150,50 150,100, 50,100" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.backgroundBrush}"/>
+                <Polygon Points="50,0 150,0 150,15, 50,15" Stroke="Transparent" Fill="#eeeeee"/>
+                <Border CornerRadius="4,0,0,0" Margin="50,6,0,0" VerticalAlignment="Top" Width="150" Height="44" Background="{x:Bind backgroundBrush}"/>
+                <Polygon Points="0,0 50,0 50,50, 0,50" Stroke="Transparent" Fill="#eeeeee"/>
+                <Polygon Points="0,50 50,50 50,100, 0,100" Stroke="Transparent" Fill="#3c3c3c"/>
+                <Polygon Fill="{x:Bind borderBrush}" Points="60,14 80,14 80,17 60,17"/>
+                <Polygon Fill="#aadddddd" Points="60,30 140,30 140,40 60,40"/>
+                <Polygon Fill="#44888888" Points="60,55 140,55 140,65 60,65"/>
+                <Polygon Points="75,34 135,34 135,36 75,36" Fill="#000000"/>
+                <Polygon Points="75,59 135,59 135,61 75,61" Fill="#ffffff"/>
+                <Ellipse Margin="-7,29,10,10" Width="4" Height="4" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                <Polygon Points="0,91 50,91 50,97 0,97" Fill="#22cccccc"/>
+                <Polygon Points="2,92 3,92 3,96 2,96" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                <Polygon Points="7,93 25,93 25,95 7,95" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                <Polygon Points="7,23 29,23 29,25 7,25" Fill="#000000"/>
+                <Polygon Points="7,13 25,13 25,15 7,15" Fill="#000000"/>
+                <Border Margin="-7,-20,10,10" Width="4" Height="4" BorderThickness="1" Background="Transparent" CornerRadius="4" BorderBrush="#000000"/>
+                <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{ThemeResource SystemBaseLowColor}" BorderThickness="1"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -73,7 +89,7 @@
                             </Button.Content>
                         </Button>
                     </StackPanel>
-                    <Button x:Name="bgimgbutton" Click="Chooseimg" Content="Choose Image"/>
+                    <Button Margin="0,-10,0,0" x:Name="bgimgbutton" Click="Chooseimg" Content="Choose Image"/>
                 </StackPanel>
             </ScrollViewer>
         </Border>

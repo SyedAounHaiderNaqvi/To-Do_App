@@ -13,6 +13,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Threading;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 
 namespace To_Do.NavigationPages
 {
@@ -28,6 +30,7 @@ namespace To_Do.NavigationPages
         public int undoIndex;
         public string undoText;
         public string undoDate;
+        public bool undoStar;
         public int delay = 3000;
         CancellationTokenSource token;
         public ContentDialog dialog;
@@ -42,9 +45,9 @@ namespace To_Do.NavigationPages
             UpdateBadge();
         }
 
-        public void AddATask(string taskDescription, string date)
+        public void AddATask(string taskDescription, string date, bool isImportant)
         {
-            TaskItems.Add(new TODOTask() { Description = taskDescription, Date = date });
+            TaskItems.Add(new TODOTask() { Description = taskDescription, Date = date, IsStarred = isImportant });
             scroll.UpdateLayout();
             scroll.ChangeView(0, scroll.ScrollableHeight, 1);
 
@@ -63,13 +66,15 @@ namespace To_Do.NavigationPages
             {
                 string jsonLoaded = localSettings.Values["Tasks"] as string;
                 string jsonOfDatesLoaded = localSettings.Values["DateOfTasks"] as string;
+                string jsonOfImpLoaded = localSettings.Values["ImportanceOfTasks"] as string;
                 List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
                 List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDatesLoaded);
+                List<bool> loadedImportance = JsonConvert.DeserializeObject<List<bool>>(jsonOfImpLoaded);
                 if (loadedDescriptions != null)
                 {
                     for (int i = 0; i < loadedDescriptions.Count; i++)
                     {
-                        AddATask(loadedDescriptions[i], loadedDates[i]);
+                        AddATask(loadedDescriptions[i], loadedDates[i], loadedImportance[i]);
                     }
                 }
             }
@@ -87,10 +92,24 @@ namespace To_Do.NavigationPages
                 string d = NewTaskBox.Text;
                 if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
                 {
-                    AddATask(d, DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"));
+                    AddATask(d, DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), false);
                     NewTaskBox.Text = string.Empty;
                     e.Handled = true;
                 }
+            }
+        }
+
+        private void StarChecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            StackPanel cbparent = VisualTreeHelper.GetParent(cb) as StackPanel;
+            //Grid panelparent = VisualTreeHelper.GetParent(cbparent) as Grid;
+
+            UserControl top = cb.DataContext as UserControl;
+            TODOTask context = top.DataContext as TODOTask;
+            if (context != null)
+            {
+                context.IsStarred = (bool)cb.IsChecked;
             }
         }
 
@@ -107,7 +126,7 @@ namespace To_Do.NavigationPages
             // get checkbox that sent this function
             CheckBox cb = sender as CheckBox;
             Grid cbparent = VisualTreeHelper.GetParent(cb) as Grid;
-            StackPanel panel = VisualTreeHelper.GetChild(cbparent, 1) as StackPanel;
+            StackPanel panel = VisualTreeHelper.GetChild(cbparent, 2) as StackPanel;
             TextBlock block = VisualTreeHelper.GetChild(panel, 0) as TextBlock;
             undoText = block.Text;
             singletonReference.tasksToParse.Add(new List<string>() { block.Text, DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt") });
@@ -117,6 +136,7 @@ namespace To_Do.NavigationPages
             UserControl top = cb.DataContext as UserControl;
             TODOTask context = top.DataContext as TODOTask;
             undoDate = context.Date;
+            undoStar = context.IsStarred;
             block.TextDecorations = Windows.UI.Text.TextDecorations.None;
             for (int i = 0; i < TaskItems.Count; i++)
             {
@@ -151,7 +171,7 @@ namespace To_Do.NavigationPages
         private async void UndoDelete(object sender, RoutedEventArgs e)
         {
             singletonReference.tasksToParse.RemoveAt(singletonReference.tasksToParse.Count - 1);
-            TaskItems.Insert(undoIndex, new TODOTask() { Description = undoText, Date = undoDate });
+            TaskItems.Insert(undoIndex, new TODOTask() { Description = undoText, Date = undoDate, IsStarred = undoStar });
             scroll.UpdateLayout();
             scroll.ChangeView(0, scroll.ScrollableHeight, 1);
             UpdateBadge();
@@ -223,6 +243,8 @@ namespace To_Do.NavigationPages
         public void UpdateBadge()
         {
             singletonReference.inf.Value = TaskItems.Count;
+            //setBadgeNumber(TaskItems.Count);
+            
             if (TaskItems.Count > 0)
             {
                 singletonReference.inf.Visibility = Visibility.Visible;
@@ -230,6 +252,7 @@ namespace To_Do.NavigationPages
             else
             {
                 singletonReference.inf.Visibility = Visibility.Collapsed;
+                //BadgeUpdateManager.CreateBadgeUpdaterForApplication().Clear();
             }
         }
 
@@ -253,17 +276,21 @@ namespace To_Do.NavigationPages
         {
             if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse || e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
             {
-                //VisualStateManager.GoToState(sender as Control, "HoverButtonsShown", true);
                 var c = sender as Control;
-                //StackPanel panel = VisualTreeHelper.GetChild(c, 0) as StackPanel;
                 var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
                 var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-                var btn = FindControl<Button>(c, typeof(Button), "DeleteTaskButton");
+                var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
                 panel.Translation = System.Numerics.Vector3.Zero;
                 panel.Opacity = 1;
                 btn.Opacity = 1;
-                btn.Translation = System.Numerics.Vector3.Zero;
+                var icon = FindControl<FontIcon>(c, typeof(FontIcon), "DockIcon");
+                icon.Opacity = 0.7f;
+                icon.Translation = System.Numerics.Vector3.Zero;
+                btn.Translation = new System.Numerics.Vector3(8, 0, 0);
                 block.Translation = System.Numerics.Vector3.Zero;
+
+                var b = FindControl<CheckBox>(c, typeof(CheckBox), "completecheckbox");
+                b.Translation = System.Numerics.Vector3.Zero;
             }
         }
 
@@ -272,12 +299,17 @@ namespace To_Do.NavigationPages
             var c = sender as Control;
             var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
             var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-            var btn = FindControl<Button>(c, typeof(Button), "DeleteTaskButton");
+            var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
             panel.Translation = new System.Numerics.Vector3(0, 60, 0);
             panel.Opacity = 0;
-            btn.Opacity = 0;
+            var icon = FindControl<FontIcon>(c, typeof(FontIcon), "DockIcon");
+            icon.Opacity = 0;
+            icon.Translation = new System.Numerics.Vector3(-30, 0, 0);
             btn.Translation = new System.Numerics.Vector3(60, 0, 0);
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
+
+            var b = FindControl<CheckBox>(c, typeof(CheckBox), "completecheckbox");
+            b.Translation = new System.Numerics.Vector3(-10, 0, 0);
         }
 
         public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
@@ -310,10 +342,16 @@ namespace To_Do.NavigationPages
             var c = cb.DataContext as Control;
             var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
             var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-            var btn = FindControl<Button>(c, typeof(Button), "DeleteTaskButton");
+            var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
             panel.Translation = new System.Numerics.Vector3(0, 60, 0);
             panel.Opacity = 0;
-            btn.Opacity = 0;
+            var icon = FindControl<FontIcon>(c, typeof(FontIcon), "DockIcon");
+            icon.Opacity = 0;
+            icon.Translation = new System.Numerics.Vector3(-30, 0, 0);
+
+            var b = FindControl<CheckBox>(c, typeof(CheckBox), "completecheckbox");
+            b.Translation = new System.Numerics.Vector3(-10, 0, 0);
+
             btn.Translation = new System.Numerics.Vector3(60, 0, 0);
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
         }
@@ -323,6 +361,7 @@ namespace To_Do.NavigationPages
     {
         private string description { get; set; }
         private string date { get; set; }
+        private bool isStarred = false;
 
         public string Date
         {
@@ -330,6 +369,16 @@ namespace To_Do.NavigationPages
             set
             {
                 date = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsStarred
+        {
+            get => isStarred;
+            set
+            {
+                isStarred = value;
                 OnPropertyChanged();
             }
         }

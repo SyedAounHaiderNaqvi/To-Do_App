@@ -108,68 +108,87 @@ namespace To_Do
         {
             var lavender = CreateNewTheme(255, 255, 255, 103, 123, 202);
             lavender.darkThemeVariant = CreateNewTheme(150, 173, 255, 44, 57, 107);
+            lavender.tooltip = "Lush Lavender";
 
             var pink = CreateNewTheme(255, 255, 255, 171, 107, 173);
             pink.darkThemeVariant = CreateNewTheme(227, 100, 232, 57, 13, 59);
+            pink.tooltip = "Picturesque Pink";
 
             var red = CreateNewTheme(255, 255, 255, 211, 92, 124);
             red.darkThemeVariant = CreateNewTheme(222, 71, 71, 46, 0, 0);
+            red.tooltip = "Smooth Cherry";
 
             var orange = CreateNewTheme(255, 255, 255, 218, 98, 94);
             orange.darkThemeVariant = CreateNewTheme(227, 115, 59, 66, 22, 0);
+            orange.tooltip = "Definitely Orange";
 
             var green = CreateNewTheme(255, 255, 255, 62, 149, 110);
             green.darkThemeVariant = CreateNewTheme(50, 227, 103, 0, 54, 30);
+            green.tooltip = "Natural Green";
 
             var aqua = CreateNewTheme(255, 255, 255, 56, 145, 140);
             aqua.darkThemeVariant = CreateNewTheme(49, 214, 207, 0, 48, 46);
+            aqua.tooltip = "Cool Aqua";
 
             var grey = CreateNewTheme(255, 255, 255, 123, 137, 148);
             grey.darkThemeVariant = CreateNewTheme(137, 157, 173, 29, 34, 38);
+            grey.tooltip = "Dull Grey";
 
             var blueTwoTone = CreateNewTheme(60, 108, 176, 223, 237, 249);
             blueTwoTone.darkThemeVariant = CreateNewTheme(51, 163, 255, 10, 10, 10);
+            blueTwoTone.tooltip = "Blue, But Cooler";
 
             var purpleTwoTone = CreateNewTheme(132, 92, 154, 242, 231, 249);
             purpleTwoTone.darkThemeVariant = CreateNewTheme(191, 104, 237, 10, 10, 10);
+            purpleTwoTone.tooltip = "Royal Purple";
 
             var redTwoTone = CreateNewTheme(190, 94, 122, 255, 228, 233);
             redTwoTone.darkThemeVariant = CreateNewTheme(250, 57, 57, 10, 10, 10);
+            redTwoTone.tooltip = "Can't Get Enough Red";
 
             var orangeTwoTone = CreateNewTheme(178, 86, 62, 249, 232, 222);
             orangeTwoTone.darkThemeVariant = CreateNewTheme(237, 113, 59, 10, 10, 10);
-
+            orangeTwoTone.tooltip = "Citrus-y";
 
             var coffee = CreateNewTheme(107, 54, 0, 255, 250, 245);
             coffee.darkThemeVariant = CreateNewTheme(209, 178, 144, 46, 23, 0);
+            coffee.tooltip = "Strong Coffee";
 
             var discord = CreateNewTheme(71, 82, 196, 242, 243, 245);
             discord.darkThemeVariant = CreateNewTheme(104, 116, 242, 35, 37, 43);
+            discord.tooltip = "Discord";
 
             var saphire = CreateNewTheme(40, 62, 97, 119, 161, 197);
             saphire.darkThemeVariant = CreateNewTheme(133, 165, 194, 42, 54, 76);
+            saphire.tooltip = "Sapphire";
 
             var kimbie = CreateNewTheme(162, 125, 109, 255, 236, 211);
             kimbie.darkThemeVariant = CreateNewTheme(179, 87, 5, 31, 19, 5);
+            kimbie.tooltip = "Kimbie";
 
             var memory = CreateNewTheme(1, 1, 255, 255, 255, 255);
             memory.darkThemeVariant = CreateNewTheme(180, 180, 180, 1, 1, 255);
+            memory.tooltip = "Nostalgia";
 
             var kde = CreateNewTheme(255, 255, 255, 61, 174, 233);
             kde.darkThemeVariant = CreateNewTheme(61, 174, 233, 28, 38, 43);
+            kde.tooltip = "KDE";
 
             var orangeBlueTone = CreateNewTheme(0, 116, 163, 245, 231, 220);
             orangeBlueTone.darkThemeVariant = CreateNewTheme(230, 122, 0, 10, 50, 92);
+            orangeBlueTone.tooltip = "Beach and Inverse";
 
             var greenTwoTone = CreateNewTheme(51, 128, 96, 213, 241, 229);
             greenTwoTone.darkThemeVariant = CreateNewTheme(50, 194, 101, 10, 10, 10);
+            greenTwoTone.tooltip = "Yay Green";
 
             var aquaTwoTone = CreateNewTheme(40, 128, 133, 212, 255, 254);
             aquaTwoTone.darkThemeVariant = CreateNewTheme(45, 207, 198, 10, 10, 10);
+            aquaTwoTone.tooltip = "Another Aqua";
 
             var greyTwoTone = CreateNewTheme(98, 110, 121, 231, 236, 240);
             greyTwoTone.darkThemeVariant = CreateNewTheme(168, 180, 191, 10, 10, 10);
-
+            greyTwoTone.tooltip = "More Dull Grey";
 
 
             gridItems.Add(lavender);
@@ -423,6 +442,7 @@ namespace To_Do
         public Brush borderBrush { get; set; }
         public Brush backgroundBrush { get; set; }
         public GridThemeItem darkThemeVariant { get; set; }
+        public string tooltip { get; set; }
 
         public GridThemeItem(Brush _border, Brush _bg)
         {

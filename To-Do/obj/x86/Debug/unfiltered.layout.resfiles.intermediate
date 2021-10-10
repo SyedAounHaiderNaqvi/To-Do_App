@@ -57,10 +57,14 @@ NavigationPages\CompletedTasks.xbf
 NavigationPages\PendingTasks.xbf
 Settings.xbf
 To-Do.xr.xml
-Images\appicon512x5122 (1).png
+Images\clock (2).tiff
 Images\clock.png
+Images\complete (4).tiff
 Images\complete.png
 Images\eek.png
+Images\New Project.png
+Images\settingsIcon (4).tiff
+Images\settingsIcon.png
 Images\tileIcon.png
 Images\yay.png
 Properties\Default.rd.xml

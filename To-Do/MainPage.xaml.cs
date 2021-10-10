@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Security.Authorization.AppCapabilityAccess;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
+using Windows.Data.Xml.Dom;
 
 namespace To_Do
 {
@@ -26,6 +27,7 @@ namespace To_Do
     {
         public List<string> savingDescriptions = new List<string>();
         public List<string> savingDates = new List<string>();
+        public List<bool> savingImps = new List<bool>();
         public List<string> savingCompletedDates = new List<string>();
         public List<string> completedSaving = new List<string>();
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
@@ -34,7 +36,6 @@ namespace To_Do
         public List<List<string>> tasksToParse = new List<List<string>>();
         AppCapabilityAccessStatus status;
         public int PendingTasksCount = 0;
-        public double BlurAmount = 32.00;
 
         public MainPage()
         {
@@ -222,6 +223,13 @@ namespace To_Do
                 await Task.Delay(10);
                 ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
                 nview.SelectedItem = nview.MenuItems[1];
+            }
+            else if (argument == "GoToSettings")
+            {
+                ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                await Task.Delay(10);
+                ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
+                nview.SelectedItem = nview.SettingsItem;
             }
         }
 
@@ -554,8 +562,10 @@ namespace To_Do
             {
                 string temp = tODO.Description;
                 string date = tODO.Date;
+                bool importance = tODO.IsStarred;
                 savingDescriptions.Add(temp);
                 savingDates.Add(date);
+                savingImps.Add(importance);
             }
             Type pageType = Type.GetType("To_Do.NavigationPages.CompletedTasks");
             ContentFrame.Navigate(pageType, tasksToParse, new SuppressNavigationTransitionInfo());
@@ -571,11 +581,31 @@ namespace To_Do
             string compJsonFile = JsonConvert.SerializeObject(completedSaving);
             string dateJsonFile = JsonConvert.SerializeObject(savingDates);
             string compdateJsonFile = JsonConvert.SerializeObject(savingCompletedDates);
+            string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
             localSettings.Values["Tasks"] = jsonFile;
             localSettings.Values["TasksDone"] = compJsonFile;
             localSettings.Values["DateOfTasks"] = dateJsonFile;
             localSettings.Values["DateOfTasksDone"] = compdateJsonFile;
+            localSettings.Values["ImportanceOfTasks"] = importanceJsonFile;
             CreateThreeTileNotifications();
+
+            //// Get the blank badge XML payload for a badge number
+            //XmlDocument badgeXml =
+            //    BadgeUpdateManager.GetTemplateContent(BadgeTemplateType.BadgeNumber);
+
+            //// Set the value of the badge in the XML to our number
+            //XmlElement badgeElement = badgeXml.SelectSingleNode("/badge") as XmlElement;
+            //badgeElement.SetAttribute("value", "7");
+
+            //// Create the badge notification
+            //BadgeNotification badge = new BadgeNotification(badgeXml);
+
+            //// Create the badge updater for the application
+            //BadgeUpdater badgeUpdater =
+            //    BadgeUpdateManager.CreateBadgeUpdaterForApplication();
+
+            //// And update the badge
+            //badgeUpdater.Update(badge);
         }
 
 
@@ -668,6 +698,13 @@ namespace To_Do
                 acrylictint.Margin = new Thickness(-4, -84, -4, -4);
                 AppTitleBar.Margin = new Thickness(expandedIndent, currMargin.Top, currMargin.Right, currMargin.Bottom);
             }
+        }
+
+        private void nview_Loaded(object sender, RoutedEventArgs e)
+        {
+            // set icon
+            var settings = (Microsoft.UI.Xaml.Controls.NavigationViewItem)nview.SettingsItem;
+            settings.Icon = new BitmapIcon() { ShowAsMonochrome = false, UriSource = new Uri("ms-appx:///Images/settingsIcon (4).tiff"), Foreground = new SolidColorBrush(Colors.Transparent) };
         }
     }
 }
