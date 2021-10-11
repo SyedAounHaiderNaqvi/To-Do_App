@@ -658,9 +658,9 @@
             <controls:DropDownButton x:ConnectionId='45' x:Name="SortingDropDown" Content="Date Created" Grid.Column="2" VerticalAlignment="Center">
                 <controls:DropDownButton.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <MenuFlyoutItem x:ConnectionId='46'                              Text="Date Created"/>
-                        <MenuFlyoutItem x:ConnectionId='47'                              Text="Text"/>
-                        <MenuFlyoutItem x:ConnectionId='48'                              Text="Importance"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='46' x:Name="opt1" IsChecked="True"                              Text="Date Created"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='47' x:Name="opt2"                              Text="Text"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='48' x:Name="opt3"                              Text="Importance"/>
                     </MenuFlyout>
                 </controls:DropDownButton.Flyout>
 

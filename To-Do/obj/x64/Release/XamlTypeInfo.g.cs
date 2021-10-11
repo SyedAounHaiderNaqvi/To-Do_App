@@ -223,7 +223,7 @@ namespace To_Do.To_Do_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[75];
+            _typeNameTable = new string[78];
             _typeNameTable[0] = "Microsoft.UI.Xaml.Controls.XamlControlsResources";
             _typeNameTable[1] = "Windows.UI.Xaml.ResourceDictionary";
             _typeNameTable[2] = "Object";
@@ -282,25 +282,28 @@ namespace To_Do.To_Do_XamlTypeInfo
             _typeNameTable[55] = "Microsoft.UI.Xaml.Controls.ProgressRingTemplateSettings";
             _typeNameTable[56] = "Microsoft.UI.Xaml.Controls.NavigationViewItem";
             _typeNameTable[57] = "Microsoft.UI.Xaml.Controls.InfoBadge";
-            _typeNameTable[58] = "Microsoft.UI.Xaml.Controls.ImageIcon";
-            _typeNameTable[59] = "Windows.UI.Xaml.Media.ImageSource";
-            _typeNameTable[60] = "Int32";
-            _typeNameTable[61] = "Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings";
-            _typeNameTable[62] = "To_Do.MainPage";
-            _typeNameTable[63] = "Windows.UI.Xaml.Controls.Page";
-            _typeNameTable[64] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[65] = "To_Do.NavigationPages.CompletedTasks";
-            _typeNameTable[66] = "Microsoft.UI.Xaml.Controls.InfoBar";
-            _typeNameTable[67] = "Microsoft.UI.Xaml.Controls.InfoBarSeverity";
-            _typeNameTable[68] = "Windows.UI.Xaml.Controls.Primitives.ButtonBase";
-            _typeNameTable[69] = "System.Windows.Input.ICommand";
-            _typeNameTable[70] = "Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings";
-            _typeNameTable[71] = "To_Do.NavigationPages.PendingTasks";
-            _typeNameTable[72] = "To_Do.Settings";
-            _typeNameTable[73] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
-            _typeNameTable[74] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
+            _typeNameTable[58] = "Int32";
+            _typeNameTable[59] = "Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings";
+            _typeNameTable[60] = "To_Do.MainPage";
+            _typeNameTable[61] = "Windows.UI.Xaml.Controls.Page";
+            _typeNameTable[62] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[63] = "To_Do.NavigationPages.CompletedTasks";
+            _typeNameTable[64] = "Microsoft.UI.Xaml.Controls.InfoBar";
+            _typeNameTable[65] = "Microsoft.UI.Xaml.Controls.InfoBarSeverity";
+            _typeNameTable[66] = "Windows.UI.Xaml.Controls.Primitives.ButtonBase";
+            _typeNameTable[67] = "System.Windows.Input.ICommand";
+            _typeNameTable[68] = "Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings";
+            _typeNameTable[69] = "Microsoft.UI.Xaml.Controls.DropDownButton";
+            _typeNameTable[70] = "Windows.UI.Xaml.Controls.Button";
+            _typeNameTable[71] = "Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem";
+            _typeNameTable[72] = "Windows.UI.Xaml.Controls.MenuFlyoutItem";
+            _typeNameTable[73] = "Windows.UI.Xaml.Controls.MenuFlyoutSubItem";
+            _typeNameTable[74] = "To_Do.NavigationPages.PendingTasks";
+            _typeNameTable[75] = "To_Do.Settings";
+            _typeNameTable[76] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
+            _typeNameTable[77] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
 
-            _typeTable = new global::System.Type[75];
+            _typeTable = new global::System.Type[78];
             _typeTable[0] = typeof(global::Microsoft.UI.Xaml.Controls.XamlControlsResources);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.ResourceDictionary);
             _typeTable[2] = typeof(global::System.Object);
@@ -359,23 +362,26 @@ namespace To_Do.To_Do_XamlTypeInfo
             _typeTable[55] = typeof(global::Microsoft.UI.Xaml.Controls.ProgressRingTemplateSettings);
             _typeTable[56] = typeof(global::Microsoft.UI.Xaml.Controls.NavigationViewItem);
             _typeTable[57] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBadge);
-            _typeTable[58] = typeof(global::Microsoft.UI.Xaml.Controls.ImageIcon);
-            _typeTable[59] = typeof(global::Windows.UI.Xaml.Media.ImageSource);
-            _typeTable[60] = typeof(global::System.Int32);
-            _typeTable[61] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings);
-            _typeTable[62] = typeof(global::To_Do.MainPage);
-            _typeTable[63] = typeof(global::Windows.UI.Xaml.Controls.Page);
-            _typeTable[64] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[65] = typeof(global::To_Do.NavigationPages.CompletedTasks);
-            _typeTable[66] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBar);
-            _typeTable[67] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBarSeverity);
-            _typeTable[68] = typeof(global::Windows.UI.Xaml.Controls.Primitives.ButtonBase);
-            _typeTable[69] = typeof(global::System.Windows.Input.ICommand);
-            _typeTable[70] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings);
-            _typeTable[71] = typeof(global::To_Do.NavigationPages.PendingTasks);
-            _typeTable[72] = typeof(global::To_Do.Settings);
-            _typeTable[73] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
-            _typeTable[74] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
+            _typeTable[58] = typeof(global::System.Int32);
+            _typeTable[59] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings);
+            _typeTable[60] = typeof(global::To_Do.MainPage);
+            _typeTable[61] = typeof(global::Windows.UI.Xaml.Controls.Page);
+            _typeTable[62] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[63] = typeof(global::To_Do.NavigationPages.CompletedTasks);
+            _typeTable[64] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBar);
+            _typeTable[65] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBarSeverity);
+            _typeTable[66] = typeof(global::Windows.UI.Xaml.Controls.Primitives.ButtonBase);
+            _typeTable[67] = typeof(global::System.Windows.Input.ICommand);
+            _typeTable[68] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings);
+            _typeTable[69] = typeof(global::Microsoft.UI.Xaml.Controls.DropDownButton);
+            _typeTable[70] = typeof(global::Windows.UI.Xaml.Controls.Button);
+            _typeTable[71] = typeof(global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem);
+            _typeTable[72] = typeof(global::Windows.UI.Xaml.Controls.MenuFlyoutItem);
+            _typeTable[73] = typeof(global::Windows.UI.Xaml.Controls.MenuFlyoutSubItem);
+            _typeTable[74] = typeof(global::To_Do.NavigationPages.PendingTasks);
+            _typeTable[75] = typeof(global::To_Do.Settings);
+            _typeTable[76] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
+            _typeTable[77] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -425,15 +431,16 @@ namespace To_Do.To_Do_XamlTypeInfo
         private object Activate_54_ProgressRing() { return new global::Microsoft.UI.Xaml.Controls.ProgressRing(); }
         private object Activate_56_NavigationViewItem() { return new global::Microsoft.UI.Xaml.Controls.NavigationViewItem(); }
         private object Activate_57_InfoBadge() { return new global::Microsoft.UI.Xaml.Controls.InfoBadge(); }
-        private object Activate_58_ImageIcon() { return new global::Microsoft.UI.Xaml.Controls.ImageIcon(); }
-        private object Activate_61_InfoBadgeTemplateSettings() { return new global::Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings(); }
-        private object Activate_62_MainPage() { return new global::To_Do.MainPage(); }
-        private object Activate_65_CompletedTasks() { return new global::To_Do.NavigationPages.CompletedTasks(); }
-        private object Activate_66_InfoBar() { return new global::Microsoft.UI.Xaml.Controls.InfoBar(); }
-        private object Activate_70_InfoBarTemplateSettings() { return new global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings(); }
-        private object Activate_71_PendingTasks() { return new global::To_Do.NavigationPages.PendingTasks(); }
-        private object Activate_72_Settings() { return new global::To_Do.Settings(); }
-        private object Activate_73_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
+        private object Activate_59_InfoBadgeTemplateSettings() { return new global::Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings(); }
+        private object Activate_60_MainPage() { return new global::To_Do.MainPage(); }
+        private object Activate_63_CompletedTasks() { return new global::To_Do.NavigationPages.CompletedTasks(); }
+        private object Activate_64_InfoBar() { return new global::Microsoft.UI.Xaml.Controls.InfoBar(); }
+        private object Activate_68_InfoBarTemplateSettings() { return new global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings(); }
+        private object Activate_69_DropDownButton() { return new global::Microsoft.UI.Xaml.Controls.DropDownButton(); }
+        private object Activate_71_RadioMenuFlyoutItem() { return new global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem(); }
+        private object Activate_74_PendingTasks() { return new global::To_Do.NavigationPages.PendingTasks(); }
+        private object Activate_75_Settings() { return new global::To_Do.Settings(); }
+        private object Activate_76_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
         private void MapAdd_0_XamlControlsResources(object instance, object key, object item)
         {
             var collection = (global::System.Collections.Generic.IDictionary<global::System.Object, global::System.Object>)instance;
@@ -447,7 +454,7 @@ namespace To_Do.To_Do_XamlTypeInfo
             var newItem = (global::System.Object)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_74_IList(object instance, object item)
+        private void VectorAdd_77_IList(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Microsoft.UI.Xaml.Controls.TreeViewNode>)instance;
             var newItem = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)item;
@@ -873,52 +880,41 @@ namespace To_Do.To_Do_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 58:   //  Microsoft.UI.Xaml.Controls.ImageIcon
-                userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.IconElement"));
-                userType.Activator = Activate_58_ImageIcon;
-                userType.AddMemberName("Source");
-                xamlType = userType;
-                break;
-
-            case 59:   //  Windows.UI.Xaml.Media.ImageSource
+            case 58:   //  Int32
                 xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 60:   //  Int32
-                xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 61:   //  Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings
+            case 59:   //  Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 62:   //  To_Do.MainPage
+            case 60:   //  To_Do.MainPage
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_62_MainPage;
+                userType.Activator = Activate_60_MainPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 63:   //  Windows.UI.Xaml.Controls.Page
+            case 61:   //  Windows.UI.Xaml.Controls.Page
                 xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 64:   //  Windows.UI.Xaml.Controls.UserControl
+            case 62:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 65:   //  To_Do.NavigationPages.CompletedTasks
+            case 63:   //  To_Do.NavigationPages.CompletedTasks
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_65_CompletedTasks;
+                userType.Activator = Activate_63_CompletedTasks;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 66:   //  Microsoft.UI.Xaml.Controls.InfoBar
+            case 64:   //  Microsoft.UI.Xaml.Controls.InfoBar
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Control"));
-                userType.Activator = Activate_66_InfoBar;
+                userType.Activator = Activate_64_InfoBar;
                 userType.SetContentPropertyName("Microsoft.UI.Xaml.Controls.InfoBar.Content");
                 userType.AddMemberName("Content");
                 userType.AddMemberName("IsClosable");
@@ -937,7 +933,7 @@ namespace To_Do.To_Do_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 67:   //  Microsoft.UI.Xaml.Controls.InfoBarSeverity
+            case 65:   //  Microsoft.UI.Xaml.Controls.InfoBarSeverity
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
                 userType.AddEnumValue("Informational", global::Microsoft.UI.Xaml.Controls.InfoBarSeverity.Informational);
                 userType.AddEnumValue("Success", global::Microsoft.UI.Xaml.Controls.InfoBarSeverity.Success);
@@ -946,39 +942,66 @@ namespace To_Do.To_Do_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 68:   //  Windows.UI.Xaml.Controls.Primitives.ButtonBase
+            case 66:   //  Windows.UI.Xaml.Controls.Primitives.ButtonBase
                 xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 69:   //  System.Windows.Input.ICommand
+            case 67:   //  System.Windows.Input.ICommand
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, null);
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 70:   //  Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings
+            case 68:   //  Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 71:   //  To_Do.NavigationPages.PendingTasks
+            case 69:   //  Microsoft.UI.Xaml.Controls.DropDownButton
+                userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Button"));
+                userType.Activator = Activate_69_DropDownButton;
+                xamlType = userType;
+                break;
+
+            case 70:   //  Windows.UI.Xaml.Controls.Button
+                xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 71:   //  Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem
+                userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.MenuFlyoutItem"));
+                userType.Activator = Activate_71_RadioMenuFlyoutItem;
+                userType.AddMemberName("IsChecked");
+                userType.AddMemberName("GroupName");
+                userType.AddMemberName("AreCheckStatesEnabled");
+                xamlType = userType;
+                break;
+
+            case 72:   //  Windows.UI.Xaml.Controls.MenuFlyoutItem
+                xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 73:   //  Windows.UI.Xaml.Controls.MenuFlyoutSubItem
+                xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 74:   //  To_Do.NavigationPages.PendingTasks
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_71_PendingTasks;
+                userType.Activator = Activate_74_PendingTasks;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 72:   //  To_Do.Settings
+            case 75:   //  To_Do.Settings
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_72_Settings;
+                userType.Activator = Activate_75_Settings;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 73:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
+            case 76:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_73_TreeViewNode;
+                userType.Activator = Activate_76_TreeViewNode;
                 userType.AddMemberName("IsExpanded");
                 userType.AddMemberName("HasUnrealizedChildren");
                 userType.AddMemberName("Content");
@@ -990,9 +1013,9 @@ namespace To_Do.To_Do_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 74:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
+            case 77:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, null);
-                userType.CollectionAdd = VectorAdd_74_IList;
+                userType.CollectionAdd = VectorAdd_77_IList;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
@@ -1846,222 +1869,240 @@ namespace To_Do.To_Do_XamlTypeInfo
             var that = (global::Microsoft.UI.Xaml.Controls.NavigationViewItem)instance;
             return that.MenuItems;
         }
-        private object get_85_ImageIcon_Source(object instance)
-        {
-            var that = (global::Microsoft.UI.Xaml.Controls.ImageIcon)instance;
-            return that.Source;
-        }
-        private void set_85_ImageIcon_Source(object instance, object Value)
-        {
-            var that = (global::Microsoft.UI.Xaml.Controls.ImageIcon)instance;
-            that.Source = (global::Windows.UI.Xaml.Media.ImageSource)Value;
-        }
-        private object get_86_InfoBadge_Value(object instance)
+        private object get_85_InfoBadge_Value(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBadge)instance;
             return that.Value;
         }
-        private void set_86_InfoBadge_Value(object instance, object Value)
+        private void set_85_InfoBadge_Value(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBadge)instance;
             that.Value = (global::System.Int32)Value;
         }
-        private object get_87_InfoBadge_IconSource(object instance)
+        private object get_86_InfoBadge_IconSource(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBadge)instance;
             return that.IconSource;
         }
-        private void set_87_InfoBadge_IconSource(object instance, object Value)
+        private void set_86_InfoBadge_IconSource(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBadge)instance;
             that.IconSource = (global::Microsoft.UI.Xaml.Controls.IconSource)Value;
         }
-        private object get_88_InfoBadge_TemplateSettings(object instance)
+        private object get_87_InfoBadge_TemplateSettings(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBadge)instance;
             return that.TemplateSettings;
         }
-        private object get_89_InfoBar_Content(object instance)
+        private object get_88_InfoBar_Content(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.Content;
         }
-        private void set_89_InfoBar_Content(object instance, object Value)
+        private void set_88_InfoBar_Content(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.Content = (global::System.Object)Value;
         }
-        private object get_90_InfoBar_IsClosable(object instance)
+        private object get_89_InfoBar_IsClosable(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.IsClosable;
         }
-        private void set_90_InfoBar_IsClosable(object instance, object Value)
+        private void set_89_InfoBar_IsClosable(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.IsClosable = (global::System.Boolean)Value;
         }
-        private object get_91_InfoBar_IsOpen(object instance)
+        private object get_90_InfoBar_IsOpen(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.IsOpen;
         }
-        private void set_91_InfoBar_IsOpen(object instance, object Value)
+        private void set_90_InfoBar_IsOpen(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.IsOpen = (global::System.Boolean)Value;
         }
-        private object get_92_InfoBar_Severity(object instance)
+        private object get_91_InfoBar_Severity(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.Severity;
         }
-        private void set_92_InfoBar_Severity(object instance, object Value)
+        private void set_91_InfoBar_Severity(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.Severity = (global::Microsoft.UI.Xaml.Controls.InfoBarSeverity)Value;
         }
-        private object get_93_InfoBar_Message(object instance)
+        private object get_92_InfoBar_Message(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.Message;
         }
-        private void set_93_InfoBar_Message(object instance, object Value)
+        private void set_92_InfoBar_Message(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.Message = (global::System.String)Value;
         }
-        private object get_94_InfoBar_ActionButton(object instance)
+        private object get_93_InfoBar_ActionButton(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.ActionButton;
         }
-        private void set_94_InfoBar_ActionButton(object instance, object Value)
+        private void set_93_InfoBar_ActionButton(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.ActionButton = (global::Windows.UI.Xaml.Controls.Primitives.ButtonBase)Value;
         }
-        private object get_95_InfoBar_Title(object instance)
+        private object get_94_InfoBar_Title(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.Title;
         }
-        private void set_95_InfoBar_Title(object instance, object Value)
+        private void set_94_InfoBar_Title(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.Title = (global::System.String)Value;
         }
-        private object get_96_InfoBar_IsIconVisible(object instance)
+        private object get_95_InfoBar_IsIconVisible(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.IsIconVisible;
         }
-        private void set_96_InfoBar_IsIconVisible(object instance, object Value)
+        private void set_95_InfoBar_IsIconVisible(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.IsIconVisible = (global::System.Boolean)Value;
         }
-        private object get_97_InfoBar_IconSource(object instance)
+        private object get_96_InfoBar_IconSource(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.IconSource;
         }
-        private void set_97_InfoBar_IconSource(object instance, object Value)
+        private void set_96_InfoBar_IconSource(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.IconSource = (global::Microsoft.UI.Xaml.Controls.IconSource)Value;
         }
-        private object get_98_InfoBar_ContentTemplate(object instance)
+        private object get_97_InfoBar_ContentTemplate(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.ContentTemplate;
         }
-        private void set_98_InfoBar_ContentTemplate(object instance, object Value)
+        private void set_97_InfoBar_ContentTemplate(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.ContentTemplate = (global::Windows.UI.Xaml.DataTemplate)Value;
         }
-        private object get_99_InfoBar_CloseButtonStyle(object instance)
+        private object get_98_InfoBar_CloseButtonStyle(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.CloseButtonStyle;
         }
-        private void set_99_InfoBar_CloseButtonStyle(object instance, object Value)
+        private void set_98_InfoBar_CloseButtonStyle(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.CloseButtonStyle = (global::Windows.UI.Xaml.Style)Value;
         }
-        private object get_100_InfoBar_CloseButtonCommandParameter(object instance)
+        private object get_99_InfoBar_CloseButtonCommandParameter(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.CloseButtonCommandParameter;
         }
-        private void set_100_InfoBar_CloseButtonCommandParameter(object instance, object Value)
+        private void set_99_InfoBar_CloseButtonCommandParameter(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.CloseButtonCommandParameter = (global::System.Object)Value;
         }
-        private object get_101_InfoBar_CloseButtonCommand(object instance)
+        private object get_100_InfoBar_CloseButtonCommand(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.CloseButtonCommand;
         }
-        private void set_101_InfoBar_CloseButtonCommand(object instance, object Value)
+        private void set_100_InfoBar_CloseButtonCommand(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             that.CloseButtonCommand = (global::System.Windows.Input.ICommand)Value;
         }
-        private object get_102_InfoBar_TemplateSettings(object instance)
+        private object get_101_InfoBar_TemplateSettings(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.TemplateSettings;
         }
-        private object get_103_TreeViewNode_IsExpanded(object instance)
+        private object get_102_RadioMenuFlyoutItem_IsChecked(object instance)
+        {
+            var that = (global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem)instance;
+            return that.IsChecked;
+        }
+        private void set_102_RadioMenuFlyoutItem_IsChecked(object instance, object Value)
+        {
+            var that = (global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem)instance;
+            that.IsChecked = (global::System.Boolean)Value;
+        }
+        private object get_103_RadioMenuFlyoutItem_GroupName(object instance)
+        {
+            var that = (global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem)instance;
+            return that.GroupName;
+        }
+        private void set_103_RadioMenuFlyoutItem_GroupName(object instance, object Value)
+        {
+            var that = (global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem)instance;
+            that.GroupName = (global::System.String)Value;
+        }
+        private object get_104_RadioMenuFlyoutItem_AreCheckStatesEnabled(object instance)
+        {
+            return global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.GetAreCheckStatesEnabled((global::Windows.UI.Xaml.Controls.MenuFlyoutSubItem)instance);
+        }
+        private void set_104_RadioMenuFlyoutItem_AreCheckStatesEnabled(object instance, object Value)
+        {
+            global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.SetAreCheckStatesEnabled((global::Windows.UI.Xaml.Controls.MenuFlyoutSubItem)instance, (global::System.Boolean)Value);
+        }
+        private object get_105_TreeViewNode_IsExpanded(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.IsExpanded;
         }
-        private void set_103_TreeViewNode_IsExpanded(object instance, object Value)
+        private void set_105_TreeViewNode_IsExpanded(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.IsExpanded = (global::System.Boolean)Value;
         }
-        private object get_104_TreeViewNode_HasUnrealizedChildren(object instance)
+        private object get_106_TreeViewNode_HasUnrealizedChildren(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.HasUnrealizedChildren;
         }
-        private void set_104_TreeViewNode_HasUnrealizedChildren(object instance, object Value)
+        private void set_106_TreeViewNode_HasUnrealizedChildren(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.HasUnrealizedChildren = (global::System.Boolean)Value;
         }
-        private object get_105_TreeViewNode_Content(object instance)
+        private object get_107_TreeViewNode_Content(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Content;
         }
-        private void set_105_TreeViewNode_Content(object instance, object Value)
+        private void set_107_TreeViewNode_Content(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.Content = (global::System.Object)Value;
         }
-        private object get_106_TreeViewNode_Children(object instance)
+        private object get_108_TreeViewNode_Children(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Children;
         }
-        private object get_107_TreeViewNode_Depth(object instance)
+        private object get_109_TreeViewNode_Depth(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Depth;
         }
-        private object get_108_TreeViewNode_HasChildren(object instance)
+        private object get_110_TreeViewNode_HasChildren(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.HasChildren;
         }
-        private object get_109_TreeViewNode_Parent(object instance)
+        private object get_111_TreeViewNode_Parent(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Parent;
@@ -2662,176 +2703,192 @@ namespace To_Do.To_Do_XamlTypeInfo
                 xamlMember.Getter = get_84_NavigationViewItem_MenuItems;
                 xamlMember.SetIsReadOnly();
                 break;
-            case "Microsoft.UI.Xaml.Controls.ImageIcon.Source":
-                userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.ImageIcon");
-                xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Source", "Windows.UI.Xaml.Media.ImageSource");
-                xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_85_ImageIcon_Source;
-                xamlMember.Setter = set_85_ImageIcon_Source;
-                break;
             case "Microsoft.UI.Xaml.Controls.InfoBadge.Value":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBadge");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Value", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_86_InfoBadge_Value;
-                xamlMember.Setter = set_86_InfoBadge_Value;
+                xamlMember.Getter = get_85_InfoBadge_Value;
+                xamlMember.Setter = set_85_InfoBadge_Value;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBadge.IconSource":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBadge");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "IconSource", "Microsoft.UI.Xaml.Controls.IconSource");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_87_InfoBadge_IconSource;
-                xamlMember.Setter = set_87_InfoBadge_IconSource;
+                xamlMember.Getter = get_86_InfoBadge_IconSource;
+                xamlMember.Setter = set_86_InfoBadge_IconSource;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBadge.TemplateSettings":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBadge");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "TemplateSettings", "Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_88_InfoBadge_TemplateSettings;
+                xamlMember.Getter = get_87_InfoBadge_TemplateSettings;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.Content":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Content", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_89_InfoBar_Content;
-                xamlMember.Setter = set_89_InfoBar_Content;
+                xamlMember.Getter = get_88_InfoBar_Content;
+                xamlMember.Setter = set_88_InfoBar_Content;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.IsClosable":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "IsClosable", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_90_InfoBar_IsClosable;
-                xamlMember.Setter = set_90_InfoBar_IsClosable;
+                xamlMember.Getter = get_89_InfoBar_IsClosable;
+                xamlMember.Setter = set_89_InfoBar_IsClosable;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.IsOpen":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "IsOpen", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_91_InfoBar_IsOpen;
-                xamlMember.Setter = set_91_InfoBar_IsOpen;
+                xamlMember.Getter = get_90_InfoBar_IsOpen;
+                xamlMember.Setter = set_90_InfoBar_IsOpen;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.Severity":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Severity", "Microsoft.UI.Xaml.Controls.InfoBarSeverity");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_92_InfoBar_Severity;
-                xamlMember.Setter = set_92_InfoBar_Severity;
+                xamlMember.Getter = get_91_InfoBar_Severity;
+                xamlMember.Setter = set_91_InfoBar_Severity;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.Message":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Message", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_93_InfoBar_Message;
-                xamlMember.Setter = set_93_InfoBar_Message;
+                xamlMember.Getter = get_92_InfoBar_Message;
+                xamlMember.Setter = set_92_InfoBar_Message;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.ActionButton":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "ActionButton", "Windows.UI.Xaml.Controls.Primitives.ButtonBase");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_94_InfoBar_ActionButton;
-                xamlMember.Setter = set_94_InfoBar_ActionButton;
+                xamlMember.Getter = get_93_InfoBar_ActionButton;
+                xamlMember.Setter = set_93_InfoBar_ActionButton;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.Title":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Title", "String");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_95_InfoBar_Title;
-                xamlMember.Setter = set_95_InfoBar_Title;
+                xamlMember.Getter = get_94_InfoBar_Title;
+                xamlMember.Setter = set_94_InfoBar_Title;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.IsIconVisible":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "IsIconVisible", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_96_InfoBar_IsIconVisible;
-                xamlMember.Setter = set_96_InfoBar_IsIconVisible;
+                xamlMember.Getter = get_95_InfoBar_IsIconVisible;
+                xamlMember.Setter = set_95_InfoBar_IsIconVisible;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.IconSource":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "IconSource", "Microsoft.UI.Xaml.Controls.IconSource");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_97_InfoBar_IconSource;
-                xamlMember.Setter = set_97_InfoBar_IconSource;
+                xamlMember.Getter = get_96_InfoBar_IconSource;
+                xamlMember.Setter = set_96_InfoBar_IconSource;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.ContentTemplate":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "ContentTemplate", "Windows.UI.Xaml.DataTemplate");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_98_InfoBar_ContentTemplate;
-                xamlMember.Setter = set_98_InfoBar_ContentTemplate;
+                xamlMember.Getter = get_97_InfoBar_ContentTemplate;
+                xamlMember.Setter = set_97_InfoBar_ContentTemplate;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.CloseButtonStyle":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "CloseButtonStyle", "Windows.UI.Xaml.Style");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_99_InfoBar_CloseButtonStyle;
-                xamlMember.Setter = set_99_InfoBar_CloseButtonStyle;
+                xamlMember.Getter = get_98_InfoBar_CloseButtonStyle;
+                xamlMember.Setter = set_98_InfoBar_CloseButtonStyle;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.CloseButtonCommandParameter":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "CloseButtonCommandParameter", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_100_InfoBar_CloseButtonCommandParameter;
-                xamlMember.Setter = set_100_InfoBar_CloseButtonCommandParameter;
+                xamlMember.Getter = get_99_InfoBar_CloseButtonCommandParameter;
+                xamlMember.Setter = set_99_InfoBar_CloseButtonCommandParameter;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.CloseButtonCommand":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "CloseButtonCommand", "System.Windows.Input.ICommand");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_101_InfoBar_CloseButtonCommand;
-                xamlMember.Setter = set_101_InfoBar_CloseButtonCommand;
+                xamlMember.Getter = get_100_InfoBar_CloseButtonCommand;
+                xamlMember.Setter = set_100_InfoBar_CloseButtonCommand;
                 break;
             case "Microsoft.UI.Xaml.Controls.InfoBar.TemplateSettings":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.InfoBar");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "TemplateSettings", "Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_102_InfoBar_TemplateSettings;
+                xamlMember.Getter = get_101_InfoBar_TemplateSettings;
                 xamlMember.SetIsReadOnly();
+                break;
+            case "Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.IsChecked":
+                userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem");
+                xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "IsChecked", "Boolean");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_102_RadioMenuFlyoutItem_IsChecked;
+                xamlMember.Setter = set_102_RadioMenuFlyoutItem_IsChecked;
+                break;
+            case "Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.GroupName":
+                userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem");
+                xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "GroupName", "String");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_103_RadioMenuFlyoutItem_GroupName;
+                xamlMember.Setter = set_103_RadioMenuFlyoutItem_GroupName;
+                break;
+            case "Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.AreCheckStatesEnabled":
+                userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem");
+                xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "AreCheckStatesEnabled", "Boolean");
+                xamlMember.SetTargetTypeName("Windows.UI.Xaml.Controls.MenuFlyoutSubItem");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.SetIsAttachable();
+                xamlMember.Getter = get_104_RadioMenuFlyoutItem_AreCheckStatesEnabled;
+                xamlMember.Setter = set_104_RadioMenuFlyoutItem_AreCheckStatesEnabled;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.IsExpanded":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "IsExpanded", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_103_TreeViewNode_IsExpanded;
-                xamlMember.Setter = set_103_TreeViewNode_IsExpanded;
+                xamlMember.Getter = get_105_TreeViewNode_IsExpanded;
+                xamlMember.Setter = set_105_TreeViewNode_IsExpanded;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.HasUnrealizedChildren":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "HasUnrealizedChildren", "Boolean");
-                xamlMember.Getter = get_104_TreeViewNode_HasUnrealizedChildren;
-                xamlMember.Setter = set_104_TreeViewNode_HasUnrealizedChildren;
+                xamlMember.Getter = get_106_TreeViewNode_HasUnrealizedChildren;
+                xamlMember.Setter = set_106_TreeViewNode_HasUnrealizedChildren;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Content":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Content", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_105_TreeViewNode_Content;
-                xamlMember.Setter = set_105_TreeViewNode_Content;
+                xamlMember.Getter = get_107_TreeViewNode_Content;
+                xamlMember.Setter = set_107_TreeViewNode_Content;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Children":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Children", "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>");
-                xamlMember.Getter = get_106_TreeViewNode_Children;
+                xamlMember.Getter = get_108_TreeViewNode_Children;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Depth":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Depth", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_107_TreeViewNode_Depth;
+                xamlMember.Getter = get_109_TreeViewNode_Depth;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.HasChildren":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "HasChildren", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_108_TreeViewNode_HasChildren;
+                xamlMember.Getter = get_110_TreeViewNode_HasChildren;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Parent":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Parent", "Microsoft.UI.Xaml.Controls.TreeViewNode");
-                xamlMember.Getter = get_109_TreeViewNode_Parent;
+                xamlMember.Getter = get_111_TreeViewNode_Parent;
                 xamlMember.SetIsReadOnly();
                 break;
             }

@@ -101,6 +101,10 @@ namespace To_Do.NavigationPages
                     AddATask(d, DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), false);
                     NewTaskBox.Text = string.Empty;
                     e.Handled = true;
+                    if ((string)SortingDropDown.Content != "Custom")
+                    {
+                        Sort((string)SortingDropDown.Content);
+                    }
                 }
             }
         }
@@ -116,6 +120,10 @@ namespace To_Do.NavigationPages
             if (context != null)
             {
                 context.IsStarred = (bool)cb.IsChecked;
+                if ((string)SortingDropDown.Content != "Custom")
+                {
+                    Sort((string)SortingDropDown.Content);
+                }
             }
         }
 
@@ -238,6 +246,7 @@ namespace To_Do.NavigationPages
                 //do change text
                 TaskItems[index].Description = EditTextBox.Text;
                 EditTextBox.Text = string.Empty;
+                Sort((string)SortingDropDown.Content);
             }
         }
 
@@ -366,28 +375,35 @@ namespace To_Do.NavigationPages
         {
             MenuFlyoutItem item = sender as MenuFlyoutItem;
             SortingDropDown.Content = item.Text;
+            Sort(item.Text);
+        }
 
-            List<TODOTask> newList = new List<TODOTask>(TaskItems);
-
-            switch (item.Text)
+        void Sort(string typeOfSort)
+        {
+            if (typeOfSort != "Custom")
             {
-                case "Date Created":
-                    newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
-                    break;
-                case "Text":
-                    newList.Sort((x, y) => string.Compare(x.Description, y.Description));
-                    break;
-                case "Importance":
-                    var query = from task in newList
-                                orderby !task.IsStarred
-                                select task;
-                    newList = query.ToList();
-                    break;
-                default:
-                    break;
+                List<TODOTask> newList = new List<TODOTask>(TaskItems);
+
+                switch (typeOfSort)
+                {
+                    case "Date Created":
+                        newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                        break;
+                    case "Text":
+                        newList.Sort((x, y) => string.Compare(x.Description, y.Description));
+                        break;
+                    case "Importance":
+                        var query = from task in newList
+                                    orderby !task.IsStarred
+                                    select task;
+                        newList = query.ToList();
+                        break;
+                    default:
+                        break;
+                }
+                TaskItems = new ObservableCollection<TODOTask>(newList);
+                listOfTasks.ItemsSource = TaskItems;
             }
-            TaskItems = new ObservableCollection<TODOTask>(newList);
-            listOfTasks.ItemsSource = TaskItems;
         }
 
         private void listOfTasks_DragItemsCompleted(ListViewBase sender, DragItemsCompletedEventArgs args)
@@ -395,6 +411,9 @@ namespace To_Do.NavigationPages
             if (args != null)
             {
                 SortingDropDown.Content = "Custom";
+                opt1.IsChecked = false;
+                opt2.IsChecked = false;
+                opt3.IsChecked = false;
             }
         }
     }

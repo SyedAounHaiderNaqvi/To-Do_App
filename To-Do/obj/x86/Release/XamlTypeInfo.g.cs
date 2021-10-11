@@ -223,7 +223,7 @@ namespace To_Do.To_Do_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[73];
+            _typeNameTable = new string[78];
             _typeNameTable[0] = "Microsoft.UI.Xaml.Controls.XamlControlsResources";
             _typeNameTable[1] = "Windows.UI.Xaml.ResourceDictionary";
             _typeNameTable[2] = "Object";
@@ -293,12 +293,17 @@ namespace To_Do.To_Do_XamlTypeInfo
             _typeNameTable[66] = "Windows.UI.Xaml.Controls.Primitives.ButtonBase";
             _typeNameTable[67] = "System.Windows.Input.ICommand";
             _typeNameTable[68] = "Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings";
-            _typeNameTable[69] = "To_Do.NavigationPages.PendingTasks";
-            _typeNameTable[70] = "To_Do.Settings";
-            _typeNameTable[71] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
-            _typeNameTable[72] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
+            _typeNameTable[69] = "Microsoft.UI.Xaml.Controls.DropDownButton";
+            _typeNameTable[70] = "Windows.UI.Xaml.Controls.Button";
+            _typeNameTable[71] = "Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem";
+            _typeNameTable[72] = "Windows.UI.Xaml.Controls.MenuFlyoutItem";
+            _typeNameTable[73] = "Windows.UI.Xaml.Controls.MenuFlyoutSubItem";
+            _typeNameTable[74] = "To_Do.NavigationPages.PendingTasks";
+            _typeNameTable[75] = "To_Do.Settings";
+            _typeNameTable[76] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
+            _typeNameTable[77] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
 
-            _typeTable = new global::System.Type[73];
+            _typeTable = new global::System.Type[78];
             _typeTable[0] = typeof(global::Microsoft.UI.Xaml.Controls.XamlControlsResources);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.ResourceDictionary);
             _typeTable[2] = typeof(global::System.Object);
@@ -368,10 +373,15 @@ namespace To_Do.To_Do_XamlTypeInfo
             _typeTable[66] = typeof(global::Windows.UI.Xaml.Controls.Primitives.ButtonBase);
             _typeTable[67] = typeof(global::System.Windows.Input.ICommand);
             _typeTable[68] = typeof(global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings);
-            _typeTable[69] = typeof(global::To_Do.NavigationPages.PendingTasks);
-            _typeTable[70] = typeof(global::To_Do.Settings);
-            _typeTable[71] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
-            _typeTable[72] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
+            _typeTable[69] = typeof(global::Microsoft.UI.Xaml.Controls.DropDownButton);
+            _typeTable[70] = typeof(global::Windows.UI.Xaml.Controls.Button);
+            _typeTable[71] = typeof(global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem);
+            _typeTable[72] = typeof(global::Windows.UI.Xaml.Controls.MenuFlyoutItem);
+            _typeTable[73] = typeof(global::Windows.UI.Xaml.Controls.MenuFlyoutSubItem);
+            _typeTable[74] = typeof(global::To_Do.NavigationPages.PendingTasks);
+            _typeTable[75] = typeof(global::To_Do.Settings);
+            _typeTable[76] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
+            _typeTable[77] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -426,9 +436,11 @@ namespace To_Do.To_Do_XamlTypeInfo
         private object Activate_63_CompletedTasks() { return new global::To_Do.NavigationPages.CompletedTasks(); }
         private object Activate_64_InfoBar() { return new global::Microsoft.UI.Xaml.Controls.InfoBar(); }
         private object Activate_68_InfoBarTemplateSettings() { return new global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings(); }
-        private object Activate_69_PendingTasks() { return new global::To_Do.NavigationPages.PendingTasks(); }
-        private object Activate_70_Settings() { return new global::To_Do.Settings(); }
-        private object Activate_71_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
+        private object Activate_69_DropDownButton() { return new global::Microsoft.UI.Xaml.Controls.DropDownButton(); }
+        private object Activate_71_RadioMenuFlyoutItem() { return new global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem(); }
+        private object Activate_74_PendingTasks() { return new global::To_Do.NavigationPages.PendingTasks(); }
+        private object Activate_75_Settings() { return new global::To_Do.Settings(); }
+        private object Activate_76_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
         private void MapAdd_0_XamlControlsResources(object instance, object key, object item)
         {
             var collection = (global::System.Collections.Generic.IDictionary<global::System.Object, global::System.Object>)instance;
@@ -442,7 +454,7 @@ namespace To_Do.To_Do_XamlTypeInfo
             var newItem = (global::System.Object)item;
             collection.Add(newItem);
         }
-        private void VectorAdd_72_IList(object instance, object item)
+        private void VectorAdd_77_IList(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Microsoft.UI.Xaml.Controls.TreeViewNode>)instance;
             var newItem = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)item;
@@ -946,23 +958,50 @@ namespace To_Do.To_Do_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 69:   //  To_Do.NavigationPages.PendingTasks
+            case 69:   //  Microsoft.UI.Xaml.Controls.DropDownButton
+                userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Button"));
+                userType.Activator = Activate_69_DropDownButton;
+                xamlType = userType;
+                break;
+
+            case 70:   //  Windows.UI.Xaml.Controls.Button
+                xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 71:   //  Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem
+                userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.MenuFlyoutItem"));
+                userType.Activator = Activate_71_RadioMenuFlyoutItem;
+                userType.AddMemberName("IsChecked");
+                userType.AddMemberName("GroupName");
+                userType.AddMemberName("AreCheckStatesEnabled");
+                xamlType = userType;
+                break;
+
+            case 72:   //  Windows.UI.Xaml.Controls.MenuFlyoutItem
+                xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 73:   //  Windows.UI.Xaml.Controls.MenuFlyoutSubItem
+                xamlType = new global::To_Do.To_Do_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 74:   //  To_Do.NavigationPages.PendingTasks
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_69_PendingTasks;
+                userType.Activator = Activate_74_PendingTasks;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 70:   //  To_Do.Settings
+            case 75:   //  To_Do.Settings
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_70_Settings;
+                userType.Activator = Activate_75_Settings;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 71:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
+            case 76:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_71_TreeViewNode;
+                userType.Activator = Activate_76_TreeViewNode;
                 userType.AddMemberName("IsExpanded");
                 userType.AddMemberName("HasUnrealizedChildren");
                 userType.AddMemberName("Content");
@@ -974,9 +1013,9 @@ namespace To_Do.To_Do_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 72:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
+            case 77:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
                 userType = new global::To_Do.To_Do_XamlTypeInfo.XamlUserType(this, typeName, type, null);
-                userType.CollectionAdd = VectorAdd_72_IList;
+                userType.CollectionAdd = VectorAdd_77_IList;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
@@ -1990,52 +2029,80 @@ namespace To_Do.To_Do_XamlTypeInfo
             var that = (global::Microsoft.UI.Xaml.Controls.InfoBar)instance;
             return that.TemplateSettings;
         }
-        private object get_102_TreeViewNode_IsExpanded(object instance)
+        private object get_102_RadioMenuFlyoutItem_IsChecked(object instance)
+        {
+            var that = (global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem)instance;
+            return that.IsChecked;
+        }
+        private void set_102_RadioMenuFlyoutItem_IsChecked(object instance, object Value)
+        {
+            var that = (global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem)instance;
+            that.IsChecked = (global::System.Boolean)Value;
+        }
+        private object get_103_RadioMenuFlyoutItem_GroupName(object instance)
+        {
+            var that = (global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem)instance;
+            return that.GroupName;
+        }
+        private void set_103_RadioMenuFlyoutItem_GroupName(object instance, object Value)
+        {
+            var that = (global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem)instance;
+            that.GroupName = (global::System.String)Value;
+        }
+        private object get_104_RadioMenuFlyoutItem_AreCheckStatesEnabled(object instance)
+        {
+            return global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.GetAreCheckStatesEnabled((global::Windows.UI.Xaml.Controls.MenuFlyoutSubItem)instance);
+        }
+        private void set_104_RadioMenuFlyoutItem_AreCheckStatesEnabled(object instance, object Value)
+        {
+            global::Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.SetAreCheckStatesEnabled((global::Windows.UI.Xaml.Controls.MenuFlyoutSubItem)instance, (global::System.Boolean)Value);
+        }
+        private object get_105_TreeViewNode_IsExpanded(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.IsExpanded;
         }
-        private void set_102_TreeViewNode_IsExpanded(object instance, object Value)
+        private void set_105_TreeViewNode_IsExpanded(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.IsExpanded = (global::System.Boolean)Value;
         }
-        private object get_103_TreeViewNode_HasUnrealizedChildren(object instance)
+        private object get_106_TreeViewNode_HasUnrealizedChildren(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.HasUnrealizedChildren;
         }
-        private void set_103_TreeViewNode_HasUnrealizedChildren(object instance, object Value)
+        private void set_106_TreeViewNode_HasUnrealizedChildren(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.HasUnrealizedChildren = (global::System.Boolean)Value;
         }
-        private object get_104_TreeViewNode_Content(object instance)
+        private object get_107_TreeViewNode_Content(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Content;
         }
-        private void set_104_TreeViewNode_Content(object instance, object Value)
+        private void set_107_TreeViewNode_Content(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.Content = (global::System.Object)Value;
         }
-        private object get_105_TreeViewNode_Children(object instance)
+        private object get_108_TreeViewNode_Children(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Children;
         }
-        private object get_106_TreeViewNode_Depth(object instance)
+        private object get_109_TreeViewNode_Depth(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Depth;
         }
-        private object get_107_TreeViewNode_HasChildren(object instance)
+        private object get_110_TreeViewNode_HasChildren(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.HasChildren;
         }
-        private object get_108_TreeViewNode_Parent(object instance)
+        private object get_111_TreeViewNode_Parent(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Parent;
@@ -2755,50 +2822,73 @@ namespace To_Do.To_Do_XamlTypeInfo
                 xamlMember.Getter = get_101_InfoBar_TemplateSettings;
                 xamlMember.SetIsReadOnly();
                 break;
+            case "Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.IsChecked":
+                userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem");
+                xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "IsChecked", "Boolean");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_102_RadioMenuFlyoutItem_IsChecked;
+                xamlMember.Setter = set_102_RadioMenuFlyoutItem_IsChecked;
+                break;
+            case "Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.GroupName":
+                userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem");
+                xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "GroupName", "String");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.Getter = get_103_RadioMenuFlyoutItem_GroupName;
+                xamlMember.Setter = set_103_RadioMenuFlyoutItem_GroupName;
+                break;
+            case "Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem.AreCheckStatesEnabled":
+                userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem");
+                xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "AreCheckStatesEnabled", "Boolean");
+                xamlMember.SetTargetTypeName("Windows.UI.Xaml.Controls.MenuFlyoutSubItem");
+                xamlMember.SetIsDependencyProperty();
+                xamlMember.SetIsAttachable();
+                xamlMember.Getter = get_104_RadioMenuFlyoutItem_AreCheckStatesEnabled;
+                xamlMember.Setter = set_104_RadioMenuFlyoutItem_AreCheckStatesEnabled;
+                break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.IsExpanded":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "IsExpanded", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_102_TreeViewNode_IsExpanded;
-                xamlMember.Setter = set_102_TreeViewNode_IsExpanded;
+                xamlMember.Getter = get_105_TreeViewNode_IsExpanded;
+                xamlMember.Setter = set_105_TreeViewNode_IsExpanded;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.HasUnrealizedChildren":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "HasUnrealizedChildren", "Boolean");
-                xamlMember.Getter = get_103_TreeViewNode_HasUnrealizedChildren;
-                xamlMember.Setter = set_103_TreeViewNode_HasUnrealizedChildren;
+                xamlMember.Getter = get_106_TreeViewNode_HasUnrealizedChildren;
+                xamlMember.Setter = set_106_TreeViewNode_HasUnrealizedChildren;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Content":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Content", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_104_TreeViewNode_Content;
-                xamlMember.Setter = set_104_TreeViewNode_Content;
+                xamlMember.Getter = get_107_TreeViewNode_Content;
+                xamlMember.Setter = set_107_TreeViewNode_Content;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Children":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Children", "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>");
-                xamlMember.Getter = get_105_TreeViewNode_Children;
+                xamlMember.Getter = get_108_TreeViewNode_Children;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Depth":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Depth", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_106_TreeViewNode_Depth;
+                xamlMember.Getter = get_109_TreeViewNode_Depth;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.HasChildren":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "HasChildren", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_107_TreeViewNode_HasChildren;
+                xamlMember.Getter = get_110_TreeViewNode_HasChildren;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Parent":
                 userType = (global::To_Do.To_Do_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::To_Do.To_Do_XamlTypeInfo.XamlMember(this, "Parent", "Microsoft.UI.Xaml.Controls.TreeViewNode");
-                xamlMember.Getter = get_108_TreeViewNode_Parent;
+                xamlMember.Getter = get_111_TreeViewNode_Parent;
                 xamlMember.SetIsReadOnly();
                 break;
             }

@@ -273,7 +273,6 @@
       <RootProperty Name="PaneDisplayMode" />
       <RootProperty Name="MenuItems" />
       <RootProperty Name="Content" />
-      <RootEvent Name="Loaded" />
       <RootEvent Name="DisplayModeChanged" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
@@ -459,8 +458,22 @@
       <RootProperty Name="InfoBadge" />
       <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="Microsoft.UI.Xaml.Controls.ImageIcon">
-      <RootProperty Name="Source" />
+    <RootType FullName="Windows.UI.Xaml.Controls.FontIcon">
+      <RootProperty Name="Glyph" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="IsHitTestVisible" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="OpacityTransition" />
+      <RootProperty Name="Translation" />
+      <RootProperty Name="TranslationTransition" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.InfoBadge" />
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
@@ -492,23 +505,6 @@
       <RootProperty Name="Visibility" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Frame" />
-    <RootType FullName="Windows.UI.Xaml.Controls.FontIcon">
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="Glyph" />
-      <RootProperty Name="FontWeight" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="FontFamily" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="IsHitTestVisible" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="OpacityTransition" />
-      <RootProperty Name="Translation" />
-      <RootProperty Name="TranslationTransition" />
-    </RootType>
     <RootType FullName="To_Do.MainPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.SymbolIcon">
       <RootProperty Name="Symbol" />
@@ -573,9 +569,14 @@
       <RootProperty Name="Placement" />
       <RootProperty Name="Items" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
+    <RootType FullName="Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem">
+      <RootProperty Name="IsChecked" />
       <RootProperty Name="Text" />
+      <RootEvent Name="Click" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
       <RootProperty Name="DataContext" />
+      <RootProperty Name="Text" />
       <RootProperty Name="Icon" />
       <RootEvent Name="Click" />
     </RootType>

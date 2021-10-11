@@ -484,12 +484,12 @@
                         Style="{ThemeResource CaptionTextBlockStyle}"/>
             </StackPanel>
         </Border>
-        <controls:NavigationView x:ConnectionId='110'                       x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False"                                               x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto"                                                   >
+        <controls:NavigationView x:ConnectionId='110' x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False"                                               x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto"                                                   >
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem ToolTipService.ToolTip="Pending Tasks" Tag="PendingTasks" IsSelected="True">
                     <controls:NavigationViewItem.Icon>
-                        <!--<FontIcon Glyph="&#xE823;"/>-->
-                        <controls:ImageIcon Source="/Images/clock (2).tiff"/>
+                        <FontIcon Glyph="&#xE823;"/>
+                        <!--<controls:ImageIcon Source="/Images/clock (2).tiff"/>-->
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.InfoBadge>
                         <controls:InfoBadge x:ConnectionId='112' x:FieldModifier="public" x:Name="inf"/>
@@ -500,8 +500,8 @@
                 </controls:NavigationViewItem>
                 <controls:NavigationViewItem ToolTipService.ToolTip="Completed Tasks" Tag="CompletedTasks">
                     <controls:NavigationViewItem.Icon>
-                        <!--<FontIcon Glyph="&#xE73E;"/>-->
-                        <controls:ImageIcon Source="/Images/complete (4).tiff"/>
+                        <FontIcon Glyph="&#xE73E;"/>
+                        <!--<controls:ImageIcon Source="/Images/complete (4).tiff"/>-->
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.Content>
                         <TextBlock Text="Completed Tasks"/>

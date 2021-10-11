@@ -6,12 +6,12 @@
 "/nativeLink:C:\Users\Aoun\.nuget\packages\runtime.win10-x86.microsoft.net.native.compiler\2.2.10-rel-29722-00\tools\x86\ilc\lib\Native\vmath.lib"
 /customImports
 /methodBodyFolding
-"E:\VS Projects\To-Do\To-Do\obj\x86\Release\ilc\intermediate\MDIL\To-Do.mdilexe"
-"/i:E:\VS Projects\To-Do\To-Do\obj\x86\Release\ilc\intermediate\MDIL"
-"/out:E:\VS Projects\To-Do\To-Do\obj\x86\Release\ilc\intermediate\Native\To-Do.exe"
-"/pdbAltPath:E:\VS Projects\To-Do\To-Do\bin\x86\Release\ilc"
-"/res:E:\VS Projects\To-Do\To-Do\obj\x86\Release\ilc\intermediate\Native.res"
+"E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\intermediate\MDIL\To-Do.mdilexe"
+"/i:E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\intermediate\MDIL"
+"/out:E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\intermediate\Native\To-Do.exe"
+"/pdbAltPath:E:\VS Projects\To-Do_App\To-Do\bin\x86\Release\ilc"
+"/res:E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\intermediate\Native.res"
 "/i:C:\Users\Aoun\.nuget\packages\runtime.win10-x86.microsoft.net.native.sharedlibrary\2.2.8-rel-29722-00\tools\SharedLibrary\ret\MDIL"
 /shimexe
 "/classlib:SharedLibrary"
-"/sourcelink:E:\VS Projects\To-Do\To-Do\obj\x86\Release\ilc\intermediate\ILTransformed\Microsoft.Toolkit.Uwp.Notifications.srclink"
+"/sourcelink:E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\intermediate\ILTransformed\Microsoft.Toolkit.Uwp.Notifications.srclink"

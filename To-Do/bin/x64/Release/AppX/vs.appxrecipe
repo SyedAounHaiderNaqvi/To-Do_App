@@ -30,7 +30,7 @@
     <AppXManifest Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-10T16:00:56.019</Modified>
+      <Modified>2021-10-11T13:31:23.429</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -334,19 +334,19 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-10-10T16:00:00.361</Modified>
+      <Modified>2021-10-11T13:30:25.828</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\To-Do.dll">
       <PackagePath>To-Do.dll</PackagePath>
-      <Modified>2021-10-10T16:00:54.989</Modified>
+      <Modified>2021-10-11T13:31:22.399</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\To-Do.exe">
       <PackagePath>To-Do.exe</PackagePath>
-      <Modified>2021-10-10T16:00:56.007</Modified>
+      <Modified>2021-10-11T13:31:23.419</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\To-Do.pdb">
       <PackagePath>To-Do.pdb</PackagePath>
-      <Modified>2021-10-10T16:00:56.007</Modified>
+      <Modified>2021-10-11T13:31:23.419</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.ui.xaml\2.7.0\buildTransitive\..\lib\uap10.0\Microsoft.UI.Xaml.winmd">
       <PackagePath>Microsoft.UI.Xaml.winmd</PackagePath>

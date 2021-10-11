@@ -20,6 +20,7 @@ using Windows.Security.Authorization.AppCapabilityAccess;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
+using Windows.System.Profile;
 
 namespace To_Do
 {
@@ -287,21 +288,21 @@ namespace To_Do
 
                                 new AdaptiveText()
                                 {
-                                    Text = "O " + tasks[0],
+                                    Text = "1) " + tasks[0],
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
 
                                 new AdaptiveText()
                                 {
 
-                                    Text = tasks.Count > 1 ? "O " + tasks[1] : "",
+                                    Text = tasks.Count > 1 ? "2) " + tasks[1] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
 
                                 new AdaptiveText()
                                 {
 
-                                    Text = tasks.Count > 2 ? "O " + tasks[2] : "",
+                                    Text = tasks.Count > 2 ? "3) " + tasks[2] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
 
@@ -327,19 +328,19 @@ namespace To_Do
 
                                 new AdaptiveText()
                                 {
-                                    Text = "O " + tasks[0],
+                                    Text = "1) " + tasks[0],
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
 
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 1 ? "O " + tasks[1] : "",
+                                    Text = tasks.Count > 1 ? "2) " + tasks[1] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
 
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 2 ? "O " + tasks[2] : "",
+                                    Text = tasks.Count > 2 ? "3) " + tasks[2] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
                                 new AdaptiveText()
@@ -363,49 +364,49 @@ namespace To_Do
 
                                 new AdaptiveText()
                                 {
-                                    Text = "O " + tasks[0],
+                                    Text = "1) " + tasks[0],
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
 
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 1 ? "O " + tasks[1] : "",
+                                    Text = tasks.Count > 1 ? "2) " + tasks[1] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 2 ? "O " + tasks[2] : "",
+                                    Text = tasks.Count > 2 ? "3) " + tasks[2] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 3 ? "O " + tasks[3] : "",
+                                    Text = tasks.Count > 3 ? "4) " + tasks[3] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 4 ? "O " + tasks[4] : "",
+                                    Text = tasks.Count > 4 ? "5) " + tasks[4] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 5 ? "O " + tasks[5] : "",
+                                    Text = tasks.Count > 5 ? "6) " + tasks[5] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 6 ? "O " + tasks[6] : "",
+                                    Text = tasks.Count > 6 ? "7) " + tasks[6] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 7 ? "O " + tasks[7] : "",
+                                    Text = tasks.Count > 7 ? "8) " + tasks[7] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
 
                                 new AdaptiveText()
                                 {
-                                    Text = tasks.Count > 8 ? "O " + tasks[8] : "",
+                                    Text = tasks.Count > 8 ? "9) " + tasks[8] : "",
                                     HintStyle = AdaptiveTextStyle.CaptionSubtle
                                 },
 
@@ -587,7 +588,15 @@ namespace To_Do
             localSettings.Values["DateOfTasks"] = dateJsonFile;
             localSettings.Values["DateOfTasksDone"] = compdateJsonFile;
             localSettings.Values["ImportanceOfTasks"] = importanceJsonFile;
-            CreateThreeTileNotifications();
+
+            string deviceFamilyVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
+            ulong version = ulong.Parse(deviceFamilyVersion);
+            ulong build = (version & 0x00000000FFFF0000L) >> 16;
+
+            if (Convert.ToInt16(build) < 22000)
+            {
+                CreateThreeTileNotifications();
+            }
 
             //// Get the blank badge XML payload for a badge number
             //XmlDocument badgeXml =
@@ -700,11 +709,11 @@ namespace To_Do
             }
         }
 
-        private void nview_Loaded(object sender, RoutedEventArgs e)
-        {
-            // set icon
-            var settings = (Microsoft.UI.Xaml.Controls.NavigationViewItem)nview.SettingsItem;
-            settings.Icon = new BitmapIcon() { ShowAsMonochrome = false, UriSource = new Uri("ms-appx:///Images/settingsIcon (4).tiff"), Foreground = new SolidColorBrush(Colors.Transparent) };
-        }
+        //private void nview_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    // set icon
+        //    var settings = (Microsoft.UI.Xaml.Controls.NavigationViewItem)nview.SettingsItem;
+        //    //settings.Icon = new BitmapIcon() { ShowAsMonochrome = false, UriSource = new Uri("ms-appx:///Images/settingsIcon (4).tiff"), Foreground = new SolidColorBrush(Colors.Transparent) };
+        //}
     }
 }
