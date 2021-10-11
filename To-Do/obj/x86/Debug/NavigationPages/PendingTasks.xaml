@@ -409,7 +409,7 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBorderBrushUnchecked}"/>
                                                 </ObjectAnimationUsingKeyFrames>
-                                                
+
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
                                                 </ObjectAnimationUsingKeyFrames>
@@ -465,7 +465,7 @@
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
-                                        
+
                                         <VisualState x:Name="CheckedNormal">
                                             <Storyboard>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
@@ -532,7 +532,7 @@
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
-                                        
+
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
                                 <Grid Height="25" VerticalAlignment="Top">
@@ -554,10 +554,10 @@
             <RowDefinition MinHeight="80" Height="80"/>
         </Grid.RowDefinitions>
         <ScrollViewer x:ConnectionId='38' Margin="20,20,20,0" IsVerticalScrollChainingEnabled="False" Grid.Row="0" x:Name="scroll" VerticalScrollBarVisibility="Auto">
-            <ListView x:ConnectionId='45' CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0" Margin="15,10,15,0"                                           x:Name="listOfTasks"                                 >
+            <ListView x:ConnectionId='49'                                                     CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0" Margin="15,10,15,0"                                           x:Name="listOfTasks"                                 >
                 <ListView.ItemTemplate>
                     <DataTemplate                            >
-                        <UserControl x:ConnectionId='47'                                                                                       x:Name="UserControl">
+                        <UserControl x:ConnectionId='51'                                                                                       x:Name="UserControl">
                             <Border CornerRadius="4" BorderThickness="1" Background="{ThemeResource TextControlBackground}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                 <Grid x:Name="rootGrid">
                                     <Grid.ColumnDefinitions>
@@ -572,13 +572,13 @@
                                             <ScalarTransition/>
                                         </FontIcon.OpacityTransition>
                                     </FontIcon>
-                                    <CheckBox x:ConnectionId='50' x:Name="completecheckbox" Translation="-10,0,0"                                                  Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}"                            Margin="38,0,10,0" Grid.Column="0" CornerRadius="10">
+                                    <CheckBox x:ConnectionId='54' x:Name="completecheckbox" Translation="-10,0,0"                                                  Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}"                            Margin="38,0,10,0" Grid.Column="0" CornerRadius="10">
                                         <CheckBox.TranslationTransition>
                                             <Vector3Transition Duration="0:0:0.2"/>
                                         </CheckBox.TranslationTransition>
                                     </CheckBox>
                                     <StackPanel Spacing="10" VerticalAlignment="Center" Margin="10,0,120,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
-                                        <TextBlock x:ConnectionId='56' Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}"                                         >
+                                        <TextBlock x:ConnectionId='60' Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}"                                         >
                                             <TextBlock.TranslationTransition>
                                                 <Vector3Transition Duration="0:0:0.2"/>
                                             </TextBlock.TranslationTransition>
@@ -591,7 +591,7 @@
                                                 <ScalarTransition/>
                                             </StackPanel.OpacityTransition>
                                             <TextBlock Text="Created on:" Foreground="{ThemeResource SystemAccentColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                            <TextBlock x:ConnectionId='58' x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"                                  />
+                                            <TextBlock x:ConnectionId='62' x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"                                  />
                                         </StackPanel>
                                     </StackPanel>
                                     <StackPanel x:Name="BtnPanel" Spacing="20" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="5,10,20,10" Translation="60,0,0" Orientation="Horizontal">
@@ -601,26 +601,26 @@
                                         <StackPanel.OpacityTransition>
                                             <ScalarTransition/>
                                         </StackPanel.OpacityTransition>
-                                        <CheckBox x:ConnectionId='52'                                               Style="{ThemeResource StarCheck}"                                                                                 ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
+                                        <CheckBox x:ConnectionId='56'                                               Style="{ThemeResource StarCheck}"                                                                                 ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
                                         <Button Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More Options" x:Name="DeleteTaskButton">
                                             <Button.Content>
-                                            <FontIcon FontSize="14" Glyph="&#xE712;"/>
-                                        </Button.Content>
+                                                <FontIcon FontSize="14" Glyph="&#xE712;"/>
+                                            </Button.Content>
                                             <Button.Flyout>
-                                            <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                                <MenuFlyoutItem x:ConnectionId='54' DataContext="{Binding ElementName=UserControl}"                       Text="Edit Task">
-                                                    <MenuFlyoutItem.Icon>
-                                                        <SymbolIcon Symbol="Edit"/>
-                                                    </MenuFlyoutItem.Icon>
-                                                </MenuFlyoutItem>
+                                                <MenuFlyout Placement="BottomEdgeAlignedRight">
+                                                    <MenuFlyoutItem x:ConnectionId='58' DataContext="{Binding ElementName=UserControl}"                       Text="Edit Task">
+                                                        <MenuFlyoutItem.Icon>
+                                                            <SymbolIcon Symbol="Edit"/>
+                                                        </MenuFlyoutItem.Icon>
+                                                    </MenuFlyoutItem>
 
-                                                <MenuFlyoutItem x:ConnectionId='55'                              DataContext="{Binding ElementName=UserControl}" Text="Delete Task">
-                                                    <MenuFlyoutItem.Icon>
-                                                        <SymbolIcon Symbol="Delete"/>
-                                                    </MenuFlyoutItem.Icon>
-                                                </MenuFlyoutItem>
-                                            </MenuFlyout>
-                                        </Button.Flyout>
+                                                    <MenuFlyoutItem x:ConnectionId='59'                              DataContext="{Binding ElementName=UserControl}" Text="Delete Task">
+                                                        <MenuFlyoutItem.Icon>
+                                                            <SymbolIcon Symbol="Delete"/>
+                                                        </MenuFlyoutItem.Icon>
+                                                    </MenuFlyoutItem>
+                                                </MenuFlyout>
+                                            </Button.Flyout>
                                         </Button>
                                     </StackPanel>
                                 </Grid>
@@ -648,6 +648,26 @@
             <TextBlock Foreground="{ThemeResource SystemAccentColorDark2}" HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="Create a new task so that you won't forget it later on."/>
         </StackPanel>
         <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Grid.Row="0" HorizontalAlignment="Left" Margin="35,-45,35,10" VerticalAlignment="Top" Text="Pending Tasks" Foreground="{ThemeResource SystemAccentColorDark2}" />
+        <Grid HorizontalAlignment="Right" Margin="35,-40,35,10" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sort By:"/>
+            <controls:DropDownButton x:ConnectionId='45' x:Name="SortingDropDown" Content="Date Created" Grid.Column="2" VerticalAlignment="Center">
+                <controls:DropDownButton.Flyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuFlyoutItem x:ConnectionId='46'                              Text="Date Created"/>
+                        <MenuFlyoutItem x:ConnectionId='47'                              Text="Text"/>
+                        <MenuFlyoutItem x:ConnectionId='48'                              Text="Importance"/>
+                    </MenuFlyout>
+                </controls:DropDownButton.Flyout>
+
+            </controls:DropDownButton>
+            
+        </Grid>
+
         <TextBox x:ConnectionId='40'                                                                                              IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" VerticalContentAlignment="Center" PlaceholderText="Add a new task" Height="50" Padding="50,15,10,10" Margin="35,5,35,20" x:Name="NewTaskBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
         <FontIcon x:ConnectionId='41' IsHitTestVisible="False" x:Name="boxIcon" Width="20" Height="20" Margin="55,0,0,15" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Glyph="&#xE710;">
             <FontIcon.OpacityTransition>
@@ -670,14 +690,6 @@
             </controls:InfoBar>
 
         </Grid>
-        <!--<ContentDialog x:Name="EditDialog" PrimaryButtonStyle="{ThemeResource AccentButtonStyle}" Title="Edit Task" PrimaryButtonText="Done" CloseButtonText="Cancel" Grid.RowSpan="2">
-            <ContentDialog.ContentTransitions>
-                <TransitionCollection>
-                    <PopupThemeTransition/>
-                </TransitionCollection>
-            </ContentDialog.ContentTransitions>
-            <TextBox TextChanged="EditBoxTextChanged" x:Name="EditTextBox" AcceptsReturn="True" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write task description"/>
-        </ContentDialog>-->
     </Grid>
 </Page>
 

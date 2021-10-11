@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Threading;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
+using System.Linq;
 
 namespace To_Do.NavigationPages
 {
@@ -77,6 +78,11 @@ namespace To_Do.NavigationPages
                         AddATask(loadedDescriptions[i], loadedDates[i], loadedImportance[i]);
                     }
                 }
+
+                List<TODOTask> newList = new List<TODOTask>(TaskItems);
+                newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                TaskItems = new ObservableCollection<TODOTask>(newList);
+                listOfTasks.ItemsSource = TaskItems;
             }
         }
 
@@ -354,6 +360,42 @@ namespace To_Do.NavigationPages
 
             btn.Translation = new System.Numerics.Vector3(60, 0, 0);
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
+        }
+
+        private void SortingOptionClicked(object sender, RoutedEventArgs e)
+        {
+            MenuFlyoutItem item = sender as MenuFlyoutItem;
+            SortingDropDown.Content = item.Text;
+
+            List<TODOTask> newList = new List<TODOTask>(TaskItems);
+
+            switch (item.Text)
+            {
+                case "Date Created":
+                    newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                    break;
+                case "Text":
+                    newList.Sort((x, y) => string.Compare(x.Description, y.Description));
+                    break;
+                case "Importance":
+                    var query = from task in newList
+                                orderby !task.IsStarred
+                                select task;
+                    newList = query.ToList();
+                    break;
+                default:
+                    break;
+            }
+            TaskItems = new ObservableCollection<TODOTask>(newList);
+            listOfTasks.ItemsSource = TaskItems;
+        }
+
+        private void listOfTasks_DragItemsCompleted(ListViewBase sender, DragItemsCompletedEventArgs args)
+        {
+            if (args != null)
+            {
+                SortingDropDown.Content = "Custom";
+            }
         }
     }
 

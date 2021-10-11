@@ -11,9 +11,9 @@
         <DataTemplate x:Key="ImageTemplate"                                 >
             <Grid x:ConnectionId='3'                                           Width="150" Height="100">
                 <Polygon x:ConnectionId='4' Points="50,50 150,50 150,100, 50,100" Stroke="Transparent"                                                 />
-                <Polygon x:ConnectionId='5' Points="50,0 150,0 150,50 50,50" Stroke="Transparent"                                />
+                <Polygon Points="50,0 150,0 150,15, 50,15" Stroke="Transparent" Fill="#eeeeee"/>
+                <Border x:ConnectionId='5' CornerRadius="4,0,0,0" Margin="50,6,0,0" VerticalAlignment="Top" Width="150" Height="44"                                      />
                 <Polygon Points="0,0 50,0 50,50, 0,50" Stroke="Transparent" Fill="#eeeeee"/>
-                <Polygon Points="50,0 150,0 150,7, 50,7" Stroke="Transparent" Fill="#eeeeee"/>
                 <Polygon Points="0,50 50,50 50,100, 0,100" Stroke="Transparent" Fill="#3c3c3c"/>
                 <Polygon x:ConnectionId='6'                             Points="60,14 80,14 80,17 60,17"/>
                 <Polygon Fill="#aadddddd" Points="60,30 140,30 140,40 60,40"/>

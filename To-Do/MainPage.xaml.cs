@@ -129,7 +129,7 @@ namespace To_Do
                 }
 
                 Color bgColor = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
-                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(bgColor);
+                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = bgR, G = bgG, B = bgB });
                 titleBar.ForegroundColor = bgColor;
                 titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];//ThemeHelper.IsDarkTheme() ? new Color() { A = 255, R = a2R, G = a2G, B = a2B } : bgColor;
 
@@ -148,7 +148,7 @@ namespace To_Do
                 Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = Application.Current.Resources["SystemAccentColor"];
 
                 Color bgColor = fallBackPurple;
-                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(bgColor);
+                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = fallBackPurple.R, G = fallBackPurple.G, B = fallBackPurple.B });
                 titleBar.ForegroundColor = bgColor;
                 titleBar.ButtonHoverBackgroundColor = bgColor;
                 titleBar.ButtonHoverForegroundColor = Colors.White;

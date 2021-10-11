@@ -240,7 +240,8 @@ namespace To_Do
             }
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
 
-            Application.Current.Resources["NavigationViewContentBackground"] = n.backgroundBrush as SolidColorBrush;
+            Color b = (n.backgroundBrush as SolidColorBrush).Color;
+            Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = b.R, G = b.G, B = b.B});
             titleBar.ButtonHoverForegroundColor = Colors.White;
             Color bgcolor = ((SolidColorBrush)n.backgroundBrush).Color;
             localSettings.Values["BG_R"] = bgcolor.R;

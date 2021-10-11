@@ -524,6 +524,7 @@
       <RootProperty Name="CanReorderItems" />
       <RootProperty Name="AllowDrop" />
       <RootEvent Name="LayoutUpdated" />
+      <RootEvent Name="DragItemsCompleted" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
@@ -563,13 +564,18 @@
       <RootProperty Name="Message" />
       <RootProperty Name="ActionButton" />
     </RootType>
+    <RootType FullName="Microsoft.UI.Xaml.Controls.DropDownButton">
+      <RootProperty Name="Content" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Flyout" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyout">
       <RootProperty Name="Placement" />
       <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
-      <RootProperty Name="DataContext" />
       <RootProperty Name="Text" />
+      <RootProperty Name="DataContext" />
       <RootProperty Name="Icon" />
       <RootEvent Name="Click" />
     </RootType>
