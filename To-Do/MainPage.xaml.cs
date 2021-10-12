@@ -12,7 +12,7 @@ using Windows.UI.Notifications;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI;
-using System.Diagnostics;
+//using System.Diagnostics;
 using Windows.UI.Xaml.Media;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
@@ -21,6 +21,9 @@ using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.System.Profile;
+using System.Linq;
+using Windows.UI.Core;
+using Windows.Foundation;
 
 namespace To_Do
 {
@@ -37,6 +40,8 @@ namespace To_Do
         public List<List<string>> tasksToParse = new List<List<string>>();
         AppCapabilityAccessStatus status;
         public int PendingTasksCount = 0;
+        bool canSearch = true;
+        public NavigationTransitionInfo info;
 
         public MainPage()
         {
@@ -55,6 +60,7 @@ namespace To_Do
             AppCapability cap = AppCapability.Create("broadFileSystemAccess");
             status = cap.CheckAccess();
             ImageInitialize();
+            RoundCornerInitialize();
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
             TileUpdateManager.CreateTileUpdaterForApplication().Clear();
             LoadTheme();
@@ -69,6 +75,16 @@ namespace To_Do
                 indexToParse = 0;
             }
             currentTheme = ThemeHelper.RootTheme.ToString();
+            Waiter();
+        }
+
+        public async void Waiter()
+        {
+            ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
+            await Task.Delay(10);
+            ContentFrame.Navigate(typeof(PendingTasks));
+            nview.SelectedItem = nview.MenuItems[0];
         }
 
         public void ImageInitialize()
@@ -94,6 +110,41 @@ namespace To_Do
                 bgIMG.Visibility = Visibility.Collapsed;
                 acrylic.Visibility = Visibility.Collapsed;
                 acrylictint.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        public void RoundCornerInitialize()
+        {
+            if (localSettings.Values["useround"] != null)
+            {
+                switch ((int)localSettings.Values["useround"])
+                {
+                    case 0:
+                        Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
+                        Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
+                        Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(1);
+                        Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0);
+                        Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(1, 0, 0, 0);
+                        break;
+                    case 1:
+                        Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
+                        Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
+                        Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
+                        Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
+                        Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                localSettings.Values["useround"] = 1;
+                Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
+                Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
+                Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
+                Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
+                Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
             }
         }
 
@@ -166,7 +217,6 @@ namespace To_Do
                     bgIMG.Visibility = Visibility.Collapsed;
                     acrylic.Visibility = Visibility.Collapsed;
                     acrylictint.Visibility = Visibility.Collapsed;
-                    Debug.WriteLine("DENIED");
                 }
                 else
                 {
@@ -177,7 +227,6 @@ namespace To_Do
                         bgIMG.Visibility = Visibility.Visible;
                         acrylic.Visibility = Visibility.Visible;
                         acrylictint.Visibility = Visibility.Visible;
-                        Debug.WriteLine("ok ok");
                         using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
                         {
                             // Set the image source to the selected bitmap
@@ -192,7 +241,6 @@ namespace To_Do
                         bgIMG.Visibility = Visibility.Collapsed;
                         acrylic.Visibility = Visibility.Collapsed;
                         acrylictint.Visibility = Visibility.Collapsed;
-                        Debug.WriteLine("DENIED");
                     }
                 }
             }
@@ -215,6 +263,10 @@ namespace To_Do
             string argument = e.Parameter.ToString();
             if (argument == "GoToPending")
             {
+                ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                //await Task.Delay(10);
+                ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
+                await Task.Delay(10);
                 ContentFrame.Navigate(typeof(PendingTasks));
                 nview.SelectedItem = nview.MenuItems[0];
             }
@@ -228,6 +280,8 @@ namespace To_Do
             else if (argument == "GoToSettings")
             {
                 ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
+                //await Task.Delay(10);
                 await Task.Delay(10);
                 ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
                 nview.SelectedItem = nview.SettingsItem;
@@ -630,7 +684,6 @@ namespace To_Do
         {
             LoadingUI.Visibility = Visibility.Visible;
             int styleIndex = (int)localSettings.Values["navStyle"];
-            NavigationTransitionInfo info;
             switch (styleIndex)
             {
                 case 0:
@@ -709,11 +762,290 @@ namespace To_Do
             }
         }
 
-        //private void nview_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    // set icon
-        //    var settings = (Microsoft.UI.Xaml.Controls.NavigationViewItem)nview.SettingsItem;
-        //    //settings.Icon = new BitmapIcon() { ShowAsMonochrome = false, UriSource = new Uri("ms-appx:///Images/settingsIcon (4).tiff"), Foreground = new SolidColorBrush(Colors.Transparent) };
-        //}
+        private List<QueryFormat> SearchControls(string query)
+        {
+            var suggestions = new List<QueryFormat>();
+            var querySplit = query.Split(" ");
+
+            if (PendingTasks.instance != null)
+            {
+                var matchingItems = PendingTasks.instance.TaskItems.ToList().Where(
+                    item =>
+                    {
+                        // Idea: check for every word entered (separated by space) if it is in the name,  
+                        // e.g. for query "split button" the only result should "SplitButton" since its the only query to contain "split" and "button" 
+                        // If any of the sub tokens is not in the string, we ignore the item. So the search gets more precise with more words 
+                        bool flag = true;
+                        foreach (string queryToken in querySplit)
+                        {
+                            // Check if token is not in string 
+                            if (item.Description.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
+                            {
+                                // Token is not in string, so we ignore this item. 
+                                flag = false;
+                            }
+                        }
+                        return flag;
+                    });
+
+                foreach (var item in matchingItems)
+                {
+                    suggestions.Add(new QueryFormat(item.Description, "Pending Tasks", "\uE823"));
+                }
+
+            }
+
+            if (CompletedTasks.instance != null)
+            {
+
+                var matchingItems2 = CompletedTasks.instance.CompleteTasks.ToList().Where(
+                    item =>
+                    {
+                        // Idea: check for every word entered (separated by space) if it is in the name,  
+                        // e.g. for query "split button" the only result should "SplitButton" since its the only query to contain "split" and "button" 
+                        // If any of the sub tokens is not in the string, we ignore the item. So the search gets more precise with more words 
+                        bool flag = true;
+                        foreach (string queryToken in querySplit)
+                        {
+                            // Check if token is not in string 
+                            if (item.Description.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
+                            {
+                                // Token is not in string, so we ignore this item. 
+                                flag = false;
+                            }
+                        }
+                        return flag;
+                    });
+                foreach (var item in matchingItems2)
+                {
+                    suggestions.Add(new QueryFormat(item.Description, "Completed Tasks", "\uE73E"));
+                }
+            }
+
+            return suggestions.OrderByDescending(i => i.Title.StartsWith(query, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title).ToList();
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (canSearch)
+            {
+                if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+                {
+                    var suggestions = SearchControls(sender.Text);
+
+                    if (suggestions.Count > 0)
+                    {
+                        sender.ItemsSource = suggestions;
+                    }
+                    else
+                    {
+                        sender.ItemsSource = new List<QueryFormat> { new QueryFormat("No result found", "Everywhere", "\uE711") };
+                    }
+                }
+            }
+        }
+
+        private async void SelectControl(QueryFormat desc)
+        {
+            if (desc != null && desc.location != "Everywhere")
+            {
+                if (desc.location == "Pending Tasks")
+                {
+                    var list = PendingTasks.instance.TaskItems;
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (desc.Title.Equals(list[i].Description))
+                        {
+                            ContentFrame.Navigate(typeof(PendingTasks), null, info);
+                            nview.SelectedItem = nview.MenuItems[0];
+                            //await Task.Delay(500);
+                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                () => calc(i, PendingTasks.instance.listOfTasks));
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    var list = CompletedTasks.instance.CompleteTasks;
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        if (desc.Title.Equals(list[i].Description))
+                        {
+                            ContentFrame.Navigate(typeof(CompletedTasks), null, info);
+                            nview.SelectedItem = nview.MenuItems[1];
+                            //await Task.Delay(500);
+                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                () => calc(i, CompletedTasks.instance.listOfTasks));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        public async void calc(int index, ListView choice)
+        {
+            await ScrollToIndex(choice, index);
+            
+        }
+
+        public ScrollViewer GetScrollViewer(DependencyObject element)
+        {
+            if (element is ScrollViewer viewer)
+            {
+                return viewer;
+            }
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+            {
+                var child = VisualTreeHelper.GetChild(element, i);
+
+                var result = GetScrollViewer(child);
+                if (result == null)
+                {
+                    continue;
+                }
+                else
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+        public async Task ScrollToIndex(ListView listViewBase, int index)
+        {
+            bool isVirtualizing = default(bool);
+            double previousHorizontalOffset = default(double), previousVerticalOffset = default(double);
+
+            // get the ScrollViewer withtin the ListView/GridView
+            var scrollViewer = GetScrollViewer(listViewBase);
+            if (scrollViewer != null)
+            {
+                // get the SelectorItem to scroll to
+                var selectorItem = listViewBase.ContainerFromIndex(index) as ListViewItem;
+
+                // when it's null, means virtualization is on and the item hasn't been realized yet
+                if (selectorItem == null)
+                {
+                    isVirtualizing = true;
+
+                    previousHorizontalOffset = scrollViewer.HorizontalOffset;
+                    previousVerticalOffset = scrollViewer.VerticalOffset;
+
+                    // call task-based ScrollIntoViewAsync to realize the item
+                    await ScrollIntoViewAsync(listViewBase, listViewBase.Items[index]);
+
+                    // this time the item shouldn't be null again
+                    selectorItem = (ListViewItem)listViewBase.ContainerFromIndex(index);
+                }
+
+                // calculate the position object in order to know how much to scroll to
+                var transform = selectorItem.TransformToVisual((UIElement)scrollViewer.Content);
+                var position = transform.TransformPoint(new Point(0, 0));
+
+                // when virtualized, scroll back to previous position without animation
+                if (isVirtualizing)
+                {
+                    await ChangeViewAsync(scrollViewer, previousHorizontalOffset, previousVerticalOffset, true);
+                }
+
+                // scroll to desired position with animation!
+                scrollViewer.ChangeView(position.X, position.Y, null);
+            }
+            
+        }
+
+        public async Task ScrollIntoViewAsync(ListView listViewBase, object item)
+        {
+            var tcs = new TaskCompletionSource<object>();
+            var scrollViewer = GetScrollViewer(listViewBase);
+
+            EventHandler<ScrollViewerViewChangedEventArgs> viewChanged = (s, e) => tcs.TrySetResult(null);
+            try
+            {
+                scrollViewer.ViewChanged += viewChanged;
+                listViewBase.ScrollIntoView(item, ScrollIntoViewAlignment.Leading);
+                await tcs.Task;
+            }
+            finally
+            {
+                scrollViewer.ViewChanged -= viewChanged;
+            }
+        }
+
+        public async Task ChangeViewAsync(ScrollViewer scrollViewer, double? horizontalOffset, double? verticalOffset, bool disableAnimation)
+        {
+            var tcs = new TaskCompletionSource<object>();
+
+            EventHandler<ScrollViewerViewChangedEventArgs> viewChanged = (s, e) => tcs.TrySetResult(null);
+            try
+            {
+                scrollViewer.ViewChanged += viewChanged;
+                scrollViewer.ChangeView(horizontalOffset, verticalOffset, null, disableAnimation);
+                await tcs.Task;
+            }
+            finally
+            {
+                scrollViewer.ViewChanged -= viewChanged;
+            }
+        }
+
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion != null && args.ChosenSuggestion is QueryFormat)
+            {
+                //User selected an item, take an action
+                SelectControl(args.ChosenSuggestion as QueryFormat);
+            }
+            else if (!string.IsNullOrEmpty(args.QueryText))
+            {
+                //Do a fuzzy search based on the text
+                var suggestions = SearchControls(sender.Text);
+                if (suggestions.Count > 0)
+                {
+                    SelectControl(suggestions.FirstOrDefault());
+                }
+            }
+        }
+
+        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            if (args.SelectedItem is QueryFormat control)
+            {
+                if (control.Title != "To_Do.QueryFormat")
+                {
+                    sender.Text = control.Title;
+
+                }
+            }
+        }
+
+        public async void Refresh()
+        {
+            LoadingUI.Visibility = Visibility.Visible;
+            ContentFrame.Navigate(typeof(CompletedTasks), tasksToParse, new SuppressNavigationTransitionInfo());
+            tasksToParse.Clear();
+            await Task.Delay(10);
+            ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+            nview.SelectedItem = nview.MenuItems[0];
+            LoadingUI.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    public class QueryFormat
+    {
+        public string Title = "";
+        public string location = "";
+        public string glyph = "";
+
+        public QueryFormat(string _title, string _location, string _glyph)
+        {
+            Title = _title;
+            location = _location;
+            glyph = _glyph;
+        }
     }
 }

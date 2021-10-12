@@ -5,6 +5,6 @@
 /Lib:"C:\Users\Aoun\.nuget\packages\runtime.win10-x64.microsoft.net.native.compiler\2.2.10-rel-29722-00\tools\x64\ilc\lib\Private"
 /WinMD:"E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\WinMetadata\Microsoft.UI.Xaml.winmd"
 /WinMD:"E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\WinMetadata\Windows.winmd"
-/VSTelemetrySessionSettings:"{\"IsOptedIn\":true,\"HostName\":\"Dev14\",\"AppInsightsInstrumentationKey\":\"f144292e-e3b2-4011-ac90-20e5c03fbce5\",\"AsimovInstrumentationKey\":\"AIF-312cbd79-9dbb-4c48-a7da-3cc2a931cb70\",\"AppId\":1001,\"UserId\":\"95cccadc-29d7-4cbe-919e-baf5944064b7\",\"Id\":\"478ccf44-80c6-4a2c-99a1-a03d07930f64\",\"ProcessStartTime\":637695536531536834}"
+/VSTelemetrySessionSettings:"{\"IsOptedIn\":true,\"HostName\":\"Dev14\",\"AppInsightsInstrumentationKey\":\"f144292e-e3b2-4011-ac90-20e5c03fbce5\",\"AsimovInstrumentationKey\":\"AIF-312cbd79-9dbb-4c48-a7da-3cc2a931cb70\",\"AppId\":1001,\"UserId\":\"95cccadc-29d7-4cbe-919e-baf5944064b7\",\"Id\":\"bf1dcd3c-7d78-4273-a5a5-1220733a0a19\",\"ProcessStartTime\":637696592029971882}"
 /RdXmlPath:"C:\Users\Aoun\.nuget\packages\microsoft.net.native.compiler\2.2.10-rel-29722-00\tools\LibraryXML"
 /RunOnlyPreDR

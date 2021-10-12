@@ -8,14 +8,20 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary>
+                    
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Dark">
+                    <CornerRadius x:Key="OverlayCornerRadius">8</CornerRadius>
+                    <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
+                    <CornerRadius x:Key="ListViewItemCornerRadius">4</CornerRadius>
+                    <CornerRadius x:Key="NavViewSplitViewCorners">0,8,8,0</CornerRadius>
+                    <CornerRadius x:Key="TopLeftNavViewContentCorner">8,0,0,0</CornerRadius>
                     <Style x:Key="ButtonStyle1" TargetType="Button">
                         <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
                         <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
-                        <Setter Property="CornerRadius" Value="4"/>
+                        <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
                         <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
                         <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
                         <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
@@ -86,7 +92,6 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                    <!--<AcrylicBrush x:Key="NavigationViewDefaultPaneBackground" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=FallbackColor}" TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=TintTransitionDuration}" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=TintLuminosityOpacity}" TintColor="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=TintColor}" TintOpacity="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=TintOpacity}" BackgroundSource="Backdrop" Opacity="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=Opacity}"/>-->
                     <Color x:Key="SystemAccentColorLight1">#5395f5</Color>
                     <Color x:Key="SystemAccentColorLight2">#5395f5</Color>
                     <Color x:Key="SystemAccentColor">#5395f5</Color>
@@ -95,54 +100,54 @@
                     <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPointerOver" Color="{ThemeResource SystemAccentColorLight2}"/>
                     <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPressed" Color="{ThemeResource SystemAccentColorLight2}"/>
                     <Style BasedOn="{StaticResource ListViewItemRevealStyle}" x:Key="RoundedListViewItem" TargetType="ListViewItem">
-                        <Setter Property="CornerRadius" Value="4"/>
+                        <Setter Property="CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListViewItem">
-                                    <ListViewItemPresenter x:Name="Root" CheckBrush="{ThemeResource ListViewItemCheckBrush}" ContentMargin="{TemplateBinding Padding}" CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}" ContentTransitions="{TemplateBinding ContentTransitions}" CheckMode="{ThemeResource ListViewItemCheckMode}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackground}" DragForeground="{ThemeResource ListViewItemDragForeground}" FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}" FocusVisualMargin="{TemplateBinding FocusVisualMargin}" FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Control.IsTemplateFocusTarget="True" PressedBackground="{ThemeResource ListViewItemBackgroundPressed}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}" PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}" PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}" RevealBorderThickness="{ThemeResource ListViewItemRevealBorderThemeThickness}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}" RevealBackground="{ThemeResource ListViewItemRevealBackground}" SelectedForeground="{ThemeResource ListViewItemForegroundSelected}" SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}" SelectedBackground="{ThemeResource ListViewItemBackgroundSelected}" SelectedPressedBackground="{ThemeResource ListViewItemBackgroundSelectedPressed}" SelectedPointerOverBackground="{ThemeResource ListViewItemBackgroundSelectedPointerOver}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <ListViewItemPresenter x:Name="Root" CheckBrush="{ThemeResource ListViewItemCheckBrush}" ContentMargin="{TemplateBinding Padding}" CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}" ContentTransitions="{TemplateBinding ContentTransitions}" CheckMode="{ThemeResource ListViewItemCheckMode}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackground}" DragForeground="{ThemeResource ListViewItemDragForeground}" FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}" FocusVisualMargin="{TemplateBinding FocusVisualMargin}" FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Control.IsTemplateFocusTarget="True" PressedBackground="{ThemeResource ListViewItemBackgroundPressed}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}" PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}" PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}" RevealBorderThickness="0" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}" RevealBackground="{ThemeResource ListViewItemRevealBackground}" SelectedForeground="{ThemeResource ListViewItemForegroundSelected}" SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}" SelectedBackground="{ThemeResource ListViewItemBackgroundSelected}" SelectedPressedBackground="{ThemeResource ListViewItemBackgroundSelectedPressed}" SelectedPointerOverBackground="{ThemeResource ListViewItemBackgroundSelectedPointerOver}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="Selected">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PointerOver">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPointerOver}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PointerOverSelected">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPointerOver}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PointerOverPressed">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="Pressed">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PressedSelected">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                                     </VisualState.Setters>
@@ -153,7 +158,7 @@
                                                 <VisualState x:Name="Disabled">
 
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.RevealBorderThickness" Value="0"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
@@ -167,10 +172,15 @@
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Light">
+                    <CornerRadius x:Key="OverlayCornerRadius">8</CornerRadius>
+                    <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
+                    <CornerRadius x:Key="ListViewItemCornerRadius">4</CornerRadius>
+                    <CornerRadius x:Key="NavViewSplitViewCorners">0,8,8,0</CornerRadius>
+                    <CornerRadius x:Key="TopLeftNavViewContentCorner">8,0,0,0</CornerRadius>
                     <Style x:Key="ButtonStyle1" TargetType="Button">
                         <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
                         <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
-                        <Setter Property="CornerRadius" Value="4"/>
+                        <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
                         <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
                         <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
                         <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
@@ -241,7 +251,6 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                    <!--<AcrylicBrush x:Key="NavigationViewDefaultPaneBackground" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=FallbackColor}" TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=TintTransitionDuration}" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=TintLuminosityOpacity}" TintColor="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=TintColor}" TintOpacity="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=TintOpacity}" BackgroundSource="Backdrop" Opacity="{Binding Source={ThemeResource SystemControlAcrylicWindowBrush}, Path=Opacity}"/>-->
                     <Color x:Key="SystemAccentColorDark1">#1e54c9</Color>
                     <Color x:Key="SystemAccentColorDark2">#1e54c9</Color>
                     <Color x:Key="SystemAccentColor">#1e54c9</Color>
@@ -250,54 +259,54 @@
                     <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPointerOver" Color="{ThemeResource SystemAccentColorDark1}"/>
                     <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPressed" Color="{ThemeResource SystemAccentColorDark1}"/>
                     <Style BasedOn="{StaticResource ListViewItemRevealStyle}" x:Key="RoundedListViewItem" TargetType="ListViewItem">
-                        <Setter Property="CornerRadius" Value="4"/>
+                        <Setter Property="CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListViewItem">
-                                    <ListViewItemPresenter x:Name="Root" CheckBrush="{ThemeResource ListViewItemCheckBrush}" ContentMargin="{TemplateBinding Padding}" CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}" ContentTransitions="{TemplateBinding ContentTransitions}" CheckMode="{ThemeResource ListViewItemCheckMode}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackground}" DragForeground="{ThemeResource ListViewItemDragForeground}" FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}" FocusVisualMargin="{TemplateBinding FocusVisualMargin}" FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Control.IsTemplateFocusTarget="True" PressedBackground="{ThemeResource ListViewItemBackgroundPressed}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}" PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}" PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}" RevealBorderThickness="{ThemeResource ListViewItemRevealBorderThemeThickness}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}" RevealBackground="{ThemeResource ListViewItemRevealBackground}" SelectedForeground="{ThemeResource ListViewItemForegroundSelected}" SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}" SelectedBackground="{ThemeResource ListViewItemBackgroundSelected}" SelectedPressedBackground="{ThemeResource ListViewItemBackgroundSelectedPressed}" SelectedPointerOverBackground="{ThemeResource ListViewItemBackgroundSelectedPointerOver}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <ListViewItemPresenter x:Name="Root" CheckBrush="{ThemeResource ListViewItemCheckBrush}" ContentMargin="{TemplateBinding Padding}" CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}" ContentTransitions="{TemplateBinding ContentTransitions}" CheckMode="{ThemeResource ListViewItemCheckMode}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackground}" DragForeground="{ThemeResource ListViewItemDragForeground}" FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}" FocusVisualMargin="{TemplateBinding FocusVisualMargin}" FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Control.IsTemplateFocusTarget="True" PressedBackground="{ThemeResource ListViewItemBackgroundPressed}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}" PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}" PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}" RevealBorderThickness="0" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}" RevealBackground="{ThemeResource ListViewItemRevealBackground}" SelectedForeground="{ThemeResource ListViewItemForegroundSelected}" SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}" SelectedBackground="{ThemeResource ListViewItemBackgroundSelected}" SelectedPressedBackground="{ThemeResource ListViewItemBackgroundSelectedPressed}" SelectedPointerOverBackground="{ThemeResource ListViewItemBackgroundSelectedPointerOver}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="Selected">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PointerOver">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPointerOver}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PointerOverSelected">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPointerOver}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PointerOverPressed">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="Pressed">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PressedSelected">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                                     </VisualState.Setters>
@@ -308,7 +317,7 @@
                                                 <VisualState x:Name="Disabled">
 
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.RevealBorderThickness" Value="0"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
@@ -322,55 +331,60 @@
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="HighContrast">
+                    <CornerRadius x:Key="OverlayCornerRadius">8</CornerRadius>
+                    <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
+                    <CornerRadius x:Key="ListViewItemCornerRadius">4</CornerRadius>
+                    <CornerRadius x:Key="NavViewSplitViewCorners">0,8,8,0</CornerRadius>
+                    <CornerRadius x:Key="TopLeftNavViewContentCorner">8,0,0,0</CornerRadius>
                     <Style BasedOn="{StaticResource ListViewItemRevealStyle}" x:Key="RoundedListViewItem" TargetType="ListViewItem">
-                        <Setter Property="CornerRadius" Value="4"/>
+                        <Setter Property="CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListViewItem">
-                                    <ListViewItemPresenter x:Name="Root" CheckBrush="{ThemeResource ListViewItemCheckBrush}" ContentMargin="{TemplateBinding Padding}" CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}" ContentTransitions="{TemplateBinding ContentTransitions}" CheckMode="{ThemeResource ListViewItemCheckMode}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackground}" DragForeground="{ThemeResource ListViewItemDragForeground}" FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}" FocusVisualMargin="{TemplateBinding FocusVisualMargin}" FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Control.IsTemplateFocusTarget="True" PressedBackground="{ThemeResource ListViewItemBackgroundPressed}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}" PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}" PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}" RevealBorderThickness="{ThemeResource ListViewItemRevealBorderThemeThickness}" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}" RevealBackground="{ThemeResource ListViewItemRevealBackground}" SelectedForeground="{ThemeResource ListViewItemForegroundSelected}" SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}" SelectedBackground="{ThemeResource ListViewItemBackgroundSelected}" SelectedPressedBackground="{ThemeResource ListViewItemBackgroundSelectedPressed}" SelectedPointerOverBackground="{ThemeResource ListViewItemBackgroundSelectedPointerOver}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <ListViewItemPresenter x:Name="Root" CheckBrush="{ThemeResource ListViewItemCheckBrush}" ContentMargin="{TemplateBinding Padding}" CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}" ContentTransitions="{TemplateBinding ContentTransitions}" CheckMode="{ThemeResource ListViewItemCheckMode}" DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" DragBackground="{ThemeResource ListViewItemDragBackground}" DragForeground="{ThemeResource ListViewItemDragForeground}" FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}" FocusVisualMargin="{TemplateBinding FocusVisualMargin}" FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Control.IsTemplateFocusTarget="True" PressedBackground="{ThemeResource ListViewItemBackgroundPressed}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackground}" PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}" PointerOverBackground="{ThemeResource ListViewItemBackgroundPointerOver}" RevealBorderThickness="0" ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}" RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}" RevealBackground="{ThemeResource ListViewItemRevealBackground}" SelectedForeground="{ThemeResource ListViewItemForegroundSelected}" SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}" SelectedBackground="{ThemeResource ListViewItemBackgroundSelected}" SelectedPressedBackground="{ThemeResource ListViewItemBackgroundSelectedPressed}" SelectedPointerOverBackground="{ThemeResource ListViewItemBackgroundSelectedPointerOver}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="Selected">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PointerOver">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPointerOver}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PointerOverSelected">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="PointerOver"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPointerOver}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PointerOverPressed">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="Pressed">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="PressedSelected">
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.(RevealBrush.State)" Value="Pressed"/>
                                                         <Setter Target="Root.RevealBorderBrush" Value="{ThemeResource ListViewItemRevealBorderBrushPressed}"/>
                                                     </VisualState.Setters>
@@ -381,7 +395,7 @@
                                                 <VisualState x:Name="Disabled">
 
                                                     <VisualState.Setters>
-                                                        <Setter Target="Root.CornerRadius" Value="4" />
+                                                        <Setter Target="Root.CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}" />
                                                         <Setter Target="Root.RevealBorderThickness" Value="0"/>
                                                     </VisualState.Setters>
                                                 </VisualState>

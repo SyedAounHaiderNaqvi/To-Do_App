@@ -12,7 +12,7 @@
             <Grid ToolTipService.ToolTip="{x:Bind tooltip}" Width="150" Height="100">
                 <Polygon Points="50,50 150,50 150,100, 50,100" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.backgroundBrush}"/>
                 <Polygon Points="50,0 150,0 150,15, 50,15" Stroke="Transparent" Fill="#eeeeee"/>
-                <Border CornerRadius="4,0,0,0" Margin="50,6,0,0" VerticalAlignment="Top" Width="150" Height="44" Background="{x:Bind backgroundBrush}"/>
+                <Border CornerRadius="{ThemeResource TopLeftNavViewContentCorner}" Margin="50,6,0,0" VerticalAlignment="Top" Width="150" Height="44" Background="{x:Bind backgroundBrush}"/>
                 <Polygon Points="0,0 50,0 50,50, 0,50" Stroke="Transparent" Fill="#eeeeee"/>
                 <Polygon Points="0,50 50,50 50,100, 0,100" Stroke="Transparent" Fill="#3c3c3c"/>
                 <Polygon Fill="{x:Bind borderBrush}" Points="60,14 80,14 80,17 60,17"/>
@@ -35,7 +35,7 @@
         <Grid.BackgroundTransition>
             <BrushTransition/>
         </Grid.BackgroundTransition>
-        <Border HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8" VerticalAlignment="Top" Margin="34,33,34,41" Background="{ThemeResource TextControlBackground}">
+        <Border HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="{ThemeResource OverlayCornerRadius}" VerticalAlignment="Top" Margin="34,33,34,41" Background="{ThemeResource TextControlBackground}">
             <ScrollViewer>
                 <StackPanel Padding="20,0,20,20" Spacing="10">
                     <TextBlock
@@ -77,6 +77,7 @@
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
                     </GridView>
+                    <ToggleSwitch x:Name="RoundCornerToggle" Toggled="OnRoundedCornerToggled" Header="Use rounded corners for controls (Note: Some controls will be updated only after restarting app)"/>
                     <ToggleSwitch x:Name="btntoggle" Toggled="OnBGIMGToggled" Header="Use image as background (Note: Some images have bad contrast with some colors)"/>
                     <StackPanel Visibility="Collapsed" x:Name="Fallbackpanel" Spacing="10">
                         <TextBlock Text="*Allow access to file system to use custom images." Foreground="{ThemeResource SystemErrorTextColor}"/>

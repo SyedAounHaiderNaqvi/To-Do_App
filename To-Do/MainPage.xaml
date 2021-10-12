@@ -10,6 +10,25 @@
     controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
+        <DataTemplate x:Key="suggestionTemplate" x:DataType="local:QueryFormat">
+            <Grid Width="270" MaxHeight="300" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <FontIcon HorizontalAlignment="Left" Grid.Column="0" Grid.RowSpan="2" Glyph="{x:Bind glyph}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock Grid.Column="1" TextWrapping="Wrap" Margin="0,5,70,0" Grid.Row="0" HorizontalAlignment="Left" Text="{x:Bind Title}"/>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="0,10,0,5" Grid.Row="1" Orientation="Horizontal" Spacing="5">
+                    <FontIcon Foreground="{ThemeResource SystemBaseMediumColor}" Margin="-2,0,0,0" Glyph="&#xE9AE;"/>
+                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" Margin="-4,0,0,0" Text="in"/>
+                    <TextBlock Foreground="{ThemeResource SystemAccentColor}" Text="{x:Bind location}"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
         <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
         <Style x:Key="NavigationBackButtonNormalStyle" TargetType="Button">
             <Setter Property="Background" Value="{ThemeResource NavigationViewBackButtonBackground}"/>
@@ -348,7 +367,7 @@
                                     </Grid>
                                     <Border x:Name="TopNavContentOverlayAreaGrid" Child="{TemplateBinding ContentOverlay}"/>
                                 </StackPanel>
-                                <SplitView x:Name="RootSplitView" CornerRadius="0,8,8,0" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsTabStop="False" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{ThemeResource NavigationViewDefaultPaneBackground}" Grid.Row="1">
+                                <SplitView x:Name="RootSplitView" CornerRadius="{ThemeResource NavViewSplitViewCorners}" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsTabStop="False" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{ThemeResource NavigationViewDefaultPaneBackground}" Grid.Row="1">
                                     <SplitView.Pane>
                                         <Grid x:Name="PaneContentGrid" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" HorizontalAlignment="Left" Margin="{ThemeResource NavigationViewPaneContentGridMargin}" Visibility="{Binding TemplateSettings.LeftPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <Grid.RowDefinitions>
@@ -439,7 +458,7 @@
                                             </Grid>
                                         </Grid>
                                     </SplitView.Pane>
-                                    <Grid CornerRadius="8,0,0,0" x:Name="ContentGrid" Background="{ThemeResource NavigationViewContentBackground}" BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}" BorderBrush="{ThemeResource NavigationViewContentGridBorderBrush}" Margin="{ThemeResource NavigationViewContentMargin}">
+                                    <Grid CornerRadius="{ThemeResource TopLeftNavViewContentCorner}" x:Name="ContentGrid" Background="{ThemeResource NavigationViewContentBackground}" BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}" BorderBrush="{ThemeResource NavigationViewContentGridBorderBrush}" Margin="{ThemeResource NavigationViewContentMargin}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
@@ -508,6 +527,9 @@
                     </controls:NavigationViewItem.Content>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
+            <controls:NavigationView.AutoSuggestBox>
+                <AutoSuggestBox UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search" />
+            </controls:NavigationView.AutoSuggestBox>
             <Grid>
 
                 <Image x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" Margin="0,-82,0,0" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>

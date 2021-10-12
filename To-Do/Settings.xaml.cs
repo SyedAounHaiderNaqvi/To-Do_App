@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+//using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Security.Authorization.AppCapabilityAccess;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -96,6 +97,53 @@ namespace To_Do
                 bgimgbutton.Visibility = Visibility.Collapsed;
                 //bgimgbutton.IsEnabled = false;
                 localSettings.Values["useimg"] = 0;
+            }
+
+            if (localSettings.Values["useround"] != null)
+            {
+                switch ((int)localSettings.Values["useround"])
+                {
+                    case 0:
+                        RoundCornerToggle.IsOn = false;
+                        Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
+                        Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
+                        Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(1);
+                        Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0);
+                        Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(1, 0, 0, 0);
+                        break;
+                    case 1:
+                        RoundCornerToggle.IsOn = true;
+                        Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
+                        Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
+                        Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
+                        Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
+                        Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                RoundCornerToggle.IsOn = true;
+                localSettings.Values["useround"] = 1;
+                Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
+                Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
+                Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
+                Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
+                Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
+            }
+
+            if (ThemeHelper.IsDarkTheme())
+            {
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
+
+            }
+            else
+            {
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
             }
         }
 
@@ -338,7 +386,6 @@ namespace To_Do
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
             }
-
         }
 
         private async void OnBGIMGToggled(object sender, RoutedEventArgs e)
@@ -435,6 +482,40 @@ namespace To_Do
             var pageType = Type.GetType("To_Do.Settings");
             MainPage.ins.ContentFrame.Navigate(pageType, null, new SuppressNavigationTransitionInfo());
             _ = await Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
+        }
+
+        private void OnRoundedCornerToggled(object sender, RoutedEventArgs e)
+        {
+            if (RoundCornerToggle.IsOn)
+            {
+                localSettings.Values["useround"] = 1;
+                Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
+                Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
+                Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
+                Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
+                Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
+            }
+            else
+            {
+                localSettings.Values["useround"] = 0;
+                Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
+                Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
+                Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(1);
+                Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0);
+                Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(1, 0, 0, 0);
+            }
+
+            if (ThemeHelper.IsDarkTheme())
+            {
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
+
+            }
+            else
+            {
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+            }
         }
     }
 

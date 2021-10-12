@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Diagnostics;
+//using System.Diagnostics;
 using System.Threading;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
@@ -43,16 +43,17 @@ namespace To_Do.NavigationPages
             InitializeData();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
             listOfTasks.ItemsSource = TaskItems;
+            listOfTasks.UpdateLayout();
             UpdateBadge();
         }
 
         public void AddATask(string taskDescription, string date, bool isImportant)
         {
-            TaskItems.Add(new TODOTask() { Description = taskDescription, Date = date, IsStarred = isImportant });
-            scroll.UpdateLayout();
-            scroll.ChangeView(0, scroll.ScrollableHeight, 1);
-
+            TODOTask newTask = new TODOTask() { Description = taskDescription, Date = date, IsStarred = isImportant };
+            TaskItems.Add(newTask);
             listOfTasks.ItemsSource = TaskItems;
+            listOfTasks.UpdateLayout();
+            listOfTasks.ScrollIntoView(newTask);
             UpdateBadge();
         }
 
@@ -112,9 +113,6 @@ namespace To_Do.NavigationPages
         private void StarChecked(object sender, RoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
-            StackPanel cbparent = VisualTreeHelper.GetParent(cb) as StackPanel;
-            //Grid panelparent = VisualTreeHelper.GetParent(cbparent) as Grid;
-
             UserControl top = cb.DataContext as UserControl;
             TODOTask context = top.DataContext as TODOTask;
             if (context != null)
@@ -136,6 +134,7 @@ namespace To_Do.NavigationPages
                 notif.Translation = new System.Numerics.Vector3(0, 170, 0);
                 notif.Opacity = 0;
                 confirmDoneNotif.IsOpen = false;
+                MainPage.ins.Refresh();
             }
             // get checkbox that sent this function
             CheckBox cb = sender as CheckBox;
@@ -170,7 +169,7 @@ namespace To_Do.NavigationPages
             }
             catch
             {
-                Debug.WriteLine("Cancelledddd");
+                
             }
             if (confirmDoneNotif.IsOpen)
             {
@@ -179,6 +178,7 @@ namespace To_Do.NavigationPages
                 await Task.Delay(200);
                 confirmDoneNotif.IsOpen = false;
                 token.Cancel();
+                MainPage.ins.Refresh();
             }
         }
 
@@ -186,10 +186,9 @@ namespace To_Do.NavigationPages
         {
             singletonReference.tasksToParse.RemoveAt(singletonReference.tasksToParse.Count - 1);
             TaskItems.Insert(undoIndex, new TODOTask() { Description = undoText, Date = undoDate, IsStarred = undoStar });
-            scroll.UpdateLayout();
-            scroll.ChangeView(0, scroll.ScrollableHeight, 1);
             UpdateBadge();
             listOfTasks.ItemsSource = TaskItems;
+            listOfTasks.UpdateLayout();
             token.Cancel();
             notif.Translation = new System.Numerics.Vector3(0, 170, 0);
             notif.Opacity = 0;
@@ -259,7 +258,7 @@ namespace To_Do.NavigationPages
         {
             singletonReference.inf.Value = TaskItems.Count;
             //setBadgeNumber(TaskItems.Count);
-            
+
             if (TaskItems.Count > 0)
             {
                 singletonReference.inf.Visibility = Visibility.Visible;
@@ -303,7 +302,8 @@ namespace To_Do.NavigationPages
                 icon.Translation = System.Numerics.Vector3.Zero;
                 btn.Translation = new System.Numerics.Vector3(8, 0, 0);
                 block.Translation = System.Numerics.Vector3.Zero;
-
+                var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
+                moreoptbutton.Opacity = 1;
                 var b = FindControl<CheckBox>(c, typeof(CheckBox), "completecheckbox");
                 b.Translation = System.Numerics.Vector3.Zero;
             }
@@ -321,6 +321,8 @@ namespace To_Do.NavigationPages
             icon.Opacity = 0;
             icon.Translation = new System.Numerics.Vector3(-30, 0, 0);
             btn.Translation = new System.Numerics.Vector3(60, 0, 0);
+            var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
+            moreoptbutton.Opacity = 0;
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
 
             var b = FindControl<CheckBox>(c, typeof(CheckBox), "completecheckbox");
@@ -369,6 +371,9 @@ namespace To_Do.NavigationPages
 
             btn.Translation = new System.Numerics.Vector3(60, 0, 0);
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
+
+            var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
+            moreoptbutton.Opacity = 0;
         }
 
         private void SortingOptionClicked(object sender, RoutedEventArgs e)

@@ -26,6 +26,7 @@
       <RootProperty Name="ThemeDictionaries" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.XamlControlsResources" />
+    <RootType FullName="Windows.UI.Xaml.CornerRadius" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListViewItem" />
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="CornerRadius" />
@@ -120,6 +121,7 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Height" />
       <RootProperty Name="CornerRadius" />
+      <RootProperty Name="OpacityTransition" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
@@ -204,6 +206,7 @@
       <RootProperty Name="CornerRadius" />
       <RootProperty Name="Background" />
       <RootProperty Name="BorderThickness" />
+      <RootProperty Name="MaxHeight" />
       <RootProperty Name="Opacity" />
       <RootProperty Name="Translation" />
       <RootProperty Name="TranslationTransition" />
@@ -247,6 +250,9 @@
       <RootMethod Name="GetApplyToRootOrPageBackground" />
       <RootMethod Name="SetApplyToRootOrPageBackground" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.DataTemplate">
+      <RootProperty Name="Template" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Thickness" />
     <RootType FullName="Windows.UI.Xaml.Controls.ContentControl">
       <RootProperty Name="Content" />
@@ -272,6 +278,7 @@
       <RootProperty Name="CompactModeThresholdWidth" />
       <RootProperty Name="PaneDisplayMode" />
       <RootProperty Name="MenuItems" />
+      <RootProperty Name="AutoSuggestBox" />
       <RootProperty Name="Content" />
       <RootEvent Name="DisplayModeChanged" />
       <RootEvent Name="SelectionChanged" />
@@ -319,11 +326,11 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="XYFocusKeyboardNavigation" />
       <RootProperty Name="Children" />
-      <RootProperty Name="Orientation" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Orientation" />
+      <RootProperty Name="Spacing" />
       <RootProperty Name="Padding" />
       <RootProperty Name="Visibility" />
-      <RootProperty Name="Spacing" />
       <RootProperty Name="DataContext" />
       <RootProperty Name="Opacity" />
       <RootProperty Name="Translation" />
@@ -364,8 +371,6 @@
       <RootProperty Name="HorizontalScrollMode" />
       <RootProperty Name="VerticalScrollMode" />
       <RootProperty Name="ZoomMode" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="IsVerticalScrollChainingEnabled" />
       <RootMethod Name="GetHorizontalScrollMode" />
       <RootMethod Name="SetHorizontalScrollMode" />
       <RootMethod Name="GetHorizontalScrollBarVisibility" />
@@ -418,12 +423,12 @@
       <RootProperty Name="Style" />
       <RootProperty Name="Text" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="TextWrapping" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="HorizontalTextAlignment" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Opacity" />
       <RootProperty Name="MaxWidth" />
-      <RootProperty Name="TextWrapping" />
       <RootProperty Name="Translation" />
       <RootProperty Name="TranslationTransition" />
       <RootProperty Name="FontWeight" />
@@ -447,6 +452,23 @@
       <RootProperty Name="MirroredWhenRightToLeft" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.AnimatedVisuals.AnimatedBackVisualSource" />
+    <RootType FullName="Windows.UI.Xaml.Controls.FontIcon">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Glyph" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="IsHitTestVisible" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="OpacityTransition" />
+      <RootProperty Name="Translation" />
+      <RootProperty Name="TranslationTransition" />
+    </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
@@ -458,24 +480,16 @@
       <RootProperty Name="InfoBadge" />
       <RootProperty Name="Content" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.FontIcon">
-      <RootProperty Name="Glyph" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="FontWeight" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="FontFamily" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="IsHitTestVisible" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="OpacityTransition" />
-      <RootProperty Name="Translation" />
-      <RootProperty Name="TranslationTransition" />
-    </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.InfoBadge" />
+    <RootType FullName="Windows.UI.Xaml.Controls.AutoSuggestBox">
+      <RootProperty Name="UpdateTextOnSelect" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="QueryIcon" />
+      <RootProperty Name="PlaceholderText" />
+      <RootEvent Name="SuggestionChosen" />
+      <RootEvent Name="TextChanged" />
+      <RootEvent Name="QuerySubmitted" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="IsHitTestVisible" />
       <RootProperty Name="MinWidth" />
@@ -506,9 +520,6 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Frame" />
     <RootType FullName="To_Do.MainPage" />
-    <RootType FullName="Windows.UI.Xaml.Controls.SymbolIcon">
-      <RootProperty Name="Symbol" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="SelectionMode" />
       <RootProperty Name="BorderThickness" />
@@ -521,9 +532,6 @@
       <RootProperty Name="AllowDrop" />
       <RootEvent Name="LayoutUpdated" />
       <RootEvent Name="DragItemsCompleted" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.DataTemplate">
-      <RootProperty Name="Template" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
       <RootProperty Name="Content" />
@@ -579,6 +587,9 @@
       <RootProperty Name="Text" />
       <RootProperty Name="Icon" />
       <RootEvent Name="Click" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.SymbolIcon">
+      <RootProperty Name="Symbol" />
     </RootType>
     <RootType FullName="To_Do.NavigationPages.PendingTasks" />
     <RootType FullName="Windows.UI.Xaml.Shapes.Polygon">

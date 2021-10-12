@@ -1,5 +1,5 @@
 ﻿<ContentDialog
-    CornerRadius="8"
+    CornerRadius="{ThemeResource OverlayCornerRadius}"
     RequestedTheme="{x:Bind THEME}"
     x:Class="To_Do.EditDialogContent"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

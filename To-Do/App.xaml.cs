@@ -85,6 +85,9 @@ namespace To_Do
                     if (e.Arguments == "GoToPending")
                     {
                         MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
+                        MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
+                        await Task.Delay(10);
+                        MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
                         MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[0];
 
                     }
@@ -98,6 +101,7 @@ namespace To_Do
                     else if (e.Arguments == "GoToSettings")
                     {
                         MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                        MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
                         await Task.Delay(10);
                         MainPage.ins.ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
                         MainPage.ins.nview.SelectedItem = MainPage.ins.nview.SettingsItem;

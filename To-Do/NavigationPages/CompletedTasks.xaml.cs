@@ -25,6 +25,7 @@ namespace To_Do.NavigationPages
             instance = this;
             InitializeData();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            listOfTasks.UpdateLayout();
         }
 
         private void InitializeData()
@@ -51,7 +52,6 @@ namespace To_Do.NavigationPages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //list of list ofstring
             base.OnNavigatedTo(e);
 
             PendingTasks.instance.HideInfoBar();
@@ -70,10 +70,11 @@ namespace To_Do.NavigationPages
 
         public void AddATask(string taskDescription, string date)
         {
-            CompleteTasks.Add(new TODOTask() { Description = taskDescription, Date = date });
+            TODOTask newTask = new TODOTask() { Description = taskDescription, Date = date };
+            CompleteTasks.Add(newTask);
 
-            scroll.UpdateLayout();
-            scroll.ChangeView(0, scroll.ScrollableHeight, 1);
+            listOfTasks.UpdateLayout();
+            listOfTasks.ScrollIntoView(newTask);
         }
 
         private void listOfTasks_LayoutUpdated(object sender, object e)

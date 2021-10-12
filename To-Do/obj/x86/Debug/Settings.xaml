@@ -12,7 +12,7 @@
             <Grid x:ConnectionId='3'                                           Width="150" Height="100">
                 <Polygon x:ConnectionId='4' Points="50,50 150,50 150,100, 50,100" Stroke="Transparent"                                                 />
                 <Polygon Points="50,0 150,0 150,15, 50,15" Stroke="Transparent" Fill="#eeeeee"/>
-                <Border x:ConnectionId='5' CornerRadius="4,0,0,0" Margin="50,6,0,0" VerticalAlignment="Top" Width="150" Height="44"                                      />
+                <Border x:ConnectionId='5' CornerRadius="{ThemeResource TopLeftNavViewContentCorner}" Margin="50,6,0,0" VerticalAlignment="Top" Width="150" Height="44"                                      />
                 <Polygon Points="0,0 50,0 50,50, 0,50" Stroke="Transparent" Fill="#eeeeee"/>
                 <Polygon Points="0,50 50,50 50,100, 0,100" Stroke="Transparent" Fill="#3c3c3c"/>
                 <Polygon x:ConnectionId='6'                             Points="60,14 80,14 80,17 60,17"/>
@@ -35,7 +35,7 @@
         <Grid.BackgroundTransition>
             <BrushTransition/>
         </Grid.BackgroundTransition>
-        <Border HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="8" VerticalAlignment="Top" Margin="34,33,34,41" Background="{ThemeResource TextControlBackground}">
+        <Border HorizontalAlignment="Stretch" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="{ThemeResource OverlayCornerRadius}" VerticalAlignment="Top" Margin="34,33,34,41" Background="{ThemeResource TextControlBackground}">
             <ScrollViewer>
                 <StackPanel Padding="20,0,20,20" Spacing="10">
                     <TextBlock
@@ -57,9 +57,9 @@
                     </ComboBox>
                     <TextBlock Margin="1,10,0,0" Text="App Theme"/>
                     <StackPanel x:ConnectionId='11' x:Name="ThemePanel" Margin="1,0,0,0">
-                        <RadioButton x:ConnectionId='18' Tag="Light"                                     Content="Light"/>
-                        <RadioButton x:ConnectionId='19' Tag="Dark"                                     Content="Dark" />
-                        <RadioButton x:ConnectionId='20' Tag="Default"                                     Content="Use system setting" />
+                        <RadioButton x:ConnectionId='19' Tag="Light"                                     Content="Light"/>
+                        <RadioButton x:ConnectionId='20' Tag="Dark"                                     Content="Dark" />
+                        <RadioButton x:ConnectionId='21' Tag="Default"                                     Content="Use system setting" />
                     </StackPanel>
                     <TextBlock Margin="1,10,0,0" Text="Color Theme"/>
                     <GridView x:ConnectionId='12'                                                                  ItemTemplate="{StaticResource ImageTemplate}" SelectionMode="None" IsItemClickEnabled="True" x:Name="themeGrid">
@@ -77,10 +77,11 @@
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
                     </GridView>
-                    <ToggleSwitch x:ConnectionId='13' x:Name="btntoggle"                          Header="Use image as background (Note: Some images have bad contrast with some colors)"/>
-                    <StackPanel x:ConnectionId='14' Visibility="Collapsed" x:Name="Fallbackpanel" Spacing="10">
+                    <ToggleSwitch x:ConnectionId='13' x:Name="RoundCornerToggle"                                  Header="Use rounded corners for controls (Note: Some controls will be updated only after restarting app)"/>
+                    <ToggleSwitch x:ConnectionId='14' x:Name="btntoggle"                          Header="Use image as background (Note: Some images have bad contrast with some colors)"/>
+                    <StackPanel x:ConnectionId='15' Visibility="Collapsed" x:Name="Fallbackpanel" Spacing="10">
                         <TextBlock Text="*Allow access to file system to use custom images." Foreground="{ThemeResource SystemErrorTextColor}"/>
-                        <Button x:ConnectionId='16'                       >
+                        <Button x:ConnectionId='17'                       >
                             <Button.Content>
                                 <StackPanel Spacing="10" Orientation="Horizontal">
                                     <FontIcon Glyph="&#xE8A7;"/>
@@ -89,7 +90,7 @@
                             </Button.Content>
                         </Button>
                     </StackPanel>
-                    <Button x:ConnectionId='15' Margin="0,-10,0,0" x:Name="bgimgbutton"                   Content="Choose Image"/>
+                    <Button x:ConnectionId='16' Margin="0,-10,0,0" x:Name="bgimgbutton"                   Content="Choose Image"/>
                 </StackPanel>
             </ScrollViewer>
         </Border>

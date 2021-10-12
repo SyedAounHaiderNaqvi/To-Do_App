@@ -10,6 +10,25 @@
     controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
+        <DataTemplate x:Key="suggestionTemplate"                               >
+            <Grid x:ConnectionId='110' Width="270" MaxHeight="300" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <FontIcon x:ConnectionId='111' HorizontalAlignment="Left" Grid.Column="0" Grid.RowSpan="2"                        Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock x:ConnectionId='112' Grid.Column="1" TextWrapping="Wrap" Margin="0,5,70,0" Grid.Row="0" HorizontalAlignment="Left"                      />
+                <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="0,10,0,5" Grid.Row="1" Orientation="Horizontal" Spacing="5">
+                    <FontIcon Foreground="{ThemeResource SystemBaseMediumColor}" Margin="-2,0,0,0" Glyph="&#xE9AE;"/>
+                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" Margin="-4,0,0,0" Text="in"/>
+                    <TextBlock x:ConnectionId='113' Foreground="{ThemeResource SystemAccentColor}"                         />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
         <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
         <Style x:Key="NavigationBackButtonNormalStyle" TargetType="Button">
             <Setter Property="Background" Value="{ThemeResource NavigationViewBackButtonBackground}"/>
@@ -348,7 +367,7 @@
                                     </Grid>
                                     <Border x:Name="TopNavContentOverlayAreaGrid" Child="{TemplateBinding ContentOverlay}"/>
                                 </StackPanel>
-                                <SplitView x:Name="RootSplitView" CornerRadius="0,8,8,0" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsTabStop="False" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{ThemeResource NavigationViewDefaultPaneBackground}" Grid.Row="1">
+                                <SplitView x:Name="RootSplitView" CornerRadius="{ThemeResource NavViewSplitViewCorners}" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsTabStop="False" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{ThemeResource NavigationViewDefaultPaneBackground}" Grid.Row="1">
                                     <SplitView.Pane>
                                         <Grid x:Name="PaneContentGrid" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" HorizontalAlignment="Left" Margin="{ThemeResource NavigationViewPaneContentGridMargin}" Visibility="{Binding TemplateSettings.LeftPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <Grid.RowDefinitions>
@@ -439,7 +458,7 @@
                                             </Grid>
                                         </Grid>
                                     </SplitView.Pane>
-                                    <Grid CornerRadius="8,0,0,0" x:Name="ContentGrid" Background="{ThemeResource NavigationViewContentBackground}" BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}" BorderBrush="{ThemeResource NavigationViewContentGridBorderBrush}" Margin="{ThemeResource NavigationViewContentMargin}">
+                                    <Grid CornerRadius="{ThemeResource TopLeftNavViewContentCorner}" x:Name="ContentGrid" Background="{ThemeResource NavigationViewContentBackground}" BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}" BorderBrush="{ThemeResource NavigationViewContentGridBorderBrush}" Margin="{ThemeResource NavigationViewContentMargin}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
@@ -468,7 +487,7 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Border x:ConnectionId='109' IsHitTestVisible="True" Canvas.ZIndex="1" Margin="48,8,0,0" Height="40" VerticalAlignment="Top" Background="Transparent" x:Name="AppTitleBar">
+        <Border x:ConnectionId='114' IsHitTestVisible="True" Canvas.ZIndex="1" Margin="48,8,0,0" Height="40" VerticalAlignment="Top" Background="Transparent" x:Name="AppTitleBar">
             <StackPanel Orientation="Horizontal">
                 <FontIcon
                         HorizontalAlignment="Left" 
@@ -484,7 +503,7 @@
                         Style="{ThemeResource CaptionTextBlockStyle}"/>
             </StackPanel>
         </Border>
-        <controls:NavigationView x:ConnectionId='110' x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False"                                               x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto"                                                   >
+        <controls:NavigationView x:ConnectionId='115' x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False"                                               x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto"                                                   >
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem ToolTipService.ToolTip="Pending Tasks" Tag="PendingTasks" IsSelected="True">
                     <controls:NavigationViewItem.Icon>
@@ -492,7 +511,7 @@
                         <!--<controls:ImageIcon Source="/Images/clock (2).tiff"/>-->
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.InfoBadge>
-                        <controls:InfoBadge x:ConnectionId='112' x:FieldModifier="public" x:Name="inf"/>
+                        <controls:InfoBadge x:ConnectionId='117' x:FieldModifier="public" x:Name="inf"/>
                     </controls:NavigationViewItem.InfoBadge>
                     <controls:NavigationViewItem.Content>
                         <TextBlock Text="Pending Tasks"/>
@@ -508,16 +527,19 @@
                     </controls:NavigationViewItem.Content>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
+            <controls:NavigationView.AutoSuggestBox>
+                <AutoSuggestBox x:ConnectionId='118' UpdateTextOnSelect="False"                                                    ItemTemplate="{StaticResource suggestionTemplate}"                                                                                         QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search" />
+            </controls:NavigationView.AutoSuggestBox>
             <Grid>
 
-                <Image x:ConnectionId='113' x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" Margin="0,-82,0,0" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
-                <Rectangle x:ConnectionId='114' Fill="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:FieldModifier="public" x:Name="acrylic" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Stroke="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Rectangle x:ConnectionId='115' x:FieldModifier="public" x:Name="acrylictint" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Opacity="0.2" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Frame x:ConnectionId='116' x:FieldModifier="public" x:Name="ContentFrame"/>
+                <Image x:ConnectionId='119' x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" Margin="0,-82,0,0" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
+                <Rectangle x:ConnectionId='120' Fill="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:FieldModifier="public" x:Name="acrylic" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Stroke="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Rectangle x:ConnectionId='121' x:FieldModifier="public" x:Name="acrylictint" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Opacity="0.2" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Frame x:ConnectionId='122' x:FieldModifier="public" x:Name="ContentFrame"/>
             </Grid>
 
         </controls:NavigationView>
-        <Grid x:ConnectionId='111' x:Name="LoadingUI" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemChromeMediumLowColor}">
+        <Grid x:ConnectionId='116' x:Name="LoadingUI" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemChromeMediumLowColor}">
             <controls:ProgressRing Width="70" Height="70"/>
         </Grid>
     </Grid>
