@@ -1,1 +1,1 @@
-E:\VS Projects\To-Do_App\To-Do\AppPackages\To-Do_2.11.41.0_Test\To-Do_2.11.41.0_x86_x64.msixbundle
+E:\VS Projects\To-Do_App\To-Do\AppPackages\To-Do_2.13.42.0_Test\To-Do_2.13.42.0_x86_x64.msixbundle

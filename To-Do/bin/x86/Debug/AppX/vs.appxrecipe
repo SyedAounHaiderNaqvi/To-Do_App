@@ -19,24 +19,24 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>EDFDCC858343D93C4986FE7EA1A3275611E0B736D140039A3D335C5C3543A4C0</RegisteredManifestChecksum>
-    <RegisteredPackageMoniker>41c791cc-adc2-4dc9-9148-fb74a5aec780_2.11.41.0_x86__tc78dab53zn56</RegisteredPackageMoniker>
+    <RegisteredManifestChecksum>C9F86B065C9FBB01FA578807EF8A852B51E4265D728A6A7192BA46F22F7114AD</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>41c791cc-adc2-4dc9-9148-fb74a5aec780_2.13.42.0_x86__tc78dab53zn56</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>41c791cc-adc2-4dc9-9148-fb74a5aec780_tc78dab53zn56!App</RegisteredUserModeAppID>
     <RegisteredPackageID>41c791cc-adc2-4dc9-9148-fb74a5aec780</RegisteredPackageID>
     <RegisteredPackagePublisher>CN=Aoun</RegisteredPackagePublisher>
-    <RegisteredVersion>2.11.41.0</RegisteredVersion>
+    <RegisteredVersion>2.13.42.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
     <AppXManifest Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-12T19:37:26.609</Modified>
+      <Modified>2021-10-14T10:08:48.326</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\To-Do.exe">
       <PackagePath>entrypoint\To-Do.exe</PackagePath>
-      <Modified>2021-10-12T19:37:25.634</Modified>
+      <Modified>2021-10-14T10:08:47.367</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.toolkit.uwp.notifications\7.1.0\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.Notifications.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.Notifications.dll</PackagePath>
@@ -354,31 +354,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\To-Do.xr.xml">
       <PackagePath>To-Do.xr.xml</PackagePath>
-      <Modified>2021-10-12T18:58:51.330</Modified>
+      <Modified>2021-10-13T18:48:25.105</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-10-12T19:37:25.429</Modified>
+      <Modified>2021-10-14T10:08:47.132</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\EditDialogContent.xbf">
       <PackagePath>EditDialogContent.xbf</PackagePath>
-      <Modified>2021-10-12T19:37:25.480</Modified>
+      <Modified>2021-10-14T10:08:47.185</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2021-10-12T19:37:25.449</Modified>
+      <Modified>2021-10-14T10:08:47.150</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\CompletedTasks.xbf">
       <PackagePath>NavigationPages\CompletedTasks.xbf</PackagePath>
-      <Modified>2021-10-12T19:37:25.480</Modified>
+      <Modified>2021-10-14T10:08:47.185</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\PendingTasks.xbf">
       <PackagePath>NavigationPages\PendingTasks.xbf</PackagePath>
-      <Modified>2021-10-12T19:37:25.477</Modified>
+      <Modified>2021-10-14T10:08:47.182</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Settings.xbf">
       <PackagePath>Settings.xbf</PackagePath>
-      <Modified>2021-10-12T19:37:25.479</Modified>
+      <Modified>2021-10-14T10:08:47.185</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.19041.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -390,11 +390,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-10-12T09:03:51.297</Modified>
+      <Modified>2021-10-13T08:06:53.951</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\To-Do.exe">
       <PackagePath>To-Do.exe</PackagePath>
-      <Modified>2021-10-12T19:37:26.607</Modified>
+      <Modified>2021-10-14T10:08:48.324</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.ui.xaml\2.7.0\buildTransitive\..\lib\uap10.0\Microsoft.UI.Xaml.winmd">
       <PackagePath>Microsoft.UI.Xaml.winmd</PackagePath>

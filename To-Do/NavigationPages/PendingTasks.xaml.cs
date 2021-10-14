@@ -11,11 +11,14 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-//using System.Diagnostics;
+
 using System.Threading;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
+using Microsoft.UI.Xaml.Controls;
 using System.Linq;
+using System.Diagnostics;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace To_Do.NavigationPages
 {
@@ -32,9 +35,11 @@ namespace To_Do.NavigationPages
         public string undoText;
         public string undoDate;
         public bool undoStar;
+        public List<TODOTask> undoSteps = new List<TODOTask>();
         public int delay = 3000;
         CancellationTokenSource token;
         public ContentDialog dialog;
+        bool hasLaunched = false;
 
         public PendingTasks()
         {
@@ -47,11 +52,11 @@ namespace To_Do.NavigationPages
             UpdateBadge();
         }
 
-        public void AddATask(string taskDescription, string date, bool isImportant)
+        public void AddATask(TODOTask newTask)
         {
-            TODOTask newTask = new TODOTask() { Description = taskDescription, Date = date, IsStarred = isImportant };
             TaskItems.Add(newTask);
             listOfTasks.ItemsSource = TaskItems;
+
             listOfTasks.UpdateLayout();
             listOfTasks.ScrollIntoView(newTask);
             UpdateBadge();
@@ -69,14 +74,23 @@ namespace To_Do.NavigationPages
                 string jsonLoaded = localSettings.Values["Tasks"] as string;
                 string jsonOfDatesLoaded = localSettings.Values["DateOfTasks"] as string;
                 string jsonOfImpLoaded = localSettings.Values["ImportanceOfTasks"] as string;
+                string jsonOfStepsLoaded = localSettings.Values["Steps"] as string;
                 List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
                 List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDatesLoaded);
                 List<bool> loadedImportance = JsonConvert.DeserializeObject<List<bool>>(jsonOfImpLoaded);
+                List<List<string>> loadedSteps = JsonConvert.DeserializeObject<List<List<string>>>(jsonOfStepsLoaded);
                 if (loadedDescriptions != null)
                 {
                     for (int i = 0; i < loadedDescriptions.Count; i++)
                     {
-                        AddATask(loadedDescriptions[i], loadedDates[i], loadedImportance[i]);
+                        TODOTask newTask = new TODOTask() { Description = loadedDescriptions[i], Date = loadedDates[i], IsStarred = loadedImportance[i] };
+                        newTask.SubTasks = new List<TODOTask>();
+                        for (int x = 0; x < loadedSteps[i].Count; x++)
+                        {
+                            string descOfStep = loadedSteps[i][x];
+                            newTask.SubTasks.Add(new TODOTask() { Description = descOfStep });
+                        }
+                        AddATask(newTask);
                     }
                 }
 
@@ -84,6 +98,7 @@ namespace To_Do.NavigationPages
                 newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
                 TaskItems = new ObservableCollection<TODOTask>(newList);
                 listOfTasks.ItemsSource = TaskItems;
+                hasLaunched = true;
             }
         }
 
@@ -99,7 +114,9 @@ namespace To_Do.NavigationPages
                 string d = NewTaskBox.Text;
                 if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
                 {
-                    AddATask(d, DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), false);
+                    TODOTask newTask = new TODOTask() { Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false };
+                    newTask.SubTasks = new List<TODOTask>();
+                    AddATask(newTask);
                     NewTaskBox.Text = string.Empty;
                     e.Handled = true;
                     if ((string)SortingDropDown.Content != "Custom")
@@ -112,15 +129,14 @@ namespace To_Do.NavigationPages
 
         private void StarChecked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = sender as CheckBox;
-            UserControl top = cb.DataContext as UserControl;
-            TODOTask context = top.DataContext as TODOTask;
-            if (context != null)
+            if (hasLaunched)
             {
-                context.IsStarred = (bool)cb.IsChecked;
-                if ((string)SortingDropDown.Content != "Custom")
+                CheckBox cb = sender as CheckBox;
+                UserControl top = cb.DataContext as UserControl;
+                if (top.DataContext is TODOTask context)
                 {
-                    Sort((string)SortingDropDown.Content);
+                    context.IsStarred = (bool)cb.IsChecked;
+                    //Sort((string)SortingDropDown.Content);
                 }
             }
         }
@@ -150,6 +166,7 @@ namespace To_Do.NavigationPages
             TODOTask context = top.DataContext as TODOTask;
             undoDate = context.Date;
             undoStar = context.IsStarred;
+            undoSteps = context.SubTasks;
             block.TextDecorations = Windows.UI.Text.TextDecorations.None;
             for (int i = 0; i < TaskItems.Count; i++)
             {
@@ -169,7 +186,7 @@ namespace To_Do.NavigationPages
             }
             catch
             {
-                
+
             }
             if (confirmDoneNotif.IsOpen)
             {
@@ -182,10 +199,57 @@ namespace To_Do.NavigationPages
             }
         }
 
+        private async void StepCheckToggled(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkbox = sender as CheckBox;
+            //step complete
+            Grid g = checkbox.Parent as Grid;
+            TextBlock block = VisualTreeHelper.GetChild(g, 2) as TextBlock;
+            block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+            await Task.Delay(100);
+            checkbox.IsChecked = false;
+            block.TextDecorations = Windows.UI.Text.TextDecorations.None;
+            UserControl top = checkbox.DataContext as UserControl;
+            TODOTask step = top.DataContext as TODOTask;
+            var lviewitempresenter = VisualTreeHelper.GetParent(top) as ListViewItemPresenter;
+            ListViewItem lvi = VisualTreeHelper.GetParent(lviewitempresenter) as ListViewItem;
+            ItemsStackPanel isp = VisualTreeHelper.GetParent(lvi) as ItemsStackPanel;
+            ItemsPresenter ip = VisualTreeHelper.GetParent(isp) as ItemsPresenter;
+            ScrollContentPresenter scp = VisualTreeHelper.GetParent(ip) as ScrollContentPresenter;
+            Grid grid = VisualTreeHelper.GetParent(scp) as Grid;
+            Border b = VisualTreeHelper.GetParent(grid) as Border;
+            ScrollViewer s = VisualTreeHelper.GetParent(b) as ScrollViewer;
+            Border b2 = VisualTreeHelper.GetParent(s) as Border;
+            ListView l = VisualTreeHelper.GetParent(b2) as ListView;
+            Grid grid2 = l.Parent as Grid;
+            Expander expander = grid2.Parent as Expander;
+            UserControl root = VisualTreeHelper.GetParent(expander) as UserControl;
+            TODOTask context = root.DataContext as TODOTask;
+
+            int index = 0;
+            for (int i = 0; i < TaskItems.Count; i++)
+            {
+                if (TaskItems[i].Equals(context))
+                {
+                    //store index
+                    index = i;
+                }
+            }
+
+            var list = new List<TODOTask>(TaskItems[index].SubTasks);
+            list.Remove(step);
+            TaskItems[index].SubTasks = new List<TODOTask>(list);
+            Grid grid3 = expander.Content as Grid;
+            ListView rootList = VisualTreeHelper.GetChild(grid3, 0) as ListView;
+            rootList.ItemsSource = TaskItems[index].SubTasks;
+        }
+
         private async void UndoDelete(object sender, RoutedEventArgs e)
         {
             singletonReference.tasksToParse.RemoveAt(singletonReference.tasksToParse.Count - 1);
-            TaskItems.Insert(undoIndex, new TODOTask() { Description = undoText, Date = undoDate, IsStarred = undoStar });
+            TODOTask reMadeTask = new TODOTask() { Description = undoText, Date = undoDate, IsStarred = undoStar };
+            reMadeTask.SubTasks = new List<TODOTask>(undoSteps);
+            TaskItems.Insert(undoIndex, reMadeTask);
             UpdateBadge();
             listOfTasks.ItemsSource = TaskItems;
             listOfTasks.UpdateLayout();
@@ -212,6 +276,43 @@ namespace To_Do.NavigationPages
             TODOTask context = top.DataContext as TODOTask;
             TaskItems.Remove(context);
             UpdateBadge();
+        }
+
+        private void DeleteSubTask(object sender, RoutedEventArgs e)
+        {
+            Button item = sender as Button;
+            UserControl top = item.DataContext as UserControl;
+            TODOTask step = top.DataContext as TODOTask;
+            var lviewitempresenter = VisualTreeHelper.GetParent(top) as ListViewItemPresenter;
+            ListViewItem lvi = VisualTreeHelper.GetParent(lviewitempresenter) as ListViewItem;
+            ItemsStackPanel isp = VisualTreeHelper.GetParent(lvi) as ItemsStackPanel;
+            ItemsPresenter ip = VisualTreeHelper.GetParent(isp) as ItemsPresenter;
+            ScrollContentPresenter scp = VisualTreeHelper.GetParent(ip) as ScrollContentPresenter;
+            Grid grid = VisualTreeHelper.GetParent(scp) as Grid;
+            Border b = VisualTreeHelper.GetParent(grid) as Border;
+            ScrollViewer s = VisualTreeHelper.GetParent(b) as ScrollViewer;
+            Border b2 = VisualTreeHelper.GetParent(s) as Border;
+            ListView l = VisualTreeHelper.GetParent(b2) as ListView;
+            Grid grid2 = l.Parent as Grid;
+            Expander expander = grid2.Parent as Expander;
+            UserControl root = VisualTreeHelper.GetParent(expander) as UserControl;
+            TODOTask context = root.DataContext as TODOTask;
+            int index = 0;
+            for (int i = 0; i < TaskItems.Count; i++)
+            {
+                if (TaskItems[i].Equals(context))
+                {
+                    //store index
+                    index = i;
+                }
+            }
+
+            var list = new List<TODOTask>(TaskItems[index].SubTasks);
+            list.Remove(step);
+            TaskItems[index].SubTasks = new List<TODOTask>(list);
+            Grid g = expander.Content as Grid;
+            ListView rootList = VisualTreeHelper.GetChild(g, 0) as ListView;
+            rootList.ItemsSource = TaskItems[index].SubTasks;
         }
 
         private async void LaunchEditBox(object sender, RoutedEventArgs e)
@@ -246,6 +347,48 @@ namespace To_Do.NavigationPages
                 TaskItems[index].Description = EditTextBox.Text;
                 EditTextBox.Text = string.Empty;
                 Sort((string)SortingDropDown.Content);
+            }
+        }
+
+        private async void AddStep(object sender, RoutedEventArgs e)
+        {
+            dialog = new EditDialogContent();
+            Grid.SetRowSpan(dialog, 2);
+            dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
+            dialog.Title = "Add Step";
+            int index = 0;
+            MenuFlyoutItem item = sender as MenuFlyoutItem;
+            UserControl top = item.DataContext as UserControl;
+            TODOTask context = top.DataContext as TODOTask;
+            for (int i = 0; i < TaskItems.Count; i++)
+            {
+                if (TaskItems[i].Equals(context))
+                {
+                    //store index
+                    index = i;
+                }
+            }
+
+            Grid grid = (Grid)dialog.Content;
+            TextBox EditTextBox = (TextBox)VisualTreeHelper.GetChild(grid, 0);
+            dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
+            EditBoxTextChanged(EditTextBox);
+            ContentDialogResult result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                //do create new task
+                Debug.WriteLine("creating new step");
+                TODOTask newStep = new TODOTask() { Description = EditTextBox.Text };
+                var list = new List<TODOTask>(TaskItems[index].SubTasks)
+                {
+                    newStep
+                };
+                TaskItems[index].SubTasks = new List<TODOTask>(list);
+                Expander expander = VisualTreeHelper.GetChild(top, 0) as Expander;
+                Grid g = expander.Content as Grid;
+                ListView rootList = VisualTreeHelper.GetChild(g, 0) as ListView;
+                rootList.ItemsSource = TaskItems[index].SubTasks;
+                EditTextBox.Text = string.Empty;
             }
         }
 
@@ -300,7 +443,7 @@ namespace To_Do.NavigationPages
                 var icon = FindControl<FontIcon>(c, typeof(FontIcon), "DockIcon");
                 icon.Opacity = 0.7f;
                 icon.Translation = System.Numerics.Vector3.Zero;
-                btn.Translation = new System.Numerics.Vector3(8, 0, 0);
+                btn.Translation = new System.Numerics.Vector3(18, 0, 0);
                 block.Translation = System.Numerics.Vector3.Zero;
                 var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
                 moreoptbutton.Opacity = 1;
@@ -315,7 +458,7 @@ namespace To_Do.NavigationPages
             var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
             var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
             var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
-            panel.Translation = new System.Numerics.Vector3(0, 60, 0);
+            panel.Translation = new System.Numerics.Vector3(0, 20, 0);
             panel.Opacity = 0;
             var icon = FindControl<FontIcon>(c, typeof(FontIcon), "DockIcon");
             icon.Opacity = 0;
@@ -360,7 +503,7 @@ namespace To_Do.NavigationPages
             var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
             var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
             var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
-            panel.Translation = new System.Numerics.Vector3(0, 60, 0);
+            panel.Translation = new System.Numerics.Vector3(0, 20, 0);
             panel.Opacity = 0;
             var icon = FindControl<FontIcon>(c, typeof(FontIcon), "DockIcon");
             icon.Opacity = 0;
@@ -393,6 +536,7 @@ namespace To_Do.NavigationPages
                 {
                     case "Date Created":
                         newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                        Debug.WriteLine("Done");
                         break;
                     case "Text":
                         newList.Sort((x, y) => string.Compare(x.Description, y.Description));
@@ -421,6 +565,64 @@ namespace To_Do.NavigationPages
                 opt3.IsChecked = false;
             }
         }
+
+        private void SubTaskPointerCaptureLost(object sender, PointerRoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            var c = cb.DataContext as Control;
+            var strip = FindControl<Grid>(c, typeof(Grid), "rect");
+            strip.Translation = new System.Numerics.Vector3(-10, 0, 0);
+            var delbtn = FindControl<Button>(c, typeof(Button), "delsubtask");
+            delbtn.Translation = new System.Numerics.Vector3(50, 0, 0);
+            delbtn.Opacity = 0;
+
+            var back = FindControl<Grid>(c, typeof(Grid), "backplate");
+            back.Opacity = 0;
+        }
+
+        private void SubTaskPointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            var c = sender as Control;
+            var strip = FindControl<Grid>(c, typeof(Grid), "rect");
+            strip.Translation = new System.Numerics.Vector3(-10, 0, 0);
+            strip.Opacity = 0;
+            var delbtn = FindControl<Button>(c, typeof(Button), "delsubtask");
+            delbtn.Translation = new System.Numerics.Vector3(50, 0, 0);
+            delbtn.Opacity = 0;
+
+            var back = FindControl<Grid>(c, typeof(Grid), "backplate");
+            back.Opacity = 0;
+        }
+
+        private void SubTaskPointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse || e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
+            {
+                var c = sender as Control;
+                var strip = FindControl<Grid>(c, typeof(Grid), "rect");
+                strip.Translation = new System.Numerics.Vector3(-2, 0, 0);
+                var delbtn = FindControl<Button>(c, typeof(Button), "delsubtask");
+                delbtn.Translation = System.Numerics.Vector3.Zero;
+                delbtn.Opacity = 1;
+                strip.Opacity = 1;
+
+                var back = FindControl<Grid>(c, typeof(Grid), "backplate");
+                back.Opacity = 0.4f;
+            }
+        }
+
+        private void BTN_SubTaskPointerCaptureLost(object sender, PointerRoutedEventArgs e)
+        {
+            Button cb = sender as Button;
+            var c = cb.DataContext as Control;
+            var strip = FindControl<Grid>(c, typeof(Grid), "rect");
+            strip.Translation = new System.Numerics.Vector3(-10, 0, 0);
+            cb.Translation = new System.Numerics.Vector3(50, 0, 0);
+            cb.Opacity = 0;
+            strip.Opacity = 0;
+            var back = FindControl<Grid>(c, typeof(Grid), "backplate");
+            back.Opacity = 0;
+        }
     }
 
     public class TODOTask : INotifyPropertyChanged
@@ -428,6 +630,7 @@ namespace To_Do.NavigationPages
         private string description { get; set; }
         private string date { get; set; }
         private bool isStarred = false;
+        private List<TODOTask> subTasks;
 
         public string Date
         {
@@ -435,6 +638,16 @@ namespace To_Do.NavigationPages
             set
             {
                 date = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<TODOTask> SubTasks
+        {
+            get => subTasks;
+            set
+            {
+                subTasks = value;
                 OnPropertyChanged();
             }
         }

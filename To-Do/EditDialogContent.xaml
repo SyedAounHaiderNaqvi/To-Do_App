@@ -13,6 +13,6 @@
     PrimaryButtonStyle="{ThemeResource AccentButtonStyle}"
     CloseButtonText="Cancel">
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <TextBox VerticalContentAlignment="Center" Padding="12,8,0,0" x:FieldModifier="public" TextChanged="EditBoxTextChanged" x:Name="EditTextBox" AcceptsReturn="True" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write task description"/>
+        <TextBox VerticalContentAlignment="Center" Padding="12,8,0,0" x:FieldModifier="public" TextChanged="EditBoxTextChanged" x:Name="EditTextBox" AcceptsReturn="True" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write description"/>
     </Grid>
 </ContentDialog>

@@ -34,6 +34,7 @@ namespace To_Do
         public List<bool> savingImps = new List<bool>();
         public List<string> savingCompletedDates = new List<string>();
         public List<string> completedSaving = new List<string>();
+        public List<List<string>> savingSteps = new List<List<string>>();
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public static MainPage ins;
         public int indexToParse;
@@ -621,6 +622,17 @@ namespace To_Do
                 savingDescriptions.Add(temp);
                 savingDates.Add(date);
                 savingImps.Add(importance);
+
+                List<TODOTask> steps = tODO.SubTasks;
+                List<string> tempList = new List<string>();
+                for (int i = 0; i < steps.Count; i++)
+                {
+                    tempList.Add(steps[i].Description);
+                }
+                if (steps != null)
+                {
+                    savingSteps.Add(tempList);
+                }
             }
             Type pageType = Type.GetType("To_Do.NavigationPages.CompletedTasks");
             ContentFrame.Navigate(pageType, tasksToParse, new SuppressNavigationTransitionInfo());
@@ -637,11 +649,13 @@ namespace To_Do
             string dateJsonFile = JsonConvert.SerializeObject(savingDates);
             string compdateJsonFile = JsonConvert.SerializeObject(savingCompletedDates);
             string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
+            string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
             localSettings.Values["Tasks"] = jsonFile;
             localSettings.Values["TasksDone"] = compJsonFile;
             localSettings.Values["DateOfTasks"] = dateJsonFile;
             localSettings.Values["DateOfTasksDone"] = compdateJsonFile;
             localSettings.Values["ImportanceOfTasks"] = importanceJsonFile;
+            localSettings.Values["Steps"] = stepsJsonFile;
 
             string deviceFamilyVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
             ulong version = ulong.Parse(deviceFamilyVersion);
@@ -887,7 +901,6 @@ namespace To_Do
         public async void calc(int index, ListView choice)
         {
             await ScrollToIndex(choice, index);
-            
         }
 
         public ScrollViewer GetScrollViewer(DependencyObject element)
@@ -955,7 +968,7 @@ namespace To_Do
                 // scroll to desired position with animation!
                 scrollViewer.ChangeView(position.X, position.Y, null);
             }
-            
+
         }
 
         public async Task ScrollIntoViewAsync(ListView listViewBase, object item)

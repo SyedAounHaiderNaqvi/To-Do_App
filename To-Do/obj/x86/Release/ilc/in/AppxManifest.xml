@@ -7,7 +7,7 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="41c791cc-adc2-4dc9-9148-fb74a5aec780" Publisher="CN=Aoun" Version="2.11.41.0" ProcessorArchitecture="x86" />
+  <Identity Name="41c791cc-adc2-4dc9-9148-fb74a5aec780" Publisher="CN=Aoun" Version="2.13.42.0" ProcessorArchitecture="x86" />
   <mp:PhoneIdentity PhoneProductId="41c791cc-adc2-4dc9-9148-fb74a5aec780" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>To-Do</DisplayName>
