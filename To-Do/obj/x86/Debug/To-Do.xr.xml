@@ -120,14 +120,14 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="MinWidth" />
       <RootProperty Name="VerticalContentAlignment" />
-      <RootProperty Name="Opacity" />
+      <RootProperty Name="DataContext" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Background" />
       <RootProperty Name="Height" />
       <RootProperty Name="CornerRadius" />
+      <RootProperty Name="Opacity" />
       <RootProperty Name="OpacityTransition" />
       <RootProperty Name="Translation" />
-      <RootProperty Name="DataContext" />
       <RootProperty Name="TranslationTransition" />
       <RootEvent Name="Click" />
       <RootEvent Name="PointerCaptureLost" />
@@ -218,8 +218,8 @@
       <RootProperty Name="Background" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="MaxHeight" />
-      <RootProperty Name="MaxWidth" />
       <RootProperty Name="MinWidth" />
+      <RootProperty Name="MaxWidth" />
       <RootProperty Name="Opacity" />
       <RootProperty Name="Translation" />
       <RootProperty Name="TranslationTransition" />
@@ -486,10 +486,6 @@
       <RootProperty Name="Translation" />
       <RootProperty Name="TranslationTransition" />
     </RootType>
-    <RootType FullName="Microsoft.UI.Xaml.Controls.ProgressRing">
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-    </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.NavigationViewItem">
       <RootProperty Name="Tag" />
       <RootProperty Name="IsSelected" />
@@ -536,6 +532,10 @@
       <RootProperty Name="Visibility" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Frame" />
+    <RootType FullName="Microsoft.UI.Xaml.Controls.ProgressRing">
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+    </RootType>
     <RootType FullName="To_Do.MainPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="SelectionMode" />

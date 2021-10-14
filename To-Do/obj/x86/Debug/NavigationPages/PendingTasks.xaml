@@ -672,7 +672,7 @@
                                                 <Vector3Transition Duration="0:0:0.2"/>
                                             </CheckBox.TranslationTransition>
                                         </CheckBox>
-                                        <StackPanel Spacing="10" VerticalAlignment="Center" Margin="10,0,120,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
+                                        <StackPanel Spacing="10" VerticalAlignment="Center" Margin="10,0,130,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
                                             <TextBlock x:ConnectionId='76' Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}"                                         >
                                                 <TextBlock.TranslationTransition>
                                                     <Vector3Transition Duration="0:0:0.2"/>
@@ -696,7 +696,12 @@
                                             <StackPanel.OpacityTransition>
                                                 <ScalarTransition/>
                                             </StackPanel.OpacityTransition>
-                                            <CheckBox x:ConnectionId='71'                                               Style="{ThemeResource StarCheck}"                                                                                 ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
+                                            <Button x:ConnectionId='71'                 DataContext="{Binding ElementName=UserControl}" x:Name="addStep" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="Add step">
+                                                <Button.Content>
+                                                    <FontIcon FontSize="14" Glyph="&#xE710;"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <CheckBox x:ConnectionId='72' Margin="0,-3,0,0"                                               Style="{ThemeResource StarCheck}"                                                                                 ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
                                             <Button Opacity="0" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.OpacityTransition>
                                                     <ScalarTransition Duration="0:0:0.2"/>
@@ -706,17 +711,12 @@
                                                 </Button.Content>
                                                 <Button.Flyout>
                                                     <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                                        <MenuFlyoutItem x:ConnectionId='73' DataContext="{Binding ElementName=UserControl}"                       Text="Edit Task">
+                                                        <MenuFlyoutItem x:ConnectionId='74' DataContext="{Binding ElementName=UserControl}"                       Text="Edit Task">
                                                             <MenuFlyoutItem.Icon>
                                                                 <SymbolIcon Symbol="Edit"/>
                                                             </MenuFlyoutItem.Icon>
                                                         </MenuFlyoutItem>
-                                                        <MenuFlyoutItem x:ConnectionId='74'                 DataContext="{Binding ElementName=UserControl}" Text="Add step">
-                                                            <MenuFlyoutItem.Icon>
-                                                                <FontIcon Glyph="&#xE710;"/>
-                                                            </MenuFlyoutItem.Icon>
-                                                        </MenuFlyoutItem>
-                                                        <MenuFlyoutItem x:ConnectionId='75'                              DataContext="{Binding ElementName=UserControl}" Text="Delete Task">
+                                                        <MenuFlyoutItem x:ConnectionId='75' Text="Delete Task"                              DataContext="{Binding ElementName=UserControl}">
                                                             <MenuFlyoutItem.Icon>
                                                                 <SymbolIcon Symbol="Delete"/>
                                                             </MenuFlyoutItem.Icon>

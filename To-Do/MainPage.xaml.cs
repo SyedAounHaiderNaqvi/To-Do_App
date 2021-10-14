@@ -12,7 +12,6 @@ using Windows.UI.Notifications;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI;
-//using System.Diagnostics;
 using Windows.UI.Xaml.Media;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
@@ -1041,7 +1040,6 @@ namespace To_Do
             LoadingUI.Visibility = Visibility.Visible;
             ContentFrame.Navigate(typeof(CompletedTasks), tasksToParse, new SuppressNavigationTransitionInfo());
             tasksToParse.Clear();
-            await Task.Delay(10);
             ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
             nview.SelectedItem = nview.MenuItems[0];
             LoadingUI.Visibility = Visibility.Collapsed;

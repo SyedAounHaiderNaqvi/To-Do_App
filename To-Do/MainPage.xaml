@@ -536,11 +536,11 @@
                 <Rectangle Fill="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:FieldModifier="public" x:Name="acrylic" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Stroke="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 <Rectangle x:FieldModifier="public" x:Name="acrylictint" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Opacity="0.2" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 <Frame x:FieldModifier="public" x:Name="ContentFrame"/>
+                <Grid MinWidth="200" Margin="-4,-84,0,0" x:Name="LoadingUI" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemChromeMediumColor}">
+                    <controls:ProgressRing Width="70" Height="70"/>
+                </Grid>
             </Grid>
 
         </controls:NavigationView>
-        <Grid x:Name="LoadingUI" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemChromeMediumLowColor}">
-            <controls:ProgressRing Width="70" Height="70"/>
-        </Grid>
     </Grid>
 </Page>

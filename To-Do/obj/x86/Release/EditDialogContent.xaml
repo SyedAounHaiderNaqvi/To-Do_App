@@ -13,7 +13,7 @@
     PrimaryButtonStyle="{ThemeResource AccentButtonStyle}"
     CloseButtonText="Cancel">
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <TextBox x:ConnectionId='2' VerticalContentAlignment="Center" Padding="12,8,0,0" x:FieldModifier="public"                                  x:Name="EditTextBox" AcceptsReturn="True" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write task description"/>
+        <TextBox x:ConnectionId='2' VerticalContentAlignment="Center" Padding="12,8,0,0" x:FieldModifier="public"                                  x:Name="EditTextBox" AcceptsReturn="True" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write description"/>
     </Grid>
 </ContentDialog>
 

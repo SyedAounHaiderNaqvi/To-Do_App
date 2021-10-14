@@ -672,7 +672,7 @@
                                                 <Vector3Transition Duration="0:0:0.2"/>
                                             </CheckBox.TranslationTransition>
                                         </CheckBox>
-                                        <StackPanel Spacing="10" VerticalAlignment="Center" Margin="10,0,120,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
+                                        <StackPanel Spacing="10" VerticalAlignment="Center" Margin="10,0,130,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
                                             <TextBlock Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Description, Mode=TwoWay}">
                                                 <TextBlock.TranslationTransition>
                                                     <Vector3Transition Duration="0:0:0.2"/>
@@ -696,7 +696,12 @@
                                             <StackPanel.OpacityTransition>
                                                 <ScalarTransition/>
                                             </StackPanel.OpacityTransition>
-                                            <CheckBox Unchecked="StarChecked" Checked="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
+                                            <Button Click="AddStep" DataContext="{Binding ElementName=UserControl}" x:Name="addStep" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="Add step">
+                                                <Button.Content>
+                                                    <FontIcon FontSize="14" Glyph="&#xE710;"/>
+                                                </Button.Content>
+                                            </Button>
+                                            <CheckBox Margin="0,-3,0,0" Unchecked="StarChecked" Checked="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
                                             <Button Opacity="0" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.OpacityTransition>
                                                     <ScalarTransition Duration="0:0:0.2"/>
@@ -711,12 +716,7 @@
                                                                 <SymbolIcon Symbol="Edit"/>
                                                             </MenuFlyoutItem.Icon>
                                                         </MenuFlyoutItem>
-                                                        <MenuFlyoutItem Click="AddStep" DataContext="{Binding ElementName=UserControl}" Text="Add step">
-                                                            <MenuFlyoutItem.Icon>
-                                                                <FontIcon Glyph="&#xE710;"/>
-                                                            </MenuFlyoutItem.Icon>
-                                                        </MenuFlyoutItem>
-                                                        <MenuFlyoutItem Click="MenuFlyoutItem_Click" DataContext="{Binding ElementName=UserControl}" Text="Delete Task">
+                                                        <MenuFlyoutItem Text="Delete Task" Click="MenuFlyoutItem_Click" DataContext="{Binding ElementName=UserControl}">
                                                             <MenuFlyoutItem.Icon>
                                                                 <SymbolIcon Symbol="Delete"/>
                                                             </MenuFlyoutItem.Icon>

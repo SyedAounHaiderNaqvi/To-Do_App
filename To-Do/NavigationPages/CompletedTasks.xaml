@@ -27,7 +27,7 @@
                                     <FontIcon Glyph="&#xE91F;" FontSize="25" Foreground="{ThemeResource NavigationViewItemForegroundSelected}"/>
                                     <FontIcon Margin="0,1,0,0" FontSize="16" Glyph="&#xE73E;" Foreground="{ThemeResource SystemAltHighColor}"/>
                                 </Grid>
-                                <StackPanel Spacing="10" VerticalAlignment="Center" Margin="21,0,120,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
+                                <StackPanel Spacing="10" VerticalAlignment="Center" Margin="21,0,130,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
                                     <TextBlock Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Description}">
                                         <TextBlock.TranslationTransition>
                                             <Vector3Transition Duration="0:0:0.2"/>
@@ -38,7 +38,7 @@
                                             <Vector3Transition Duration="0:0:0.2"/>
                                         </StackPanel.TranslationTransition>
                                         <StackPanel.OpacityTransition>
-                                            <ScalarTransition/>
+                                            <ScalarTransition Duration="0:0:0.13"/>
                                         </StackPanel.OpacityTransition>
                                         <TextBlock Text="Completed on:" Foreground="{ThemeResource SystemAccentColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"/>
                                         <TextBlock x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind Date}"/>

@@ -127,7 +127,7 @@ namespace To_Do.NavigationPages
             }
         }
 
-        private void StarChecked(object sender, RoutedEventArgs e)
+        private async void StarChecked(object sender, RoutedEventArgs e)
         {
             if (hasLaunched)
             {
@@ -138,6 +138,9 @@ namespace To_Do.NavigationPages
                     context.IsStarred = (bool)cb.IsChecked;
                     //Sort((string)SortingDropDown.Content);
                 }
+
+                await Task.Delay(1000);
+                Sort((string)SortingDropDown.Content);
             }
         }
 
@@ -150,33 +153,36 @@ namespace To_Do.NavigationPages
                 notif.Translation = new System.Numerics.Vector3(0, 170, 0);
                 notif.Opacity = 0;
                 confirmDoneNotif.IsOpen = false;
-                MainPage.ins.Refresh();
+                //MainPage.ins.Refresh();
             }
             // get checkbox that sent this function
             CheckBox cb = sender as CheckBox;
             Grid cbparent = VisualTreeHelper.GetParent(cb) as Grid;
-            StackPanel panel = VisualTreeHelper.GetChild(cbparent, 2) as StackPanel;
-            TextBlock block = VisualTreeHelper.GetChild(panel, 0) as TextBlock;
-            undoText = block.Text;
-            singletonReference.tasksToParse.Add(new List<string>() { block.Text, DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt") });
-            block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-            await Task.Delay(100);
-            cb.IsChecked = false;
-            UserControl top = cb.DataContext as UserControl;
-            TODOTask context = top.DataContext as TODOTask;
-            undoDate = context.Date;
-            undoStar = context.IsStarred;
-            undoSteps = context.SubTasks;
-            block.TextDecorations = Windows.UI.Text.TextDecorations.None;
-            for (int i = 0; i < TaskItems.Count; i++)
+            if (cbparent != null)
             {
-                if (TaskItems[i] == context)
+                StackPanel panel = VisualTreeHelper.GetChild(cbparent, 2) as StackPanel;
+                TextBlock block = VisualTreeHelper.GetChild(panel, 0) as TextBlock;
+                undoText = block.Text;
+                singletonReference.tasksToParse.Add(new List<string>() { block.Text, DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt") });
+                block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                await Task.Delay(100);
+                cb.IsChecked = false;
+                UserControl top = cb.DataContext as UserControl;
+                TODOTask context = top.DataContext as TODOTask;
+                undoDate = context.Date;
+                undoStar = context.IsStarred;
+                undoSteps = context.SubTasks;
+                block.TextDecorations = Windows.UI.Text.TextDecorations.None;
+                for (int i = 0; i < TaskItems.Count; i++)
                 {
-                    undoIndex = i;
+                    if (TaskItems[i] == context)
+                    {
+                        undoIndex = i;
+                    }
                 }
+                TaskItems.Remove(context);
+                UpdateBadge();
             }
-            TaskItems.Remove(context);
-            UpdateBadge();
             confirmDoneNotif.IsOpen = true;
             notif.Translation = System.Numerics.Vector3.Zero;
             notif.Opacity = 1;
@@ -204,7 +210,7 @@ namespace To_Do.NavigationPages
             CheckBox checkbox = sender as CheckBox;
             //step complete
             Grid g = checkbox.Parent as Grid;
-            TextBlock block = VisualTreeHelper.GetChild(g, 2) as TextBlock;
+            TextBlock block = VisualTreeHelper.GetChild(g, 3) as TextBlock;
             block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
             await Task.Delay(100);
             checkbox.IsChecked = false;
@@ -357,7 +363,7 @@ namespace To_Do.NavigationPages
             dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
             dialog.Title = "Add Step";
             int index = 0;
-            MenuFlyoutItem item = sender as MenuFlyoutItem;
+            Button item = sender as Button;
             UserControl top = item.DataContext as UserControl;
             TODOTask context = top.DataContext as TODOTask;
             for (int i = 0; i < TaskItems.Count; i++)
