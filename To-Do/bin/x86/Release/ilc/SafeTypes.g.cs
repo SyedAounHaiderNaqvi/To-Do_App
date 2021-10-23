@@ -912,29 +912,6 @@ namespace Internal.Cryptography.Pal.Native
 		}
 	}
 
-	[global::System.Runtime.InteropServices.McgRedirectedType("Internal.Cryptography.Pal.Native.SafeCertContextHandleWithKeyContainerDeletion,System.Security.Cryptography.X509" +
-		"Certificates, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-	public unsafe class SafeCertContextHandleWithKeyContainerDeletion__System_Security_Cryptography_X509Certificates : global::System.Runtime.InteropServices.SafeHandle
-	{
-		public SafeCertContextHandleWithKeyContainerDeletion__System_Security_Cryptography_X509Certificates() : 
-				base(default(global::System.IntPtr), false)
-		{
-		}
-
-		public override bool IsInvalid
-		{
-			get
-			{
-				return false;
-			}
-		}
-
-		protected override bool ReleaseHandle()
-		{
-			return false;
-		}
-	}
-
 	[global::System.Runtime.InteropServices.McgRedirectedType("Internal.Cryptography.Pal.Native.SafeCertStoreHandle,System.Security.Cryptography.X509Certificates, Version=4.2." +
 		"1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
 	public unsafe class SafeCertStoreHandle__System_Security_Cryptography_X509Certificates : global::System.Runtime.InteropServices.SafeHandle
@@ -963,6 +940,29 @@ namespace Internal.Cryptography.Pal.Native
 	public unsafe class SafeCryptMsgHandle__System_Security_Cryptography_X509Certificates : global::System.Runtime.InteropServices.SafeHandle
 	{
 		public SafeCryptMsgHandle__System_Security_Cryptography_X509Certificates() : 
+				base(default(global::System.IntPtr), false)
+		{
+		}
+
+		public override bool IsInvalid
+		{
+			get
+			{
+				return false;
+			}
+		}
+
+		protected override bool ReleaseHandle()
+		{
+			return false;
+		}
+	}
+
+	[global::System.Runtime.InteropServices.McgRedirectedType("Internal.Cryptography.Pal.Native.SafeCertContextHandleWithKeyContainerDeletion,System.Security.Cryptography.X509" +
+		"Certificates, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+	public unsafe class SafeCertContextHandleWithKeyContainerDeletion__System_Security_Cryptography_X509Certificates : global::System.Runtime.InteropServices.SafeHandle
+	{
+		public SafeCertContextHandleWithKeyContainerDeletion__System_Security_Cryptography_X509Certificates() : 
 				base(default(global::System.IntPtr), false)
 		{
 		}
@@ -3779,37 +3779,37 @@ namespace Microsoft.UI.Xaml.Controls
 		}
 	}
 
-	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Microsoft.UI.Xaml.Controls.IProgressRing))]
+	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Microsoft.UI.Xaml.Controls.IInfoBar))]
 	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(65536)]
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
 	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe class ProgressRing : global::Windows.UI.Xaml.Controls.Control, global::Microsoft.UI.Xaml.Controls.IProgressRing
+	public unsafe class InfoBar : global::Windows.UI.Xaml.Controls.Control, global::Microsoft.UI.Xaml.Controls.IInfoBar
 	{
 		[global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-		public ProgressRing() : 
+		public InfoBar() : 
 				base(default(global::System.IntPtr))
 		{
 			global::System.IntPtr retval;
-			retval = __Factory_Microsoft_UI_Xaml_Controls__IProgressRingFactory_CreateInstance("Microsoft.UI.Xaml.Controls.ProgressRing");
+			retval = __Factory_Microsoft_UI_Xaml_Controls__IInfoBarFactory_CreateInstance("Microsoft.UI.Xaml.Controls.InfoBar");
 			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
 			global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref retval);
 			this.__AttachAndRelease(retval);
 		}
 
-		global::System.IntPtr __Factory_Microsoft_UI_Xaml_Controls__IProgressRingFactory_CreateInstance(string typeName)
+		global::System.IntPtr __Factory_Microsoft_UI_Xaml_Controls__IInfoBarFactory_CreateInstance(string typeName)
 		{
 			global::System.IntPtr innerInspectable;
 			global::System.IntPtr outerInspectable = default(global::System.IntPtr);
 			if (global::System.Runtime.InteropServices.McgMarshal.IsOfType(
 								this, 
-								typeof(global::Microsoft.UI.Xaml.Controls.ProgressRing).TypeHandle
+								typeof(global::Microsoft.UI.Xaml.Controls.InfoBar).TypeHandle
 							))
 			{
 				global::System.IntPtr __pRetVal_NoAggregation;
-				__pRetVal_NoAggregation = global::Microsoft.UI.Xaml.Controls.IProgressRingFactory__Impl.Stubs.CreateInstance(
+				__pRetVal_NoAggregation = global::Microsoft.UI.Xaml.Controls.IInfoBarFactory__Impl.Stubs.CreateInstance(
 									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
 														typeName, 
-														typeof(global::Microsoft.UI.Xaml.Controls.IProgressRingFactory).TypeHandle
+														typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarFactory).TypeHandle
 													), 
 									outerInspectable, 
 									out innerInspectable
@@ -3823,10 +3823,10 @@ namespace Microsoft.UI.Xaml.Controls
 			{
 				outerInspectable = global::System.Runtime.InteropServices.McgMarshal.GetOuterIInspectableForManagedObject(this);
 				global::System.IntPtr __pRetVal_WithAggregation;
-				__pRetVal_WithAggregation = global::Microsoft.UI.Xaml.Controls.IProgressRingFactory__Impl.Stubs.CreateInstance(
+				__pRetVal_WithAggregation = global::Microsoft.UI.Xaml.Controls.IInfoBarFactory__Impl.Stubs.CreateInstance(
 									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
 														typeName, 
-														typeof(global::Microsoft.UI.Xaml.Controls.IProgressRingFactory).TypeHandle
+														typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarFactory).TypeHandle
 													), 
 									outerInspectable, 
 									out innerInspectable
@@ -3838,36 +3838,234 @@ namespace Microsoft.UI.Xaml.Controls
 			}
 		}
 
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsActive")]
-		public virtual bool get_IsActive()
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsOpen")]
+		public virtual bool get_IsOpen()
 		{
-			bool __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_IsActive(this);
+			bool __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_IsOpen(this);
 			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
 			return __retVal;
 		}
 
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsActive")]
-		public virtual void put_IsActive(bool value)
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsOpen")]
+		public virtual void put_IsOpen(bool value)
 		{
-			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_IsActive(
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_IsOpen(
 								this, 
 								value
 							);
 			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
 		}
 
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsIndeterminate")]
-		public virtual bool get_IsIndeterminate()
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Title")]
+		public virtual string get_Title()
 		{
-			bool __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_IsIndeterminate(this);
+			string __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_Title(this);
 			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
 			return __retVal;
 		}
 
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsIndeterminate")]
-		public virtual void put_IsIndeterminate(bool value)
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Title")]
+		public virtual void put_Title(string value)
 		{
-			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_IsIndeterminate(
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_Title(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Message")]
+		public virtual string get_Message()
+		{
+			string __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_Message(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Message")]
+		public virtual void put_Message(string value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_Message(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Severity")]
+		public virtual global::Microsoft.UI.Xaml.Controls.InfoBarSeverity get_Severity()
+		{
+			global::Microsoft.UI.Xaml.Controls.InfoBarSeverity __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_Severity(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Severity")]
+		public virtual void put_Severity(global::Microsoft.UI.Xaml.Controls.InfoBarSeverity value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_Severity(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IconSource")]
+		public virtual global::Microsoft.UI.Xaml.Controls.IconSource get_IconSource()
+		{
+			global::Microsoft.UI.Xaml.Controls.IconSource __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_IconSource(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IconSource")]
+		public virtual void put_IconSource(global::Microsoft.UI.Xaml.Controls.IconSource value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_IconSource(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsIconVisible")]
+		public virtual bool get_IsIconVisible()
+		{
+			bool __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_IsIconVisible(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsIconVisible")]
+		public virtual void put_IsIconVisible(bool value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_IsIconVisible(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsClosable")]
+		public virtual bool get_IsClosable()
+		{
+			bool __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_IsClosable(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsClosable")]
+		public virtual void put_IsClosable(bool value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_IsClosable(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonStyle")]
+		public virtual global::Windows.UI.Xaml.Style get_CloseButtonStyle()
+		{
+			global::Windows.UI.Xaml.Style __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_CloseButtonStyle(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonStyle")]
+		public virtual void put_CloseButtonStyle(global::Windows.UI.Xaml.Style value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_CloseButtonStyle(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonCommand")]
+		public virtual global::System.Windows.Input.ICommand get_CloseButtonCommand()
+		{
+			global::System.Windows.Input.ICommand __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_CloseButtonCommand(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonCommand")]
+		public virtual void put_CloseButtonCommand(global::System.Windows.Input.ICommand value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_CloseButtonCommand(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonCommandParameter")]
+		public virtual object get_CloseButtonCommandParameter()
+		{
+			object __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_CloseButtonCommandParameter(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonCommandParameter")]
+		public virtual void put_CloseButtonCommandParameter(object value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_CloseButtonCommandParameter(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "ActionButton")]
+		public virtual global::Windows.UI.Xaml.Controls.Primitives.ButtonBase get_ActionButton()
+		{
+			global::Windows.UI.Xaml.Controls.Primitives.ButtonBase __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_ActionButton(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "ActionButton")]
+		public virtual void put_ActionButton(global::Windows.UI.Xaml.Controls.Primitives.ButtonBase value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_ActionButton(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Content")]
+		public virtual object get_Content()
+		{
+			object __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_Content(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Content")]
+		public virtual void put_Content(object value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_Content(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "ContentTemplate")]
+		public virtual global::Windows.UI.Xaml.DataTemplate get_ContentTemplate()
+		{
+			global::Windows.UI.Xaml.DataTemplate __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_ContentTemplate(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "ContentTemplate")]
+		public virtual void put_ContentTemplate(global::Windows.UI.Xaml.DataTemplate value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_ContentTemplate(
 								this, 
 								value
 							);
@@ -3875,80 +4073,79 @@ namespace Microsoft.UI.Xaml.Controls
 		}
 
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "TemplateSettings")]
-		public virtual global::Microsoft.UI.Xaml.Controls.ProgressRingTemplateSettings get_TemplateSettings()
+		public virtual global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings get_TemplateSettings()
 		{
-			global::Microsoft.UI.Xaml.Controls.ProgressRingTemplateSettings __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_TemplateSettings(this);
+			global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_TemplateSettings(this);
 			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
 			return __retVal;
 		}
 
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Value")]
-		public virtual double get_Value()
-		{
-			double __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_Value(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Value")]
-		public virtual void put_Value(double value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_Value(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Minimum")]
-		public virtual double get_Minimum()
-		{
-			double __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_Minimum(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Minimum")]
-		public virtual void put_Minimum(double value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_Minimum(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Maximum")]
-		public virtual double get_Maximum()
-		{
-			double __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_Maximum(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Maximum")]
-		public virtual void put_Maximum(double value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_Maximum(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		public ProgressRing(global::System.IntPtr dummy) : 
+		public InfoBar(global::System.IntPtr dummy) : 
 				base(dummy)
 		{
 		}
 	}
 
-	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Microsoft.UI.Xaml.Controls.IProgressRingTemplateSettings))]
-	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(0)]
+	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettings))]
+	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(65536)]
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
 	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe sealed class ProgressRingTemplateSettings : global::Windows.UI.Xaml.DependencyObject, global::Microsoft.UI.Xaml.Controls.IProgressRingTemplateSettings
+	public unsafe class InfoBarTemplateSettings : global::Windows.UI.Xaml.DependencyObject, global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettings
 	{
-		public ProgressRingTemplateSettings(global::System.IntPtr dummy) : 
+		[global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+		public InfoBarTemplateSettings() : 
+				base(default(global::System.IntPtr))
+		{
+			global::System.IntPtr retval;
+			retval = __Factory_Microsoft_UI_Xaml_Controls__IInfoBarTemplateSettingsFactory_CreateInstance("Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings");
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref retval);
+			this.__AttachAndRelease(retval);
+		}
+
+		global::System.IntPtr __Factory_Microsoft_UI_Xaml_Controls__IInfoBarTemplateSettingsFactory_CreateInstance(string typeName)
+		{
+			global::System.IntPtr innerInspectable;
+			global::System.IntPtr outerInspectable = default(global::System.IntPtr);
+			if (global::System.Runtime.InteropServices.McgMarshal.IsOfType(
+								this, 
+								typeof(global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings).TypeHandle
+							))
+			{
+				global::System.IntPtr __pRetVal_NoAggregation;
+				__pRetVal_NoAggregation = global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory__Impl.Stubs.CreateInstance(
+									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
+														typeName, 
+														typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory).TypeHandle
+													), 
+									outerInspectable, 
+									out innerInspectable
+								);
+				global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(innerInspectable);
+				global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref __pRetVal_NoAggregation);
+				return __pRetVal_NoAggregation;
+			}
+			else
+			{
+				outerInspectable = global::System.Runtime.InteropServices.McgMarshal.GetOuterIInspectableForManagedObject(this);
+				global::System.IntPtr __pRetVal_WithAggregation;
+				__pRetVal_WithAggregation = global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory__Impl.Stubs.CreateInstance(
+									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
+														typeName, 
+														typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory).TypeHandle
+													), 
+									outerInspectable, 
+									out innerInspectable
+								);
+				global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(outerInspectable);
+				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(__pRetVal_WithAggregation);
+				return innerInspectable;
+			}
+		}
+
+		public InfoBarTemplateSettings(global::System.IntPtr dummy) : 
 				base(dummy)
 		{
 		}
@@ -4337,6 +4534,181 @@ namespace Microsoft.UI.Xaml.Controls
 		}
 	}
 
+	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Microsoft.UI.Xaml.Controls.IProgressRing))]
+	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(65536)]
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe class ProgressRing : global::Windows.UI.Xaml.Controls.Control, global::Microsoft.UI.Xaml.Controls.IProgressRing
+	{
+		[global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+		public ProgressRing() : 
+				base(default(global::System.IntPtr))
+		{
+			global::System.IntPtr retval;
+			retval = __Factory_Microsoft_UI_Xaml_Controls__IProgressRingFactory_CreateInstance("Microsoft.UI.Xaml.Controls.ProgressRing");
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref retval);
+			this.__AttachAndRelease(retval);
+		}
+
+		global::System.IntPtr __Factory_Microsoft_UI_Xaml_Controls__IProgressRingFactory_CreateInstance(string typeName)
+		{
+			global::System.IntPtr innerInspectable;
+			global::System.IntPtr outerInspectable = default(global::System.IntPtr);
+			if (global::System.Runtime.InteropServices.McgMarshal.IsOfType(
+								this, 
+								typeof(global::Microsoft.UI.Xaml.Controls.ProgressRing).TypeHandle
+							))
+			{
+				global::System.IntPtr __pRetVal_NoAggregation;
+				__pRetVal_NoAggregation = global::Microsoft.UI.Xaml.Controls.IProgressRingFactory__Impl.Stubs.CreateInstance(
+									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
+														typeName, 
+														typeof(global::Microsoft.UI.Xaml.Controls.IProgressRingFactory).TypeHandle
+													), 
+									outerInspectable, 
+									out innerInspectable
+								);
+				global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(innerInspectable);
+				global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref __pRetVal_NoAggregation);
+				return __pRetVal_NoAggregation;
+			}
+			else
+			{
+				outerInspectable = global::System.Runtime.InteropServices.McgMarshal.GetOuterIInspectableForManagedObject(this);
+				global::System.IntPtr __pRetVal_WithAggregation;
+				__pRetVal_WithAggregation = global::Microsoft.UI.Xaml.Controls.IProgressRingFactory__Impl.Stubs.CreateInstance(
+									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
+														typeName, 
+														typeof(global::Microsoft.UI.Xaml.Controls.IProgressRingFactory).TypeHandle
+													), 
+									outerInspectable, 
+									out innerInspectable
+								);
+				global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(outerInspectable);
+				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(__pRetVal_WithAggregation);
+				return innerInspectable;
+			}
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsActive")]
+		public virtual bool get_IsActive()
+		{
+			bool __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_IsActive(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsActive")]
+		public virtual void put_IsActive(bool value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_IsActive(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsIndeterminate")]
+		public virtual bool get_IsIndeterminate()
+		{
+			bool __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_IsIndeterminate(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsIndeterminate")]
+		public virtual void put_IsIndeterminate(bool value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_IsIndeterminate(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "TemplateSettings")]
+		public virtual global::Microsoft.UI.Xaml.Controls.ProgressRingTemplateSettings get_TemplateSettings()
+		{
+			global::Microsoft.UI.Xaml.Controls.ProgressRingTemplateSettings __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_TemplateSettings(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Value")]
+		public virtual double get_Value()
+		{
+			double __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_Value(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Value")]
+		public virtual void put_Value(double value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_Value(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Minimum")]
+		public virtual double get_Minimum()
+		{
+			double __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_Minimum(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Minimum")]
+		public virtual void put_Minimum(double value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_Minimum(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Maximum")]
+		public virtual double get_Maximum()
+		{
+			double __retVal = global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.get_Maximum(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Maximum")]
+		public virtual void put_Maximum(double value)
+		{
+			global::Microsoft.UI.Xaml.Controls.IProgressRing__Impl.Stubs.put_Maximum(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
+		public ProgressRing(global::System.IntPtr dummy) : 
+				base(dummy)
+		{
+		}
+	}
+
+	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Microsoft.UI.Xaml.Controls.IProgressRingTemplateSettings))]
+	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(0)]
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe sealed class ProgressRingTemplateSettings : global::Windows.UI.Xaml.DependencyObject, global::Microsoft.UI.Xaml.Controls.IProgressRingTemplateSettings
+	{
+		public ProgressRingTemplateSettings(global::System.IntPtr dummy) : 
+				base(dummy)
+		{
+		}
+	}
+
 	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Microsoft.UI.Xaml.Controls.IExpander))]
 	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(65536)]
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
@@ -4523,378 +4895,6 @@ namespace Microsoft.UI.Xaml.Controls
 		}
 
 		public ExpanderTemplateSettings(global::System.IntPtr dummy) : 
-				base(dummy)
-		{
-		}
-	}
-
-	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Microsoft.UI.Xaml.Controls.IInfoBar))]
-	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(65536)]
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe class InfoBar : global::Windows.UI.Xaml.Controls.Control, global::Microsoft.UI.Xaml.Controls.IInfoBar
-	{
-		[global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-		public InfoBar() : 
-				base(default(global::System.IntPtr))
-		{
-			global::System.IntPtr retval;
-			retval = __Factory_Microsoft_UI_Xaml_Controls__IInfoBarFactory_CreateInstance("Microsoft.UI.Xaml.Controls.InfoBar");
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref retval);
-			this.__AttachAndRelease(retval);
-		}
-
-		global::System.IntPtr __Factory_Microsoft_UI_Xaml_Controls__IInfoBarFactory_CreateInstance(string typeName)
-		{
-			global::System.IntPtr innerInspectable;
-			global::System.IntPtr outerInspectable = default(global::System.IntPtr);
-			if (global::System.Runtime.InteropServices.McgMarshal.IsOfType(
-								this, 
-								typeof(global::Microsoft.UI.Xaml.Controls.InfoBar).TypeHandle
-							))
-			{
-				global::System.IntPtr __pRetVal_NoAggregation;
-				__pRetVal_NoAggregation = global::Microsoft.UI.Xaml.Controls.IInfoBarFactory__Impl.Stubs.CreateInstance(
-									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
-														typeName, 
-														typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarFactory).TypeHandle
-													), 
-									outerInspectable, 
-									out innerInspectable
-								);
-				global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(innerInspectable);
-				global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref __pRetVal_NoAggregation);
-				return __pRetVal_NoAggregation;
-			}
-			else
-			{
-				outerInspectable = global::System.Runtime.InteropServices.McgMarshal.GetOuterIInspectableForManagedObject(this);
-				global::System.IntPtr __pRetVal_WithAggregation;
-				__pRetVal_WithAggregation = global::Microsoft.UI.Xaml.Controls.IInfoBarFactory__Impl.Stubs.CreateInstance(
-									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
-														typeName, 
-														typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarFactory).TypeHandle
-													), 
-									outerInspectable, 
-									out innerInspectable
-								);
-				global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(outerInspectable);
-				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(__pRetVal_WithAggregation);
-				return innerInspectable;
-			}
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsOpen")]
-		public virtual bool get_IsOpen()
-		{
-			bool __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_IsOpen(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsOpen")]
-		public virtual void put_IsOpen(bool value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_IsOpen(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Title")]
-		public virtual string get_Title()
-		{
-			string __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_Title(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Title")]
-		public virtual void put_Title(string value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_Title(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Message")]
-		public virtual string get_Message()
-		{
-			string __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_Message(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Message")]
-		public virtual void put_Message(string value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_Message(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Severity")]
-		public virtual global::Microsoft.UI.Xaml.Controls.InfoBarSeverity get_Severity()
-		{
-			global::Microsoft.UI.Xaml.Controls.InfoBarSeverity __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_Severity(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Severity")]
-		public virtual void put_Severity(global::Microsoft.UI.Xaml.Controls.InfoBarSeverity value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_Severity(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IconSource")]
-		public virtual global::Microsoft.UI.Xaml.Controls.IconSource get_IconSource()
-		{
-			global::Microsoft.UI.Xaml.Controls.IconSource __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_IconSource(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IconSource")]
-		public virtual void put_IconSource(global::Microsoft.UI.Xaml.Controls.IconSource value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_IconSource(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsIconVisible")]
-		public virtual bool get_IsIconVisible()
-		{
-			bool __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_IsIconVisible(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsIconVisible")]
-		public virtual void put_IsIconVisible(bool value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_IsIconVisible(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsClosable")]
-		public virtual bool get_IsClosable()
-		{
-			bool __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_IsClosable(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsClosable")]
-		public virtual void put_IsClosable(bool value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_IsClosable(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonStyle")]
-		public virtual global::Windows.UI.Xaml.Style get_CloseButtonStyle()
-		{
-			global::Windows.UI.Xaml.Style __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_CloseButtonStyle(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonStyle")]
-		public virtual void put_CloseButtonStyle(global::Windows.UI.Xaml.Style value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_CloseButtonStyle(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonCommand")]
-		public virtual global::System.Windows.Input.ICommand get_CloseButtonCommand()
-		{
-			global::System.Windows.Input.ICommand __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_CloseButtonCommand(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonCommand")]
-		public virtual void put_CloseButtonCommand(global::System.Windows.Input.ICommand value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_CloseButtonCommand(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonCommandParameter")]
-		public virtual object get_CloseButtonCommandParameter()
-		{
-			object __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_CloseButtonCommandParameter(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonCommandParameter")]
-		public virtual void put_CloseButtonCommandParameter(object value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_CloseButtonCommandParameter(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "ActionButton")]
-		public virtual global::Windows.UI.Xaml.Controls.Primitives.ButtonBase get_ActionButton()
-		{
-			global::Windows.UI.Xaml.Controls.Primitives.ButtonBase __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_ActionButton(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "ActionButton")]
-		public virtual void put_ActionButton(global::Windows.UI.Xaml.Controls.Primitives.ButtonBase value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_ActionButton(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Content")]
-		public virtual object get_Content()
-		{
-			object __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_Content(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Content")]
-		public virtual void put_Content(object value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_Content(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "ContentTemplate")]
-		public virtual global::Windows.UI.Xaml.DataTemplate get_ContentTemplate()
-		{
-			global::Windows.UI.Xaml.DataTemplate __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_ContentTemplate(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "ContentTemplate")]
-		public virtual void put_ContentTemplate(global::Windows.UI.Xaml.DataTemplate value)
-		{
-			global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.put_ContentTemplate(
-								this, 
-								value
-							);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-		}
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "TemplateSettings")]
-		public virtual global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings get_TemplateSettings()
-		{
-			global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings __retVal = global::Microsoft.UI.Xaml.Controls.IInfoBar__Impl.Stubs.get_TemplateSettings(this);
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			return __retVal;
-		}
-
-		public InfoBar(global::System.IntPtr dummy) : 
-				base(dummy)
-		{
-		}
-	}
-
-	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettings))]
-	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(65536)]
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe class InfoBarTemplateSettings : global::Windows.UI.Xaml.DependencyObject, global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettings
-	{
-		[global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-		public InfoBarTemplateSettings() : 
-				base(default(global::System.IntPtr))
-		{
-			global::System.IntPtr retval;
-			retval = __Factory_Microsoft_UI_Xaml_Controls__IInfoBarTemplateSettingsFactory_CreateInstance("Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings");
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref retval);
-			this.__AttachAndRelease(retval);
-		}
-
-		global::System.IntPtr __Factory_Microsoft_UI_Xaml_Controls__IInfoBarTemplateSettingsFactory_CreateInstance(string typeName)
-		{
-			global::System.IntPtr innerInspectable;
-			global::System.IntPtr outerInspectable = default(global::System.IntPtr);
-			if (global::System.Runtime.InteropServices.McgMarshal.IsOfType(
-								this, 
-								typeof(global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings).TypeHandle
-							))
-			{
-				global::System.IntPtr __pRetVal_NoAggregation;
-				__pRetVal_NoAggregation = global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory__Impl.Stubs.CreateInstance(
-									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
-														typeName, 
-														typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory).TypeHandle
-													), 
-									outerInspectable, 
-									out innerInspectable
-								);
-				global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(innerInspectable);
-				global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref __pRetVal_NoAggregation);
-				return __pRetVal_NoAggregation;
-			}
-			else
-			{
-				outerInspectable = global::System.Runtime.InteropServices.McgMarshal.GetOuterIInspectableForManagedObject(this);
-				global::System.IntPtr __pRetVal_WithAggregation;
-				__pRetVal_WithAggregation = global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory__Impl.Stubs.CreateInstance(
-									global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
-														typeName, 
-														typeof(global::Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory).TypeHandle
-													), 
-									outerInspectable, 
-									out innerInspectable
-								);
-				global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(outerInspectable);
-				global::System.Runtime.InteropServices.McgMarshal.ComSafeRelease(__pRetVal_WithAggregation);
-				return innerInspectable;
-			}
-		}
-
-		public InfoBarTemplateSettings(global::System.IntPtr dummy) : 
 				base(dummy)
 		{
 		}
@@ -6005,7 +6005,7 @@ namespace Microsoft.UI.Xaml.Controls
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
 	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe interface IProgressRingFactory
+	public unsafe interface IInfoBarFactory
 	{
 		global::System.IntPtr CreateInstance(
 					global::System.IntPtr baseInterface, 
@@ -6014,45 +6014,102 @@ namespace Microsoft.UI.Xaml.Controls
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
 	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe interface IProgressRing
+	public unsafe interface IInfoBar
 	{
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsActive")]
-		bool get_IsActive();
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsOpen")]
+		bool get_IsOpen();
 
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsActive")]
-		void put_IsActive(bool value);
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsOpen")]
+		void put_IsOpen(bool value);
 
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsIndeterminate")]
-		bool get_IsIndeterminate();
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Title")]
+		string get_Title();
 
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsIndeterminate")]
-		void put_IsIndeterminate(bool value);
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Title")]
+		void put_Title(string value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Message")]
+		string get_Message();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Message")]
+		void put_Message(string value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Severity")]
+		global::Microsoft.UI.Xaml.Controls.InfoBarSeverity get_Severity();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Severity")]
+		void put_Severity(global::Microsoft.UI.Xaml.Controls.InfoBarSeverity value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IconSource")]
+		global::Microsoft.UI.Xaml.Controls.IconSource get_IconSource();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IconSource")]
+		void put_IconSource(global::Microsoft.UI.Xaml.Controls.IconSource value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsIconVisible")]
+		bool get_IsIconVisible();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsIconVisible")]
+		void put_IsIconVisible(bool value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsClosable")]
+		bool get_IsClosable();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsClosable")]
+		void put_IsClosable(bool value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonStyle")]
+		global::Windows.UI.Xaml.Style get_CloseButtonStyle();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonStyle")]
+		void put_CloseButtonStyle(global::Windows.UI.Xaml.Style value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonCommand")]
+		global::System.Windows.Input.ICommand get_CloseButtonCommand();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonCommand")]
+		void put_CloseButtonCommand(global::System.Windows.Input.ICommand value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonCommandParameter")]
+		object get_CloseButtonCommandParameter();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonCommandParameter")]
+		void put_CloseButtonCommandParameter(object value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "ActionButton")]
+		global::Windows.UI.Xaml.Controls.Primitives.ButtonBase get_ActionButton();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "ActionButton")]
+		void put_ActionButton(global::Windows.UI.Xaml.Controls.Primitives.ButtonBase value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Content")]
+		object get_Content();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Content")]
+		void put_Content(object value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "ContentTemplate")]
+		global::Windows.UI.Xaml.DataTemplate get_ContentTemplate();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "ContentTemplate")]
+		void put_ContentTemplate(global::Windows.UI.Xaml.DataTemplate value);
 
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "TemplateSettings")]
-		global::Microsoft.UI.Xaml.Controls.ProgressRingTemplateSettings get_TemplateSettings();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Value")]
-		double get_Value();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Value")]
-		void put_Value(double value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Minimum")]
-		double get_Minimum();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Minimum")]
-		void put_Minimum(double value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Maximum")]
-		double get_Maximum();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Maximum")]
-		void put_Maximum(double value);
+		global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings get_TemplateSettings();
 	}
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
 	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe interface IProgressRingTemplateSettings
+	public unsafe interface IInfoBarTemplateSettingsFactory
+	{
+		global::System.IntPtr CreateInstance(
+					global::System.IntPtr baseInterface, 
+					out global::System.IntPtr innerInterface);
+	}
+
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe interface IInfoBarTemplateSettings
 	{
 	}
 
@@ -6174,6 +6231,59 @@ namespace Microsoft.UI.Xaml.Controls
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
 	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe interface IProgressRingFactory
+	{
+		global::System.IntPtr CreateInstance(
+					global::System.IntPtr baseInterface, 
+					out global::System.IntPtr innerInterface);
+	}
+
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe interface IProgressRing
+	{
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsActive")]
+		bool get_IsActive();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsActive")]
+		void put_IsActive(bool value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsIndeterminate")]
+		bool get_IsIndeterminate();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsIndeterminate")]
+		void put_IsIndeterminate(bool value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "TemplateSettings")]
+		global::Microsoft.UI.Xaml.Controls.ProgressRingTemplateSettings get_TemplateSettings();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Value")]
+		double get_Value();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Value")]
+		void put_Value(double value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Minimum")]
+		double get_Minimum();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Minimum")]
+		void put_Minimum(double value);
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Maximum")]
+		double get_Maximum();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Maximum")]
+		void put_Maximum(double value);
+	}
+
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe interface IProgressRingTemplateSettings
+	{
+	}
+
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
 	public unsafe interface IExpanderFactory
 	{
 		global::System.IntPtr CreateInstance(
@@ -6228,116 +6338,6 @@ namespace Microsoft.UI.Xaml.Controls
 
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "NegativeContentHeight")]
 		double get_NegativeContentHeight();
-	}
-
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe interface IInfoBarFactory
-	{
-		global::System.IntPtr CreateInstance(
-					global::System.IntPtr baseInterface, 
-					out global::System.IntPtr innerInterface);
-	}
-
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe interface IInfoBar
-	{
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsOpen")]
-		bool get_IsOpen();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsOpen")]
-		void put_IsOpen(bool value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Title")]
-		string get_Title();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Title")]
-		void put_Title(string value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Message")]
-		string get_Message();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Message")]
-		void put_Message(string value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Severity")]
-		global::Microsoft.UI.Xaml.Controls.InfoBarSeverity get_Severity();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Severity")]
-		void put_Severity(global::Microsoft.UI.Xaml.Controls.InfoBarSeverity value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IconSource")]
-		global::Microsoft.UI.Xaml.Controls.IconSource get_IconSource();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IconSource")]
-		void put_IconSource(global::Microsoft.UI.Xaml.Controls.IconSource value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsIconVisible")]
-		bool get_IsIconVisible();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsIconVisible")]
-		void put_IsIconVisible(bool value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsClosable")]
-		bool get_IsClosable();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "IsClosable")]
-		void put_IsClosable(bool value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonStyle")]
-		global::Windows.UI.Xaml.Style get_CloseButtonStyle();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonStyle")]
-		void put_CloseButtonStyle(global::Windows.UI.Xaml.Style value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonCommand")]
-		global::System.Windows.Input.ICommand get_CloseButtonCommand();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonCommand")]
-		void put_CloseButtonCommand(global::System.Windows.Input.ICommand value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CloseButtonCommandParameter")]
-		object get_CloseButtonCommandParameter();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "CloseButtonCommandParameter")]
-		void put_CloseButtonCommandParameter(object value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "ActionButton")]
-		global::Windows.UI.Xaml.Controls.Primitives.ButtonBase get_ActionButton();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "ActionButton")]
-		void put_ActionButton(global::Windows.UI.Xaml.Controls.Primitives.ButtonBase value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Content")]
-		object get_Content();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Content")]
-		void put_Content(object value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "ContentTemplate")]
-		global::Windows.UI.Xaml.DataTemplate get_ContentTemplate();
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "ContentTemplate")]
-		void put_ContentTemplate(global::Windows.UI.Xaml.DataTemplate value);
-
-		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "TemplateSettings")]
-		global::Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings get_TemplateSettings();
-	}
-
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe interface IInfoBarTemplateSettingsFactory
-	{
-		global::System.IntPtr CreateInstance(
-					global::System.IntPtr baseInterface, 
-					out global::System.IntPtr innerInterface);
-	}
-
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe interface IInfoBarTemplateSettings
-	{
 	}
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
@@ -6527,21 +6527,21 @@ namespace Microsoft.UI.Xaml.Controls
 	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(0)]
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
 	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public enum ExpandDirection
-	{
-		Down = 0,
-		Up = 1,
-	}
-
-	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(0)]
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
 	public enum InfoBarSeverity
 	{
 		Informational = 0,
 		Success = 1,
 		Warning = 2,
 		Error = 3,
+	}
+
+	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(0)]
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Microsoft.UI.Xaml, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public enum ExpandDirection
+	{
+		Down = 0,
+		Up = 1,
 	}
 
 	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(0)]
@@ -8743,6 +8743,14 @@ namespace Windows.ApplicationModel.Core
 	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
 	public unsafe sealed class CoreApplicationView : global::System.__ComObject, global::Windows.ApplicationModel.Core.ICoreApplicationView, global::Windows.ApplicationModel.Core.ICoreApplicationView3
 	{
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CoreWindow")]
+		public global::Windows.UI.Core.CoreWindow get_CoreWindow()
+		{
+			global::Windows.UI.Core.CoreWindow __retVal = global::Windows.ApplicationModel.Core.ICoreApplicationView__Impl.Stubs.get_CoreWindow(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "TitleBar")]
 		public global::Windows.ApplicationModel.Core.CoreApplicationViewTitleBar get_TitleBar()
 		{
@@ -8761,6 +8769,26 @@ namespace Windows.ApplicationModel.Core
 	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
 	public unsafe sealed class CoreApplication : global::System.__ComObject
 	{
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "MainView")]
+		public static global::Windows.ApplicationModel.Core.CoreApplicationView get_MainView()
+		{
+			global::Windows.ApplicationModel.Core.CoreApplicationView retval;
+			retval = __Factory_Windows_ApplicationModel_Core__ICoreImmersiveApplication_get_MainView("Windows.ApplicationModel.Core.CoreApplication");
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return retval;
+		}
+
+		static global::Windows.ApplicationModel.Core.CoreApplicationView __Factory_Windows_ApplicationModel_Core__ICoreImmersiveApplication_get_MainView(string typeName)
+		{
+			global::Windows.ApplicationModel.Core.CoreApplicationView __pRetVal;
+			__pRetVal = global::Windows.ApplicationModel.Core.ICoreImmersiveApplication__Impl.Stubs.get_MainView(global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
+									typeName, 
+									typeof(global::Windows.ApplicationModel.Core.ICoreImmersiveApplication).TypeHandle
+								));
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __pRetVal;
+		}
+
 		public static global::Windows.ApplicationModel.Core.CoreApplicationView GetCurrentView()
 		{
 			global::Windows.ApplicationModel.Core.CoreApplicationView retval;
@@ -8818,6 +8846,8 @@ namespace Windows.ApplicationModel.Core
 	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
 	public unsafe interface ICoreApplicationView
 	{
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CoreWindow")]
+		global::Windows.UI.Core.CoreWindow get_CoreWindow();
 	}
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
@@ -8833,6 +8863,14 @@ namespace Windows.ApplicationModel.Core
 	public unsafe interface ICoreApplication
 	{
 		global::Windows.ApplicationModel.Core.CoreApplicationView GetCurrentView();
+	}
+
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe interface ICoreImmersiveApplication
+	{
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "MainView")]
+		global::Windows.ApplicationModel.Core.CoreApplicationView get_MainView();
 	}
 }
 
@@ -14190,6 +14228,15 @@ namespace Windows.UI.Xaml
 			return innerInspectable;
 		}
 
+		public virtual void ClearValue(global::Windows.UI.Xaml.DependencyProperty dp)
+		{
+			global::Windows.UI.Xaml.IDependencyObject__Impl.Stubs.ClearValue(
+								this, 
+								dp
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Dispatcher")]
 		public virtual global::Windows.UI.Core.CoreDispatcher get_Dispatcher()
 		{
@@ -17615,8 +17662,16 @@ namespace Windows.UI.Xaml
 	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
 	public unsafe interface IDependencyObject
 	{
+		void ClearValue(global::Windows.UI.Xaml.DependencyProperty dp);
+
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Dispatcher")]
 		global::Windows.UI.Core.CoreDispatcher get_Dispatcher();
+	}
+
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe interface IDependencyProperty
+	{
 	}
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
@@ -17626,12 +17681,6 @@ namespace Windows.UI.Xaml
 		long RegisterPropertyChangedCallback(
 					global::Windows.UI.Xaml.DependencyProperty dp, 
 					global::Windows.UI.Xaml.DependencyPropertyChangedCallback callback);
-	}
-
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe interface IDependencyProperty
-	{
 	}
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
@@ -28689,6 +28738,14 @@ namespace Windows.UI.Xaml.Controls
 			}
 		}
 
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CurrentSourcePageType")]
+		public virtual global::System.Type get_CurrentSourcePageType()
+		{
+			global::System.Type __retVal = global::Windows.UI.Xaml.Controls.IFrame__Impl.Stubs.get_CurrentSourcePageType(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.EventAdd, "Navigated")]
 		public virtual global::System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken add_Navigated(global::Windows.UI.Xaml.Navigation.NavigatedEventHandler handler)
 		{
@@ -31263,6 +31320,9 @@ namespace Windows.UI.Xaml.Controls
 	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
 	public unsafe interface IFrame
 	{
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "CurrentSourcePageType")]
+		global::System.Type get_CurrentSourcePageType();
+
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.EventAdd, "Navigated")]
 		global::System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken add_Navigated(global::Windows.UI.Xaml.Navigation.NavigatedEventHandler handler);
 
@@ -32584,6 +32644,26 @@ namespace Windows.UI.Xaml.Controls.Primitives
 			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
 		}
 
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsCheckedProperty")]
+		public static global::Windows.UI.Xaml.DependencyProperty get_IsCheckedProperty()
+		{
+			global::Windows.UI.Xaml.DependencyProperty retval;
+			retval = __Factory_Windows_UI_Xaml_Controls_Primitives__IToggleButtonStatics_get_IsCheckedProperty("Windows.UI.Xaml.Controls.Primitives.ToggleButton");
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return retval;
+		}
+
+		static global::Windows.UI.Xaml.DependencyProperty __Factory_Windows_UI_Xaml_Controls_Primitives__IToggleButtonStatics_get_IsCheckedProperty(string typeName)
+		{
+			global::Windows.UI.Xaml.DependencyProperty __pRetVal;
+			__pRetVal = global::Windows.UI.Xaml.Controls.Primitives.IToggleButtonStatics__Impl.Stubs.get_IsCheckedProperty(global::System.Runtime.InteropServices.McgMarshal.GetActivationFactory(
+									typeName, 
+									typeof(global::Windows.UI.Xaml.Controls.Primitives.IToggleButtonStatics).TypeHandle
+								));
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __pRetVal;
+		}
+
 		public ToggleButton(global::System.IntPtr dummy) : 
 				base(dummy)
 		{
@@ -32971,6 +33051,14 @@ namespace Windows.UI.Xaml.Controls.Primitives
 		global::System.IntPtr CreateInstance(
 					global::System.IntPtr baseInterface, 
 					out global::System.IntPtr innerInterface);
+	}
+
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe interface IToggleButtonStatics
+	{
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "IsCheckedProperty")]
+		global::Windows.UI.Xaml.DependencyProperty get_IsCheckedProperty();
 	}
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
@@ -36027,6 +36115,24 @@ namespace Windows.UI.Xaml.Media.Animation
 			this.__AttachAndRelease(retval);
 		}
 
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "From")]
+		public global::System.Nullable<double> get_From()
+		{
+			global::System.Nullable<double> __retVal = global::Windows.UI.Xaml.Media.Animation.IDoubleAnimation__Impl.Stubs.get_From(this);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			return __retVal;
+		}
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "From")]
+		public void put_From(global::System.Nullable<double> value)
+		{
+			global::Windows.UI.Xaml.Media.Animation.IDoubleAnimation__Impl.Stubs.put_From(
+								this, 
+								value
+							);
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+		}
+
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "To")]
 		public global::System.Nullable<double> get_To()
 		{
@@ -36357,6 +36463,12 @@ namespace Windows.UI.Xaml.Media.Animation
 	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
 	public unsafe interface IDoubleAnimation
 	{
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "From")]
+		global::System.Nullable<double> get_From();
+
+		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "From")]
+		void put_From(global::System.Nullable<double> value);
+
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "To")]
 		global::System.Nullable<double> get_To();
 
@@ -36844,6 +36956,29 @@ namespace Windows.UI.Xaml.Shapes
 		}
 	}
 
+	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Windows.UI.Xaml.Shapes.IEllipse))]
+	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(65536)]
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe sealed class Ellipse : global::Windows.UI.Xaml.Shapes.Shape, global::Windows.UI.Xaml.Shapes.IEllipse
+	{
+		[global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+		public Ellipse() : 
+				base(default(global::System.IntPtr))
+		{
+			global::System.IntPtr retval;
+			retval = global::System.Runtime.InteropServices.McgMarshal.ActivateInstance("Windows.UI.Xaml.Shapes.Ellipse");
+			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
+			global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref retval);
+			this.__AttachAndRelease(retval);
+		}
+
+		public Ellipse(global::System.IntPtr dummy) : 
+				base(dummy)
+		{
+		}
+	}
+
 	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Windows.UI.Xaml.Shapes.IPolygon))]
 	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(65536)]
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
@@ -36880,29 +37015,6 @@ namespace Windows.UI.Xaml.Shapes
 		}
 
 		public Polygon(global::System.IntPtr dummy) : 
-				base(dummy)
-		{
-		}
-	}
-
-	[global::System.Runtime.CompilerServices.DependencyReductionConditionallyDependent(typeof(global::Windows.UI.Xaml.Shapes.IEllipse))]
-	[global::System.Runtime.InteropServices.McgWindowsRuntimeVersion(65536)]
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe sealed class Ellipse : global::Windows.UI.Xaml.Shapes.Shape, global::Windows.UI.Xaml.Shapes.IEllipse
-	{
-		[global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-		public Ellipse() : 
-				base(default(global::System.IntPtr))
-		{
-			global::System.IntPtr retval;
-			retval = global::System.Runtime.InteropServices.McgMarshal.ActivateInstance("Windows.UI.Xaml.Shapes.Ellipse");
-			global::System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
-			global::__Interop.McgHelpers.GetIUnknownForFactoryReturn(ref retval);
-			this.__AttachAndRelease(retval);
-		}
-
-		public Ellipse(global::System.IntPtr dummy) : 
 				base(dummy)
 		{
 		}
@@ -36950,6 +37062,12 @@ namespace Windows.UI.Xaml.Shapes
 
 	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
 	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
+	public unsafe interface IEllipse
+	{
+	}
+
+	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
+	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
 	public unsafe interface IPolygon
 	{
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertyGet, "Points")]
@@ -36957,12 +37075,6 @@ namespace Windows.UI.Xaml.Shapes
 
 		[global::System.Runtime.InteropServices.McgAccessor(global::System.Runtime.InteropServices.McgAccessorKind.PropertySet, "Points")]
 		void put_Points(global::Windows.UI.Xaml.Media.PointCollection value);
-	}
-
-	[global::Internal.Reflection.MetadataTransformed(global::Internal.Reflection.MetadataTransformation.OriginallyForeignObject)]
-	[global::Internal.Reflection.ExplicitScope("Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime")]
-	public unsafe interface IEllipse
-	{
 	}
 }
 

@@ -7,7 +7,7 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="41c791cc-adc2-4dc9-9148-fb74a5aec780" Publisher="CN=Aoun" Version="2.15.45.0" ProcessorArchitecture="x86" />
+  <Identity Name="41c791cc-adc2-4dc9-9148-fb74a5aec780" Publisher="CN=Aoun" Version="2.16.49.0" ProcessorArchitecture="x86" />
   <mp:PhoneIdentity PhoneProductId="41c791cc-adc2-4dc9-9148-fb74a5aec780" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>To-Do</DisplayName>
@@ -47,7 +47,7 @@
     <build:Item Name="VisualStudio" Version="17.0" />
     <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Community 2022" />
     <build:Item Name="OperatingSystem" Version="10.0.22000.1 (WinBuild.160101.0800)" />
-    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="17.0.31709.430" />
+    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="17.0.31808.319" />
     <build:Item Name="ProjectGUID" Value="{06E107EB-5AB3-41F8-A511-F9FDF86F3C0D}" />
     <build:Item Name="ilc.exe" Version="2.2.29722.00 built by: PROJECTNREL" />
     <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="10.0.19041.685" />

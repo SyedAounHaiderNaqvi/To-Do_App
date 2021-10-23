@@ -57,6 +57,7 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxCheckGlyphForegroundUnchecked}"/>
                                                         </ObjectAnimationUsingKeyFrames>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" From="0.5" To="0"/>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="UncheckedPointerOver">
@@ -80,7 +81,7 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltLowColor}"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="0.5"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" From="0" To="0.5"/>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="UncheckedPressed">
@@ -103,8 +104,8 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxCheckGlyphForegroundChecked}"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="0.7"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="0.7"/>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="CheckedNormal">
@@ -127,8 +128,8 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="White"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="CheckedPointerOver">
@@ -151,7 +152,7 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="White"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="CheckedPressed">
@@ -174,15 +175,15 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="White"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
                                                     </Storyboard>
                                                 </VisualState>
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
                                         <Grid CornerRadius="15" Height="25" VerticalAlignment="Top">
                                             <Rectangle RadiusX="15" RadiusY="15" x:Name="NormalRectangle" Fill="{ThemeResource CheckBoxCheckBackgroundFillUnchecked}" Height="25" StrokeThickness="2" Stroke="{ThemeResource CheckBoxCheckBackgroundStrokeUnchecked}" UseLayoutRounding="False" Width="25"/>
-                                            <FontIcon x:Name="CheckGlyph" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource CheckBoxCheckGlyphForegroundUnchecked}" FontSize="16" Glyph="&#xE001;" Opacity="0"/>
+                                            <FontIcon x:Name="CheckGlyph" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource CheckBoxCheckGlyphForegroundUnchecked}" FontWeight="ExtraBold" FontSize="16" Glyph="&#xE001;" Opacity="0"/>
                                         </Grid>
                                         <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                     </Grid>
@@ -238,6 +239,8 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxCheckGlyphForegroundUnchecked}"/>
                                                         </ObjectAnimationUsingKeyFrames>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" From="0.5" To="0"/>
+
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="UncheckedPointerOver">
@@ -261,7 +264,7 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemChromeAltLowColor}"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="0.5"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" From="0" To="0.5"/>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="UncheckedPressed">
@@ -284,8 +287,8 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxCheckGlyphForegroundChecked}"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="0.7"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="0.7"/>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="CheckedNormal">
@@ -308,8 +311,8 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Black"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="CheckedPointerOver">
@@ -332,7 +335,7 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Black"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
                                                     </Storyboard>
                                                 </VisualState>
                                                 <VisualState x:Name="CheckedPressed">
@@ -355,15 +358,15 @@
                                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
                                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Black"/>
                                                         </ObjectAnimationUsingKeyFrames>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
-                                                        <DoubleAnimation Duration="0" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="NormalRectangle" Storyboard.TargetProperty="StrokeThickness" To="{ThemeResource CheckBoxCheckedStrokeThickness}"/>
+                                                        <DoubleAnimation Duration="0:0:0.1" Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity" To="1"/>
                                                     </Storyboard>
                                                 </VisualState>
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
                                         <Grid CornerRadius="15" Height="25" VerticalAlignment="Top">
                                             <Rectangle RadiusX="15" RadiusY="15" x:Name="NormalRectangle" Fill="{ThemeResource CheckBoxCheckBackgroundFillUnchecked}" Height="25" StrokeThickness="2" Stroke="{ThemeResource CheckBoxCheckBackgroundStrokeUnchecked}" UseLayoutRounding="False" Width="25"/>
-                                            <FontIcon x:Name="CheckGlyph" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource CheckBoxCheckGlyphForegroundUnchecked}" FontSize="16" Glyph="&#xE001;" Opacity="0"/>
+                                            <FontIcon x:Name="CheckGlyph" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="{ThemeResource CheckBoxCheckGlyphForegroundUnchecked}" FontWeight="ExtraBold" FontSize="16" Glyph="&#xE001;" Opacity="0"/>
                                         </Grid>
                                         <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                     </Grid>
@@ -393,7 +396,7 @@
                         <ControlTemplate TargetType="CheckBox">
                             <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="35"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <VisualStateManager.VisualStateGroups>
@@ -419,6 +422,7 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                                                 </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimation Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity" From="0.2" To="0" Duration="0:0:0.1"/>
                                             </Storyboard>
                                         </VisualState>
                                         <VisualState x:Name="UncheckedPointerOver">
@@ -433,12 +437,16 @@
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBorderBrushUncheckedPointerOver}"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Glyph">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE735;"/>
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE734;"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimation Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity" From="0" To="0.2" Duration="0:0:0.1"/>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="bg" Storyboard.TargetProperty="Fill">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
@@ -463,6 +471,10 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Opacity">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="1"/>
                                                 </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimation Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity" From="0.2" To="0.4" Duration="0:0:0.1"/>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="bg" Storyboard.TargetProperty="Fill">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
 
@@ -486,6 +498,7 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource CheckBoxBorderBrushChecked}"/>
                                                 </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimation Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity" From="0.2" To="0" Duration="0:0:0.1"/>
                                             </Storyboard>
                                         </VisualState>
                                         <VisualState x:Name="CheckedPointerOver">
@@ -507,6 +520,10 @@
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Glyph">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE735;"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimation Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity" From="0" To="0.2" Duration="0:0:0.1"/>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="bg" Storyboard.TargetProperty="Fill">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
@@ -530,14 +547,19 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckGlyph" Storyboard.TargetProperty="Glyph">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="&#xE734;"/>
                                                 </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimation Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity" From="0.2" To="0.4" Duration="0:0:0.1"/>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="bg" Storyboard.TargetProperty="Fill">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
 
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
-                                <Grid Height="25" VerticalAlignment="Top">
+                                <Grid Height="45" HorizontalAlignment="Center" Width="40" VerticalAlignment="Center">
                                     <Rectangle Visibility="Collapsed" x:Name="NormalRectangle" Fill="{ThemeResource CheckBoxCheckBackgroundFillUnchecked}" Height="20" StrokeThickness="{ThemeResource CheckBoxBorderThemeThickness}" Stroke="{ThemeResource CheckBoxCheckBackgroundStrokeUnchecked}" UseLayoutRounding="False" Width="20"/>
-                                    <FontIcon x:Name="CheckGlyph" FontFamily="{ThemeResource SymbolThemeFontFamily}" Foreground="#eeac00" FontSize="20" Glyph="&#xE734;" Opacity="0"/>
+                                    <Ellipse x:Name="bg" UseLayoutRounding="False" HorizontalAlignment="Center" Width="33" Height="33" Opacity="0" Fill="{ThemeResource SystemAccentColor}"/>
+                                    <FontIcon x:Name="CheckGlyph" Foreground="#eeac00" FontSize="20" Glyph="&#xE734;" Opacity="0"/>
                                 </Grid>
                                 <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Grid>
@@ -696,12 +718,12 @@
                                             <StackPanel.OpacityTransition>
                                                 <ScalarTransition/>
                                             </StackPanel.OpacityTransition>
-                                            <Button Click="AddStep" DataContext="{Binding ElementName=UserControl}" x:Name="addStep" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="Add step">
+                                            <Button Click="AddStep" Margin="0,0,-4,0" DataContext="{Binding ElementName=UserControl}" x:Name="addStep" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="Add step">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE710;"/>
                                                 </Button.Content>
                                             </Button>
-                                            <CheckBox Margin="0,-3,0,0" Unchecked="StarChecked" Checked="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
+                                            <CheckBox Margin="0,-2,0,0" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
                                             <Button Opacity="0" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.OpacityTransition>
                                                     <ScalarTransition Duration="0:0:0.2"/>

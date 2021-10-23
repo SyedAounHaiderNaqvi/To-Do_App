@@ -231,14 +231,8 @@
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\clrcompression.dll">
       <PackagePath>clrcompression.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\clock %282%29.tiff">
-      <PackagePath>Images\clock %282%29.tiff</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\clock.png">
       <PackagePath>Images\clock.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\complete %284%29.tiff">
-      <PackagePath>Images\complete %284%29.tiff</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\complete.png">
       <PackagePath>Images\complete.png</PackagePath>
@@ -246,17 +240,20 @@
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\eek.png">
       <PackagePath>Images\eek.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\New Project.png">
-      <PackagePath>Images\New Project.png</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\settingsIcon %284%29.tiff">
-      <PackagePath>Images\settingsIcon %284%29.tiff</PackagePath>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\New Project %281%29.png">
+      <PackagePath>Images\New Project %281%29.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\settingsIcon.png">
       <PackagePath>Images\settingsIcon.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\sun.png">
+      <PackagePath>Images\sun.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\tileIcon.png">
       <PackagePath>Images\tileIcon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\wand.png">
+      <PackagePath>Images\wand.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\yay.png">
       <PackagePath>Images\yay.png</PackagePath>

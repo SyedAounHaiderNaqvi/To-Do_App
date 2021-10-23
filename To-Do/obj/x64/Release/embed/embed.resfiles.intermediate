@@ -2,5 +2,6 @@ App.xbf
 EditDialogContent.xbf
 MainPage.xbf
 NavigationPages\CompletedTasks.xbf
+NavigationPages\MyDay.xbf
 NavigationPages\PendingTasks.xbf
 Settings.xbf

@@ -136,6 +136,9 @@
     <Compile Include="NavigationPages\CompletedTasks.xaml.cs">
       <DependentUpon>CompletedTasks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NavigationPages\MyDay.xaml.cs">
+      <DependentUpon>MyDay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NavigationPages\PendingTasks.xaml.cs">
       <DependentUpon>PendingTasks.xaml</DependentUpon>
     </Compile>
@@ -196,15 +199,14 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <Content Include="Images\clock %282%29.tiff" />
     <Content Include="Images\clock.png" />
-    <Content Include="Images\complete %284%29.tiff" />
     <Content Include="Images\complete.png" />
     <Content Include="Images\eek.png" />
-    <Content Include="Images\New Project.png" />
-    <Content Include="Images\settingsIcon %284%29.tiff" />
+    <Content Include="Images\New Project %281%29.png" />
     <Content Include="Images\settingsIcon.png" />
+    <Content Include="Images\sun.png" />
     <Content Include="Images\tileIcon.png" />
+    <Content Include="Images\wand.png" />
     <Content Include="Images\yay.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -230,6 +232,10 @@
     <Page Include="NavigationPages\CompletedTasks.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NavigationPages\MyDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NavigationPages\PendingTasks.xaml">
       <SubType>Designer</SubType>

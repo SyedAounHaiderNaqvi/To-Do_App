@@ -505,6 +505,19 @@
         </Border>
         <controls:NavigationView x:ConnectionId='115' x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False"                                               x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto"                                                   >
             <controls:NavigationView.MenuItems>
+
+                <controls:NavigationViewItem ToolTipService.ToolTip="My Day" Tag="MyDay">
+                    <controls:NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE706;"/>
+                    </controls:NavigationViewItem.Icon>
+                    <controls:NavigationViewItem.InfoBadge>
+                        <controls:InfoBadge x:ConnectionId='118' x:FieldModifier="public" x:Name="myDayinf"/>
+                    </controls:NavigationViewItem.InfoBadge>
+                    <controls:NavigationViewItem.Content>
+                        <TextBlock Text="My Day"/>
+                    </controls:NavigationViewItem.Content>
+                </controls:NavigationViewItem>
+
                 <controls:NavigationViewItem ToolTipService.ToolTip="Pending Tasks" Tag="PendingTasks" IsSelected="True">
                     <controls:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE823;"/>
@@ -528,20 +541,21 @@
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
             <controls:NavigationView.AutoSuggestBox>
-                <AutoSuggestBox x:ConnectionId='118' UpdateTextOnSelect="False"                                                    ItemTemplate="{StaticResource suggestionTemplate}"                                                                                         QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search" />
+                <AutoSuggestBox x:ConnectionId='119' UpdateTextOnSelect="False"                                                    ItemTemplate="{StaticResource suggestionTemplate}"                                                                                         QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search" />
             </controls:NavigationView.AutoSuggestBox>
             <Grid>
 
-                <Image x:ConnectionId='119' x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" Margin="0,-82,0,0" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
-                <Rectangle x:ConnectionId='120' Fill="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:FieldModifier="public" x:Name="acrylic" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Stroke="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Rectangle x:ConnectionId='121' x:FieldModifier="public" x:Name="acrylictint" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Opacity="0.2" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Frame x:ConnectionId='122' x:FieldModifier="public" x:Name="ContentFrame"/>
+                <Image x:ConnectionId='120' x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" Margin="0,-82,0,0" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
+                <Rectangle x:ConnectionId='121' Fill="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:FieldModifier="public" x:Name="acrylic" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Stroke="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Rectangle x:ConnectionId='122' x:FieldModifier="public" x:Name="acrylictint" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Opacity="0.2" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Frame x:ConnectionId='123' x:FieldModifier="public" x:Name="ContentFrame"/>
+                <Grid x:ConnectionId='124' MinWidth="200" Margin="-4,-84,0,0" x:Name="LoadingUI" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemChromeMediumColor}">
+                    <controls:ProgressRing Width="70" Height="70"/>
+                </Grid>
             </Grid>
 
         </controls:NavigationView>
-        <Grid x:ConnectionId='116' x:Name="LoadingUI" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemChromeMediumLowColor}">
-            <controls:ProgressRing Width="70" Height="70"/>
-        </Grid>
+        <controls:InfoBar x:ConnectionId='116' Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:Name="change" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,60,30,50" IsOpen="False" Severity="Informational" Title="My Day" Message="Leftover task(s) from My Day have been shifted to Pending Tasks."/>
     </Grid>
 </Page>
 

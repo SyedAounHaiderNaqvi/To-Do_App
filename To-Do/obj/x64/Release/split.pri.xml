@@ -120,19 +120,9 @@
 				</NamedResource>
 			</ResourceMapSubtree>
 			<ResourceMapSubtree name="Images">
-				<NamedResource name="clock (2).tiff" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/clock (2).tiff">
-					<Candidate type="Path">
-						<Value>Images\clock (2).tiff</Value>
-					</Candidate>
-				</NamedResource>
 				<NamedResource name="clock.png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/clock.png">
 					<Candidate type="Path">
 						<Value>Images\clock.png</Value>
-					</Candidate>
-				</NamedResource>
-				<NamedResource name="complete (4).tiff" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/complete (4).tiff">
-					<Candidate type="Path">
-						<Value>Images\complete (4).tiff</Value>
 					</Candidate>
 				</NamedResource>
 				<NamedResource name="complete.png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/complete.png">
@@ -145,14 +135,9 @@
 						<Value>Images\eek.png</Value>
 					</Candidate>
 				</NamedResource>
-				<NamedResource name="New Project.png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/New Project.png">
+				<NamedResource name="New Project (1).png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/New Project (1).png">
 					<Candidate type="Path">
-						<Value>Images\New Project.png</Value>
-					</Candidate>
-				</NamedResource>
-				<NamedResource name="settingsIcon (4).tiff" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/settingsIcon (4).tiff">
-					<Candidate type="Path">
-						<Value>Images\settingsIcon (4).tiff</Value>
+						<Value>Images\New Project (1).png</Value>
 					</Candidate>
 				</NamedResource>
 				<NamedResource name="settingsIcon.png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/settingsIcon.png">
@@ -160,9 +145,19 @@
 						<Value>Images\settingsIcon.png</Value>
 					</Candidate>
 				</NamedResource>
+				<NamedResource name="sun.png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/sun.png">
+					<Candidate type="Path">
+						<Value>Images\sun.png</Value>
+					</Candidate>
+				</NamedResource>
 				<NamedResource name="tileIcon.png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/tileIcon.png">
 					<Candidate type="Path">
 						<Value>Images\tileIcon.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="wand.png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/wand.png">
+					<Candidate type="Path">
+						<Value>Images\wand.png</Value>
 					</Candidate>
 				</NamedResource>
 				<NamedResource name="yay.png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/yay.png">
@@ -182,6 +177,11 @@
 			</ResourceMapSubtree>
 			<ResourceMapSubtree name="NavigationPages">
 				<NamedResource name="CompletedTasks.xbf" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/NavigationPages/CompletedTasks.xbf">
+					<Candidate type="EmbeddedData">
+						<Base64Value>[Embedded Binary Data]</Base64Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="MyDay.xbf" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/NavigationPages/MyDay.xbf">
 					<Candidate type="EmbeddedData">
 						<Base64Value>[Embedded Binary Data]</Base64Value>
 					</Candidate>

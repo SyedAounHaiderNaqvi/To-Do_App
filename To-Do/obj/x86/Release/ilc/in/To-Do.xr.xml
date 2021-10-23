@@ -120,14 +120,14 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="MinWidth" />
       <RootProperty Name="VerticalContentAlignment" />
-      <RootProperty Name="Opacity" />
-      <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Background" />
       <RootProperty Name="Height" />
       <RootProperty Name="CornerRadius" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Opacity" />
       <RootProperty Name="OpacityTransition" />
       <RootProperty Name="Translation" />
-      <RootProperty Name="DataContext" />
       <RootProperty Name="TranslationTransition" />
       <RootEvent Name="Click" />
       <RootEvent Name="PointerCaptureLost" />
@@ -218,12 +218,12 @@
       <RootProperty Name="Background" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="MaxHeight" />
-      <RootProperty Name="MaxWidth" />
       <RootProperty Name="MinWidth" />
+      <RootProperty Name="MaxWidth" />
       <RootProperty Name="Opacity" />
+      <RootProperty Name="OpacityTransition" />
       <RootProperty Name="Translation" />
       <RootProperty Name="TranslationTransition" />
-      <RootProperty Name="OpacityTransition" />
       <RootProperty Name="BackgroundTransition" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
@@ -486,16 +486,25 @@
       <RootProperty Name="Translation" />
       <RootProperty Name="TranslationTransition" />
     </RootType>
-    <RootType FullName="Microsoft.UI.Xaml.Controls.ProgressRing">
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
+    <RootType FullName="Microsoft.UI.Xaml.Controls.InfoBar">
+      <RootProperty Name="Background" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="IsOpen" />
+      <RootProperty Name="Severity" />
+      <RootProperty Name="Title" />
+      <RootProperty Name="Message" />
+      <RootProperty Name="CornerRadius" />
+      <RootProperty Name="IsClosable" />
+      <RootProperty Name="ActionButton" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.NavigationViewItem">
       <RootProperty Name="Tag" />
-      <RootProperty Name="IsSelected" />
       <RootProperty Name="Icon" />
       <RootProperty Name="InfoBadge" />
       <RootProperty Name="Content" />
+      <RootProperty Name="IsSelected" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.InfoBadge" />
     <RootType FullName="Windows.UI.Xaml.Controls.AutoSuggestBox">
@@ -536,6 +545,10 @@
       <RootProperty Name="Visibility" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Frame" />
+    <RootType FullName="Microsoft.UI.Xaml.Controls.ProgressRing">
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+    </RootType>
     <RootType FullName="To_Do.MainPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="SelectionMode" />
@@ -575,11 +588,12 @@
       <RootProperty Name="IsChecked" />
       <RootEvent Name="PointerCaptureLost" />
       <RootEvent Name="Checked" />
-      <RootEvent Name="Unchecked" />
+      <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimation">
       <RootProperty Name="Duration" />
       <RootProperty Name="To" />
+      <RootProperty Name="From" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.Expander">
       <RootProperty Name="Style" />
@@ -605,14 +619,14 @@
       <RootProperty Name="Style" />
       <RootProperty Name="VerticalContentAlignment" />
     </RootType>
-    <RootType FullName="Microsoft.UI.Xaml.Controls.InfoBar">
-      <RootProperty Name="CornerRadius" />
-      <RootProperty Name="IsClosable" />
-      <RootProperty Name="IsOpen" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Severity" />
-      <RootProperty Name="Message" />
-      <RootProperty Name="ActionButton" />
+    <RootType FullName="Windows.UI.Xaml.Shapes.Ellipse">
+      <RootProperty Name="UseLayoutRounding" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="Fill" />
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.DropDownButton">
       <RootProperty Name="Content" />
@@ -629,24 +643,19 @@
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
-      <RootProperty Name="DataContext" />
       <RootProperty Name="Text" />
       <RootProperty Name="Icon" />
+      <RootProperty Name="DataContext" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.SymbolIcon">
       <RootProperty Name="Symbol" />
     </RootType>
+    <RootType FullName="To_Do.NavigationPages.MyDay" />
     <RootType FullName="To_Do.NavigationPages.PendingTasks" />
     <RootType FullName="Windows.UI.Xaml.Shapes.Polygon">
       <RootProperty Name="Points" />
       <RootProperty Name="Stroke" />
-      <RootProperty Name="Fill" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Shapes.Ellipse">
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
       <RootProperty Name="Fill" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.BrushTransition" />

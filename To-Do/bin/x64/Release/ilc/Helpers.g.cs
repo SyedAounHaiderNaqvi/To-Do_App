@@ -2749,7 +2749,7 @@ namespace __Interop
 		[global::Internal.PreInitializedAddrOfDelegate]
 		public delegate int AddrOfTarget66(
 					global::System.IntPtr a0, 
-					global::Microsoft.UI.Xaml.Controls.ExpandDirection* a1);
+					global::Microsoft.UI.Xaml.Controls.InfoBarSeverity* a1);
 
 		#endif
 
@@ -2758,7 +2758,7 @@ namespace __Interop
 		[global::Internal.PreInitializedAddrOfDelegate]
 		public delegate int AddrOfTarget67(
 					global::System.IntPtr a0, 
-					global::Microsoft.UI.Xaml.Controls.InfoBarSeverity* a1);
+					global::Microsoft.UI.Xaml.Controls.ExpandDirection* a1);
 
 		#endif
 

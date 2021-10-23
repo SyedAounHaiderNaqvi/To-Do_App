@@ -19,6 +19,8 @@ using Microsoft.UI.Xaml.Controls;
 using System.Linq;
 using System.Diagnostics;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using System.Collections.Specialized;
 
 namespace To_Do.NavigationPages
 {
@@ -39,7 +41,6 @@ namespace To_Do.NavigationPages
         public int delay = 3000;
         CancellationTokenSource token;
         public ContentDialog dialog;
-        bool hasLaunched = false;
 
         public PendingTasks()
         {
@@ -98,13 +99,31 @@ namespace To_Do.NavigationPages
                 newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
                 TaskItems = new ObservableCollection<TODOTask>(newList);
                 listOfTasks.ItemsSource = TaskItems;
-                hasLaunched = true;
             }
         }
 
         private void listOfTasks_LayoutUpdated(object sender, object e)
         {
             AllDone.Visibility = TaskItems.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e != null)
+            {
+                ObservableCollection<TODOTask> parsed = e.Parameter as ObservableCollection<TODOTask>;
+                if (parsed != null && parsed.Count > 0)
+                {
+                    //now add
+                    foreach (TODOTask item in parsed)
+                    {
+                        TODOTask n = new TODOTask() { Date = DateTime.Now.AddDays(-1).ToString("dd-MMMM-yyyy hh:mm:ss tt"), Description = item.Description, IsStarred = item.IsStarred, SubTasks = item.SubTasks };
+                        AddATask(n);
+                    }
+                    Sort((string)SortingDropDown.Content);
+                }
+            }
+            base.OnNavigatedTo(e);
         }
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -119,29 +138,44 @@ namespace To_Do.NavigationPages
                     AddATask(newTask);
                     NewTaskBox.Text = string.Empty;
                     e.Handled = true;
-                    if ((string)SortingDropDown.Content != "Custom")
-                    {
-                        Sort((string)SortingDropDown.Content);
-                    }
+                    Sort((string)SortingDropDown.Content);
                 }
             }
         }
 
-        private async void StarChecked(object sender, RoutedEventArgs e)
+        private void StarChecked(object sender, RoutedEventArgs e)
         {
-            if (hasLaunched)
+            CheckBox cb = sender as CheckBox;
+            UserControl ct = cb.DataContext as UserControl;
+            TODOTask task = ct.DataContext as TODOTask;
+            var truth = (bool)cb.IsChecked;
+            cb.ClearValue(CheckBox.IsCheckedProperty);
+            task.IsStarred = truth;
+            var list = TaskItems.ToList();
+            if ((string)SortingDropDown.Content != "Custom")
             {
-                CheckBox cb = sender as CheckBox;
-                UserControl top = cb.DataContext as UserControl;
-                if (top.DataContext is TODOTask context)
+                switch ((string)SortingDropDown.Content)
                 {
-                    context.IsStarred = (bool)cb.IsChecked;
-                    //Sort((string)SortingDropDown.Content);
+                    case "Date Created":
+                        list.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                        break;
+                    case "Text":
+                        list.Sort((x, y) => string.Compare(x.Description, y.Description));
+                        break;
+                    case "Importance":
+                        var query = from x in list
+                                    orderby !x.IsStarred
+                                    select x;
+                        list = query.ToList();
+                        break;
+                    default:
+                        break;
                 }
 
-                await Task.Delay(1000);
-                Sort((string)SortingDropDown.Content);
+                TaskItems = new ObservableCollection<TODOTask>(list);
+                listOfTasks.ItemsSource = TaskItems;
             }
+            return;
         }
 
         private async void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -341,7 +375,6 @@ namespace To_Do.NavigationPages
             //launch contentdialog
             Grid grid = (Grid)dialog.Content;
             TextBox EditTextBox = (TextBox)VisualTreeHelper.GetChild(grid, 0);
-            //EditTextBox.TextChanged += EditBoxTextChanged;
             EditTextBox.Text = TaskItems[index].Description;
             EditTextBox.SelectionStart = EditTextBox.Text.Length;
             dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
@@ -353,6 +386,7 @@ namespace To_Do.NavigationPages
                 TaskItems[index].Description = EditTextBox.Text;
                 EditTextBox.Text = string.Empty;
                 Sort((string)SortingDropDown.Content);
+                //listOfTasks.ItemsSource = TaskItems;
             }
         }
 
@@ -536,27 +570,27 @@ namespace To_Do.NavigationPages
         {
             if (typeOfSort != "Custom")
             {
-                List<TODOTask> newList = new List<TODOTask>(TaskItems);
-
+                var list = new List<TODOTask>(TaskItems);
                 switch (typeOfSort)
                 {
                     case "Date Created":
-                        newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
-                        Debug.WriteLine("Done");
+                        list.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
                         break;
                     case "Text":
-                        newList.Sort((x, y) => string.Compare(x.Description, y.Description));
+                        list.Sort((x, y) => string.Compare(x.Description, y.Description));
                         break;
                     case "Importance":
-                        var query = from task in newList
+                        var query = from task in list
                                     orderby !task.IsStarred
                                     select task;
-                        newList = query.ToList();
+                        list = query.ToList();
                         break;
                     default:
                         break;
                 }
-                TaskItems = new ObservableCollection<TODOTask>(newList);
+                // This area causes error as TaskItems is being renewed
+                TaskItems = new ObservableCollection<TODOTask>(list);
+                //TaskItems = list;
                 listOfTasks.ItemsSource = TaskItems;
             }
         }
@@ -629,6 +663,7 @@ namespace To_Do.NavigationPages
             var back = FindControl<Grid>(c, typeof(Grid), "backplate");
             back.Opacity = 0;
         }
+
     }
 
     public class TODOTask : INotifyPropertyChanged
@@ -644,7 +679,7 @@ namespace To_Do.NavigationPages
             set
             {
                 date = value;
-                OnPropertyChanged();
+                OnPropertyChanged("Date");
             }
         }
 
@@ -654,7 +689,7 @@ namespace To_Do.NavigationPages
             set
             {
                 subTasks = value;
-                OnPropertyChanged();
+                OnPropertyChanged("SubTasks");
             }
         }
 
@@ -664,7 +699,7 @@ namespace To_Do.NavigationPages
             set
             {
                 isStarred = value;
-                OnPropertyChanged();
+                OnPropertyChanged("IsStarred");
             }
         }
 
@@ -674,11 +709,12 @@ namespace To_Do.NavigationPages
             set
             {
                 description = value;
-                OnPropertyChanged();
+                OnPropertyChanged("Description");
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

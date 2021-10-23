@@ -835,13 +835,9 @@ E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\clrcompression.dll
 E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Data.g.cs
 E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\DotNetNative.debugger-services-def.json
 E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Helpers.g.cs
-E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\clock (2).tiff
 E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\clock.png
-E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\complete (4).tiff
 E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\complete.png
 E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\eek.png
-E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\New Project.png
-E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\settingsIcon (4).tiff
 E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\settingsIcon.png
 E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\tileIcon.png
 E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\yay.png
@@ -1304,7 +1300,6 @@ E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Assets\Wide310x150Logo.sca
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\clock.png
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\complete.png
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\eek.png
-E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\New Project.png
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\settingsIcon.png
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\tileIcon.png
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\yay.png
@@ -1314,9 +1309,6 @@ E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Assets\Square150x150Logo.s
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Assets\Square44x44Logo.scale-200.png
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Assets\Square44x44Logo.targetsize-24_altform-unplated.png
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Assets\Wide310x150Logo.scale-200.png
-E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\clock (2).tiff
-E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\complete (4).tiff
-E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\settingsIcon (4).tiff
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc.To-Do.rsp
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\intermediate\BuildInfo\BuildInfo.rc
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\intermediate\BuildInfo\BuildInfo.res
@@ -1541,3 +1533,14 @@ E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\intermediate\To-Do.McgInterop
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\intermediate\To-Do.McgInterop\PInvoke.g.cs
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\intermediate\To-Do.McgInterop\SafeTypes.g.cs
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\intermediate\To-Do.McgInterop\SharedStubs.g.cs
+E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\NavigationPages\MyDay.xbf
+E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\New Project (1).png
+E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\sun.png
+E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\Images\wand.png
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\NavigationPages\MyDay.g.i.cs
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\NavigationPages\MyDay.g.cs
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\NavigationPages\MyDay.xaml
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\NavigationPages\MyDay.xbf
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\New Project (1).png
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\sun.png
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\wand.png

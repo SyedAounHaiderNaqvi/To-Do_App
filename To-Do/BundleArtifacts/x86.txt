@@ -1,2 +1,2 @@
-MainPackage=E:\VS Projects\To-Do_App\To-Do\bin\x86\Release\To-Do_2.15.45.0_x86.msix
-SymbolPackage=E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\Symbols\To-Do_2.15.45.0_x86.appxsym
+MainPackage=E:\VS Projects\To-Do_App\To-Do\bin\x86\Release\To-Do_2.16.49.0_x86.msix
+SymbolPackage=E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\Symbols\To-Do_2.16.49.0_x86.appxsym

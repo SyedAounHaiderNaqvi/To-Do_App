@@ -505,6 +505,19 @@
         </Border>
         <controls:NavigationView x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
             <controls:NavigationView.MenuItems>
+
+                <controls:NavigationViewItem ToolTipService.ToolTip="My Day" Tag="MyDay">
+                    <controls:NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE706;"/>
+                    </controls:NavigationViewItem.Icon>
+                    <controls:NavigationViewItem.InfoBadge>
+                        <controls:InfoBadge x:FieldModifier="public" x:Name="myDayinf"/>
+                    </controls:NavigationViewItem.InfoBadge>
+                    <controls:NavigationViewItem.Content>
+                        <TextBlock Text="My Day"/>
+                    </controls:NavigationViewItem.Content>
+                </controls:NavigationViewItem>
+
                 <controls:NavigationViewItem ToolTipService.ToolTip="Pending Tasks" Tag="PendingTasks" IsSelected="True">
                     <controls:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE823;"/>
@@ -542,5 +555,6 @@
             </Grid>
 
         </controls:NavigationView>
+        <controls:InfoBar Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:Name="change" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,60,30,50" IsOpen="False" Severity="Informational" Title="My Day" Message="Leftover task(s) from My Day have been shifted to Pending Tasks."/>
     </Grid>
 </Page>

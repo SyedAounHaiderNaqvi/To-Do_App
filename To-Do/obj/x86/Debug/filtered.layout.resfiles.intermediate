@@ -54,17 +54,17 @@ App.xbf
 EditDialogContent.xbf
 MainPage.xbf
 NavigationPages\CompletedTasks.xbf
+NavigationPages\MyDay.xbf
 NavigationPages\PendingTasks.xbf
 Settings.xbf
 To-Do.xr.xml
-Images\clock (2).tiff
 Images\clock.png
-Images\complete (4).tiff
 Images\complete.png
 Images\eek.png
-Images\New Project.png
-Images\settingsIcon (4).tiff
+Images\New Project (1).png
 Images\settingsIcon.png
+Images\sun.png
 Images\tileIcon.png
+Images\wand.png
 Images\yay.png
 Properties\Default.rd.xml

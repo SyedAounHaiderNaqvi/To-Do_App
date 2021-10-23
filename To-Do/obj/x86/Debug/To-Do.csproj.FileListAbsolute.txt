@@ -139,3 +139,8 @@ E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\MultipleQualifiersPerDimensionFound
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\ProjectArchitectures.txt
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\.winmd_cache\$Microsoft.Graphics.Canvas.winmd_637214354760000000.json
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_637424635200000000.json
+E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\MyDay.xbf
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\NavigationPages\MyDay.g.i.cs
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\NavigationPages\MyDay.g.cs
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\NavigationPages\MyDay.xaml
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\NavigationPages\MyDay.xbf
