@@ -8,7 +8,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary>
-                    
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <ResourceDictionary.ThemeDictionaries>
@@ -18,6 +17,8 @@
                     <CornerRadius x:Key="ListViewItemCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="NavViewSplitViewCorners">0,8,8,0</CornerRadius>
                     <CornerRadius x:Key="TopLeftNavViewContentCorner">8,0,0,0</CornerRadius>
+                    <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintOpacity}" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintColor}" Opacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=Opacity}" x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}" />
+
                     <Style x:Key="ButtonStyle1" TargetType="Button">
                         <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
                         <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
@@ -175,6 +176,8 @@
                     <CornerRadius x:Key="OverlayCornerRadius">8</CornerRadius>
                     <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="ListViewItemCornerRadius">4</CornerRadius>
+                    <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintOpacity}" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintColor}" Opacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=Opacity}" x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}" />
+
                     <CornerRadius x:Key="NavViewSplitViewCorners">0,8,8,0</CornerRadius>
                     <CornerRadius x:Key="TopLeftNavViewContentCorner">8,0,0,0</CornerRadius>
                     <Style x:Key="ButtonStyle1" TargetType="Button">
@@ -332,6 +335,8 @@
 
                 <ResourceDictionary x:Key="HighContrast">
                     <CornerRadius x:Key="OverlayCornerRadius">8</CornerRadius>
+                    <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintOpacity}" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintColor}" Opacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=Opacity}" x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}" />
+
                     <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="ListViewItemCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="NavViewSplitViewCorners">0,8,8,0</CornerRadius>

@@ -664,6 +664,11 @@ namespace To_Do.NavigationPages
             back.Opacity = 0;
         }
 
+        private void opt1_Loaded(object sender, RoutedEventArgs e)
+        {
+            RadioMenuFlyoutItem rmfi = sender as RadioMenuFlyoutItem;
+            rmfi.IsChecked = true;
+        }
     }
 
     public class TODOTask : INotifyPropertyChanged

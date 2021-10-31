@@ -1007,7 +1007,7 @@ namespace To_Do
                     }
                     else
                     {
-                        sender.ItemsSource = new List<QueryFormat> { new QueryFormat("No result found", "Everywhere", "\uE711") };
+                        sender.ItemsSource = new List<QueryFormat> { new QueryFormat("No results found", "Everywhere", "\uE711") };
                     }
                 }
             }

@@ -681,7 +681,7 @@
                                             <ColumnDefinition Width="75"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon x:Name="DockIcon" Translation="-30,0,0" Opacity="0.7" Glyph="&#xE784;" Margin="-40,0,5,0" Grid.Column="0">
+                                        <FontIcon x:Name="DockIcon" Translation="-30,0,0" Opacity="0" Glyph="&#xE784;" Margin="-40,0,5,0" Grid.Column="0">
                                             <FontIcon.TranslationTransition>
                                                 <Vector3Transition Duration="0:0:0.2"/>
                                             </FontIcon.TranslationTransition>
@@ -849,7 +849,7 @@
             <controls:DropDownButton x:ConnectionId='61' x:Name="SortingDropDown" Content="Date Created" Grid.Column="2" VerticalAlignment="Center">
                 <controls:DropDownButton.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <controls:RadioMenuFlyoutItem x:ConnectionId='62' x:Name="opt1" IsChecked="True"                              Text="Date Created"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='62'                      x:Name="opt1" IsChecked="True"                              Text="Date Created"/>
                         <controls:RadioMenuFlyoutItem x:ConnectionId='63' x:Name="opt2"                              Text="Text"/>
                         <controls:RadioMenuFlyoutItem x:ConnectionId='64' x:Name="opt3"                              Text="Importance"/>
                     </MenuFlyout>
@@ -873,7 +873,7 @@
                 <ScalarTransition/>
             </Grid.OpacityTransition>
             <Border Background="Transparent" BorderBrush="{ThemeResource SystemBaseHighColor}" Opacity="0.3" BorderThickness="3" CornerRadius="{ThemeResource ControlCornerRadius}"/>
-            <controls:InfoBar x:ConnectionId='59' CornerRadius="{ThemeResource ControlCornerRadius}" IsClosable="False" IsOpen="True" Background="{ThemeResource SystemControlAcrylicElementBrush}" Severity="Informational" Message="Marked task as complete." x:Name="confirmDoneNotif">
+            <controls:InfoBar x:ConnectionId='59' CornerRadius="{ThemeResource ControlCornerRadius}" IsClosable="False" IsOpen="True" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" Severity="Informational" Message="Marked task as complete." x:Name="confirmDoneNotif">
 
                 <controls:InfoBar.ActionButton>
                     <Button x:ConnectionId='60'                    HorizontalAlignment="Right" Margin="50,0,0,0" Content="Undo" Style="{ThemeResource AccentButtonStyle}"/>

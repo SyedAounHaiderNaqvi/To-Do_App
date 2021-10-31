@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 //using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
+using Windows.Foundation;
 using Windows.Security.Authorization.AppCapabilityAccess;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -289,7 +291,7 @@ namespace To_Do
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
 
             Color b = (n.backgroundBrush as SolidColorBrush).Color;
-            Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = b.R, G = b.G, B = b.B});
+            Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = b.R, G = b.G, B = b.B });
             titleBar.ButtonHoverForegroundColor = Colors.White;
             Color bgcolor = ((SolidColorBrush)n.backgroundBrush).Color;
             localSettings.Values["BG_R"] = bgcolor.R;
@@ -439,7 +441,7 @@ namespace To_Do
             }
             else
             {
-                
+
                 Fallbackpanel.Visibility = Visibility.Collapsed;
                 //bgimgbutton.IsEnabled = false;
                 bgimgbutton.Visibility = Visibility.Collapsed;
@@ -516,6 +518,65 @@ namespace To_Do
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
             }
+        }
+
+        private void Grid_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            Grid parentGrid = sender as Grid;
+            RectangleGeometry rectangle = new RectangleGeometry();
+            rectangle.Rect = new Rect(0, 0, parentGrid.ActualWidth, parentGrid.ActualHeight);
+            (sender as Grid).Clip = rectangle;
+
+            var txt = FindControl<TextBlock>(parentGrid, typeof(TextBlock), "tttext");
+            txt.Opacity = 1;
+            txt.Translation = System.Numerics.Vector3.Zero;
+        }
+
+        private void Grid_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            Grid parentGrid = sender as Grid;
+            var txt = FindControl<TextBlock>(parentGrid, typeof(TextBlock), "tttext");
+            txt.Opacity = 0;
+            txt.Translation = new System.Numerics.Vector3(0, 30, 0);
+        }
+
+        public static string GetAppVersion()
+        {
+            Package package = Package.Current;
+            PackageId packageId = package.Id;
+            PackageVersion version = packageId.Version;
+
+            return string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+        }
+
+        public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
+        {
+
+            if (parent == null) return null;
+
+            if (parent.GetType() == targetType && ((T)parent).Name == ControlName)
+            {
+                return (T)parent;
+            }
+            T result = null;
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < count; i++)
+            {
+                UIElement child = (UIElement)VisualTreeHelper.GetChild(parent, i);
+
+                if (FindControl<T>(child, targetType, ControlName) != null)
+                {
+                    result = FindControl<T>(child, targetType, ControlName);
+                    break;
+                }
+            }
+            return result;
+        }
+
+        private void TextBlock_Loaded(object sender, RoutedEventArgs e)
+        {
+            var txtb = sender as TextBlock;
+            txtb.Text = $"To-Do {GetAppVersion()}";
         }
     }
 
