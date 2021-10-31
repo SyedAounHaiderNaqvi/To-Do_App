@@ -567,100 +567,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <Style x:Key="ExpanderStyle1" TargetType="controls:Expander">
-                <Setter Property="IsTabStop" Value="False"/>
-                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
-                <Setter Property="Background" Value="{ThemeResource ExpanderContentBackground}"/>
-                <Setter Property="MinWidth" Value="{ThemeResource FlyoutThemeMinWidth}"/>
-                <Setter Property="MinHeight" Value="{StaticResource ExpanderMinHeight}"/>
-                <Setter Property="BorderThickness" Value="{ThemeResource ExpanderContentDownBorderThickness}"/>
-                <Setter Property="BorderBrush" Value="{ThemeResource ExpanderContentBorderBrush}"/>
-                <Setter Property="Padding" Value="{StaticResource ExpanderContentPadding}"/>
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="controls:Expander">
-                            <Grid MaxWidth="{TemplateBinding MaxWidth}" MinWidth="{TemplateBinding MinWidth}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition x:Name="Row0" Height="Auto"/>
-                                    <RowDefinition x:Name="Row1" Height="*"/>
-                                </Grid.RowDefinitions>
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup x:Name="ExpandStates">
-                                        <VisualState x:Name="ExpandUp">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
-                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="{Binding TemplateSettings.ContentHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.333" KeySpline="0.0, 0.0, 0.0, 1.0" Value="0"/>
-                                                </DoubleAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="CollapseDown">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
-                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="0"/>
-                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.167" KeySpline="1.0, 1.0, 0.0, 1.0" Value="{Binding TemplateSettings.ContentHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                                </DoubleAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="ExpandDown">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
-                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="{Binding TemplateSettings.NegativeContentHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.333" KeySpline="0.0, 0.0, 0.0, 1.0" Value="0"/>
-                                                </DoubleAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                        <VisualState x:Name="CollapseUp">
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.167" Value="Collapsed"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
-                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="0"/>
-                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.167" KeySpline="1.0, 1.0, 0.0, 1.0" Value="{Binding TemplateSettings.NegativeContentHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                                </DoubleAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                    <VisualStateGroup x:Name="ExpandDirectionStates">
-                                        <VisualState x:Name="Down"/>
-                                        <VisualState x:Name="Up">
-                                            <VisualState.Setters>
-                                                <Setter Target="ExpanderHeader.Style" Value="{StaticResource ExpanderHeaderUpStyle}"/>
-                                                <Setter Target="ExpanderContent.BorderThickness" Value="{StaticResource ExpanderContentUpBorderThickness}"/>
-                                                <Setter Target="ExpanderHeader.(Grid.Row)" Value="1"/>
-                                                <Setter Target="ExpanderContentClip.(Grid.Row)" Value="0"/>
-                                                <Setter Target="Row0.Height" Value="*"/>
-                                                <Setter Target="Row1.Height" Value="Auto"/>
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                                <ToggleButton x:Name="ExpanderHeader" AutomationProperties.AutomationId="ExpanderToggleButton" Background="{ThemeResource ExpanderHeaderBackground}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" HorizontalAlignment="Stretch" HorizontalContentAlignment="{StaticResource ExpanderHeaderHorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsEnabled="{TemplateBinding IsEnabled}" MinHeight="{TemplateBinding MinHeight}" Padding="{StaticResource ExpanderHeaderPadding}" Style="{StaticResource ExpanderHeaderDownStyle}" VerticalContentAlignment="{StaticResource ExpanderHeaderVerticalContentAlignment}"/>
-                                <Border x:Name="ExpanderContentClip" Grid.Row="1">
-                                    <Border x:Name="ExpanderContent" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{StaticResource ExpanderContentDownBorderThickness}" HorizontalAlignment="Stretch" MinHeight="{TemplateBinding MinHeight}" Padding="{TemplateBinding Padding}" VerticalAlignment="Stretch" Visibility="Collapsed">
-                                        <Border.RenderTransform>
-                                            <CompositeTransform/>
-                                        </Border.RenderTransform>
-                                        <ContentPresenter HorizontalAlignment="Stretch" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                    </Border>
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
 
         </ResourceDictionary>
     </Page.Resources>
@@ -669,14 +575,14 @@
             <RowDefinition/>
             <RowDefinition MinHeight="80" Height="80"/>
         </Grid.RowDefinitions>
-        <ListView x:ConnectionId='54' Grid.Row="0" Margin="35,30,19,0" x:FieldModifier="public"                                                      CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0"                                            x:Name="listOfTasks"                                 >
+        <ListView x:ConnectionId='39' Grid.Row="0" Margin="35,30,19,0" x:FieldModifier="public"                                                      CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0"                                            x:Name="listOfTasks"                                 >
             <ListView.ItemTemplate>
                 <DataTemplate                            >
-                    <UserControl x:ConnectionId='71'                                                                                       x:Name="UserControl">
-                        <controls:Expander Style="{StaticResource ExpanderStyle1}" HorizontalAlignment="Stretch" IsExpanded="False" CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <UserControl x:ConnectionId='56'                                                                                       x:Name="UserControl">
+                        <controls:Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="False">
                             <controls:Expander.HeaderTemplate>
                                 <DataTemplate                            >
-                                    <Grid x:ConnectionId='73' x:Name="rootGrid">
+                                    <Grid x:ConnectionId='58' x:Name="rootGrid">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="75"/>
                                             <ColumnDefinition Width="*"/>
@@ -689,13 +595,13 @@
                                                 <ScalarTransition/>
                                             </FontIcon.OpacityTransition>
                                         </FontIcon>
-                                        <CheckBox x:ConnectionId='75' x:Name="completecheckbox" Translation="-10,0,0"                                                  Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}"                            Margin="38,0,10,0" Grid.Column="0" CornerRadius="10">
+                                        <CheckBox x:ConnectionId='60' x:Name="completecheckbox" Translation="-10,0,0"                                                  Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}"                            Margin="38,0,10,0" Grid.Column="0" CornerRadius="10">
                                             <CheckBox.TranslationTransition>
                                                 <Vector3Transition Duration="0:0:0.2"/>
                                             </CheckBox.TranslationTransition>
                                         </CheckBox>
                                         <StackPanel Spacing="10" VerticalAlignment="Center" Margin="10,0,130,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
-                                            <TextBlock x:ConnectionId='82' Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}"                                         >
+                                            <TextBlock x:ConnectionId='67' Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}"                                         >
                                                 <TextBlock.TranslationTransition>
                                                     <Vector3Transition Duration="0:0:0.2"/>
                                                 </TextBlock.TranslationTransition>
@@ -708,7 +614,7 @@
                                                     <ScalarTransition Duration="0:0:0.13"/>
                                                 </StackPanel.OpacityTransition>
                                                 <TextBlock Text="Created on:" Foreground="{ThemeResource SystemAccentColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                                <TextBlock x:ConnectionId='84' x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"                                  />
+                                                <TextBlock x:ConnectionId='69' x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"                                  />
                                             </StackPanel>
                                         </StackPanel>
                                         <StackPanel x:Name="BtnPanel" Spacing="10" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="5,10,10,10" Translation="60,0,0" Orientation="Horizontal">
@@ -718,12 +624,12 @@
                                             <StackPanel.OpacityTransition>
                                                 <ScalarTransition/>
                                             </StackPanel.OpacityTransition>
-                                            <Button x:ConnectionId='77'                 Margin="0,0,-4,0" DataContext="{Binding ElementName=UserControl}" x:Name="addStep" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="Add step">
+                                            <Button x:ConnectionId='62'                 Margin="0,0,-4,0" DataContext="{Binding ElementName=UserControl}" x:Name="addStep" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="Add step">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE710;"/>
                                                 </Button.Content>
                                             </Button>
-                                            <CheckBox x:ConnectionId='78' Margin="0,-2,0,0"                     Style="{ThemeResource StarCheck}"                                                                                 ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
+                                            <CheckBox x:ConnectionId='63' Margin="0,-2,0,0"                     Style="{ThemeResource StarCheck}"                                                                                 ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
                                             <Button Opacity="0" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.OpacityTransition>
                                                     <ScalarTransition Duration="0:0:0.2"/>
@@ -733,12 +639,12 @@
                                                 </Button.Content>
                                                 <Button.Flyout>
                                                     <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                                        <MenuFlyoutItem x:ConnectionId='80' DataContext="{Binding ElementName=UserControl}"                       Text="Edit Task">
+                                                        <MenuFlyoutItem x:ConnectionId='65' DataContext="{Binding ElementName=UserControl}"                       Text="Edit Task">
                                                             <MenuFlyoutItem.Icon>
                                                                 <SymbolIcon Symbol="Edit"/>
                                                             </MenuFlyoutItem.Icon>
                                                         </MenuFlyoutItem>
-                                                        <MenuFlyoutItem x:ConnectionId='81' Text="Delete Task"                              DataContext="{Binding ElementName=UserControl}">
+                                                        <MenuFlyoutItem x:ConnectionId='66' Text="Delete Task"                              DataContext="{Binding ElementName=UserControl}">
                                                             <MenuFlyoutItem.Icon>
                                                                 <SymbolIcon Symbol="Delete"/>
                                                             </MenuFlyoutItem.Icon>
@@ -756,10 +662,10 @@
                                         <RowDefinition Height="0"/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <ListView x:ConnectionId='85' Grid.Row="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"                                 SelectionMode="None" BorderThickness="0" MaxHeight="350">
+                                    <ListView x:ConnectionId='70' Grid.Row="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"                                 SelectionMode="None" BorderThickness="0" MaxHeight="350">
                                         <ListView.ItemTemplate>
                                             <DataTemplate                            >
-                                                <UserControl x:ConnectionId='87' x:Name="control"                                                                            >
+                                                <UserControl x:ConnectionId='72' x:Name="control"                                                                            >
                                                     <Border Margin="20,0,0,0" Padding="10" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Background="{ThemeResource TextControlBackground}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
@@ -783,11 +689,11 @@
                                                                     <ScalarTransition Duration="0:0:0.2"/>
                                                                 </Grid.OpacityTransition>
                                                             </Grid>
-                                                            <CheckBox x:ConnectionId='90'                                                DataContext="{Binding ElementName=control}"                            Margin="5,0,0,0" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" Grid.Column="1">
+                                                            <CheckBox x:ConnectionId='75'                                                DataContext="{Binding ElementName=control}"                            Margin="5,0,0,0" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" Grid.Column="1">
 
                                                             </CheckBox>
-                                                            <TextBlock x:ConnectionId='91' Style="{ThemeResource BaseTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"                            />
-                                                            <Button x:ConnectionId='92' Opacity="0" Translation="50,0,0"                                                                          DataContext="{Binding ElementName=control}" Grid.Column="3" Width="42" Height="46" x:Name="delsubtask" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" CornerRadius="20" ToolTipService.ToolTip="Delete step">
+                                                            <TextBlock x:ConnectionId='76' Style="{ThemeResource BaseTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"                            />
+                                                            <Button x:ConnectionId='77' Opacity="0" Translation="50,0,0"                                                                          DataContext="{Binding ElementName=control}" Grid.Column="3" Width="42" Height="46" x:Name="delsubtask" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" CornerRadius="20" ToolTipService.ToolTip="Delete step">
                                                                 <Button.Content>
                                                                     <FontIcon FontSize="14" Glyph="&#xE74D;"/>
                                                                 </Button.Content>
@@ -831,7 +737,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <StackPanel x:ConnectionId='55' Margin="5,5,5,0" Padding="20,40,20,20" Background="Transparent" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
+        <StackPanel x:ConnectionId='40' Margin="5,5,5,0" Padding="20,40,20,20" Background="Transparent" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Width="70" Height="70" Stretch="Uniform" Source="/Images/wand.png" />
             </Grid>
@@ -840,7 +746,7 @@
         </StackPanel>
         <StackPanel Grid.Row="0" HorizontalAlignment="Left" Margin="35,-45,35,10" VerticalAlignment="Top">
             <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="My Day" Foreground="{ThemeResource SystemAccentColorDark2}" />
-            <TextBlock x:ConnectionId='69' x:FieldModifier="public" x:Name="TodayTxt" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemAccentColorDark2}" />
+            <TextBlock x:ConnectionId='54' x:FieldModifier="public" x:Name="TodayTxt" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemAccentColorDark2}" />
             
         </StackPanel>
         <Grid HorizontalAlignment="Right" Margin="35,-30,35,10" VerticalAlignment="Top">
@@ -856,37 +762,37 @@
                     </Button.Content>
                     <Button.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem x:ConnectionId='62'                          Text="Birthday">
+                            <MenuFlyoutItem x:ConnectionId='47'                          Text="Birthday">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xEA3A;"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem x:ConnectionId='63'                          Text="Yoga">
+                            <MenuFlyoutItem x:ConnectionId='48'                          Text="Yoga">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xEA3A;"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem x:ConnectionId='64'                          Text="Consumables">
+                            <MenuFlyoutItem x:ConnectionId='49'                          Text="Consumables">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xEA3A;"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem x:ConnectionId='65'                          Text="Groceries">
+                            <MenuFlyoutItem x:ConnectionId='50'                          Text="Groceries">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xEA3A;"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem x:ConnectionId='66'                          Text="Visit dentist">
+                            <MenuFlyoutItem x:ConnectionId='51'                          Text="Visit dentist">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xEA3A;"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem x:ConnectionId='67'                          Text="Prepare research paper">
+                            <MenuFlyoutItem x:ConnectionId='52'                          Text="Prepare research paper">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xEA3A;"/>
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-                            <MenuFlyoutItem x:ConnectionId='68'                          Text="Office meeting">
+                            <MenuFlyoutItem x:ConnectionId='53'                          Text="Office meeting">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon Glyph="&#xEA3A;"/>
                                 </MenuFlyoutItem.Icon>
@@ -897,12 +803,12 @@
                 <TextBlock VerticalAlignment="Center" Text="Sort By:"/>
                 
             </StackPanel>
-            <controls:DropDownButton x:ConnectionId='58' x:Name="SortingDropDown" Content="Time Created" Grid.Column="2" VerticalAlignment="Center">
+            <controls:DropDownButton x:ConnectionId='43' x:Name="SortingDropDown" Content="Time Created" Grid.Column="2" VerticalAlignment="Center">
                 <controls:DropDownButton.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <controls:RadioMenuFlyoutItem x:ConnectionId='59' x:Name="opt1" IsChecked="True"                              Text="Time Created"/>
-                        <controls:RadioMenuFlyoutItem x:ConnectionId='60' x:Name="opt2"                              Text="Text"/>
-                        <controls:RadioMenuFlyoutItem x:ConnectionId='61' x:Name="opt3"                              Text="Importance"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='44' x:Name="opt1" IsChecked="True"                              Text="Time Created"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='45' x:Name="opt2"                              Text="Text"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='46' x:Name="opt3"                              Text="Importance"/>
                     </MenuFlyout>
                 </controls:DropDownButton.Flyout>
 
@@ -910,8 +816,8 @@
 
         </Grid>
 
-        <TextBox x:ConnectionId='56'                                                                                              IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" VerticalContentAlignment="Center" PlaceholderText="Add a new task" Height="50" Padding="50,15,10,10" Margin="35,5,35,20" x:Name="NewTaskBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-        <FontIcon x:ConnectionId='57' IsHitTestVisible="False" x:Name="boxIcon" Width="20" Height="20" Margin="55,0,0,15" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Glyph="&#xE710;">
+        <TextBox x:ConnectionId='41'                                                                                              IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" VerticalContentAlignment="Center" PlaceholderText="Add a new task" Height="50" Padding="50,15,10,10" Margin="35,5,35,20" x:Name="NewTaskBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <FontIcon x:ConnectionId='42' IsHitTestVisible="False" x:Name="boxIcon" Width="20" Height="20" Margin="55,0,0,15" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Glyph="&#xE710;">
             <FontIcon.OpacityTransition>
                 <ScalarTransition/>
             </FontIcon.OpacityTransition>
