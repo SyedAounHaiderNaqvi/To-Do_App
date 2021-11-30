@@ -44,7 +44,7 @@
                             <ani:AnimationSet x:Name="BlurAnimation">
                                 <ani:BlurEffectAnimation
                                  To="10"
-                                 Duration="0:0:0.2"
+                                 Duration="0:0:0.15"
                                  EasingType="Quadratic"
                                  EasingMode="EaseOut"
                                  Target="{Binding ElementName=ImageBlurEffect}"/>
@@ -52,7 +52,7 @@
                             <ani:AnimationSet x:Name="UnBlurAnimation">
                                 <ani:BlurEffectAnimation
                                  To="0"
-                                 Duration="0:0:0.2"
+                                 Duration="0:0:0.15"
                                  EasingType="Quadratic"
                                  EasingMode="EaseIn"
                                  Target="{Binding ElementName=ImageBlurEffect}"/>
@@ -62,10 +62,10 @@
                     <Grid>
                         <TextBlock x:ConnectionId='11' Opacity="0" x:Name="tttext" Translation="0,30,0" FontSize="12" Style="{ThemeResource BaseTextBlockStyle}" Foreground="White" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="12,6,12,12" VerticalAlignment="Bottom"                        >
                             <TextBlock.TranslationTransition>
-                                <Vector3Transition Duration="0:0:0.2"/>
+                                <Vector3Transition Duration="0:0:0.15"/>
                             </TextBlock.TranslationTransition>
                             <TextBlock.OpacityTransition>
-                                <ScalarTransition Duration="0:0:0.2"/>
+                                <ScalarTransition Duration="0:0:0.15"/>
                             </TextBlock.OpacityTransition>
                         </TextBlock>
                     </Grid>

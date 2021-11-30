@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>DESKTOP-A2TMFK</Machine>
+    <Machine>LAPTOP-GS4L</Machine>
     <WindowsUser>Aoun</WindowsUser>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetOsVersion>10.0</TargetOsVersion>
@@ -10,7 +10,7 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>41c791cc-adc2-4dc9-9148-fb74a5aec780</PackageIdentityName>
     <PackageIdentityPublisher>CN=Aoun</PackageIdentityPublisher>
-    <IntermediateOutputPath>E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>F:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
     <PackageRegistrationPath>
@@ -18,8 +18,8 @@
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>C99A3A40B23D73D714383B65866033723AECF84B60E1B9E2B274BA9275A7C2C4</RegisteredManifestChecksum>
+    <LayoutDir>F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\AppX</LayoutDir>
+    <RegisteredManifestChecksum>BF45B10790B7FE2BD32476DD52455B623A73A6B412F75527173352C6348B0AFD</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>41c791cc-adc2-4dc9-9148-fb74a5aec780_2.16.49.0_x86__tc78dab53zn56</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>41c791cc-adc2-4dc9-9148-fb74a5aec780_tc78dab53zn56!App</RegisteredUserModeAppID>
     <RegisteredPackageID>41c791cc-adc2-4dc9-9148-fb74a5aec780</RegisteredPackageID>
@@ -27,16 +27,16 @@
     <RegisteredVersion>2.16.49.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-31T19:33:06.383</Modified>
+      <Modified>2021-11-30T07:13:05.903</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\To-Do.exe">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\To-Do.exe">
       <PackagePath>entrypoint\To-Do.exe</PackagePath>
-      <Modified>2021-10-31T19:31:18.350</Modified>
+      <Modified>2021-11-30T07:13:03.721</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.toolkit\7.1.1\lib\netstandard2.0\Microsoft.Toolkit.dll">
       <PackagePath>Microsoft.Toolkit.dll</PackagePath>
@@ -68,15 +68,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.xaml.behaviors.uwp.managed\2.0.1\lib\uap10.0\Microsoft.Xaml.Interactions.dll">
       <PackagePath>Microsoft.Xaml.Interactions.dll</PackagePath>
-      <Modified>2019-04-26T20:06:58.000</Modified>
+      <Modified>2019-04-27T01:06:58.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.xaml.behaviors.uwp.managed\2.0.1\lib\uap10.0\Microsoft.Xaml.Interactivity.dll">
       <PackagePath>Microsoft.Xaml.Interactivity.dll</PackagePath>
-      <Modified>2019-04-26T20:06:08.000</Modified>
+      <Modified>2019-04-27T01:06:08.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\newtonsoft.json\13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
-      <Modified>2021-03-17T15:03:36.000</Modified>
+      <Modified>2021-03-17T20:03:36.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.13\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -84,345 +84,345 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\system.runtime.compilerservices.unsafe\4.5.3\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll">
       <PackagePath>System.Runtime.CompilerServices.Unsafe.dll</PackagePath>
-      <Modified>2020-02-19T05:05:16.000</Modified>
+      <Modified>2020-02-19T10:05:16.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\win2d.uwp\1.25.0\runtimes\win10-x86\native\Microsoft.Graphics.Canvas.dll">
       <PackagePath>Microsoft.Graphics.Canvas.dll</PackagePath>
-      <Modified>2020-04-02T14:44:36.000</Modified>
+      <Modified>2020-04-02T19:44:36.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\win2d.uwp\1.25.0\lib\uap10.0\Microsoft.Graphics.Canvas.winmd">
       <PackagePath>Microsoft.Graphics.Canvas.winmd</PackagePath>
-      <Modified>2020-04-02T14:44:36.000</Modified>
+      <Modified>2020-04-02T19:44:36.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.19041.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2020-12-01T23:52:00.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-100.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-100.png">
       <PackagePath>Assets\LargeTile.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.264</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-125.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-125.png">
       <PackagePath>Assets\LargeTile.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.291</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-150.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-150.png">
       <PackagePath>Assets\LargeTile.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.326</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-200.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-200.png">
       <PackagePath>Assets\LargeTile.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.378</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-400.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\LargeTile.scale-400.png">
       <PackagePath>Assets\LargeTile.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.546</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-100.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-100.png">
       <PackagePath>Assets\SmallTile.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:23.898</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-125.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-125.png">
       <PackagePath>Assets\SmallTile.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:23.910</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-150.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-150.png">
       <PackagePath>Assets\SmallTile.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:23.922</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-200.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-200.png">
       <PackagePath>Assets\SmallTile.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:23.935</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-400.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SmallTile.scale-400.png">
       <PackagePath>Assets\SmallTile.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:23.956</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-100.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-100.png">
       <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.832</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-125.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-125.png">
       <PackagePath>Assets\SplashScreen.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.872</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-150.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-150.png">
       <PackagePath>Assets\SplashScreen.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.926</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-400.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-400.png">
       <PackagePath>Assets\SplashScreen.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:25.315</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-100.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-100.png">
       <PackagePath>Assets\Square150x150Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:23.969</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-125.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-125.png">
       <PackagePath>Assets\Square150x150Logo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:23.984</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-150.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-150.png">
       <PackagePath>Assets\Square150x150Logo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.000</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-400.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-400.png">
       <PackagePath>Assets\Square150x150Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.070</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.747</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.757</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.802</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.768</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png">
       <PackagePath>Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.779</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-16.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.681</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-256.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.736</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-32.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.702</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
       <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-48.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.713</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-100.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-100.png">
       <PackagePath>Assets\Square44x44Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.557</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-125.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-125.png">
       <PackagePath>Assets\Square44x44Logo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.568</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-150.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-150.png">
       <PackagePath>Assets\Square44x44Logo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.580</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-400.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-400.png">
       <PackagePath>Assets\Square44x44Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.607</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-16.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-16.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-16.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.618</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-24.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-24.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.628</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-256.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-256.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-256.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.670</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-32.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-32.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-32.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.639</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-48.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-48.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-48.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.650</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-100.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-100.png">
       <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:25.326</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-125.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-125.png">
       <PackagePath>Assets\StoreLogo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:25.338</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-150.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-150.png">
       <PackagePath>Assets\StoreLogo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:25.350</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-200.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-200.png">
       <PackagePath>Assets\StoreLogo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:25.363</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-400.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\StoreLogo.scale-400.png">
       <PackagePath>Assets\StoreLogo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:25.388</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-100.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-100.png">
       <PackagePath>Assets\Wide310x150Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.086</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-125.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-125.png">
       <PackagePath>Assets\Wide310x150Logo.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.104</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-150.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-150.png">
       <PackagePath>Assets\Wide310x150Logo.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.126</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-400.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-400.png">
       <PackagePath>Assets\Wide310x150Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.242</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\clock.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Images\clock.png">
       <PackagePath>Images\clock.png</PackagePath>
-      <Modified>2021-09-26T17:38:18.118</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\complete.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Images\complete.png">
       <PackagePath>Images\complete.png</PackagePath>
-      <Modified>2021-09-26T17:38:18.138</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\eek.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Images\eek.png">
       <PackagePath>Images\eek.png</PackagePath>
-      <Modified>2021-09-26T08:08:16.786</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\New Project %281%29.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Images\New Project %281%29.png">
       <PackagePath>Images\New Project %281%29.png</PackagePath>
-      <Modified>2021-10-23T17:09:12.351</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\settingsIcon.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Images\settingsIcon.png">
       <PackagePath>Images\settingsIcon.png</PackagePath>
-      <Modified>2021-09-27T12:58:07.318</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\sun.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Images\sun.png">
       <PackagePath>Images\sun.png</PackagePath>
-      <Modified>2021-10-19T16:48:25.083</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\tileIcon.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Images\tileIcon.png">
       <PackagePath>Images\tileIcon.png</PackagePath>
-      <Modified>2021-09-26T08:08:16.788</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\wand.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Images\wand.png">
       <PackagePath>Images\wand.png</PackagePath>
-      <Modified>2021-10-19T16:19:38.277</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Images\yay.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Images\yay.png">
       <PackagePath>Images\yay.png</PackagePath>
-      <Modified>2021-09-26T08:08:16.788</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
-      <Modified>2021-09-26T08:08:16.744</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:25.012</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.021</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.592</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.691</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-10-23T17:09:24.156</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2021-09-26T08:08:16.794</Modified>
+      <Modified>2021-10-23T18:36:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\To-Do.xr.xml">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\To-Do.xr.xml">
       <PackagePath>To-Do.xr.xml</PackagePath>
-      <Modified>2021-10-31T19:30:48.522</Modified>
+      <Modified>2021-11-30T07:01:22.615</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\App.xbf">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-10-31T19:33:05.343</Modified>
+      <Modified>2021-11-30T07:13:03.089</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\EditDialogContent.xbf">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\EditDialogContent.xbf">
       <PackagePath>EditDialogContent.xbf</PackagePath>
-      <Modified>2021-10-31T19:33:05.428</Modified>
+      <Modified>2021-11-30T07:13:03.277</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2021-10-31T19:33:05.363</Modified>
+      <Modified>2021-11-30T07:13:03.130</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\CompletedTasks.xbf">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\CompletedTasks.xbf">
       <PackagePath>NavigationPages\CompletedTasks.xbf</PackagePath>
-      <Modified>2021-10-31T19:33:05.428</Modified>
+      <Modified>2021-11-30T07:13:03.278</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\MyDay.xbf">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\MyDay.xbf">
       <PackagePath>NavigationPages\MyDay.xbf</PackagePath>
-      <Modified>2021-10-31T19:33:05.393</Modified>
+      <Modified>2021-11-30T07:13:03.194</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\PendingTasks.xbf">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\PendingTasks.xbf">
       <PackagePath>NavigationPages\PendingTasks.xbf</PackagePath>
-      <Modified>2021-10-31T19:33:05.418</Modified>
+      <Modified>2021-11-30T07:13:03.258</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Settings.xbf">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Settings.xbf">
       <PackagePath>Settings.xbf</PackagePath>
-      <Modified>2021-10-31T19:33:05.428</Modified>
+      <Modified>2021-11-30T07:13:03.276</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.19041.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -432,13 +432,13 @@
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
       <Modified>2020-12-01T21:52:06.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-10-31T16:58:50.936</Modified>
+      <Modified>2021-11-05T12:34:14.038</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\To-Do.exe">
+    <AppxPackagedFile Include="F:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\To-Do.exe">
       <PackagePath>To-Do.exe</PackagePath>
-      <Modified>2021-10-31T19:33:06.383</Modified>
+      <Modified>2021-11-30T07:13:05.896</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.ui.xaml\2.7.0\buildTransitive\..\lib\uap10.0\Microsoft.UI.Xaml.winmd">
       <PackagePath>Microsoft.UI.Xaml.winmd</PackagePath>

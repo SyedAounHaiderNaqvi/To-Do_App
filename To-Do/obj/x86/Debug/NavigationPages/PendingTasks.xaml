@@ -754,9 +754,9 @@
             <controls:DropDownButton x:ConnectionId='46' x:Name="SortingDropDown" Content="Date Created" Grid.Column="2" VerticalAlignment="Center">
                 <controls:DropDownButton.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <controls:RadioMenuFlyoutItem x:ConnectionId='47'                      x:Name="opt1" IsChecked="True"                              Text="Date Created"/>
-                        <controls:RadioMenuFlyoutItem x:ConnectionId='48' x:Name="opt2"                              Text="Text"/>
-                        <controls:RadioMenuFlyoutItem x:ConnectionId='49' x:Name="opt3"                              Text="Importance"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='47' x:Name="opt1" GroupName="t" IsChecked="True"                              Text="Date Created"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='48' x:Name="opt2" GroupName="t"                              Text="Text"/>
+                        <controls:RadioMenuFlyoutItem x:ConnectionId='49' x:Name="opt3" GroupName="t"                              Text="Importance"/>
                     </MenuFlyout>
                 </controls:DropDownButton.Flyout>
 

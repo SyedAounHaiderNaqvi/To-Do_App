@@ -5,7 +5,6 @@
     <RootPropertyPathName Name="TintLuminosityOpacity" />
     <RootPropertyPathName Name="Opacity" />
     <RootPropertyPathName Name="FallbackColor" />
-    <RootPropertyPathName Name="TintColor" />
     <RootPropertyPathName Name="TemplateSettings" />
     <RootPropertyPathName Name="NegativeOpenPaneLengthMinusCompactLength" />
     <RootPropertyPathName Name="CompactPaneLength" />
@@ -625,10 +624,10 @@
       <RootProperty Name="Items" />
     </RootType>
     <RootType FullName="Microsoft.UI.Xaml.Controls.RadioMenuFlyoutItem">
+      <RootProperty Name="GroupName" />
       <RootProperty Name="IsChecked" />
       <RootProperty Name="Text" />
       <RootEvent Name="Click" />
-      <RootEvent Name="Loaded" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
       <RootProperty Name="Text" />

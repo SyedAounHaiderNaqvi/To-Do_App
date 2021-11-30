@@ -32,6 +32,7 @@ namespace To_Do.NavigationPages
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public MainPage singletonReference = MainPage.ins;
         public ContentDialog dialog;
+        public int sortMethodIndex = 0;
 
         public MyDay()
         {

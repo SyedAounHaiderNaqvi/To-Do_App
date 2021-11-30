@@ -754,9 +754,9 @@
             <controls:DropDownButton x:Name="SortingDropDown" Content="Date Created" Grid.Column="2" VerticalAlignment="Center">
                 <controls:DropDownButton.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <controls:RadioMenuFlyoutItem Loaded="opt1_Loaded" x:Name="opt1" IsChecked="True" Click="SortingOptionClicked" Text="Date Created"/>
-                        <controls:RadioMenuFlyoutItem x:Name="opt2" Click="SortingOptionClicked" Text="Text"/>
-                        <controls:RadioMenuFlyoutItem x:Name="opt3" Click="SortingOptionClicked" Text="Importance"/>
+                        <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="t" IsChecked="True" Click="SortingOptionClicked" Text="Date Created"/>
+                        <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="t" Click="SortingOptionClicked" Text="Text"/>
+                        <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="t" Click="SortingOptionClicked" Text="Importance"/>
                     </MenuFlyout>
                 </controls:DropDownButton.Flyout>
 

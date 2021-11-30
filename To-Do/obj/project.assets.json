@@ -9904,11 +9904,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
+      "projectUniqueName": "F:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
       "projectName": "To-Do",
-      "projectPath": "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
+      "projectPath": "F:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
       "packagesPath": "C:\\Users\\Aoun\\.nuget\\packages\\",
-      "outputPath": "E:\\VS Projects\\To-Do_App\\To-Do\\obj\\",
+      "outputPath": "F:\\VS Projects\\To-Do_App\\To-Do\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [

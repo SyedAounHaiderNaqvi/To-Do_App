@@ -88,11 +88,13 @@ namespace To_Do
                 }
                 else
                 {
+                    MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
+                    MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
+                    MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
+                    MainPage.ins.ContentFrame.Navigate(typeof(Settings));
+
                     if (e.Arguments == "GoToPending")
                     {
-                        MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
-                        MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
-                        MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
                         MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
                         await Task.Delay(10);
                         MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[1];
@@ -100,26 +102,28 @@ namespace To_Do
                     }
                     else if (e.Arguments == "GoToCompleted")
                     {
-                        MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
-                        MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
-                        MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
+                        while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(CompletedTasks))
+                        {
+                            MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
+                        }
                         await Task.Delay(10);
                         MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[2];
                     }
                     else if (e.Arguments == "GoToSettings")
                     {
-                        MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
-                        MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
-                        MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
-                        MainPage.ins.ContentFrame.Navigate(typeof(Settings));
+                        while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(Settings))
+                        {
+                            MainPage.ins.ContentFrame.Navigate(typeof(Settings));
+                        }
                         await Task.Delay(10);
                         MainPage.ins.nview.SelectedItem = MainPage.ins.nview.SettingsItem;
                     }
                     else if (e.Arguments == "GoToMyDay")
                     {
-                        MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
-                        MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
-                        MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
+                        while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(MyDay))
+                        {
+                            MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
+                        }
                         await Task.Delay(10);
                         MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[0];
                     }
