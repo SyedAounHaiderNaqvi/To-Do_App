@@ -130,9 +130,19 @@
 						<Value>Images\complete.png</Value>
 					</Candidate>
 				</NamedResource>
+				<NamedResource name="dark.jpg" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/dark.jpg">
+					<Candidate type="Path">
+						<Value>Images\dark.jpg</Value>
+					</Candidate>
+				</NamedResource>
 				<NamedResource name="eek.png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/eek.png">
 					<Candidate type="Path">
 						<Value>Images\eek.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="light.jpg" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/light.jpg">
+					<Candidate type="Path">
+						<Value>Images\light.jpg</Value>
 					</Candidate>
 				</NamedResource>
 				<NamedResource name="New Project (1).png" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/Images/New Project (1).png">

@@ -44,7 +44,14 @@ namespace To_Do
         public void Settings_Loaded(object sender, RoutedEventArgs e)
         {
             var currentTheme = ThemeHelper.RootTheme.ToString();
-            ThemePanel.Children.Cast<RadioButton>().FirstOrDefault(c => c?.Tag?.ToString() == currentTheme).IsChecked = true;
+            if (lightradio.Tag.ToString() == currentTheme)
+            {
+                lightradio.IsChecked = true;
+            }
+            else
+            {
+                darkradio.IsChecked = true;
+            }
             if (localSettings.Values["useimg"] != null)
             {
                 switch ((int)localSettings.Values["useimg"])
@@ -527,17 +534,18 @@ namespace To_Do
             rectangle.Rect = new Rect(0, 0, parentGrid.ActualWidth, parentGrid.ActualHeight);
             (sender as Grid).Clip = rectangle;
 
-            var txt = FindControl<TextBlock>(parentGrid, typeof(TextBlock), "tttext");
-            txt.Opacity = 1;
-            txt.Translation = System.Numerics.Vector3.Zero;
+            var blurgrid = FindControl<Grid>(parentGrid, typeof(Grid), "blur");
+            blurgrid.Opacity = 1;
+            blurgrid.Translation = System.Numerics.Vector3.Zero;
         }
 
         private void Grid_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             Grid parentGrid = sender as Grid;
-            var txt = FindControl<TextBlock>(parentGrid, typeof(TextBlock), "tttext");
-            txt.Opacity = 0;
-            txt.Translation = new System.Numerics.Vector3(0, 30, 0);
+
+            var blurgrid = FindControl<Grid>(parentGrid, typeof(Grid), "blur");
+            blurgrid.Opacity = 0;
+            blurgrid.Translation = new System.Numerics.Vector3(0,40,0);
         }
 
         public static string GetAppVersion()

@@ -58,6 +58,49 @@ namespace To_Do
             await jumpList.SaveAsync();
         }
 
+        async void JumplistTransferCode(LaunchActivatedEventArgs e)
+        {
+            MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
+            MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
+            MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
+            MainPage.ins.ContentFrame.Navigate(typeof(Settings));
+
+            if (e.Arguments == "GoToPending")
+            {
+                MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
+                await Task.Delay(10);
+                MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[1];
+
+            }
+            else if (e.Arguments == "GoToCompleted")
+            {
+                while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(CompletedTasks))
+                {
+                    MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
+                }
+                await Task.Delay(10);
+                MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[2];
+            }
+            else if (e.Arguments == "GoToSettings")
+            {
+                while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(Settings))
+                {
+                    MainPage.ins.ContentFrame.Navigate(typeof(Settings));
+                }
+                await Task.Delay(10);
+                MainPage.ins.nview.SelectedItem = MainPage.ins.nview.SettingsItem;
+            }
+            else if (e.Arguments == "GoToMyDay")
+            {
+                while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(MyDay))
+                {
+                    MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
+                }
+                await Task.Delay(10);
+                MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[0];
+            }
+        }
+
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
             await ConfigureJumpList();
@@ -85,48 +128,13 @@ namespace To_Do
                 if (rootFrame.Content == null)
                 {
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    Debug.WriteLine("Root frame null");
+                    JumplistTransferCode(e);
                 }
                 else
                 {
-                    MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
-                    MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
-                    MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
-                    MainPage.ins.ContentFrame.Navigate(typeof(Settings));
-
-                    if (e.Arguments == "GoToPending")
-                    {
-                        MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
-                        await Task.Delay(10);
-                        MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[1];
-
-                    }
-                    else if (e.Arguments == "GoToCompleted")
-                    {
-                        while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(CompletedTasks))
-                        {
-                            MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
-                        }
-                        await Task.Delay(10);
-                        MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[2];
-                    }
-                    else if (e.Arguments == "GoToSettings")
-                    {
-                        while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(Settings))
-                        {
-                            MainPage.ins.ContentFrame.Navigate(typeof(Settings));
-                        }
-                        await Task.Delay(10);
-                        MainPage.ins.nview.SelectedItem = MainPage.ins.nview.SettingsItem;
-                    }
-                    else if (e.Arguments == "GoToMyDay")
-                    {
-                        while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(MyDay))
-                        {
-                            MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
-                        }
-                        await Task.Delay(10);
-                        MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[0];
-                    }
+                    Debug.WriteLine("Root frame not null");
+                    JumplistTransferCode(e);
                 }
                 // Ensure the current window is active
                 ThemeHelper.Initialize();

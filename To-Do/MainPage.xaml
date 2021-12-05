@@ -11,7 +11,7 @@
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
         <DataTemplate x:Key="suggestionTemplate" x:DataType="local:QueryFormat">
-            <Grid Width="270" MaxHeight="300" Background="Transparent">
+            <Grid HorizontalAlignment="Left" Width="270" MaxHeight="300" Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -487,25 +487,27 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Border IsHitTestVisible="True" Canvas.ZIndex="1" Margin="48,8,0,0" Height="40" VerticalAlignment="Top" Background="Transparent" x:Name="AppTitleBar">
-            <StackPanel Orientation="Horizontal">
-                <FontIcon
-                        HorizontalAlignment="Left" 
-                        VerticalAlignment="Center"
-                        Foreground="{ThemeResource NavigationViewItemForegroundSelected}"
-                        Glyph="&#xE73E;"
-                        FontWeight="ExtraBold"
-                        />
-                <TextBlock
-                        Text="To-Do"
-                        VerticalAlignment="Center"
-                        Margin="8, 0, 0, 0"
-                        Style="{ThemeResource CaptionTextBlockStyle}"/>
-            </StackPanel>
-        </Border>
-        <controls:NavigationView x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" Canvas.ZIndex="0" OpenPaneLength="270" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
-            <controls:NavigationView.MenuItems>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="700" />
+                    </VisualState.StateTriggers>
 
+                    <VisualState.Setters>
+                        <Setter Target="searchBoxGrid.Margin" Value="150,3,150,0"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Border IsHitTestVisible="True" Canvas.ZIndex="1" Margin="48,8,0,0" Height="40" VerticalAlignment="Top" Background="Transparent" x:Name="AppTitleBar">
+        </Border>
+        <Grid x:Name="searchBoxGrid" Margin="48,3,150,0" Canvas.ZIndex="2" HorizontalAlignment="Stretch" Height="40" MaxWidth="540" VerticalAlignment="Top">
+            <AutoSuggestBox HorizontalContentAlignment="Left" VerticalAlignment="Center" Height="35" UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search"/>
+        </Grid>
+        <controls:NavigationView PaneTitle="To-Do" Canvas.ZIndex="2" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
+            <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem ToolTipService.ToolTip="My Day" Tag="MyDay">
                     <controls:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE706;"/>
@@ -521,7 +523,6 @@
                 <controls:NavigationViewItem ToolTipService.ToolTip="Pending Tasks" Tag="PendingTasks" IsSelected="True">
                     <controls:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE823;"/>
-                        <!--<controls:ImageIcon Source="/Images/clock (2).tiff"/>-->
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.InfoBadge>
                         <controls:InfoBadge x:FieldModifier="public" x:Name="inf"/>
@@ -533,18 +534,13 @@
                 <controls:NavigationViewItem ToolTipService.ToolTip="Completed Tasks" Tag="CompletedTasks">
                     <controls:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE73E;"/>
-                        <!--<controls:ImageIcon Source="/Images/complete (4).tiff"/>-->
                     </controls:NavigationViewItem.Icon>
                     <controls:NavigationViewItem.Content>
                         <TextBlock Text="Completed Tasks"/>
                     </controls:NavigationViewItem.Content>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
-            <controls:NavigationView.AutoSuggestBox>
-                <AutoSuggestBox UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search" />
-            </controls:NavigationView.AutoSuggestBox>
             <Grid>
-
                 <Image x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" Margin="0,-82,0,0" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
                 <Rectangle Fill="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:FieldModifier="public" x:Name="acrylic" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Stroke="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 <Rectangle x:FieldModifier="public" x:Name="acrylictint" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Opacity="0.2" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
@@ -553,8 +549,7 @@
                     <controls:ProgressRing Width="70" Height="70"/>
                 </Grid>
             </Grid>
-
         </controls:NavigationView>
-        <controls:InfoBar Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:Name="change" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,60,30,50" IsOpen="False" Severity="Informational" Title="My Day" Message="Leftover task(s) from My Day have been shifted to Pending Tasks."/>
+        <controls:InfoBar Canvas.ZIndex="2" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:Name="change" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="45,60,45,50" IsOpen="False" Severity="Informational" Title="My Day" Message="Leftover task(s) from My Day have been shifted to Pending Tasks."/>
     </Grid>
 </Page>

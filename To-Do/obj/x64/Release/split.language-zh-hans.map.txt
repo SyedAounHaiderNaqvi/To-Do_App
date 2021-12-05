@@ -1,0 +1,6 @@
+﻿[ResourceMetadata]
+"ResourceId"			"split.language-zh-hans"
+"ResourceDimensions"		"language-zh-cn"
+
+[Files]
+"E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\split.language-zh-hans.pri"			"resources.pri"

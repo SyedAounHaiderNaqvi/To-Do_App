@@ -740,7 +740,7 @@
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Width="70" Height="70" Stretch="Uniform" Source="/Images/yay.png" />
             </Grid>
-            <TextBlock Foreground="{ThemeResource SystemAccentColorDark2}" HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Yay, no pending task!"/>
+            <TextBlock Foreground="{ThemeResource SystemAccentColorDark2}" HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Yay, no pending tasks!"/>
             <TextBlock Foreground="{ThemeResource SystemAccentColorDark2}" HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="Create a new task so that you won't forget it later on."/>
         </StackPanel>
         <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Grid.Row="0" HorizontalAlignment="Left" Margin="35,-45,35,10" VerticalAlignment="Top" Text="Pending Tasks" Foreground="{ThemeResource SystemAccentColorDark2}" />

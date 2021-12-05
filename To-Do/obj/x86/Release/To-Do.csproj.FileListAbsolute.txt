@@ -1545,3 +1545,8 @@ E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\To-Do.csproj.CopyComplete
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\in\Images\New Project (1).png
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\in\Images\sun.png
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\in\Images\wand.png
+E:\VS Projects\To-Do_App\To-Do\bin\x86\Release\ilc\Images\dark.jpg
+E:\VS Projects\To-Do_App\To-Do\bin\x86\Release\ilc\Images\light.jpg
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\.winmd_cache\$Microsoft.Graphics.Canvas.winmd_637214354760000000.json
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\in\Images\dark.jpg
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\ilc\in\Images\light.jpg

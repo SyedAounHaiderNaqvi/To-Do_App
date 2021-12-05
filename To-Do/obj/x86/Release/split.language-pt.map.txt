@@ -1,0 +1,6 @@
+﻿[ResourceMetadata]
+"ResourceId"			"split.language-pt"
+"ResourceDimensions"		"language-pt-br"
+
+[Files]
+"E:\VS Projects\To-Do_App\To-Do\obj\x86\Release\split.language-pt.pri"			"resources.pri"

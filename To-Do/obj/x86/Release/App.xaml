@@ -2,13 +2,21 @@
     x:Class="To_Do.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:local="using:To_Do">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary>
-                    
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Dark">
+                            <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="0.9" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="Black" Opacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=Opacity}" x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}" />
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="Light">
+                            <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="0.8" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="White" Opacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=Opacity}" x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}" />
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <ResourceDictionary.ThemeDictionaries>

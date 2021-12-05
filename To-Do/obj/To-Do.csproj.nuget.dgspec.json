@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj": {}
+    "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj": {}
   },
   "projects": {
-    "F:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj": {
+    "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
+        "projectUniqueName": "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
         "projectName": "To-Do",
-        "projectPath": "F:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
+        "projectPath": "E:\\VS Projects\\To-Do_App\\To-Do\\To-Do.csproj",
         "packagesPath": "C:\\Users\\Aoun\\.nuget\\packages\\",
-        "outputPath": "F:\\VS Projects\\To-Do_App\\To-Do\\obj\\",
+        "outputPath": "E:\\VS Projects\\To-Do_App\\To-Do\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -44,18 +44,6 @@
               "version": "[6.2.13, )"
             },
             "Microsoft.Toolkit.Uwp.Notifications": {
-              "target": "Package",
-              "version": "[7.1.1, )"
-            },
-            "Microsoft.Toolkit.Uwp.UI.Animations": {
-              "target": "Package",
-              "version": "[7.1.1, )"
-            },
-            "Microsoft.Toolkit.Uwp.UI.Behaviors": {
-              "target": "Package",
-              "version": "[7.1.1, )"
-            },
-            "Microsoft.Toolkit.Uwp.UI.Media": {
               "target": "Package",
               "version": "[7.1.1, )"
             },
