@@ -9,6 +9,66 @@
     mc:Ignorable="d">
     <Page.Resources>
         <ResourceDictionary>
+            <Style x:Key="RadioButtonStyle1" TargetType="RadioButton">
+                <Setter Property="UseSystemFocusVisuals" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="CheckStates">
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txt" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unchecked"/>
+                                        <VisualState x:Name="Indeterminate"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid x:Name="myGrid" Height="32" VerticalAlignment="Top">
+                                    <TextBlock HorizontalAlignment="Center" x:Name="txt" VerticalAlignment="Center" Text="Light"/>
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="RadioButtonStyle2" TargetType="RadioButton">
+                <Setter Property="UseSystemFocusVisuals" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="CheckStates">
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txt" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unchecked"/>
+                                        <VisualState x:Name="Indeterminate"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid x:Name="myGrid" Height="32" VerticalAlignment="Top">
+                                    <TextBlock HorizontalAlignment="Center" x:Name="txt" VerticalAlignment="Center" Text="Dark"/>
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <AcrylicBrush TintLuminosityOpacity="0.4" x:Key="LightThemeBrush" TintOpacity="0.3" BackgroundSource="Backdrop" TintColor="White"/>
             <AcrylicBrush x:Key="DarkThemeBrush" TintOpacity="0.6" BackgroundSource="Backdrop" TintColor="Black"/>
             <SolidColorBrush x:Key="SystemControlTransparentRevealBackgroundBrush" Color="Transparent" />
@@ -27,39 +87,31 @@
             <SolidColorBrush x:Key="GridViewItemRevealPlaceholderBackground" Color="Transparent" />
 
             <DataTemplate x:Key="ImageTemplate" x:DataType="local:GridThemeItem">
-                <Grid CornerRadius="{ThemeResource ControlCornerRadius}" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Width="150" Height="100">
-                    <Polygon Points="50,50 150,50 150,100, 50,100" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.backgroundBrush}"/>
-                    <Polygon Points="50,0 150,0 150,15, 50,15" Stroke="Transparent" Fill="#eeeeee"/>
-                    <Border CornerRadius="{ThemeResource TopLeftNavViewContentCorner}" Margin="50,6,0,0" VerticalAlignment="Top" Width="150" Height="44" Background="{x:Bind backgroundBrush}"/>
-                    <Polygon Points="0,0 50,0 50,50, 0,50" Stroke="Transparent" Fill="#eeeeee"/>
-                    <Polygon Points="0,50 50,50 50,100, 0,100" Stroke="Transparent" Fill="#3c3c3c"/>
-                    <Polygon Fill="{x:Bind borderBrush}" Points="60,14 80,14 80,17 60,17"/>
-                    <Polygon Fill="#aadddddd" Points="60,30 140,30 140,40 60,40"/>
-                    <Polygon Fill="#44888888" Points="60,55 140,55 140,65 60,65"/>
-                    <Polygon Points="75,34 135,34 135,36 75,36" Fill="#000000"/>
-                    <Polygon Points="75,59 135,59 135,61 75,61" Fill="#ffffff"/>
-                    <Ellipse Margin="-7,29,10,10" Width="4" Height="4" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
-                    <Polygon Points="0,91 50,91 50,97 0,97" Fill="#22cccccc"/>
-                    <Polygon Points="2,92 3,92 3,96 2,96" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
-                    <Polygon Points="7,93 25,93 25,95 7,95" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
-                    <Polygon Points="7,23 29,23 29,25 7,25" Fill="#000000"/>
-                    <Polygon Points="7,13 25,13 25,15 7,15" Fill="#000000"/>
-                    <Border Margin="-7,-20,10,10" Width="4" Height="4" BorderThickness="1" Background="Transparent" CornerRadius="4" BorderBrush="#000000"/>
-                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{ThemeResource SystemBaseLowColor}" CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1"/>
-
-                    <Grid Translation="0,40,0" Opacity="0" x:Name="blur" Background="{ThemeResource SystemControlAcrylicElementBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,6">
-                        <Grid.OpacityTransition>
-                            <ScalarTransition Duration="0:0:0.15"/>
-                        </Grid.OpacityTransition>
-                        <Grid.TranslationTransition>
-                            <Vector3Transition Duration="0:0:0.15"/>
-                        </Grid.TranslationTransition>
-                        <Border Opacity="0.5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{ThemeResource SystemBaseLowColor}" CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1"/>
-                        <TextBlock x:Name="tttext" FontSize="12" Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemBaseHighColor}" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="8,6,8,6" VerticalAlignment="Center" Text="{x:Bind tooltip}"/>
+                <Grid Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Width="150" Height="105">
+                    <Grid VerticalAlignment="Top" CornerRadius="{ThemeResource ControlCornerRadius}">
+                        <Polygon Points="30,30 150,30 150,45, 30,45" Stroke="Transparent" Fill="#eeeeee"/>
+                        <Border CornerRadius="{ThemeResource TopLeftNavViewContentCorner}" Margin="38,35,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Height="50" Background="{x:Bind backgroundBrush}"/>
+                        <Polygon Points="40,70 150,70 150,105, 40,105" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.backgroundBrush}"/>
+                        <Polygon Points="0,30 40,30 40,80, 0,80" Stroke="Transparent" Fill="#eeeeee"/>
+                        <Polygon Points="0,70 40,70 40,105, 0,105" Stroke="Transparent" Fill="#3c3c3c"/>
+                        <Polygon Fill="{x:Bind borderBrush}" Points="50,42 70,42 70,45 50,45"/>
+                        <Polygon Fill="#aaeeeeee" Points="50,55 140,55 140,65 50,65"/>
+                        <Polygon Fill="#44888888" Points="50,75 140,75 140,85 50,85"/>
+                        <Polygon Points="65,59 135,59 135,61 65,61" Fill="#000000"/>
+                        <Polygon Points="65,79 135,79 135,81 65,81" Fill="#ffffff"/>
+                        <Ellipse Margin="-27,65,10,10" Width="4" Height="4" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                        <Polygon Points="0,96 40,96 40,102 0,102" Fill="#22cccccc"/>
+                        <Polygon Points="2,97 3,97 3,101 2,101" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                        <Polygon Points="6,98 25,98 25,100 6,100" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                        <Polygon Points="6,38 25,38 25,40 6,40" Fill="#000000"/>
+                        <Polygon Points="6,46 29,46 29,48 6,48" Fill="#000000"/>
+                        <Border Margin="-27,25,10,10" Width="4" Height="4" BorderThickness="1" Background="Transparent" CornerRadius="4" BorderBrush="#000000"/>
                     </Grid>
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{ThemeResource SystemBaseLowColor}" CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1"/>
+                    <TextBlock Text="{x:Bind tooltip}" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}" FontSize="11" TextWrapping="Wrap" Margin="8,8,0,0"/>
+                    <Rectangle Opacity="0.4" Fill="Gray" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="1" Margin="0,30,0,0"/>
                 </Grid>
             </DataTemplate>
-
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
@@ -85,7 +137,7 @@
                                         <Grid Width="130" Height="160" CornerRadius="{ThemeResource ControlCornerRadius}">
                                             <controls:ParallaxView Source="{Binding ElementName=scroller}" VerticalShift="70">
                                                 <Image Stretch="UniformToFill" Source="/Images/light.jpg" />
-                                                
+
                                             </controls:ParallaxView>
                                             <StackPanel Spacing="10" VerticalAlignment="Center" Width="100" HorizontalAlignment="Center" Orientation="Vertical">
                                                 <StackPanel Spacing="5" Orientation="Vertical" Height="40" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{StaticResource LightThemeBrush}">
@@ -97,18 +149,16 @@
                                                     <Border Opacity="0.4" Background="Black" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="80" Height="8"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                            <Border CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="#666666" VerticalAlignment="Stretch"/>
+                                            <Button Opacity="0.5" Click="LightModeChosen" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent"/>
+                                            <Border IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="#666666" VerticalAlignment="Stretch"/>
+                                            <Border x:Name="lightthemeborder" IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="{ThemeResource SystemAccentColor}" VerticalAlignment="Stretch"/>
                                         </Grid>
                                     </Grid>
-                                    <RadioButton x:Name="lightradio" HorizontalAlignment="Center" Margin="50,0,0,0" GroupName="theme" Tag="Light" Checked="OnThemeRadioButtonChecked">
-                                        <RadioButton.ContentTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Margin="5,0,0,0" Text="Light"/>
-                                            </DataTemplate>
-                                        </RadioButton.ContentTemplate>
+                                    <RadioButton Style="{StaticResource RadioButtonStyle1}" x:Name="lightradio" HorizontalAlignment="Center" GroupName="theme" Tag="Light" Checked="OnThemeRadioButtonChecked">
+
                                     </RadioButton>
                                 </StackPanel>
-                                <StackPanel Orientation="Vertical">
+                                <StackPanel Margin="50,0,0,0" Orientation="Vertical">
                                     <Grid Width="auto" Height="160">
                                         <Grid Width="130" Height="160" CornerRadius="{ThemeResource ControlCornerRadius}">
                                             <controls:ParallaxView Source="{Binding ElementName=scroller}" VerticalShift="70">
@@ -125,15 +175,12 @@
                                                     <Border Opacity="0.5" Background="White" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="80" Height="8"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                            <Border CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="#666666" VerticalAlignment="Stretch"/>
+                                            <Button Opacity="0.5" Click="DarkModeChosen" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent"/>
+                                            <Border IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="#666666" VerticalAlignment="Stretch"/>
+                                            <Border x:Name="darkthemeborder" IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="{ThemeResource SystemAccentColor}" VerticalAlignment="Stretch"/>
                                         </Grid>
                                     </Grid>
-                                    <RadioButton x:Name="darkradio" Margin="50,0,0,0" GroupName="theme" Tag="Dark" Checked="OnThemeRadioButtonChecked">
-                                        <RadioButton.ContentTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Margin="5,0,0,0" Text="Dark"/>
-                                            </DataTemplate>
-                                        </RadioButton.ContentTemplate>
+                                    <RadioButton Margin="5,0,0,0" Style="{ThemeResource RadioButtonStyle2}" x:Name="darkradio" GroupName="theme" Tag="Dark" Checked="OnThemeRadioButtonChecked">
                                     </RadioButton>
                                 </StackPanel>
                             </StackPanel>
@@ -147,21 +194,31 @@
                             </StackPanel>
                         </controls:Expander.Header>
                         <controls:Expander.Content>
-                            <GridView ItemClick="themeGrid_ItemClick" ItemsSource="{x:Bind gridItems}" ItemTemplate="{StaticResource ImageTemplate}" SelectionMode="None" IsItemClickEnabled="True" x:Name="themeGrid">
-                                <GridView.ItemContainerStyle>
-                                    <Style TargetType="GridViewItem">
-                                        <Setter Property="Margin" Value="3, 3, 3, 3"/>
-                                    </Style>
-                                </GridView.ItemContainerStyle>
+                            <StackPanel Orientation="Vertical" Spacing="10">
 
-                                <GridView.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
+                                <GridView ItemClick="themeGrid_ItemClick" ItemsSource="{x:Bind gridItems}" ItemTemplate="{StaticResource ImageTemplate}" SelectionMode="None" IsItemClickEnabled="True" x:Name="themeGrid">
+                                    <GridView.ItemContainerStyle>
+                                        <Style TargetType="GridViewItem">
+                                            <Setter Property="Margin" Value="3, 3, 3, 3"/>
+                                        </Style>
+                                    </GridView.ItemContainerStyle>
+
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
                                    MaximumRowsOrColumns="7"
                                    Orientation="Horizontal"/>
-                                    </ItemsPanelTemplate>
-                                </GridView.ItemsPanel>
-                            </GridView>
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
+                                </GridView>
+                                <Button Click="OpenCustomColorDialog" Height="60" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                    <Button.Content>
+                                        <StackPanel Spacing="10" Orientation="Horizontal">
+                                            <TextBlock FontSize="18" Text="Create custom theme"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>
                     <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">

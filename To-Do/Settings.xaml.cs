@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 //using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace To_Do
 
         public static Settings ins;
         AppCapabilityAccessStatus status;
+        public ContentDialog dialog;
 
         public Settings()
         {
@@ -277,7 +279,7 @@ namespace To_Do
             localSettings.Values["navStyle"] = navStyleCombo.SelectedIndex;
         }
 
-        void changecol(GridThemeItem item, bool chosenFromGrid)
+        void changecol(GridThemeItem item, bool chosenFromGrid, bool custom)
         {
             GridThemeItem n;
             if (chosenFromGrid)
@@ -288,11 +290,23 @@ namespace To_Do
             {
                 n = ThemeHelper.IsDarkTheme() ? item.darkThemeVariant : item;
             }
-            for (int i = 0; i < gridItems.Count; i++)
+            if (custom)
             {
-                if (gridItems[i] == item)
+                localSettings.Values["colorindex"] = 666;
+            }
+            if (!custom)
+            {
+                for (int i = 0; i < gridItems.Count; i++)
                 {
-                    localSettings.Values["colorindex"] = i;
+                    if (gridItems[i] == item)
+                    {
+                        localSettings.Values["colorindex"] = i;
+                        break;
+                    }
+                    else
+                    {
+                        localSettings.Values["colorindex"] = 666;
+                    }
                 }
             }
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -361,9 +375,14 @@ namespace To_Do
                 if (gridItems[i] == e.ClickedItem)
                 {
                     localSettings.Values["colorindex"] = i;
+                    break;
+                }
+                else
+                {
+                    localSettings.Values["colorindex"] = 666;
                 }
             }
-            changecol(clickedItem, true);
+            changecol(clickedItem, true, false);
 
         }
 
@@ -376,11 +395,29 @@ namespace To_Do
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>(selectedTheme);
                 if (localSettings.Values["colorindex"] != null)
                 {
-                    changecol(gridItems[(int)localSettings.Values["colorindex"]], false);
+                    if ((int)localSettings.Values["colorindex"] == 666)
+                    {
+                        Color lightthemebgcolor = Color.FromArgb(255, (byte)localSettings.Values["tempLightBG_R"], (byte)localSettings.Values["tempLightBG_G"], (byte)localSettings.Values["tempLightBG_B"]);
+                        Color lightthemeaccentcolor = Color.FromArgb(255, (byte)localSettings.Values["tempLightACCENT_R"], (byte)localSettings.Values["tempLightACCENT_G"], (byte)localSettings.Values["tempLightACCENT_B"]);
+
+                        Color darkthemebgcolor = Color.FromArgb(255, (byte)localSettings.Values["tempDarkBG_R"], (byte)localSettings.Values["tempDarkBG_G"], (byte)localSettings.Values["tempDarkBG_B"]);
+                        Color darkthemeaccentcolor = Color.FromArgb(255, (byte)localSettings.Values["tempDarkACCENT_R"], (byte)localSettings.Values["tempDarkACCENT_G"], (byte)localSettings.Values["tempDarkACCENT_B"]);
+
+                        var custom = CreateNewTheme(lightthemeaccentcolor.R, lightthemeaccentcolor.G, lightthemeaccentcolor.B, lightthemebgcolor.R, lightthemebgcolor.G, lightthemebgcolor.B);
+                        custom.darkThemeVariant = CreateNewTheme(darkthemeaccentcolor.R, darkthemeaccentcolor.G, darkthemeaccentcolor.B, darkthemebgcolor.R, darkthemebgcolor.G, darkthemebgcolor.B);
+                        custom.tooltip = "Custom";
+                        changecol(custom, false, true);
+
+                    }
+                    else
+                    {
+                        changecol(gridItems[(int)localSettings.Values["colorindex"]], false, false);
+
+                    }
                 }
                 else
                 {
-                    changecol(gridItems[0], false);
+                    changecol(gridItems[0], false, false);
                 }
             }
 
@@ -388,12 +425,16 @@ namespace To_Do
             {
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
+                lightthemeborder.Visibility = Visibility.Collapsed;
+                darkthemeborder.Visibility = Visibility.Visible;
 
             }
             else
             {
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+                lightthemeborder.Visibility = Visibility.Visible;
+                darkthemeborder.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -527,26 +568,13 @@ namespace To_Do
             }
         }
 
-        private void Grid_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
-        {
-            Grid parentGrid = sender as Grid;
-            RectangleGeometry rectangle = new RectangleGeometry();
-            rectangle.Rect = new Rect(0, 0, parentGrid.ActualWidth, parentGrid.ActualHeight);
-            (sender as Grid).Clip = rectangle;
-
-            var blurgrid = FindControl<Grid>(parentGrid, typeof(Grid), "blur");
-            blurgrid.Opacity = 1;
-            blurgrid.Translation = System.Numerics.Vector3.Zero;
-        }
-
-        private void Grid_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
-        {
-            Grid parentGrid = sender as Grid;
-
-            var blurgrid = FindControl<Grid>(parentGrid, typeof(Grid), "blur");
-            blurgrid.Opacity = 0;
-            blurgrid.Translation = new System.Numerics.Vector3(0,40,0);
-        }
+        //private void Grid_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        //{
+        //    //Grid parentGrid = sender as Grid;
+        //    //RectangleGeometry rectangle = new RectangleGeometry();
+        //    //rectangle.Rect = new Rect(0, 0, parentGrid.ActualWidth, parentGrid.ActualHeight);
+        //    //(sender as Grid).Clip = rectangle;
+        //}
 
         public static string GetAppVersion()
         {
@@ -585,6 +613,39 @@ namespace To_Do
         {
             var txtb = sender as TextBlock;
             txtb.Text = $"To-Do {GetAppVersion()}";
+        }
+
+        private void LightModeChosen(object sender, RoutedEventArgs e)
+        {
+            lightradio.IsChecked = true;
+        }
+
+        private void DarkModeChosen(object sender, RoutedEventArgs e)
+        {
+            darkradio.IsChecked = true;
+        }
+
+        private async void OpenCustomColorDialog(object sender, RoutedEventArgs e)
+        {
+            dialog = new CustomColorThemeContentDialog();
+            Grid.SetRowSpan(dialog, 2);
+            dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
+            Grid grid = (Grid)dialog.Content;
+            ContentDialogResult result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                Color lightthemebgcolor = Color.FromArgb(255, (byte)localSettings.Values["tempLightBG_R"], (byte)localSettings.Values["tempLightBG_G"], (byte)localSettings.Values["tempLightBG_B"]);
+                Color lightthemeaccentcolor = Color.FromArgb(255, (byte)localSettings.Values["tempLightACCENT_R"], (byte)localSettings.Values["tempLightACCENT_G"], (byte)localSettings.Values["tempLightACCENT_B"]);
+
+                Color darkthemebgcolor = Color.FromArgb(255, (byte)localSettings.Values["tempDarkBG_R"], (byte)localSettings.Values["tempDarkBG_G"], (byte)localSettings.Values["tempDarkBG_B"]);
+                Color darkthemeaccentcolor = Color.FromArgb(255, (byte)localSettings.Values["tempDarkACCENT_R"], (byte)localSettings.Values["tempDarkACCENT_G"], (byte)localSettings.Values["tempDarkACCENT_B"]);
+
+                var custom = CreateNewTheme(lightthemeaccentcolor.R, lightthemeaccentcolor.G, lightthemeaccentcolor.B, lightthemebgcolor.R, lightthemebgcolor.G, lightthemebgcolor.B);
+                custom.darkThemeVariant = CreateNewTheme(darkthemeaccentcolor.R, darkthemeaccentcolor.G, darkthemeaccentcolor.B, darkthemebgcolor.R, darkthemebgcolor.G, darkthemebgcolor.B);
+                custom.tooltip = "Custom";
+
+                changecol(custom, false, true);
+            }
         }
     }
 

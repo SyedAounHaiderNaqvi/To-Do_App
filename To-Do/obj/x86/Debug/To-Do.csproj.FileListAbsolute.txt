@@ -325,3 +325,9 @@ F:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\Microsoft.Xaml.Interactions.pri.xml
 F:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\Microsoft.Xaml.Interactivity.pri.xml
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\To-Do.csproj.CopyComplete
 E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\.winmd_cache\$Microsoft.Graphics.Canvas.winmd_637214534760000000.json
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_637559882240000000.json
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\CustomColorThemeContentDialog.g.i.cs
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\CustomColorThemeContentDialog.g.cs
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\CustomColorThemeContentDialog.xaml
+E:\VS Projects\To-Do_App\To-Do\obj\x86\Debug\CustomColorThemeContentDialog.xbf
+E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\CustomColorThemeContentDialog.xbf
