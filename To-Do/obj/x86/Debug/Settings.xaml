@@ -149,12 +149,12 @@
                                                     <Border Opacity="0.4" Background="Black" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="80" Height="8"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                            <Button x:ConnectionId='46' Opacity="0.5"                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent"/>
+                                            <Button x:ConnectionId='47' Opacity="0.5"                         VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent"/>
                                             <Border IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="#666666" VerticalAlignment="Stretch"/>
-                                            <Border x:ConnectionId='47' x:Name="lightthemeborder" IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="{ThemeResource SystemAccentColor}" VerticalAlignment="Stretch"/>
+                                            <Border x:ConnectionId='48' x:Name="lightthemeborder" IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="{ThemeResource SystemAccentColor}" VerticalAlignment="Stretch"/>
                                         </Grid>
                                     </Grid>
-                                    <RadioButton x:ConnectionId='45' Style="{StaticResource RadioButtonStyle1}" x:Name="lightradio" HorizontalAlignment="Center" GroupName="theme" Tag="Light"                                    >
+                                    <RadioButton x:ConnectionId='46' Style="{StaticResource RadioButtonStyle1}" x:Name="lightradio" HorizontalAlignment="Center" GroupName="theme" Tag="Light"                                    >
 
                                     </RadioButton>
                                 </StackPanel>
@@ -175,18 +175,18 @@
                                                     <Border Opacity="0.5" Background="White" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="80" Height="8"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                            <Button x:ConnectionId='43' Opacity="0.5"                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent"/>
+                                            <Button x:ConnectionId='44' Opacity="0.5"                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent"/>
                                             <Border IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="#666666" VerticalAlignment="Stretch"/>
-                                            <Border x:ConnectionId='44' x:Name="darkthemeborder" IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="{ThemeResource SystemAccentColor}" VerticalAlignment="Stretch"/>
+                                            <Border x:ConnectionId='45' x:Name="darkthemeborder" IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="{ThemeResource SystemAccentColor}" VerticalAlignment="Stretch"/>
                                         </Grid>
                                     </Grid>
-                                    <RadioButton x:ConnectionId='42' Margin="5,0,0,0" Style="{ThemeResource RadioButtonStyle2}" x:Name="darkradio" GroupName="theme" Tag="Dark"                                    >
+                                    <RadioButton x:ConnectionId='43' Margin="5,0,0,0" Style="{ThemeResource RadioButtonStyle2}" x:Name="darkradio" GroupName="theme" Tag="Dark"                                    >
                                     </RadioButton>
                                 </StackPanel>
                             </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>
-                    <controls:Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <controls:Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
                             <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
                                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Color theme"/>
@@ -196,7 +196,7 @@
                         <controls:Expander.Content>
                             <StackPanel Orientation="Vertical" Spacing="10">
 
-                                <GridView x:ConnectionId='39'                                                                  ItemTemplate="{StaticResource ImageTemplate}" SelectionMode="None" IsItemClickEnabled="True" x:Name="themeGrid">
+                                <GridView x:ConnectionId='40' HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"                                                                  ItemTemplate="{StaticResource ImageTemplate}" SelectionMode="None" IsItemClickEnabled="True" x:Name="themeGrid">
                                     <GridView.ItemContainerStyle>
                                         <Style TargetType="GridViewItem">
                                             <Setter Property="Margin" Value="3, 3, 3, 3"/>
@@ -206,12 +206,12 @@
                                     <GridView.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
-                                   MaximumRowsOrColumns="7"
+                                   MaximumRowsOrColumns="15"
                                    Orientation="Horizontal"/>
                                         </ItemsPanelTemplate>
                                     </GridView.ItemsPanel>
                                 </GridView>
-                                <Button x:ConnectionId='40'                               Height="60" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                <Button x:ConnectionId='41'                               Height="60" VerticalAlignment="Center" HorizontalAlignment="Stretch">
                                     <Button.Content>
                                         <StackPanel Spacing="10" Orientation="Horizontal">
                                             <TextBlock FontSize="18" Text="Create custom theme"/>
@@ -232,7 +232,7 @@
                                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Navigation transition style"/>
                                 <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose how transitions to different pages are shown"/>
                             </StackPanel>
-                            <ComboBox x:ConnectionId='38' VerticalAlignment="Center" Margin="10,0,54,0" HorizontalAlignment="Right" Grid.Column="1"                                                   x:Name="navStyleCombo">
+                            <ComboBox x:ConnectionId='39' VerticalAlignment="Center" Margin="10,0,54,0" HorizontalAlignment="Right" Grid.Column="1"                                                   x:Name="navStyleCombo">
                                 <ComboBoxItem Content="Entrance"/>
                                 <ComboBoxItem Content="Drill"/>
                                 <ComboBoxItem Content="Suppress"/>
@@ -251,7 +251,7 @@
                                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Rounded corners for controls"/>
                                 <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Let controls use rounded corners introduced in WinUI 2.6 (app restart needed)"/>
                             </StackPanel>
-                            <ToggleSwitch x:ConnectionId='37' VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="RoundCornerToggle"                                 />
+                            <ToggleSwitch x:ConnectionId='38' VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="RoundCornerToggle"                                 />
                         </Grid>
                     </Border>
 
@@ -262,9 +262,9 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="90"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
+                                <StackPanel Grid.Column="0" Padding="0,11,0,0" Height="65" Spacing="3" Orientation="Vertical">
                                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Background image"/>
-                                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose an image as wallpaper"/>
+                                    <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="14" TextWrapping="Wrap" HorizontalAlignment="Left" MaxWidth="260" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose whether you want an image as wallpaper"/>
                                 </StackPanel>
                                 <ToggleSwitch x:ConnectionId='33' HorizontalAlignment="Left" Margin="16,0,0,0" x:Name="btntoggle" Grid.Column="1"                         />
                             </Grid>
@@ -273,7 +273,7 @@
                             <StackPanel HorizontalAlignment="Left">
                                 <StackPanel x:ConnectionId='34' Visibility="Collapsed" x:Name="Fallbackpanel" Spacing="10">
                                     <TextBlock Text="*Allow access to file system to use custom images." Foreground="{ThemeResource SystemErrorTextColor}"/>
-                                    <Button x:ConnectionId='36'                       >
+                                    <Button x:ConnectionId='37'                       >
                                         <Button.Content>
                                             <StackPanel Spacing="10" Orientation="Horizontal">
                                                 <FontIcon Glyph="&#xE8A7;"/>
@@ -282,7 +282,10 @@
                                         </Button.Content>
                                     </Button>
                                 </StackPanel>
-                                <Button x:ConnectionId='35' Margin="0,10,0,0" x:Name="bgimgbutton"                   Content="Choose Image"/>
+                                <StackPanel x:ConnectionId='35' x:Name="bgimgbutton" Orientation="Vertical" Spacing="10">
+                                    <TextBlock Text="Note: Some images could have bad contrast with colors"/>
+                                    <Button x:ConnectionId='36'                   Content="Choose Image"/>
+                                </StackPanel>
                             </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>

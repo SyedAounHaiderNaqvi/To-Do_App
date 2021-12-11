@@ -186,7 +186,7 @@
                             </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>
-                    <controls:Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <controls:Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
                             <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
                                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Color theme"/>
@@ -196,7 +196,7 @@
                         <controls:Expander.Content>
                             <StackPanel Orientation="Vertical" Spacing="10">
 
-                                <GridView ItemClick="themeGrid_ItemClick" ItemsSource="{x:Bind gridItems}" ItemTemplate="{StaticResource ImageTemplate}" SelectionMode="None" IsItemClickEnabled="True" x:Name="themeGrid">
+                                <GridView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" ItemClick="themeGrid_ItemClick" ItemsSource="{x:Bind gridItems}" ItemTemplate="{StaticResource ImageTemplate}" SelectionMode="None" IsItemClickEnabled="True" x:Name="themeGrid">
                                     <GridView.ItemContainerStyle>
                                         <Style TargetType="GridViewItem">
                                             <Setter Property="Margin" Value="3, 3, 3, 3"/>
@@ -206,7 +206,7 @@
                                     <GridView.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
-                                   MaximumRowsOrColumns="7"
+                                   MaximumRowsOrColumns="15"
                                    Orientation="Horizontal"/>
                                         </ItemsPanelTemplate>
                                     </GridView.ItemsPanel>
@@ -282,7 +282,10 @@
                                         </Button.Content>
                                     </Button>
                                 </StackPanel>
-                                <Button Margin="0,10,0,0" x:Name="bgimgbutton" Click="Chooseimg" Content="Choose Image"/>
+                                <StackPanel x:Name="bgimgbutton" Orientation="Vertical" Spacing="10">
+                                    <TextBlock Text="Note: Some images could have bad contrast with colors"/>
+                                    <Button Click="Chooseimg" Content="Choose Image"/>
+                                </StackPanel>
                             </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>
