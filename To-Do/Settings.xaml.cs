@@ -290,22 +290,18 @@ namespace To_Do
             {
                 n = ThemeHelper.IsDarkTheme() ? item.darkThemeVariant : item;
             }
+
             if (custom)
             {
                 localSettings.Values["colorindex"] = 666;
             }
-            if (!custom)
+            else
             {
                 for (int i = 0; i < gridItems.Count; i++)
                 {
                     if (gridItems[i] == item)
                     {
                         localSettings.Values["colorindex"] = i;
-                        break;
-                    }
-                    else
-                    {
-                        localSettings.Values["colorindex"] = 666;
                     }
                 }
             }

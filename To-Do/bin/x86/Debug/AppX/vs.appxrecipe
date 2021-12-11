@@ -30,13 +30,13 @@
     <AppXManifest Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-12-11T10:45:03.194</Modified>
+      <Modified>2021-12-11T15:46:25.085</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\To-Do.exe">
       <PackagePath>entrypoint\To-Do.exe</PackagePath>
-      <Modified>2021-12-11T10:45:02.024</Modified>
+      <Modified>2021-12-11T15:46:24.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.toolkit.uwp.notifications\7.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.Notifications.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.Notifications.dll</PackagePath>
@@ -358,39 +358,39 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\To-Do.xr.xml">
       <PackagePath>To-Do.xr.xml</PackagePath>
-      <Modified>2021-12-11T10:19:27.625</Modified>
+      <Modified>2021-12-11T15:46:23.655</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-12-11T10:45:01.674</Modified>
+      <Modified>2021-12-11T15:46:23.677</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\CustomColorThemeContentDialog.xbf">
       <PackagePath>CustomColorThemeContentDialog.xbf</PackagePath>
-      <Modified>2021-12-11T10:45:01.674</Modified>
+      <Modified>2021-12-11T15:46:23.682</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\EditDialogContent.xbf">
       <PackagePath>EditDialogContent.xbf</PackagePath>
-      <Modified>2021-12-11T10:45:01.784</Modified>
+      <Modified>2021-12-11T15:46:23.777</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2021-12-11T10:45:01.694</Modified>
+      <Modified>2021-12-11T15:46:23.704</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\CompletedTasks.xbf">
       <PackagePath>NavigationPages\CompletedTasks.xbf</PackagePath>
-      <Modified>2021-12-11T10:45:01.784</Modified>
+      <Modified>2021-12-11T15:46:23.777</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\MyDay.xbf">
       <PackagePath>NavigationPages\MyDay.xbf</PackagePath>
-      <Modified>2021-12-11T10:45:01.734</Modified>
+      <Modified>2021-12-11T15:46:23.737</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\PendingTasks.xbf">
       <PackagePath>NavigationPages\PendingTasks.xbf</PackagePath>
-      <Modified>2021-12-11T10:45:01.774</Modified>
+      <Modified>2021-12-11T15:46:23.766</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Settings.xbf">
       <PackagePath>Settings.xbf</PackagePath>
-      <Modified>2021-12-11T10:45:01.784</Modified>
+      <Modified>2021-12-11T15:46:23.776</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.20348.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -406,7 +406,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\To-Do.exe">
       <PackagePath>To-Do.exe</PackagePath>
-      <Modified>2021-12-11T10:45:03.184</Modified>
+      <Modified>2021-12-11T15:46:25.083</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.ui.xaml\2.7.0\buildTransitive\..\lib\uap10.0\Microsoft.UI.Xaml.winmd">
       <PackagePath>Microsoft.UI.Xaml.winmd</PackagePath>

@@ -255,16 +255,22 @@
                         </Grid>
                     </Border>
 
-                    <controls:Expander  HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <controls:Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
-                            <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Background image"/>
-                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose whether to show an image as wallpaper"/>
-                            </StackPanel>
+                            <Grid Margin="0,0,-10,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="90"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Background image"/>
+                                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose an image as wallpaper"/>
+                                </StackPanel>
+                                <ToggleSwitch x:ConnectionId='33' HorizontalAlignment="Left" Margin="16,0,0,0" x:Name="btntoggle" Grid.Column="1"                         />
+                            </Grid>
                         </controls:Expander.Header>
                         <controls:Expander.Content>
                             <StackPanel HorizontalAlignment="Left">
-                                <ToggleSwitch x:ConnectionId='33' x:Name="btntoggle"                          Header="Use image as background (some images have bad contrast with some colors)"/>
                                 <StackPanel x:ConnectionId='34' Visibility="Collapsed" x:Name="Fallbackpanel" Spacing="10">
                                     <TextBlock Text="*Allow access to file system to use custom images." Foreground="{ThemeResource SystemErrorTextColor}"/>
                                     <Button x:ConnectionId='36'                       >
