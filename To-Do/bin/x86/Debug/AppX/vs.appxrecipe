@@ -30,13 +30,13 @@
     <AppXManifest Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-12-11T18:26:51.977</Modified>
+      <Modified>2021-12-12T07:30:38.202</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\To-Do.exe">
       <PackagePath>entrypoint\To-Do.exe</PackagePath>
-      <Modified>2021-12-11T18:26:50.899</Modified>
+      <Modified>2021-12-12T07:30:36.532</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.toolkit.uwp.notifications\7.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.Notifications.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.Notifications.dll</PackagePath>
@@ -362,35 +362,35 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2021-12-11T18:26:50.607</Modified>
+      <Modified>2021-12-12T07:30:36.212</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\CustomColorThemeContentDialog.xbf">
       <PackagePath>CustomColorThemeContentDialog.xbf</PackagePath>
-      <Modified>2021-12-11T18:26:50.607</Modified>
+      <Modified>2021-12-12T07:30:36.222</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\EditDialogContent.xbf">
       <PackagePath>EditDialogContent.xbf</PackagePath>
-      <Modified>2021-12-11T18:26:50.708</Modified>
+      <Modified>2021-12-12T07:30:36.318</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2021-12-11T18:26:50.637</Modified>
+      <Modified>2021-12-12T07:30:36.242</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\CompletedTasks.xbf">
       <PackagePath>NavigationPages\CompletedTasks.xbf</PackagePath>
-      <Modified>2021-12-11T18:26:50.708</Modified>
+      <Modified>2021-12-12T07:30:36.318</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\MyDay.xbf">
       <PackagePath>NavigationPages\MyDay.xbf</PackagePath>
-      <Modified>2021-12-11T18:26:50.669</Modified>
+      <Modified>2021-12-12T07:30:36.272</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\NavigationPages\PendingTasks.xbf">
       <PackagePath>NavigationPages\PendingTasks.xbf</PackagePath>
-      <Modified>2021-12-11T18:26:50.703</Modified>
+      <Modified>2021-12-12T07:30:36.306</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Settings.xbf">
       <PackagePath>Settings.xbf</PackagePath>
-      <Modified>2021-12-11T18:26:50.708</Modified>
+      <Modified>2021-12-12T07:30:36.318</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.20348.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -406,7 +406,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x86\Debug\Core\To-Do.exe">
       <PackagePath>To-Do.exe</PackagePath>
-      <Modified>2021-12-11T18:26:51.977</Modified>
+      <Modified>2021-12-12T07:30:38.182</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.ui.xaml\2.7.0\buildTransitive\..\lib\uap10.0\Microsoft.UI.Xaml.winmd">
       <PackagePath>Microsoft.UI.Xaml.winmd</PackagePath>

@@ -262,9 +262,9 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="90"/>
                                 </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Padding="0,11,0,0" Height="65" Spacing="3" Orientation="Vertical">
+                                <StackPanel Grid.Column="0" Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
                                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Background image"/>
-                                    <TextBlock LineStackingStrategy="BlockLineHeight" LineHeight="14" TextWrapping="Wrap" HorizontalAlignment="Left" MaxWidth="260" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose whether you want an image as wallpaper"/>
+                                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" MaxWidth="260" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Toggle using an image as wallpaper"/>
                                 </StackPanel>
                                 <ToggleSwitch HorizontalAlignment="Left" Margin="16,0,0,0" x:Name="btntoggle" Grid.Column="1" Toggled="OnBGIMGToggled"/>
                             </Grid>
