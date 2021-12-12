@@ -1550,3 +1550,8 @@ E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\To-Do.csproj.CopyComplete
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\.winmd_cache\$Microsoft.Graphics.Canvas.winmd_637214354760000000.json
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\dark.jpg
 E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\ilc\in\Images\light.jpg
+E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\CustomColorThemeContentDialog.xbf
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\CustomColorThemeContentDialog.g.i.cs
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\CustomColorThemeContentDialog.g.cs
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\CustomColorThemeContentDialog.xaml
+E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\CustomColorThemeContentDialog.xbf

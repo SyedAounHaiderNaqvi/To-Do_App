@@ -7,7 +7,7 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="41c791cc-adc2-4dc9-9148-fb74a5aec780" Publisher="CN=Aoun" Version="2.22.57.0" ProcessorArchitecture="x64" />
+  <Identity Name="41c791cc-adc2-4dc9-9148-fb74a5aec780" Publisher="CN=Aoun" Version="2.24.63.0" ProcessorArchitecture="x64" />
   <mp:PhoneIdentity PhoneProductId="41c791cc-adc2-4dc9-9148-fb74a5aec780" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>To-Do</DisplayName>
@@ -15,7 +15,7 @@
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.19041.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.20348.0" />
     <PackageDependency Name="Microsoft.UI.Xaml.2.7" MinVersion="7.2109.13004.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
     <PackageDependency Name="Microsoft.NET.Native.Framework.2.2" MinVersion="2.2.29512.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
     <PackageDependency Name="Microsoft.NET.Native.Runtime.2.2" MinVersion="2.2.28604.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
@@ -63,7 +63,7 @@
     <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="17.0.31822.380" />
     <build:Item Name="ProjectGUID" Value="{06E107EB-5AB3-41F8-A511-F9FDF86F3C0D}" />
     <build:Item Name="ilc.exe" Version="2.2.30601.02 built by: PROJECTNREL" />
-    <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="10.0.19041.685" />
+    <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="0.0.0.0" />
     <build:Item Name="OptimizingToolset" Value="ilc.exe" />
     <build:Item Name="UseDotNetNativeSharedAssemblyFrameworkPackage" Value="True" />
     <build:Item Name="DisableStackTraceMetadata" Value="false" />
@@ -77,6 +77,6 @@
     <build:Item Name="AlignMethodsAtMinimalBoundaries" Value="false" />
     <build:Item Name="LargeAddressAware" Value="false" />
     <build:Item Name="NoLinkerSymbols" Value="false" />
-    <build:Item Name="MakePri.exe" Version="10.0.19041.685 (WinBuild.160101.0800)" />
+    <build:Item Name="MakePri.exe" Version="10.0.20348.1 (WinBuild.160101.0800)" />
   </build:Metadata>
 </Package>

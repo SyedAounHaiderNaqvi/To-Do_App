@@ -1,6 +1,6 @@
-MainPackage=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.22.57.0_x64.msix
-SymbolPackage=E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\Symbols\To-Do_2.22.57.0_x64.appxsym
-ResourcePack=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.22.57.0_scale-100.msix
-ResourcePack=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.22.57.0_scale-125.msix
-ResourcePack=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.22.57.0_scale-150.msix
-ResourcePack=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.22.57.0_scale-400.msix
+MainPackage=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.24.63.0_x64.msix
+SymbolPackage=E:\VS Projects\To-Do_App\To-Do\obj\x64\Release\Symbols\To-Do_2.24.63.0_x64.appxsym
+ResourcePack=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.24.63.0_scale-100.msix
+ResourcePack=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.24.63.0_scale-125.msix
+ResourcePack=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.24.63.0_scale-150.msix
+ResourcePack=E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\To-Do_2.24.63.0_scale-400.msix

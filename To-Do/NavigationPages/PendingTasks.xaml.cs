@@ -11,16 +11,10 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
 using System.Threading;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Notifications;
 using Microsoft.UI.Xaml.Controls;
 using System.Linq;
-using System.Diagnostics;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using System.Collections.Specialized;
 
 namespace To_Do.NavigationPages
 {
@@ -187,12 +181,10 @@ namespace To_Do.NavigationPages
                 notif.Translation = new System.Numerics.Vector3(0, 170, 0);
                 notif.Opacity = 0;
                 confirmDoneNotif.IsOpen = false;
-                //MainPage.ins.Refresh();
             }
             // get checkbox that sent this function
             CheckBox cb = sender as CheckBox;
-            Grid cbparent = VisualTreeHelper.GetParent(cb) as Grid;
-            if (cbparent != null)
+            if (VisualTreeHelper.GetParent(cb) is Grid cbparent)
             {
                 StackPanel panel = VisualTreeHelper.GetChild(cbparent, 2) as StackPanel;
                 TextBlock block = VisualTreeHelper.GetChild(panel, 0) as TextBlock;
@@ -386,7 +378,6 @@ namespace To_Do.NavigationPages
                 TaskItems[index].Description = EditTextBox.Text;
                 EditTextBox.Text = string.Empty;
                 Sort((string)SortingDropDown.Content);
-                //listOfTasks.ItemsSource = TaskItems;
             }
         }
 
@@ -417,7 +408,6 @@ namespace To_Do.NavigationPages
             if (result == ContentDialogResult.Primary)
             {
                 //do create new task
-                Debug.WriteLine("creating new step");
                 TODOTask newStep = new TODOTask() { Description = EditTextBox.Text };
                 var list = new List<TODOTask>(TaskItems[index].SubTasks)
                 {
@@ -588,9 +578,8 @@ namespace To_Do.NavigationPages
                     default:
                         break;
                 }
-                // This area causes error as TaskItems is being renewed
+
                 TaskItems = new ObservableCollection<TODOTask>(list);
-                //TaskItems = list;
                 listOfTasks.ItemsSource = TaskItems;
             }
         }

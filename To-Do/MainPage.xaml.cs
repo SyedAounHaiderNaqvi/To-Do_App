@@ -18,12 +18,10 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Security.Authorization.AppCapabilityAccess;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
-using Windows.Data.Xml.Dom;
 using Windows.System.Profile;
 using System.Linq;
 using Windows.UI.Core;
 using Windows.Foundation;
-using System.Diagnostics;
 
 namespace To_Do
 {
@@ -91,8 +89,6 @@ namespace To_Do
                 loadedDate = Convert.ToDateTime((string)localSettings.Values["datediff"]);
                 if (DateTime.Now.Date > loadedDate.Date)
                 {
-                    //immediately delete
-                    Debug.WriteLine("Immediately Deleting");
                     MyDay.instance.TodayTxt.Text = DateTime.Now.ToString("dddd, MMMM d");
                     var pendingNow = MyDay.instance.TaskItems;
                     if (pendingNow.Count > 0)
@@ -107,7 +103,6 @@ namespace To_Do
                     MyDay.instance.UpdateBadge();
                 }
                 D = (DateTime.Today.AddDays(1).Date - loadedDate);
-                Debug.WriteLine("Next deadline:" + DateTime.Today.AddDays(1).Date.ToString());
                 var T = new System.Timers.Timer();
                 T.Elapsed += CallBackFunction;
                 MyDay.instance.TodayTxt.Text = DateTime.Now.ToString("dddd, MMMM d");
@@ -129,7 +124,6 @@ namespace To_Do
             D = (DateTime.Today.AddDays(1).Date - DateTime.Now.Date);
             MyDay.instance.TodayTxt.Text = DateTime.Now.ToString("dddd, MMMM d");
 
-            Debug.WriteLine((DateTime.Today.AddDays(1).Date - DateTime.Now).TotalMilliseconds);
             T.Interval = D.TotalMilliseconds;
 
             T.Start();
@@ -1098,8 +1092,8 @@ namespace To_Do
 
         public async Task ScrollToIndex(ListView listViewBase, int index)
         {
-            bool isVirtualizing = default(bool);
-            double previousHorizontalOffset = default(double), previousVerticalOffset = default(double);
+            bool isVirtualizing = default;
+            double previousHorizontalOffset = default, previousVerticalOffset = default;
 
             // get the ScrollViewer withtin the ListView/GridView
             var scrollViewer = GetScrollViewer(listViewBase);

@@ -12,7 +12,7 @@
     <BadgeLogoSource>C:\Users\Aoun\Downloads\check %283%29.png</BadgeLogoSource>
     <UapAppxPackageBuildMode>SideloadOnly</UapAppxPackageBuildMode>
     <AppxShowAllApps>False</AppxShowAllApps>
-    <AppxBuildConfigurationSelection>x86|x64</AppxBuildConfigurationSelection>
+    <AppxBuildConfigurationSelection>x64</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>

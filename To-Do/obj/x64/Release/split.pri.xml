@@ -12,6 +12,11 @@
 					<Base64Value>[Embedded Binary Data]</Base64Value>
 				</Candidate>
 			</NamedResource>
+			<NamedResource name="CustomColorThemeContentDialog.xbf" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/CustomColorThemeContentDialog.xbf">
+				<Candidate type="EmbeddedData">
+					<Base64Value>[Embedded Binary Data]</Base64Value>
+				</Candidate>
+			</NamedResource>
 			<NamedResource name="EditDialogContent.xbf" uri="ms-resource://41c791cc-adc2-4dc9-9148-fb74a5aec780/Files/EditDialogContent.xbf">
 				<Candidate type="EmbeddedData">
 					<Base64Value>[Embedded Binary Data]</Base64Value>

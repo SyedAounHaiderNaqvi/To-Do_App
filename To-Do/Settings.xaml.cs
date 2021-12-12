@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-//using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Windows.ApplicationModel;
-using Windows.Foundation;
 using Windows.Security.Authorization.AppCapabilityAccess;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -61,7 +56,6 @@ namespace To_Do
                     case 0:
                         btntoggle.IsOn = false;
                         bgimgbutton.Visibility = Visibility.Collapsed;
-                        //bgimgbutton.IsEnabled = false;
                         MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
                         MainPage.ins.acrylic.Visibility = Visibility.Collapsed;
                         MainPage.ins.acrylictint.Visibility = Visibility.Collapsed;
@@ -72,7 +66,6 @@ namespace To_Do
                         {
                             Fallbackpanel.Visibility = Visibility.Visible;
                             bgimgbutton.Visibility = Visibility.Collapsed;
-                            //bgimgbutton.IsEnabled = false;
                             MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
                             MainPage.ins.acrylic.Visibility = Visibility.Collapsed;
                             MainPage.ins.acrylictint.Visibility = Visibility.Collapsed;
@@ -81,7 +74,7 @@ namespace To_Do
                         {
                             Fallbackpanel.Visibility = Visibility.Collapsed;
                             bgimgbutton.Visibility = Visibility.Visible;
-                            //bgimgbutton.IsEnabled = true;
+
                             if (localSettings.Values["imgPath"] != null)
                             {
                                 MainPage.ins.bgIMG.Visibility = Visibility.Visible;
@@ -106,7 +99,6 @@ namespace To_Do
                 Fallbackpanel.Visibility = Visibility.Collapsed;
                 btntoggle.IsOn = false;
                 bgimgbutton.Visibility = Visibility.Collapsed;
-                //bgimgbutton.IsEnabled = false;
                 localSettings.Values["useimg"] = 0;
             }
 
@@ -442,7 +434,6 @@ namespace To_Do
                 if (status == AppCapabilityAccessStatus.DeniedByUser)
                 {
                     Fallbackpanel.Visibility = Visibility.Visible;
-                    //bgimgbutton.IsEnabled = false;
                     bgimgbutton.Visibility = Visibility.Collapsed;
                     MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
                     MainPage.ins.acrylic.Visibility = Visibility.Collapsed;
@@ -451,7 +442,6 @@ namespace To_Do
                 else
                 {
                     Fallbackpanel.Visibility = Visibility.Collapsed;
-                    //bgimgbutton.IsEnabled = true;
                     bgimgbutton.Visibility = Visibility.Visible;
                     MainPage.ins.bgIMG.Visibility = Visibility.Visible;
                     MainPage.ins.acrylic.Visibility = Visibility.Visible;
@@ -487,7 +477,6 @@ namespace To_Do
             {
 
                 Fallbackpanel.Visibility = Visibility.Collapsed;
-                //bgimgbutton.IsEnabled = false;
                 bgimgbutton.Visibility = Visibility.Collapsed;
                 localSettings.Values["useimg"] = 0;
                 MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
@@ -498,9 +487,11 @@ namespace To_Do
 
         private async void Chooseimg(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker openPicker = new FileOpenPicker();
-            openPicker.ViewMode = PickerViewMode.Thumbnail;
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            FileOpenPicker openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary
+            };
             openPicker.FileTypeFilter.Add(".jpg");
             openPicker.FileTypeFilter.Add(".jpeg");
             openPicker.FileTypeFilter.Add(".png");
@@ -564,14 +555,6 @@ namespace To_Do
             }
         }
 
-        //private void Grid_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
-        //{
-        //    //Grid parentGrid = sender as Grid;
-        //    //RectangleGeometry rectangle = new RectangleGeometry();
-        //    //rectangle.Rect = new Rect(0, 0, parentGrid.ActualWidth, parentGrid.ActualHeight);
-        //    //(sender as Grid).Clip = rectangle;
-        //}
-
         public static string GetAppVersion()
         {
             Package package = Package.Current;
@@ -626,7 +609,6 @@ namespace To_Do
             dialog = new CustomColorThemeContentDialog();
             Grid.SetRowSpan(dialog, 2);
             dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
-            Grid grid = (Grid)dialog.Content;
             ContentDialogResult result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {

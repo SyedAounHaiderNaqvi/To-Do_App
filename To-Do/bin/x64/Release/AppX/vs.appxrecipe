@@ -19,18 +19,18 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\AppX</LayoutDir>
-    <RegisteredManifestChecksum>D3D7617E913B30DE72B1D4B3E10F1496246F24C6EBEA6A9FB9EC6FFED8428442</RegisteredManifestChecksum>
-    <RegisteredPackageMoniker>41c791cc-adc2-4dc9-9148-fb74a5aec780_2.16.49.0_x64__tc78dab53zn56</RegisteredPackageMoniker>
+    <RegisteredManifestChecksum>C0D2DE080C04813F2D00A620D097492DA518B14B1777D22AFD02957DD3F5B5FE</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>41c791cc-adc2-4dc9-9148-fb74a5aec780_2.22.57.0_x64__tc78dab53zn56</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>41c791cc-adc2-4dc9-9148-fb74a5aec780_tc78dab53zn56!App</RegisteredUserModeAppID>
     <RegisteredPackageID>41c791cc-adc2-4dc9-9148-fb74a5aec780</RegisteredPackageID>
     <RegisteredPackagePublisher>CN=Aoun</RegisteredPackagePublisher>
-    <RegisteredVersion>2.16.49.0</RegisteredVersion>
+    <RegisteredVersion>2.22.57.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
     <AppXManifest Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-12-05T10:35:49.428</Modified>
+      <Modified>2021-12-12T07:53:26.854</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -338,19 +338,19 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2021-12-05T10:34:52.269</Modified>
+      <Modified>2021-12-12T07:52:28.200</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\To-Do.dll">
       <PackagePath>To-Do.dll</PackagePath>
-      <Modified>2021-12-05T10:35:48.387</Modified>
+      <Modified>2021-12-12T07:53:25.814</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\To-Do.exe">
       <PackagePath>To-Do.exe</PackagePath>
-      <Modified>2021-12-05T10:35:49.415</Modified>
+      <Modified>2021-12-12T07:53:26.840</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="E:\VS Projects\To-Do_App\To-Do\bin\x64\Release\ilc\To-Do.pdb">
       <PackagePath>To-Do.pdb</PackagePath>
-      <Modified>2021-12-05T10:35:49.414</Modified>
+      <Modified>2021-12-12T07:53:26.840</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aoun\.nuget\packages\microsoft.ui.xaml\2.7.0\buildTransitive\..\lib\uap10.0\Microsoft.UI.Xaml.winmd">
       <PackagePath>Microsoft.UI.Xaml.winmd</PackagePath>

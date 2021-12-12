@@ -23,3 +23,9 @@ dotnet_diagnostic.IDE0008.severity = none
 
 # IDE0040: Add accessibility modifiers
 dotnet_diagnostic.IDE0040.severity = none
+
+# IDE0039: Use local function
+dotnet_diagnostic.IDE0039.severity = none
+
+# IDE0019: Use pattern matching
+dotnet_diagnostic.IDE0019.severity = none
