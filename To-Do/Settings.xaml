@@ -283,7 +283,7 @@
                                     </Button>
                                 </StackPanel>
                                 <StackPanel x:Name="bgimgbutton" Orientation="Vertical" Spacing="10">
-                                    <TextBlock Text="Note: Some images could have bad contrast with colors"/>
+                                    <TextBlock Text="Note: Images could have bad contrast with colors."/>
                                     <Button Click="Chooseimg" Content="Choose Image"/>
                                 </StackPanel>
                             </StackPanel>

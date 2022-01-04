@@ -470,15 +470,11 @@ namespace To_Do.NavigationPages
                 panel.Translation = System.Numerics.Vector3.Zero;
                 panel.Opacity = 1;
                 btn.Opacity = 1;
-                var icon = FindControl<FontIcon>(c, typeof(FontIcon), "DockIcon");
-                icon.Opacity = 0.7f;
-                icon.Translation = System.Numerics.Vector3.Zero;
+
                 btn.Translation = new System.Numerics.Vector3(18, 0, 0);
                 block.Translation = System.Numerics.Vector3.Zero;
                 var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
                 moreoptbutton.Opacity = 1;
-                var b = FindControl<CheckBox>(c, typeof(CheckBox), "completecheckbox");
-                b.Translation = System.Numerics.Vector3.Zero;
             }
         }
 
@@ -490,16 +486,10 @@ namespace To_Do.NavigationPages
             var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
             panel.Translation = new System.Numerics.Vector3(0, 20, 0);
             panel.Opacity = 0;
-            var icon = FindControl<FontIcon>(c, typeof(FontIcon), "DockIcon");
-            icon.Opacity = 0;
-            icon.Translation = new System.Numerics.Vector3(-30, 0, 0);
             btn.Translation = new System.Numerics.Vector3(60, 0, 0);
             var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
             moreoptbutton.Opacity = 0;
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
-
-            var b = FindControl<CheckBox>(c, typeof(CheckBox), "completecheckbox");
-            b.Translation = new System.Numerics.Vector3(-10, 0, 0);
         }
 
         public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
@@ -535,16 +525,8 @@ namespace To_Do.NavigationPages
             var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
             panel.Translation = new System.Numerics.Vector3(0, 20, 0);
             panel.Opacity = 0;
-            var icon = FindControl<FontIcon>(c, typeof(FontIcon), "DockIcon");
-            icon.Opacity = 0;
-            icon.Translation = new System.Numerics.Vector3(-30, 0, 0);
-
-            var b = FindControl<CheckBox>(c, typeof(CheckBox), "completecheckbox");
-            b.Translation = new System.Numerics.Vector3(-10, 0, 0);
-
             btn.Translation = new System.Numerics.Vector3(60, 0, 0);
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
-
             var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
             moreoptbutton.Opacity = 0;
         }

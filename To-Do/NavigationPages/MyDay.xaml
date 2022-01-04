@@ -587,19 +587,7 @@
                                             <ColumnDefinition Width="75"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon x:Name="DockIcon" Translation="-30,0,0" Opacity="0.7" Glyph="&#xE784;" Margin="-40,0,5,0" Grid.Column="0">
-                                            <FontIcon.TranslationTransition>
-                                                <Vector3Transition Duration="0:0:0.2"/>
-                                            </FontIcon.TranslationTransition>
-                                            <FontIcon.OpacityTransition>
-                                                <ScalarTransition/>
-                                            </FontIcon.OpacityTransition>
-                                        </FontIcon>
-                                        <CheckBox x:Name="completecheckbox" Translation="-10,0,0" PointerCaptureLost="CheckBox_PointerCaptureLost" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}" Checked="CheckBox_Checked" Margin="38,0,10,0" Grid.Column="0" CornerRadius="10">
-                                            <CheckBox.TranslationTransition>
-                                                <Vector3Transition Duration="0:0:0.2"/>
-                                            </CheckBox.TranslationTransition>
-                                        </CheckBox>
+                                        <CheckBox x:Name="completecheckbox" Translation="-10,0,0" PointerCaptureLost="CheckBox_PointerCaptureLost" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}" Checked="CheckBox_Checked" Margin="38,0,10,0" Grid.Column="0" CornerRadius="10"/>
                                         <StackPanel Spacing="10" VerticalAlignment="Center" Margin="10,0,130,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
                                             <TextBlock Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Description, Mode=TwoWay}">
                                                 <TextBlock.TranslationTransition>
