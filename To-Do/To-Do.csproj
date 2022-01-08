@@ -127,6 +127,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BackupContentDialog.xaml.cs">
+      <DependentUpon>BackupContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomColorThemeContentDialog.xaml.cs">
       <DependentUpon>CustomColorThemeContentDialog.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,7 @@
     <Content Include="Images\complete.png" />
     <Content Include="Images\dark.jpg" />
     <Content Include="Images\eek.png" />
+    <Content Include="Images\floppy_disk.png" />
     <Content Include="Images\light.jpg" />
     <Content Include="Images\New Project %281%29.png" />
     <Content Include="Images\settingsIcon.png" />
@@ -226,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="BackupContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CustomColorThemeContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

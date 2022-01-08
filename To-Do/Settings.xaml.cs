@@ -625,6 +625,14 @@ namespace To_Do
                 changecol(custom, false, true);
             }
         }
+
+        private async void OpenBackupDialog(object sender, RoutedEventArgs e)
+        {
+            dialog = new BackupContentDialog();
+            Grid.SetRowSpan(dialog, 2);
+            dialog.PrimaryButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
+            _ = await dialog.ShowAsync();
+        }
     }
 
     public class GridThemeItem

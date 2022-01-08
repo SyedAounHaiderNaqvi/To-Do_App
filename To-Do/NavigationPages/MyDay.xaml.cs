@@ -160,7 +160,7 @@ namespace To_Do.NavigationPages
             Grid cbparent = VisualTreeHelper.GetParent(cb) as Grid;
             if (cbparent != null)
             {
-                StackPanel panel = VisualTreeHelper.GetChild(cbparent, 2) as StackPanel;
+                StackPanel panel = VisualTreeHelper.GetChild(cbparent, 1) as StackPanel;
                 TextBlock block = VisualTreeHelper.GetChild(panel, 0) as TextBlock;
                 block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
                 await Task.Delay(100);

@@ -186,7 +186,7 @@ namespace To_Do.NavigationPages
             CheckBox cb = sender as CheckBox;
             if (VisualTreeHelper.GetParent(cb) is Grid cbparent)
             {
-                StackPanel panel = VisualTreeHelper.GetChild(cbparent, 2) as StackPanel;
+                StackPanel panel = VisualTreeHelper.GetChild(cbparent, 1) as StackPanel;
                 TextBlock block = VisualTreeHelper.GetChild(panel, 0) as TextBlock;
                 undoText = block.Text;
                 singletonReference.tasksToParse.Add(new List<string>() { block.Text, DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt") });

@@ -211,13 +211,15 @@
                                         </ItemsPanelTemplate>
                                     </GridView.ItemsPanel>
                                 </GridView>
-                                <Button Click="OpenCustomColorDialog" Height="60" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                                    <Button.Content>
-                                        <StackPanel Spacing="10" Orientation="Horizontal">
-                                            <TextBlock FontSize="18" Text="Create custom theme"/>
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
+                                <Rectangle Height="1" Margin="-20,0,-20,0" HorizontalAlignment="Stretch" Fill="{ThemeResource ExpanderContentBorderBrush}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Choose custom theme" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="2,0,0,-5"/>
+                                    <Button Grid.Column="1" VerticalAlignment="Center" Margin="0,0,38,-5" HorizontalAlignment="Right" Click="OpenCustomColorDialog" Content="Create theme"/>
+                                </Grid>
                             </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>
@@ -290,6 +292,21 @@
                         </controls:Expander.Content>
                     </controls:Expander>
                     <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColorDark2}" Margin="0,20,0,0" FontSize="18" Text="Miscellaneous"/>
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="170" Width="*"/>
+                                <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch" Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Backup &amp; Restore"/>
+                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Create or restore data backup"/>
+                            </StackPanel>
+                            <Button VerticalAlignment="Center" Margin="10,0,54,0" Content="See more" Click="OpenBackupDialog" Grid.Column="1" HorizontalAlignment="Right">
+
+                            </Button>
+                        </Grid>
+                    </Border>
                     <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>

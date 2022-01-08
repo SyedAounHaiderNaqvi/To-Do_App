@@ -1,0 +1,72 @@
+﻿<ContentDialog
+    CornerRadius="{ThemeResource OverlayCornerRadius}"
+    RequestedTheme="{x:Bind THEME}"
+    x:Class="To_Do.BackupContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:To_Do"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    Title="Local Backup"
+    PrimaryButtonText="Done">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Spacing="10">
+            <controls:Expander IsExpanded="True" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                <controls:Expander.Header>
+                    <Grid Padding="20">
+                        <Grid Visibility="Visible" x:Name="normalui"  Margin="-36,0,-80,0">
+
+                            <StackPanel Margin="15,0,55,0" Spacing="12" Orientation="Horizontal">
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" Glyph="&#xE74e;"/>
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" Text="Create a backup"/>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Visibility="Collapsed" x:Name="backupui" Orientation="Vertical" Margin="-36,0,-80,0">
+
+                            <StackPanel Spacing="15" Orientation="Horizontal" Margin="15,0,55,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="{x:Bind backupprogress.Value, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="%" Style="{ThemeResource TitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                                </StackPanel>
+                                <TextBlock VerticalAlignment="Center" Text="Backup in progress..." Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                            </StackPanel>
+                            <controls:ProgressBar x:Name="backupprogress" VerticalAlignment="Bottom" Value="0" HorizontalAlignment="Stretch" Margin="0,0,0,-20"/>
+                        </StackPanel>
+                    </Grid>
+                </controls:Expander.Header>
+                <controls:Expander.Content>
+                    <Grid>
+                        <StackPanel Spacing="10" Margin="-35,0,0,0" HorizontalAlignment="Left" Orientation="Vertical">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Choose an empty folder to store required data."/>
+                            </StackPanel>
+                            <Button Click="CreateBackup" Content="Create Backup"/>
+                        </StackPanel>
+                    </Grid>
+                </controls:Expander.Content>
+            </controls:Expander>
+
+            <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="170" Width="*"/>
+                        <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="17,15,10,15" Padding="0,0,0,0" VerticalAlignment="Stretch" Spacing="15" Orientation="Horizontal">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" Glyph="&#xE777;"/>
+                        <TextBlock Style="{ThemeResource BodyTextBlockStyle}" VerticalAlignment="Center" Text="Restore data from backup"/>
+                    </StackPanel>
+                    <Button VerticalAlignment="Center" Margin="14,0,17,0" Grid.Column="1" HorizontalAlignment="Right">
+                        <Button.Content>
+                            <TextBlock Text="Restore"/>
+                        </Button.Content>
+
+                    </Button>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</ContentDialog>
