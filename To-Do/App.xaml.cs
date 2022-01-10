@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -115,7 +114,6 @@ namespace To_Do
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
-                    Debug.WriteLine("Unsuspending from terminated state.");
                 }
 
                 // Place the frame in the current Window
@@ -127,12 +125,10 @@ namespace To_Do
                 if (rootFrame.Content == null)
                 {
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                    Debug.WriteLine("Root frame null");
                     JumplistTransferCode(e);
                 }
                 else
                 {
-                    Debug.WriteLine("Root frame not null");
                     JumplistTransferCode(e);
                 }
                 // Ensure the current window is active

@@ -25,7 +25,6 @@ namespace To_Do.NavigationPages
         public List<string> savingDescriptions;
 
         public static PendingTasks instance;
-        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public MainPage singletonReference = MainPage.ins;
         public int undoIndex;
         public string undoText;
@@ -57,19 +56,29 @@ namespace To_Do.NavigationPages
             UpdateBadge();
         }
 
-        private void InitializeData()
+        private async void InitializeData()
         {
             if (TaskItems == null)
             {
                 TaskItems = new ObservableCollection<TODOTask>();
                 listOfTasks.ItemsSource = TaskItems;
             }
-            if (localSettings.Values["Tasks"] != null)
+
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync("App_Essential_Data");
+
+            if (rootFolder != null)
             {
-                string jsonLoaded = localSettings.Values["Tasks"] as string;
-                string jsonOfDatesLoaded = localSettings.Values["DateOfTasks"] as string;
-                string jsonOfImpLoaded = localSettings.Values["ImportanceOfTasks"] as string;
-                string jsonOfStepsLoaded = localSettings.Values["Steps"] as string;
+                StorageFile descriptionFile = await rootFolder.GetFileAsync("pending_desc.json");
+                StorageFile datesFile = await rootFolder.GetFileAsync("pending_dates.json");
+                StorageFile importanceFile = await rootFolder.GetFileAsync("imp_desc.json");
+                StorageFile stepsFile = await rootFolder.GetFileAsync("pending_steps.json");
+
+                string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
+                string jsonOfDatesLoaded = await FileIO.ReadTextAsync(datesFile);
+                string jsonOfImpLoaded = await FileIO.ReadTextAsync(importanceFile);
+                string jsonOfStepsLoaded = await FileIO.ReadTextAsync(stepsFile);
+
                 List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
                 List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDatesLoaded);
                 List<bool> loadedImportance = JsonConvert.DeserializeObject<List<bool>>(jsonOfImpLoaded);

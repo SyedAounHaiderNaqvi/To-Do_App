@@ -13,7 +13,7 @@
     PrimaryButtonText="Done">
 
     <Grid>
-        <StackPanel Orientation="Vertical" Spacing="10">
+        <StackPanel Orientation="Vertical" Spacing="10" Width="400">
             <controls:Expander IsExpanded="True" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                 <controls:Expander.Header>
                     <Grid Padding="20">
@@ -21,7 +21,7 @@
 
                             <StackPanel Margin="15,0,55,0" Spacing="12" Orientation="Horizontal">
                                 <FontIcon Foreground="{ThemeResource SystemAccentColor}" Glyph="&#xE74e;"/>
-                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" Text="Create a backup"/>
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Normal" VerticalAlignment="Center" Text="Create a backup"/>
                             </StackPanel>
                         </Grid>
                         <StackPanel Visibility="Collapsed" x:Name="backupui" Orientation="Vertical" Margin="-36,0,-80,0">
@@ -31,7 +31,7 @@
                                     <TextBlock FontSize="20" VerticalAlignment="Center" Text="{x:Bind backupprogress.Value, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                                     <TextBlock FontSize="20" VerticalAlignment="Center" Text="%" Style="{ThemeResource TitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                                 </StackPanel>
-                                <TextBlock VerticalAlignment="Center" Text="Backup in progress..." Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                                <TextBlock VerticalAlignment="Center" Text="Backup in progress" FontWeight="Normal" Style="{ThemeResource SubtitleTextBlockStyle}"/>
                             </StackPanel>
                             <controls:ProgressBar x:Name="backupprogress" VerticalAlignment="Bottom" Value="0" HorizontalAlignment="Stretch" Margin="0,0,0,-20"/>
                         </StackPanel>
@@ -41,32 +41,49 @@
                     <Grid>
                         <StackPanel Spacing="10" Margin="-35,0,0,0" HorizontalAlignment="Left" Orientation="Vertical">
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="Choose an empty folder to store required data."/>
+                                <TextBlock Text="A folder will be created in the specified location to&#x0a;store the required data."/>
                             </StackPanel>
-                            <Button Click="CreateBackup" Content="Create Backup"/>
+                            <Button Click="CreateBackup" x:Name="backupbtn" Content="Create Backup"/>
                         </StackPanel>
                     </Grid>
                 </controls:Expander.Content>
             </controls:Expander>
 
-            <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="170" Width="*"/>
-                        <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Margin="17,15,10,15" Padding="0,0,0,0" VerticalAlignment="Stretch" Spacing="15" Orientation="Horizontal">
-                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" Glyph="&#xE777;"/>
-                        <TextBlock Style="{ThemeResource BodyTextBlockStyle}" VerticalAlignment="Center" Text="Restore data from backup"/>
-                    </StackPanel>
-                    <Button VerticalAlignment="Center" Margin="14,0,17,0" Grid.Column="1" HorizontalAlignment="Right">
-                        <Button.Content>
-                            <TextBlock Text="Restore"/>
-                        </Button.Content>
+            <controls:Expander IsExpanded="False" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                <controls:Expander.Header>
+                    <Grid Padding="20">
+                        <Grid Visibility="Visible" x:Name="normalrestoreui"  Margin="-36,0,-80,0">
 
-                    </Button>
-                </Grid>
-            </Border>
+                            <StackPanel Margin="15,0,55,0" Spacing="12" Orientation="Horizontal">
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" Glyph="&#xE777;"/>
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="Normal" VerticalAlignment="Center" Text="Restore data from backup"/>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Visibility="Collapsed" x:Name="restoringui" Orientation="Vertical" Margin="-36,0,-80,0">
+
+                            <StackPanel Spacing="15" Orientation="Horizontal" Margin="15,0,55,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="{x:Bind restoreprogressbar.Value, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                                    <TextBlock FontSize="20" VerticalAlignment="Center" Text="%" Style="{ThemeResource TitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                                </StackPanel>
+                                <TextBlock VerticalAlignment="Center" Text="Restoring data" FontWeight="Normal" Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                            </StackPanel>
+                            <controls:ProgressBar x:Name="restoreprogressbar" VerticalAlignment="Bottom" Value="0" HorizontalAlignment="Stretch" Margin="0,0,0,-20"/>
+                        </StackPanel>
+                    </Grid>
+                </controls:Expander.Header>
+                <controls:Expander.Content>
+                    <Grid>
+                        <StackPanel Spacing="10" Margin="-35,0,0,0" HorizontalAlignment="Left" Orientation="Vertical">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Navigate to the backup folder and the data will be&#x0a;restored."/>
+                            </StackPanel>
+                            <Button Click="RestoreData" x:Name="restorebtn" Content="Restore data"/>
+                            <TextBlock x:Name="RestoreErrorText" Visibility="Collapsed" Text="*Could not restore data. Check if you navigated to&#x0a;the right folder and all backup files are present." Foreground="{ThemeResource SystemErrorTextColor}"/>
+                        </StackPanel>
+                    </Grid>
+                </controls:Expander.Content>
+            </controls:Expander>
         </StackPanel>
     </Grid>
 </ContentDialog>

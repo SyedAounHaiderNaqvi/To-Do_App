@@ -3,19 +3,12 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
@@ -29,7 +22,6 @@ namespace To_Do.NavigationPages
         public List<string> savingDescriptions;
 
         public static MyDay instance;
-        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public MainPage singletonReference = MainPage.ins;
         public ContentDialog dialog;
         public int sortMethodIndex = 0;
@@ -57,19 +49,29 @@ namespace To_Do.NavigationPages
             UpdateBadge();
         }
 
-        private void InitializeData()
+        private async void InitializeData()
         {
             if (TaskItems == null)
             {
                 TaskItems = new ObservableCollection<TODOTask>();
                 listOfTasks.ItemsSource = TaskItems;
             }
-            if (localSettings.Values["MyDayTasks"] != null)
+
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync("App_Essential_Data");
+
+            if (rootFolder != null)
             {
-                string jsonLoaded = localSettings.Values["MyDayTasks"] as string;
-                string jsonOfDatesLoaded = localSettings.Values["MyDayDates"] as string;
-                string jsonOfImpLoaded = localSettings.Values["MyDayImps"] as string;
-                string jsonOfStepsLoaded = localSettings.Values["MyDaySteps"] as string;
+                StorageFile descriptionFile = await rootFolder.GetFileAsync("md_desc.json");
+                StorageFile datesFile = await rootFolder.GetFileAsync("md_dates.json");
+                StorageFile importanceFile = await rootFolder.GetFileAsync("md_imp_desc.json");
+                StorageFile stepsFile = await rootFolder.GetFileAsync("md_steps.json");
+
+                string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
+                string jsonOfDatesLoaded = await FileIO.ReadTextAsync(datesFile);
+                string jsonOfImpLoaded = await FileIO.ReadTextAsync(importanceFile);
+                string jsonOfStepsLoaded = await FileIO.ReadTextAsync(stepsFile);
+
                 List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
                 List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDatesLoaded);
                 List<bool> loadedImportance = JsonConvert.DeserializeObject<List<bool>>(jsonOfImpLoaded);
@@ -327,7 +329,6 @@ namespace To_Do.NavigationPages
             if (result == ContentDialogResult.Primary)
             {
                 //do create new task
-                Debug.WriteLine("creating new step");
                 TODOTask newStep = new TODOTask() { Description = EditTextBox.Text };
                 var list = new List<TODOTask>(TaskItems[index].SubTasks)
                 {

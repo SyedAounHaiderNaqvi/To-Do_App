@@ -695,8 +695,9 @@ namespace To_Do
             }
         }
 
-        public void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
+        public async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
         {
+            e.Handled = true;
             localSettings.Values["datediff"] = DateTime.Now.Date.ToString();
 
             PendingTasks ins = PendingTasks.instance;
@@ -766,19 +767,30 @@ namespace To_Do
             string myDayImpJsonFile = JsonConvert.SerializeObject(myDayImpsToSave);
             string myDayStepsJsonFile = JsonConvert.SerializeObject(myDayTaskStepsToSave);
 
-            localSettings.Values["Tasks"] = jsonFile;
-            localSettings.Values["TasksDone"] = compJsonFile;
-            localSettings.Values["DateOfTasks"] = dateJsonFile;
-            localSettings.Values["DateOfTasksDone"] = compdateJsonFile;
-            localSettings.Values["ImportanceOfTasks"] = importanceJsonFile;
-            localSettings.Values["Steps"] = stepsJsonFile;
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFolder rootFolder = await folder.CreateFolderAsync("App_Essential_Data", CreationCollisionOption.ReplaceExisting);
 
+            StorageFile pendingdescjson = await rootFolder.CreateFileAsync("pending_desc.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
+            StorageFile completeddescjson = await rootFolder.CreateFileAsync("comp_desc.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(completeddescjson, compJsonFile);
+            StorageFile pendingdatesjson = await rootFolder.CreateFileAsync("pending_dates.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
+            StorageFile compdatesjson = await rootFolder.CreateFileAsync("comp_dates.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(compdatesjson, compdateJsonFile);
+            StorageFile impdescjson = await rootFolder.CreateFileAsync("imp_desc.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
+            StorageFile pendingstepsjson = await rootFolder.CreateFileAsync("pending_steps.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
 
-            localSettings.Values["MyDaySteps"] = myDayStepsJsonFile;
-            localSettings.Values["MyDayTasks"] = myDayJsonFile;
-            localSettings.Values["MyDayDates"] = myDaydateJsonFile;
-            localSettings.Values["MyDayImps"] = myDayImpJsonFile;
-
+            StorageFile mydaydescjson = await rootFolder.CreateFileAsync("md_desc.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(mydaydescjson, myDayJsonFile);
+            StorageFile mydayimpjson = await rootFolder.CreateFileAsync("md_imp_desc.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(mydayimpjson, myDayImpJsonFile);
+            StorageFile mydaystepsjson = await rootFolder.CreateFileAsync("md_steps.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(mydaystepsjson, myDayStepsJsonFile);
+            StorageFile mydaydatejson = await rootFolder.CreateFileAsync("md_dates.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(mydaydatejson, myDaydateJsonFile);
             string deviceFamilyVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
             ulong version = ulong.Parse(deviceFamilyVersion);
             ulong build = (version & 0x00000000FFFF0000L) >> 16;
@@ -787,7 +799,7 @@ namespace To_Do
             {
                 CreateThreeTileNotifications();
             }
-
+            Application.Current.Exit();
             //// Get the blank badge XML payload for a badge number
             //XmlDocument badgeXml =
             //    BadgeUpdateManager.GetTemplateContent(BadgeTemplateType.BadgeNumber);

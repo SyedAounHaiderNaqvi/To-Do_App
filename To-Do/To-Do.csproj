@@ -209,7 +209,6 @@
     <Content Include="Images\complete.png" />
     <Content Include="Images\dark.jpg" />
     <Content Include="Images\eek.png" />
-    <Content Include="Images\floppy_disk.png" />
     <Content Include="Images\light.jpg" />
     <Content Include="Images\New Project %281%29.png" />
     <Content Include="Images\settingsIcon.png" />

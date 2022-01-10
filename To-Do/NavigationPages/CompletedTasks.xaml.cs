@@ -15,7 +15,6 @@ namespace To_Do.NavigationPages
     {
         public ObservableCollection<TODOTask> CompleteTasks;
         public static CompletedTasks instance;
-        ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public MainPage singletonReference = MainPage.ins;
 
         public CompletedTasks()
@@ -27,16 +26,24 @@ namespace To_Do.NavigationPages
             listOfTasks.UpdateLayout();
         }
 
-        private void InitializeData()
+        private async void InitializeData()
         {
             if (CompleteTasks == null)
             {
                 CompleteTasks = new ObservableCollection<TODOTask>();
             }
-            if (localSettings.Values["TasksDone"] != null)
+
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync("App_Essential_Data");
+
+            if (rootFolder != null)
             {
-                string jsonLoaded = localSettings.Values["TasksDone"] as string;
-                string jsonOfDateLoaded = localSettings.Values["DateOfTasksDone"] as string;
+                StorageFile descriptionFile = await rootFolder.GetFileAsync("comp_desc.json");
+                StorageFile datesFile = await rootFolder.GetFileAsync("comp_dates.json");
+
+                string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
+                string jsonOfDateLoaded = await FileIO.ReadTextAsync(datesFile);
+
                 List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
                 List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDateLoaded);
                 if (loadedDescriptions != null)
