@@ -697,7 +697,7 @@ namespace To_Do
 
         public async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
         {
-            e.Handled = true;
+            var def = e.GetDeferral();
             localSettings.Values["datediff"] = DateTime.Now.Date.ToString();
 
             PendingTasks ins = PendingTasks.instance;
@@ -799,7 +799,8 @@ namespace To_Do
             {
                 CreateThreeTileNotifications();
             }
-            Application.Current.Exit();
+            def.Complete();
+            //Application.Current.Exit();
             //// Get the blank badge XML payload for a badge number
             //XmlDocument badgeXml =
             //    BadgeUpdateManager.GetTemplateContent(BadgeTemplateType.BadgeNumber);

@@ -584,11 +584,11 @@
                                 <DataTemplate x:DataType="local:TODOTask">
                                     <Grid x:Name="rootGrid">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="75"/>
+                                            <ColumnDefinition Width="70"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <CheckBox x:Name="completecheckbox" Translation="-10,0,0" PointerCaptureLost="CheckBox_PointerCaptureLost" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}" Checked="CheckBox_Checked" Margin="38,0,10,0" Grid.Column="0" CornerRadius="10"/>
-                                        <StackPanel Spacing="10" VerticalAlignment="Center" Margin="10,0,130,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
+                                        <CheckBox x:Name="completecheckbox" Translation="-10,0,0" PointerCaptureLost="CheckBox_PointerCaptureLost" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}" Checked="CheckBox_Checked" Margin="25,0,10,0" Grid.Column="0" CornerRadius="10"/>
+                                        <StackPanel Spacing="10" VerticalAlignment="Center" Margin="-5,0,150,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
                                             <TextBlock Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Description, Mode=TwoWay}">
                                                 <TextBlock.TranslationTransition>
                                                     <Vector3Transition Duration="0:0:0.2"/>
@@ -605,23 +605,14 @@
                                                 <TextBlock x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind Date, Mode=OneWay}"/>
                                             </StackPanel>
                                         </StackPanel>
-                                        <StackPanel x:Name="BtnPanel" Spacing="10" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="5,10,10,10" Translation="60,0,0" Orientation="Horizontal">
-                                            <StackPanel.TranslationTransition>
-                                                <Vector3Transition Duration="0:0:0.2"/>
-                                            </StackPanel.TranslationTransition>
-                                            <StackPanel.OpacityTransition>
-                                                <ScalarTransition/>
-                                            </StackPanel.OpacityTransition>
+                                        <StackPanel x:Name="BtnPanel" Spacing="10" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="5,10,0,10" Orientation="Horizontal">
                                             <Button Click="AddStep" Margin="0,0,-4,0" DataContext="{Binding ElementName=UserControl}" x:Name="addStep" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="Add step">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE710;"/>
                                                 </Button.Content>
                                             </Button>
                                             <CheckBox Margin="0,-2,0,0" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
-                                            <Button Opacity="0" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
-                                                <Button.OpacityTransition>
-                                                    <ScalarTransition Duration="0:0:0.2"/>
-                                                </Button.OpacityTransition>
+                                            <Button x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE712;"/>
                                                 </Button.Content>
@@ -662,17 +653,14 @@
                                                                 <ColumnDefinition Width="*"/>
                                                                 <ColumnDefinition Width="50"/>
                                                             </Grid.ColumnDefinitions>
-                                                            <Grid x:Name="backplate" Margin="-10,-10,-10,-10" Opacity="0" Grid.ColumnSpan="4" Background="{ThemeResource ListViewItemPointerOverBackgroundThemeBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                            <Grid Background="{ThemeResource SystemAccentColor}" CornerRadius="{ThemeResource ListViewItemCornerRadius}" x:Name="backplate" Margin="-10,-10,-10,-10" Opacity="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                                                 <Grid.OpacityTransition>
                                                                     <ScalarTransition Duration="0:0:0.2"/>
                                                                 </Grid.OpacityTransition>
                                                             </Grid>
-                                                            <Grid Opacity="0" x:Name="rect" Translation="-10,0,0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="-10,-10,-10,-10">
-                                                                <Rectangle Width="7" Fill="{ThemeResource SystemControlForegroundAccentBrush}">
-                                                                </Rectangle>
-                                                                <Grid.TranslationTransition>
-                                                                    <Vector3Transition Duration="0:0:0.2"/>
-                                                                </Grid.TranslationTransition>
+                                                            <Grid Opacity="0" Margin="-10,-10,-10,-10" x:Name="rect" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                                <Border BorderBrush="{ThemeResource SystemAccentColor}" CornerRadius="{ThemeResource ListViewItemCornerRadius}" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                                </Border>
                                                                 <Grid.OpacityTransition>
                                                                     <ScalarTransition Duration="0:0:0.2"/>
                                                                 </Grid.OpacityTransition>

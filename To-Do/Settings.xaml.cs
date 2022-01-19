@@ -264,6 +264,7 @@ namespace To_Do
             gridItems.Add(memory);
             gridItems.Add(kde);
             gridItems.Add(orangeBlueTone);
+
         }
 
         private void navStyleCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -313,7 +314,6 @@ namespace To_Do
             titleBar.ForegroundColor = titleBar.ButtonHoverBackgroundColor;
             Application.Current.Resources["SystemAccentColorLight2"] = ((SolidColorBrush)n.borderBrush).Color;
             Application.Current.Resources["SystemAccentColor"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
-
 
             Application.Current.Resources["NavigationViewItemForegroundSelected"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
             Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];

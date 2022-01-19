@@ -53,7 +53,9 @@ namespace To_Do.NavigationPages
                         AddATask(loadedDescriptions[i], loadedDates[i]);
                     }
                 }
+
             }
+            MainPage.ins.initialLoadingUI.Visibility = Visibility.Collapsed;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

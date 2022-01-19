@@ -551,5 +551,8 @@
             </Grid>
         </controls:NavigationView>
         <controls:InfoBar Canvas.ZIndex="2" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:Name="change" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="45,60,45,50" IsOpen="False" Severity="Informational" Title="My Day" Message="Leftover task(s) from My Day have been shifted to Pending Tasks."/>
+        <Grid Canvas.ZIndex="100" x:FieldModifier="public" x:Name="initialLoadingUI" Background="#222222" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <controls:ProgressRing Foreground="{ThemeResource SystemAccentColor}" Width="50" Height="50" IsIndeterminate="True"/>
+        </Grid>
     </Grid>
 </Page>

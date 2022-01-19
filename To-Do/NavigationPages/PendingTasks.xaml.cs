@@ -15,6 +15,7 @@ using System.Threading;
 using Microsoft.UI.Xaml.Controls;
 using System.Linq;
 using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI;
 
 namespace To_Do.NavigationPages
 {
@@ -102,7 +103,9 @@ namespace To_Do.NavigationPages
                 newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
                 TaskItems = new ObservableCollection<TODOTask>(newList);
                 listOfTasks.ItemsSource = TaskItems;
+
             }
+            MainPage.ins.initialLoadingUI.Visibility = Visibility.Collapsed;
         }
 
         private void listOfTasks_LayoutUpdated(object sender, object e)
@@ -475,15 +478,9 @@ namespace To_Do.NavigationPages
                 var c = sender as Control;
                 var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
                 var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-                var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
                 panel.Translation = System.Numerics.Vector3.Zero;
                 panel.Opacity = 1;
-                btn.Opacity = 1;
-
-                btn.Translation = new System.Numerics.Vector3(18, 0, 0);
                 block.Translation = System.Numerics.Vector3.Zero;
-                var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
-                moreoptbutton.Opacity = 1;
             }
         }
 
@@ -492,12 +489,8 @@ namespace To_Do.NavigationPages
             var c = sender as Control;
             var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
             var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-            var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
             panel.Translation = new System.Numerics.Vector3(0, 20, 0);
             panel.Opacity = 0;
-            btn.Translation = new System.Numerics.Vector3(60, 0, 0);
-            var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
-            moreoptbutton.Opacity = 0;
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
         }
 
@@ -531,13 +524,9 @@ namespace To_Do.NavigationPages
             var c = cb.DataContext as Control;
             var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
             var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-            var btn = FindControl<StackPanel>(c, typeof(StackPanel), "BtnPanel");
             panel.Translation = new System.Numerics.Vector3(0, 20, 0);
             panel.Opacity = 0;
-            btn.Translation = new System.Numerics.Vector3(60, 0, 0);
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
-            var moreoptbutton = FindControl<Button>(c, typeof(Button), "moreOptBtn");
-            moreoptbutton.Opacity = 0;
         }
 
         private void SortingOptionClicked(object sender, RoutedEventArgs e)
@@ -591,11 +580,10 @@ namespace To_Do.NavigationPages
             CheckBox cb = sender as CheckBox;
             var c = cb.DataContext as Control;
             var strip = FindControl<Grid>(c, typeof(Grid), "rect");
-            strip.Translation = new System.Numerics.Vector3(-10, 0, 0);
             var delbtn = FindControl<Button>(c, typeof(Button), "delsubtask");
             delbtn.Translation = new System.Numerics.Vector3(50, 0, 0);
             delbtn.Opacity = 0;
-
+            strip.Opacity = 0;
             var back = FindControl<Grid>(c, typeof(Grid), "backplate");
             back.Opacity = 0;
         }
@@ -604,7 +592,6 @@ namespace To_Do.NavigationPages
         {
             var c = sender as Control;
             var strip = FindControl<Grid>(c, typeof(Grid), "rect");
-            strip.Translation = new System.Numerics.Vector3(-10, 0, 0);
             strip.Opacity = 0;
             var delbtn = FindControl<Button>(c, typeof(Button), "delsubtask");
             delbtn.Translation = new System.Numerics.Vector3(50, 0, 0);
@@ -620,14 +607,14 @@ namespace To_Do.NavigationPages
             {
                 var c = sender as Control;
                 var strip = FindControl<Grid>(c, typeof(Grid), "rect");
-                strip.Translation = new System.Numerics.Vector3(-2, 0, 0);
                 var delbtn = FindControl<Button>(c, typeof(Button), "delsubtask");
                 delbtn.Translation = System.Numerics.Vector3.Zero;
                 delbtn.Opacity = 1;
                 strip.Opacity = 1;
 
+
                 var back = FindControl<Grid>(c, typeof(Grid), "backplate");
-                back.Opacity = 0.4f;
+                back.Opacity = 0.2f;
             }
         }
 
@@ -636,7 +623,6 @@ namespace To_Do.NavigationPages
             Button cb = sender as Button;
             var c = cb.DataContext as Control;
             var strip = FindControl<Grid>(c, typeof(Grid), "rect");
-            strip.Translation = new System.Numerics.Vector3(-10, 0, 0);
             cb.Translation = new System.Numerics.Vector3(50, 0, 0);
             cb.Opacity = 0;
             strip.Opacity = 0;
