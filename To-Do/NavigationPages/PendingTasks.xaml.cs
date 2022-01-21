@@ -312,13 +312,13 @@ namespace To_Do.NavigationPages
             confirmDoneNotif.IsOpen = false;
         }
 
-        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        private void DeleteTask(object sender, RoutedEventArgs e)
         {
             // Delete a task
-            MenuFlyoutItem item = sender as MenuFlyoutItem;
-            UserControl top = item.DataContext as UserControl;
-            TODOTask context = top.DataContext as TODOTask;
-            TaskItems.Remove(context);
+            moreOptionsSplitView.IsPaneOpen = false;
+
+            TaskItems.Remove(selectedTask);
+            selectedTask = null;
             UpdateBadge();
         }
 
@@ -359,40 +359,6 @@ namespace To_Do.NavigationPages
             rootList.ItemsSource = TaskItems[index].SubTasks;
         }
 
-        private async void LaunchEditBox(object sender, RoutedEventArgs e)
-        {
-            dialog = new EditDialogContent();
-            Grid.SetRowSpan(dialog, 2);
-            dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
-            int index = 0;
-            MenuFlyoutItem item = sender as MenuFlyoutItem;
-            UserControl top = item.DataContext as UserControl;
-            TODOTask context = top.DataContext as TODOTask;
-            for (int i = 0; i < TaskItems.Count; i++)
-            {
-                if (TaskItems[i].Equals(context))
-                {
-                    //store index
-                    index = i;
-                }
-            }
-            //launch contentdialog
-            Grid grid = (Grid)dialog.Content;
-            TextBox EditTextBox = (TextBox)VisualTreeHelper.GetChild(grid, 0);
-            EditTextBox.Text = TaskItems[index].Description;
-            EditTextBox.SelectionStart = EditTextBox.Text.Length;
-            dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
-            EditBoxTextChanged(EditTextBox);
-            ContentDialogResult result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                //do change text
-                TaskItems[index].Description = EditTextBox.Text;
-                EditTextBox.Text = string.Empty;
-                Sort((string)SortingDropDown.Content);
-            }
-        }
-
         private async void AddStep(object sender, RoutedEventArgs e)
         {
             dialog = new EditDialogContent();
@@ -415,7 +381,7 @@ namespace To_Do.NavigationPages
             Grid grid = (Grid)dialog.Content;
             TextBox EditTextBox = (TextBox)VisualTreeHelper.GetChild(grid, 0);
             dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
-            EditBoxTextChanged(EditTextBox);
+            TextChanged(EditTextBox);
             ContentDialogResult result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
@@ -434,9 +400,9 @@ namespace To_Do.NavigationPages
             }
         }
 
-        private void EditBoxTextChanged(TextBox EditTextBox)
+        public void TextChanged(TextBox b)
         {
-            dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
+            dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(b.Text) && !string.IsNullOrWhiteSpace(b.Text);
         }
 
         public void UpdateBadge()
@@ -630,9 +596,43 @@ namespace To_Do.NavigationPages
             back.Opacity = 0;
         }
 
-        private void AddDueDate(object sender, RoutedEventArgs e)
-        {
+        TODOTask selectedTask = null;
 
+        private void OpenSplitView(object sender, RoutedEventArgs e)
+        {
+            Button item = sender as Button;
+            UserControl top = item.DataContext as UserControl;
+            selectedTask = top.DataContext as TODOTask;
+            edittasktextbox.Text = selectedTask.Description;
+            edittasktextbox.SelectionStart = edittasktextbox.Text.Length;
+            moreOptionsSplitView.IsPaneOpen = true;
+        }
+
+        private void CloseSplitView(object sender, RoutedEventArgs e)
+        {
+            moreOptionsSplitView.IsPaneOpen = false;
+        }
+
+        private void EditBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            confirmchangesBTN.IsEnabled = !string.IsNullOrEmpty(edittasktextbox.Text) && !string.IsNullOrWhiteSpace(edittasktextbox.Text);
+        }
+
+        private void SaveChanges(object sender, RoutedEventArgs e)
+        {
+            int index = 0;
+            for (int i = 0; i < TaskItems.Count; i++)
+            {
+                if (TaskItems[i].Equals(selectedTask))
+                {
+                    //store index
+                    index = i;
+                }
+            }
+            TaskItems[index].Description = edittasktextbox.Text;
+            moreOptionsSplitView.IsPaneOpen = false;
+            edittasktextbox.Text = string.Empty;
+            Sort((string)SortingDropDown.Content);
         }
     }
 

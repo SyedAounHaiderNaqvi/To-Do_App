@@ -614,29 +614,11 @@
                                                 </Button.Content>
                                             </Button>
                                             <CheckBox Margin="0,-2,0,0" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
-                                            <Button x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
+                                            <Button DataContext="{Binding ElementName=UserControl}" Click="OpenSplitView" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE712;"/>
                                                 </Button.Content>
-                                                <Button.Flyout>
-                                                    <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                                        <MenuFlyoutItem DataContext="{Binding ElementName=UserControl}" Click="LaunchEditBox" Text="Edit Task">
-                                                            <MenuFlyoutItem.Icon>
-                                                                <SymbolIcon Symbol="Edit"/>
-                                                            </MenuFlyoutItem.Icon>
-                                                        </MenuFlyoutItem>
-                                                        <MenuFlyoutItem DataContext="{Binding ElementName=UserControl}" Click="AddDueDate" Text="Add due date">
-                                                            <MenuFlyoutItem.Icon>
-                                                                <SymbolIcon Symbol="Calendar"/>
-                                                            </MenuFlyoutItem.Icon>
-                                                        </MenuFlyoutItem>
-                                                        <MenuFlyoutItem Text="Delete Task" Click="MenuFlyoutItem_Click" DataContext="{Binding ElementName=UserControl}">
-                                                            <MenuFlyoutItem.Icon>
-                                                                <SymbolIcon Symbol="Delete"/>
-                                                            </MenuFlyoutItem.Icon>
-                                                        </MenuFlyoutItem>
-                                                    </MenuFlyout>
-                                                </Button.Flyout>
+                                                 
                                             </Button>
                                         </StackPanel>
                                     </Grid>
@@ -754,12 +736,14 @@
                 <ScalarTransition/>
             </FontIcon.OpacityTransition>
         </FontIcon>
-        <SplitView Margin="0,-80,-1,-20" Grid.RowSpan="2" IsPaneOpen="True" DisplayMode="Overlay" PanePlacement="Right">
+        <SplitView x:Name="moreOptionsSplitView" Margin="0,-80,-1,-20" Grid.RowSpan="2" IsPaneOpen="True" DisplayMode="Overlay" PanePlacement="Right">
             <SplitView.Pane>
                 <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="10"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15" FontSize="20" FontWeight="SemiBold" Style="{ThemeResource SubheaderTextBlockStyle}" Text="More Options"/>
@@ -771,7 +755,7 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Edit task" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <TextBox PlaceholderText="Type task name" Margin="8" Grid.Row="1">
+                                <TextBox TextChanged="EditBoxTextChanged" x:Name="edittasktextbox" PlaceholderText="Type task name" Margin="8" Grid.Row="1">
                                     
                                 </TextBox>
                             </Grid>
@@ -783,21 +767,24 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Add due date" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <CalendarDatePicker VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" PlaceholderText="Pick a date"/>
+                                <CalendarDatePicker FirstDayOfWeek="Monday" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" PlaceholderText="Pick a date"/>
                             </Grid>
                         </Border>
                     </StackPanel>
-                    <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="40" Background="{ThemeResource LayerFillColorDefaultBrush}">
+                    <Button Click="SaveChanges" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Content="Save Changes" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="confirmchangesBTN" Grid.Row="2">
+                        
+                    </Button>
+                    <Grid Grid.Row="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="40" Background="{ThemeResource LayerFillColorDefaultBrush}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
-                        <Button ToolTipService.ToolTip="Close Pane" CornerRadius="0" Height="40" Width="40" Grid.Column="0">
+                        <Button Click="CloseSplitView" ToolTipService.ToolTip="Close Pane" CornerRadius="0" Height="40" Width="40" Grid.Column="0">
                             <FontIcon FontSize="17" Glyph="&#xE76C;"/>
                         </Button>
                         <TextBlock Text="Created 31 months ago" Foreground="{ThemeResource SystemBaseMediumHighColor}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
-                        <Button ToolTipService.ToolTip="Delete task" CornerRadius="0" Height="40" Width="40" Grid.Column="2">
+                        <Button Click="DeleteTask" ToolTipService.ToolTip="Delete task" CornerRadius="0" Height="40" Width="40" Grid.Column="2">
                             <FontIcon Foreground="{ThemeResource SystemControlErrorTextForegroundBrush}" FontSize="17" Glyph="&#xE74D;"/>
                         </Button>
                     </Grid>
