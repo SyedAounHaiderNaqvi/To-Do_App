@@ -630,6 +630,10 @@ namespace To_Do.NavigationPages
             back.Opacity = 0;
         }
 
+        private void AddDueDate(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class TODOTask : INotifyPropertyChanged
