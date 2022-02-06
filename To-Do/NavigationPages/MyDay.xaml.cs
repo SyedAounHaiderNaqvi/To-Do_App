@@ -37,7 +37,11 @@ namespace To_Do.NavigationPages
             UpdateBadge();
         }
 
-
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            MainPage.ins.parallax.Source = listOfTasks;
+        }
 
         public void AddATask(TODOTask newTask)
         {

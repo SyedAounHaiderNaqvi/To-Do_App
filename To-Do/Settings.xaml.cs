@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel;
-using Windows.Security.Authorization.AppCapabilityAccess;
 using Windows.Storage;
+using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
-using Windows.System;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -23,7 +21,6 @@ namespace To_Do
         public ObservableCollection<GridThemeItem> gridItems = new ObservableCollection<GridThemeItem>();
 
         public static Settings ins;
-        AppCapabilityAccessStatus status;
         public ContentDialog dialog;
 
         public Settings()
@@ -33,9 +30,13 @@ namespace To_Do
             ins = this;
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
             navStyleCombo.SelectedIndex = MainPage.ins.indexToParse;
-            AppCapability cap = AppCapability.Create("broadFileSystemAccess");
-            status = cap.CheckAccess();
             LoadGridItems();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            MainPage.ins.parallax.Source = scroller;
         }
 
         public void Settings_Loaded(object sender, RoutedEventArgs e)
@@ -57,37 +58,19 @@ namespace To_Do
                         btntoggle.IsOn = false;
                         bgimgbutton.Visibility = Visibility.Collapsed;
                         MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
-                        MainPage.ins.acrylic.Visibility = Visibility.Collapsed;
-                        MainPage.ins.acrylictint.Visibility = Visibility.Collapsed;
                         break;
                     case 1:
                         btntoggle.IsOn = true;
-                        if (status == AppCapabilityAccessStatus.DeniedByUser)
+                        bgimgbutton.Visibility = Visibility.Visible;
+
+                        if (localSettings.Values["token"] != null)
                         {
-                            Fallbackpanel.Visibility = Visibility.Visible;
-                            bgimgbutton.Visibility = Visibility.Collapsed;
-                            MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
-                            MainPage.ins.acrylic.Visibility = Visibility.Collapsed;
-                            MainPage.ins.acrylictint.Visibility = Visibility.Collapsed;
+                            MainPage.ins.bgIMG.Visibility = Visibility.Visible;
+
                         }
                         else
                         {
-                            Fallbackpanel.Visibility = Visibility.Collapsed;
-                            bgimgbutton.Visibility = Visibility.Visible;
-
-                            if (localSettings.Values["imgPath"] != null)
-                            {
-                                MainPage.ins.bgIMG.Visibility = Visibility.Visible;
-                                MainPage.ins.acrylic.Visibility = Visibility.Visible;
-                                MainPage.ins.acrylictint.Visibility = Visibility.Visible;
-
-                            }
-                            else
-                            {
-                                MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
-                                MainPage.ins.acrylic.Visibility = Visibility.Collapsed;
-                                MainPage.ins.acrylictint.Visibility = Visibility.Collapsed;
-                            }
+                            MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
                         }
                         break;
                     default:
@@ -96,7 +79,6 @@ namespace To_Do
             }
             else
             {
-                Fallbackpanel.Visibility = Visibility.Collapsed;
                 btntoggle.IsOn = false;
                 bgimgbutton.Visibility = Visibility.Collapsed;
                 localSettings.Values["useimg"] = 0;
@@ -431,30 +413,17 @@ namespace To_Do
             if (btntoggle.IsOn)
             {
                 localSettings.Values["useimg"] = 1;
-                if (status == AppCapabilityAccessStatus.DeniedByUser)
+                bgimgbutton.Visibility = Visibility.Visible;
+                MainPage.ins.bgIMG.Visibility = Visibility.Visible;
+                string token = (string)localSettings.Values["token"];
+                if (token != null)
                 {
-                    Fallbackpanel.Visibility = Visibility.Visible;
-                    bgimgbutton.Visibility = Visibility.Collapsed;
-                    MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
-                    MainPage.ins.acrylic.Visibility = Visibility.Collapsed;
-                    MainPage.ins.acrylictint.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    Fallbackpanel.Visibility = Visibility.Collapsed;
-                    bgimgbutton.Visibility = Visibility.Visible;
-                    MainPage.ins.bgIMG.Visibility = Visibility.Visible;
-                    MainPage.ins.acrylic.Visibility = Visibility.Visible;
-                    MainPage.ins.acrylictint.Visibility = Visibility.Visible;
-                    if (localSettings.Values["imgPath"] != null)
+                    if (StorageApplicationPermissions.FutureAccessList.ContainsItem(token))
                     {
-                        string path = (string)localSettings.Values["imgPath"];
-                        StorageFile file = await StorageFile.GetFileFromPathAsync(path);
+                        var file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(token);
                         if (file != null)
                         {
                             MainPage.ins.bgIMG.Visibility = Visibility.Visible;
-                            MainPage.ins.acrylic.Visibility = Visibility.Visible;
-                            MainPage.ins.acrylictint.Visibility = Visibility.Visible;
                             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
                             {
                                 BitmapImage bitmapImage = new BitmapImage();
@@ -466,8 +435,6 @@ namespace To_Do
                         else
                         {
                             MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
-                            MainPage.ins.acrylic.Visibility = Visibility.Collapsed;
-                            MainPage.ins.acrylictint.Visibility = Visibility.Collapsed;
                         }
                     }
                 }
@@ -475,13 +442,9 @@ namespace To_Do
             }
             else
             {
-
-                Fallbackpanel.Visibility = Visibility.Collapsed;
                 bgimgbutton.Visibility = Visibility.Collapsed;
                 localSettings.Values["useimg"] = 0;
                 MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
-                MainPage.ins.acrylic.Visibility = Visibility.Collapsed;
-                MainPage.ins.acrylictint.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -499,7 +462,7 @@ namespace To_Do
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file != null)
             {
-                localSettings.Values["imgPath"] = file.Path;
+                localSettings.Values["token"] = StorageApplicationPermissions.FutureAccessList.Add(file);
                 using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
                 {
                     BitmapImage bitmapImage = new BitmapImage();
@@ -507,18 +470,8 @@ namespace To_Do
                     await bitmapImage.SetSourceAsync(fileStream);
                     MainPage.ins.bgIMG.Source = bitmapImage;
                     MainPage.ins.bgIMG.Visibility = Visibility.Visible;
-                    MainPage.ins.acrylic.Visibility = Visibility.Visible;
-                    MainPage.ins.acrylictint.Visibility = Visibility.Visible;
                 }
             }
-        }
-
-        private async void LaunchSettings(object sender, RoutedEventArgs e)
-        {
-            MainPage.ins.OnCloseRequest(null, null);
-            var pageType = Type.GetType("To_Do.Settings");
-            MainPage.ins.ContentFrame.Navigate(pageType, null, new SuppressNavigationTransitionInfo());
-            _ = await Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-broadfilesystemaccess"));
         }
 
         private void OnRoundedCornerToggled(object sender, RoutedEventArgs e)

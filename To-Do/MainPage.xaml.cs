@@ -15,13 +15,13 @@ using Windows.UI;
 using Windows.UI.Xaml.Media;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.Security.Authorization.AppCapabilityAccess;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.System.Profile;
 using System.Linq;
 using Windows.UI.Core;
 using Windows.Foundation;
+using Windows.Storage.AccessCache;
 
 namespace To_Do
 {
@@ -43,7 +43,6 @@ namespace To_Do
         public static MainPage ins;
         public int indexToParse;
         public List<List<string>> tasksToParse = new List<List<string>>();
-        AppCapabilityAccessStatus status;
         public int PendingTasksCount = 0;
         public int MyDayTasksCount = 0;
         bool canSearch = true;
@@ -65,8 +64,6 @@ namespace To_Do
             Window.Current.SetTitleBar(AppTitleBar);
             coreTitleBar.LayoutMetricsChanged += (s, a) => UpdateTitleBarLayout(s);
             coreTitleBar.IsVisibleChanged += CoreTitlebar_IsVisibleChanged;
-            AppCapability cap = AppCapability.Create("broadFileSystemAccess");
-            status = cap.CheckAccess();
             ImageInitialize();
             RoundCornerInitialize();
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
@@ -113,6 +110,8 @@ namespace To_Do
             {
                 SetUpTimer();
             }
+            parallax.Source = PendingTasks.instance.listOfTasks;
+            LoseFocus(searchbox);
         }
 
         public void SetUpTimer()
@@ -172,8 +171,6 @@ namespace To_Do
                 {
                     case 0:
                         bgIMG.Visibility = Visibility.Collapsed;
-                        acrylic.Visibility = Visibility.Collapsed;
-                        acrylictint.Visibility = Visibility.Collapsed;
                         break;
                     case 1:
                         LoadIMG();
@@ -185,8 +182,6 @@ namespace To_Do
             else
             {
                 bgIMG.Visibility = Visibility.Collapsed;
-                acrylic.Visibility = Visibility.Collapsed;
-                acrylictint.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -287,26 +282,17 @@ namespace To_Do
 
         async void LoadIMG()
         {
-            if (localSettings.Values["imgPath"] != null)
+            string token = (string)localSettings.Values["token"];
+            if (token != null)
             {
-                if (status == AppCapabilityAccessStatus.DeniedByUser)
+                if (StorageApplicationPermissions.FutureAccessList.ContainsItem(token))
                 {
-                    bgIMG.Visibility = Visibility.Collapsed;
-                    acrylic.Visibility = Visibility.Collapsed;
-                    acrylictint.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    string path = (string)localSettings.Values["imgPath"];
-                    StorageFile file = await StorageFile.GetFileFromPathAsync(path);
+                    var file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(token);
                     if (file != null)
                     {
                         bgIMG.Visibility = Visibility.Visible;
-                        acrylic.Visibility = Visibility.Visible;
-                        acrylictint.Visibility = Visibility.Visible;
                         using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
                         {
-                            // Set the image source to the selected bitmap
                             BitmapImage bitmapImage = new BitmapImage();
 
                             await bitmapImage.SetSourceAsync(fileStream);
@@ -316,16 +302,12 @@ namespace To_Do
                     else
                     {
                         bgIMG.Visibility = Visibility.Collapsed;
-                        acrylic.Visibility = Visibility.Collapsed;
-                        acrylictint.Visibility = Visibility.Collapsed;
                     }
                 }
             }
             else
             {
                 bgIMG.Visibility = Visibility.Collapsed;
-                acrylic.Visibility = Visibility.Collapsed;
-                acrylictint.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -346,6 +328,7 @@ namespace To_Do
                 await Task.Delay(10);
                 ContentFrame.Navigate(typeof(PendingTasks));
                 nview.SelectedItem = nview.MenuItems[1];
+                parallax.Source = PendingTasks.instance.listOfTasks;
             }
             else if (argument == "GoToCompleted")
             {
@@ -354,6 +337,7 @@ namespace To_Do
                 await Task.Delay(10);
                 ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
                 nview.SelectedItem = nview.MenuItems[2];
+                parallax.Source = CompletedTasks.instance.listOfTasks;
             }
             else if (argument == "GoToSettings")
             {
@@ -363,6 +347,7 @@ namespace To_Do
                 await Task.Delay(10);
                 ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
                 nview.SelectedItem = nview.SettingsItem;
+                parallax.Source = Settings.ins.scroller;
             }
             else if (argument == "GoToMyDay")
             {
@@ -371,6 +356,7 @@ namespace To_Do
                 await Task.Delay(10);
                 ContentFrame.Navigate(typeof(MyDay));
                 nview.SelectedItem = nview.MenuItems[0];
+                parallax.Source = MyDay.instance.listOfTasks;
             }
         }
 
@@ -900,16 +886,10 @@ namespace To_Do
             }
             else if (sender.DisplayMode == Microsoft.UI.Xaml.Controls.NavigationViewDisplayMode.Minimal)
             {
-                bgIMG.Margin = new Thickness(0, -60, 0, 0);
-                acrylic.Margin = new Thickness(-4, -61, -4, -4);
-                acrylictint.Margin = new Thickness(-4, -61, -4, -4);
                 AppTitleBar.Margin = new Thickness(minimalIndent, currMargin.Top, currMargin.Right, currMargin.Bottom);
             }
             else
             {
-                bgIMG.Margin = new Thickness(0, -82, 0, 0);
-                acrylic.Margin = new Thickness(-4, -84, -4, -4);
-                acrylictint.Margin = new Thickness(-4, -84, -4, -4);
                 AppTitleBar.Margin = new Thickness(expandedIndent, currMargin.Top, currMargin.Right, currMargin.Bottom);
             }
         }
@@ -1076,6 +1056,18 @@ namespace To_Do
         public async void calc(int index, ListView choice)
         {
             await ScrollToIndex(choice, index);
+            searchbox.Text = string.Empty;
+            LoseFocus(searchbox);
+        }
+
+        private void LoseFocus(object sender)
+        {
+            var control = sender as Control;
+            var isTabStop = control.IsTabStop;
+            control.IsTabStop = false;
+            control.IsEnabled = false;
+            control.IsEnabled = true;
+            control.IsTabStop = isTabStop;
         }
 
         public ScrollViewer GetScrollViewer(DependencyObject element)
@@ -1209,16 +1201,6 @@ namespace To_Do
 
                 }
             }
-        }
-
-        public void Refresh()
-        {
-            LoadingUI.Visibility = Visibility.Visible;
-            ContentFrame.Navigate(typeof(CompletedTasks), tasksToParse, new SuppressNavigationTransitionInfo());
-            tasksToParse.Clear();
-            ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
-            nview.SelectedItem = nview.MenuItems[1];
-            LoadingUI.Visibility = Visibility.Collapsed;
         }
 
     }

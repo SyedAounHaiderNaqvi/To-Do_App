@@ -52,6 +52,5 @@
 
   <Capabilities>
 	  <rescap:Capability Name="confirmAppClose"/>
-	  <rescap:Capability Name="broadFileSystemAccess"/>
   </Capabilities>
 </Package>

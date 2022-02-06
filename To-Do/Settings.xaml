@@ -9,6 +9,14 @@
     mc:Ignorable="d">
     <Page.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="pane" Color="#aa111111"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="pane" Color="#aaffffff"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
             <Style x:Key="RadioButtonStyle1" TargetType="RadioButton">
                 <Setter Property="UseSystemFocusVisuals" Value="False"/>
                 <Setter Property="Template">
@@ -112,6 +120,100 @@
                     <Rectangle Opacity="0.4" Fill="Gray" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="1" Margin="0,30,0,0"/>
                 </Grid>
             </DataTemplate>
+            <Style x:Key="ExpanderStyle1" TargetType="controls:Expander">
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Background" Value="{ThemeResource ExpanderContentBackground}"/>
+                <Setter Property="MinWidth" Value="{ThemeResource FlyoutThemeMinWidth}"/>
+                <Setter Property="MinHeight" Value="{StaticResource ExpanderMinHeight}"/>
+                <Setter Property="BorderThickness" Value="{ThemeResource ExpanderContentDownBorderThickness}"/>
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource ExpanderContentBorderBrush}"/>
+                <Setter Property="Padding" Value="{StaticResource ExpanderContentPadding}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="controls:Expander">
+                            <Grid MaxWidth="{TemplateBinding MaxWidth}" MinWidth="{TemplateBinding MinWidth}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition x:Name="Row0" Height="Auto"/>
+                                    <RowDefinition x:Name="Row1" Height="*"/>
+                                </Grid.RowDefinitions>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="ExpandStates">
+                                        <VisualState x:Name="ExpandUp">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="{Binding TemplateSettings.ContentHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.333" KeySpline="0.0, 0.0, 0.0, 1.0" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CollapseDown">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="Collapsed"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.167" KeySpline="1.0, 1.0, 0.0, 1.0" Value="{Binding TemplateSettings.ContentHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="ExpandDown">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="{Binding TemplateSettings.NegativeContentHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.333" KeySpline="0.0, 0.0, 0.0, 1.0" Value="0"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="CollapseUp">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="Visibility">
+                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.167" Value="Collapsed"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpanderContent" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.167" KeySpline="1.0, 1.0, 0.0, 1.0" Value="{Binding TemplateSettings.NegativeContentHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="ExpandDirectionStates">
+                                        <VisualState x:Name="Down"/>
+                                        <VisualState x:Name="Up">
+                                            <VisualState.Setters>
+                                                <Setter Target="ExpanderHeader.Style" Value="{StaticResource ExpanderHeaderUpStyle}"/>
+                                                <Setter Target="ExpanderContent.BorderThickness" Value="{StaticResource ExpanderContentUpBorderThickness}"/>
+                                                <Setter Target="ExpanderHeader.(Grid.Row)" Value="1"/>
+                                                <Setter Target="ExpanderContentClip.(Grid.Row)" Value="0"/>
+                                                <Setter Target="Row0.Height" Value="*"/>
+                                                <Setter Target="Row1.Height" Value="Auto"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ToggleButton CornerRadius="{ThemeResource ControlCornerRadius}" x:Name="ExpanderHeader" AutomationProperties.AutomationId="ExpanderToggleButton" Background="{ThemeResource pane}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" HorizontalAlignment="Stretch" HorizontalContentAlignment="{StaticResource ExpanderHeaderHorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsEnabled="{TemplateBinding IsEnabled}" MinHeight="{TemplateBinding MinHeight}" Padding="{StaticResource ExpanderHeaderPadding}" Style="{StaticResource ExpanderHeaderDownStyle}" VerticalContentAlignment="{StaticResource ExpanderHeaderVerticalContentAlignment}"/>
+                                <Border x:Name="ExpanderContentClip" Grid.Row="1">
+                                    <Border x:Name="ExpanderContent" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource pane}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{StaticResource ExpanderContentDownBorderThickness}" HorizontalAlignment="Stretch" MinHeight="{TemplateBinding MinHeight}" Padding="{TemplateBinding Padding}" VerticalAlignment="Stretch" Visibility="Collapsed">
+                                        <Border.RenderTransform>
+                                            <CompositeTransform/>
+                                        </Border.RenderTransform>
+                                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Border>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
@@ -119,11 +221,10 @@
             <BrushTransition/>
         </Grid.BackgroundTransition>
         <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="34,33,18,41">
-            <ScrollViewer x:Name="scroller" VerticalScrollBarVisibility="Auto">
-                <StackPanel Padding="0,0,20,20" Spacing="10">
-
-                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColorDark2}" FontSize="18" Text="Appearance"/>
-                    <controls:Expander HorizontalContentAlignment="Center" HorizontalAlignment="Stretch">
+            <ScrollViewer x:FieldModifier="public" CornerRadius="{ThemeResource ControlCornerRadius}" x:Name="scroller" VerticalScrollBarVisibility="Auto">
+                <StackPanel Background="{ThemeResource ExpanderContentBackground}" Padding="20,10,20,20" Spacing="10">
+                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="Appearance"/>
+                    <controls:Expander Style="{StaticResource ExpanderStyle1}" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
                             <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
                                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="App theme"/>
@@ -186,7 +287,7 @@
                             </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>
-                    <controls:Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <controls:Expander Style="{StaticResource ExpanderStyle1}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
                             <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
                                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Color theme"/>
@@ -223,7 +324,7 @@
                             </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>
-                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource pane}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="170" Width="*"/>
@@ -243,7 +344,7 @@
                             </ComboBox>
                         </Grid>
                     </Border>
-                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource pane}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="170" Width="*"/>
@@ -257,7 +358,7 @@
                         </Grid>
                     </Border>
 
-                    <controls:Expander HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <controls:Expander Style="{StaticResource ExpanderStyle1}" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
                             <Grid Margin="0,0,-10,0">
                                 <Grid.ColumnDefinitions>
@@ -273,17 +374,6 @@
                         </controls:Expander.Header>
                         <controls:Expander.Content>
                             <StackPanel HorizontalAlignment="Left">
-                                <StackPanel Visibility="Collapsed" x:Name="Fallbackpanel" Spacing="10">
-                                    <TextBlock Text="*Allow access to file system to use custom images." Foreground="{ThemeResource SystemErrorTextColor}"/>
-                                    <Button Click="LaunchSettings">
-                                        <Button.Content>
-                                            <StackPanel Spacing="10" Orientation="Horizontal">
-                                                <FontIcon Glyph="&#xE8A7;"/>
-                                                <TextBlock Text="Launch Settings"/>
-                                            </StackPanel>
-                                        </Button.Content>
-                                    </Button>
-                                </StackPanel>
                                 <StackPanel x:Name="bgimgbutton" Orientation="Vertical" Spacing="10">
                                     <TextBlock Text="Note: Images could have bad contrast with colors."/>
                                     <Button Click="Chooseimg" Content="Choose Image"/>
@@ -291,8 +381,8 @@
                             </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>
-                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColorDark2}" Margin="0,20,0,0" FontSize="18" Text="Miscellaneous"/>
-                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,20,0,0" FontSize="18" Text="Miscellaneous"/>
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource pane}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="170" Width="*"/>
@@ -307,7 +397,7 @@
                             </Button>
                         </Grid>
                     </Border>
-                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource pane}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="170" Width="*"/>
@@ -327,6 +417,6 @@
                 </StackPanel>
             </ScrollViewer>
         </Border>
-        <TextBlock Margin="35,-45,35,10" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{ThemeResource TitleTextBlockStyle}" Text="Settings" Foreground="{ThemeResource SystemAccentColorDark2}" />
+        <TextBlock Margin="35,-60,35,10" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{ThemeResource TitleTextBlockStyle}" Text="Settings" />
     </Grid>
 </Page>

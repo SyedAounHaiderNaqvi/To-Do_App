@@ -31,6 +31,7 @@ namespace To_Do.NavigationPages
         public string undoText;
         public string undoDate;
         public bool undoStar;
+        public string redate;
         public List<TODOTask> undoSteps = new List<TODOTask>();
         public int delay = 3000;
         CancellationTokenSource token;
@@ -130,6 +131,7 @@ namespace To_Do.NavigationPages
                 }
             }
             base.OnNavigatedTo(e);
+            MainPage.ins.parallax.Source = listOfTasks;
         }
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -201,7 +203,6 @@ namespace To_Do.NavigationPages
                 StackPanel panel = VisualTreeHelper.GetChild(cbparent, 1) as StackPanel;
                 TextBlock block = VisualTreeHelper.GetChild(panel, 0) as TextBlock;
                 undoText = block.Text;
-                singletonReference.tasksToParse.Add(new List<string>() { block.Text, DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt") });
                 block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
                 await Task.Delay(100);
                 cb.IsChecked = false;
@@ -218,6 +219,8 @@ namespace To_Do.NavigationPages
                         undoIndex = i;
                     }
                 }
+                redate = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt");
+                CompletedTasks.instance.AddATask(block.Text, redate);
                 TaskItems.Remove(context);
                 UpdateBadge();
             }
@@ -239,7 +242,6 @@ namespace To_Do.NavigationPages
                 await Task.Delay(200);
                 confirmDoneNotif.IsOpen = false;
                 token.Cancel();
-                MainPage.ins.Refresh();
             }
         }
 
@@ -290,7 +292,7 @@ namespace To_Do.NavigationPages
 
         private async void UndoDelete(object sender, RoutedEventArgs e)
         {
-            singletonReference.tasksToParse.RemoveAt(singletonReference.tasksToParse.Count - 1);
+            CompletedTasks.instance.DeleteTaskFromExternal(redate);
             TODOTask reMadeTask = new TODOTask() { Description = undoText, Date = undoDate, IsStarred = undoStar };
             reMadeTask.SubTasks = new List<TODOTask>(undoSteps);
             TaskItems.Insert(undoIndex, reMadeTask);

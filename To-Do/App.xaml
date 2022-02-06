@@ -11,9 +11,14 @@
                 <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>
                         <ResourceDictionary x:Key="Dark">
+                            <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="0.9" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="#ee111111" Opacity="1" x:Key="ExpanderContentBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}"/>
+                            <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="0.9" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="#fe111111" Opacity="1" x:Key="ExpanderHeaderBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}"/>
+                            
                             <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="0.9" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="Black" Opacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=Opacity}" x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}" />
                         </ResourceDictionary>
                         <ResourceDictionary x:Key="Light">
+                            <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="0.9" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="#eeffffff" Opacity="1" x:Key="ExpanderContentBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}"/>
+                            <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="0.9" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="#feffffff" Opacity="1" x:Key="ExpanderHeaderBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}"/>
                             <AcrylicBrush TintTransitionDuration="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintTransitionDuration}" TintOpacity="0.8" TintLuminosityOpacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=TintLuminosityOpacity}" TintColor="White" Opacity="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=Opacity}" x:Key="NavigationViewDefaultPaneBackground" BackgroundSource="Backdrop" FallbackColor="{Binding Source={ThemeResource SystemControlAcrylicElementMediumHighBrush}, Path=FallbackColor}" />
                         </ResourceDictionary>
                     </ResourceDictionary.ThemeDictionaries>
@@ -104,6 +109,7 @@
                     <Color x:Key="SystemAccentColorLight2">#5395f5</Color>
                     <Color x:Key="SystemAccentColor">#5395f5</Color>
                     <SolidColorBrush x:Key="NavigationViewContentBackground" Color="#1c4785"/>
+                    
                     <SolidColorBrush x:Key="NavigationViewItemForegroundSelected" Color="{ThemeResource SystemAccentColorLight2}"/>
                     <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPointerOver" Color="{ThemeResource SystemAccentColorLight2}"/>
                     <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPressed" Color="{ThemeResource SystemAccentColorLight2}"/>

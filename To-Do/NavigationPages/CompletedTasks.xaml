@@ -9,6 +9,9 @@
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlPageBackgroundTransparentBrush}">
     <Grid>
+        <Grid.Resources>
+            <ThemeShadow x:Name="SharedShadow" />
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="5" MinHeight="5"/>
@@ -17,7 +20,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:TODOTask">
                     <UserControl x:Name="UserControl" PointerEntered="UserControl_PointerEntered" PointerExited="UserControl_PointerExited">
-                        <Border CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1" Background="{ThemeResource TextControlBackground}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                        <Border CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1" Background="{ThemeResource ExpanderHeaderBackground}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="70"/>
@@ -60,15 +63,15 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <StackPanel Margin="5,5,5,115" Padding="20,40,20,20" Background="Transparent" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
+        <StackPanel Translation="0,0,32" Shadow="{StaticResource SharedShadow}" Margin="5,5,5,115" Padding="20,40,20,20" Background="{ThemeResource ExpanderHeaderBackground}" CornerRadius="{ThemeResource OverlayCornerRadius}" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Width="70" Height="70" Stretch="Uniform" Source="/Images/eek.png" />
             </Grid>
-            <TextBlock HorizontalTextAlignment="Center" Foreground="{ThemeResource SystemAccentColorDark2}" HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Yikes, nothing here!"/>
-            <TextBlock HorizontalAlignment="Center" Foreground="{ThemeResource SystemAccentColorDark2}" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="View all your completed tasks here."/>
+            <TextBlock HorizontalTextAlignment="Center" HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Yikes, nothing here!"/>
+            <TextBlock HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="View all your completed tasks here."/>
         </StackPanel>
-        <TextBlock HorizontalAlignment="Left" Style="{ThemeResource TitleTextBlockStyle}" Grid.Row="0" Margin="35,-45,35,10" VerticalAlignment="Top" Text="Completed Tasks" Foreground="{ThemeResource SystemAccentColorDark2}"/>
-        <Button Click="ClearCompletedTaskList" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" x:Name="ClearListBtn" Margin="5,-40,35,10" VerticalContentAlignment="Center">
+        <TextBlock HorizontalAlignment="Left" Style="{ThemeResource TitleTextBlockStyle}" Grid.Row="0" Margin="35,-58,35,10" VerticalAlignment="Top" Text="Completed Tasks"/>
+        <Button Click="ClearCompletedTaskList" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" x:Name="ClearListBtn" Margin="5,-53,35,10" VerticalContentAlignment="Center">
             <Button.Content>
                 <StackPanel Spacing="8" Orientation="Horizontal">
                     <FontIcon FontSize="16" Glyph="&#xE74D;"/>

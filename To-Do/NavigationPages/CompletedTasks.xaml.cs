@@ -74,6 +74,7 @@ namespace To_Do.NavigationPages
             }
 
             ClearListBtn.Visibility = CompleteTasks.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            MainPage.ins.parallax.Source = listOfTasks;
         }
 
         public void AddATask(string taskDescription, string date)
@@ -83,6 +84,18 @@ namespace To_Do.NavigationPages
 
             listOfTasks.UpdateLayout();
             listOfTasks.ScrollIntoView(newTask);
+        }
+
+        public void DeleteTaskFromExternal(string date)
+        {
+            for (int i = 0; i < CompleteTasks.Count; i++)
+            {
+                if (CompleteTasks[i].Date.Equals(date))
+                {
+                    CompleteTasks.RemoveAt(i);
+                }
+            }
+            listOfTasks.UpdateLayout();
         }
 
         private void listOfTasks_LayoutUpdated(object sender, object e)

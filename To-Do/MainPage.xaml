@@ -11,23 +11,43 @@
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
         <DataTemplate x:Key="suggestionTemplate" x:DataType="local:QueryFormat">
-            <Grid HorizontalAlignment="Left" Width="270" MaxHeight="300" Background="Transparent">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <FontIcon HorizontalAlignment="Left" Grid.Column="0" Grid.RowSpan="2" Glyph="{x:Bind glyph}" Foreground="{ThemeResource SystemAccentColor}"/>
-                <TextBlock Grid.Column="1" TextWrapping="Wrap" Margin="0,5,70,0" Grid.Row="0" HorizontalAlignment="Left" Text="{x:Bind Title}"/>
-                <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="0,10,0,5" Grid.Row="1" Orientation="Horizontal" Spacing="5">
-                    <FontIcon Foreground="{ThemeResource SystemBaseMediumColor}" Margin="-2,0,0,0" Glyph="&#xE9AE;"/>
-                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" Margin="-4,0,0,0" Text="in"/>
-                    <TextBlock Foreground="{ThemeResource SystemAccentColor}" Text="{x:Bind location}"/>
-                </StackPanel>
-            </Grid>
+            <UserControl>
+                <Grid HorizontalAlignment="Left" Width="270" Background="Transparent">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup>
+                            <VisualState>
+                                <VisualState.StateTriggers>
+                                    <AdaptiveTrigger MinWindowWidth="700" />
+                                </VisualState.StateTriggers>
+
+                                <VisualState.Setters>
+                                    <Setter Target="t.Margin" Value="0,5,-100,0"/>
+
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="35"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <FontIcon HorizontalAlignment="Left" Grid.Column="0" Grid.RowSpan="2" Glyph="{x:Bind glyph}" Foreground="{ThemeResource SystemAccentColor}"/>
+                    <Grid HorizontalAlignment="Stretch" x:Name="t" Grid.Column="1" Margin="0,5,-5,0" Grid.Row="0">
+                        
+                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{x:Bind Title}"/>
+
+                    </Grid>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Left" Margin="0,10,0,5" Grid.Row="1" Orientation="Horizontal" Spacing="5">
+                        <FontIcon Foreground="{ThemeResource SystemBaseMediumColor}" Margin="-2,0,0,0" Glyph="&#xE9AE;"/>
+                        <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" Margin="-4,0,0,0" Text="in"/>
+                        <TextBlock Foreground="{ThemeResource SystemAccentColor}" Text="{x:Bind location}"/>
+                    </StackPanel>
+                </Grid>
+            </UserControl>
         </DataTemplate>
         <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
         <Style x:Key="NavigationBackButtonNormalStyle" TargetType="Button">
@@ -458,7 +478,7 @@
                                             </Grid>
                                         </Grid>
                                     </SplitView.Pane>
-                                    <Grid CornerRadius="{ThemeResource TopLeftNavViewContentCorner}" x:Name="ContentGrid" Background="{ThemeResource NavigationViewContentBackground}" BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}" BorderBrush="{ThemeResource NavigationViewContentGridBorderBrush}" Margin="{ThemeResource NavigationViewContentMargin}">
+                                    <Grid CornerRadius="{ThemeResource TopLeftNavViewContentCorner}" x:Name="ContentGrid" Background="Transparent" BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}" BorderBrush="{ThemeResource NavigationViewContentGridBorderBrush}" Margin="{ThemeResource NavigationViewContentMargin}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
@@ -470,7 +490,7 @@
                                         </Grid.RowDefinitions>
                                         <Grid x:Name="ContentTopPadding" Grid.ColumnSpan="2" Height="{Binding TemplateSettings.TopPadding, RelativeSource={RelativeSource Mode=TemplatedParent}}" Visibility="{Binding TemplateSettings.LeftPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                                         <Grid x:Name="ContentLeftPadding" Grid.Row="1"/>
-                                        <ContentControl x:Name="HeaderContent" Foreground="{ThemeResource SystemAccentColorDark2}" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" HorizontalContentAlignment="Stretch" IsTabStop="False" MinHeight="{StaticResource PaneToggleButtonHeight}" Grid.Row="1" Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}" VerticalContentAlignment="Stretch"/>
+                                        <ContentControl x:Name="HeaderContent" Foreground="{ThemeResource SystemAccentColor}" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" HorizontalContentAlignment="Stretch" IsTabStop="False" MinHeight="{StaticResource PaneToggleButtonHeight}" Grid.Row="1" Style="{StaticResource NavigationViewTitleHeaderContentControlTextStyle}" VerticalContentAlignment="Stretch"/>
                                         <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}" Grid.ColumnSpan="2" AutomationProperties.LandmarkType="Main" Margin="{ThemeResource NavigationViewContentPresenterMargin}" Grid.Row="2"/>
                                     </Grid>
                                 </SplitView>
@@ -487,6 +507,9 @@
         </Style>
     </Page.Resources>
     <Grid>
+        <Grid.Resources>
+            <ThemeShadow x:Name="SharedShadow" />
+        </Grid.Resources>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
@@ -504,7 +527,7 @@
         <Border IsHitTestVisible="True" Canvas.ZIndex="1" Margin="48,8,0,0" Height="40" VerticalAlignment="Top" Background="Transparent" x:Name="AppTitleBar">
         </Border>
         <Grid x:Name="searchBoxGrid" Margin="48,3,150,0" Canvas.ZIndex="2" HorizontalAlignment="Stretch" Height="40" MaxWidth="540" VerticalAlignment="Top">
-            <AutoSuggestBox HorizontalContentAlignment="Left" VerticalAlignment="Center" Height="35" UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search"/>
+            <AutoSuggestBox x:Name="searchbox" BorderThickness="0,1,0,0" Translation="0,0,16" Shadow="{StaticResource SharedShadow}" HorizontalContentAlignment="Left" VerticalAlignment="Center" Height="35" UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search"/>
         </Grid>
         <controls:NavigationView PaneTitle="To-Do" Canvas.ZIndex="2" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
             <controls:NavigationView.MenuItems>
@@ -540,11 +563,14 @@
                     </controls:NavigationViewItem.Content>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
-            <Grid>
-                <Image x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" Margin="0,-82,0,0" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
-                <Rectangle Fill="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:FieldModifier="public" x:Name="acrylic" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Stroke="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                <Rectangle x:FieldModifier="public" x:Name="acrylictint" IsHitTestVisible="False" MinWidth="200" Margin="-4,-84,0,0" Opacity="0.2" Fill="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Grid Background="{ThemeResource NavigationViewContentBackground}">
+                <Rectangle Fill="#06ffffff" IsHitTestVisible="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-90,0,0"/>
+                <controls:ParallaxView x:Name="parallax" x:FieldModifier="public" IsHitTestVisible="False" VerticalSourceStartOffset="0" VerticalSourceEndOffset="1800" VerticalShift="100" VerticalSourceOffsetKind="Absolute">
+                    <Image x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
+                    
+                </controls:ParallaxView>
                 <Frame x:FieldModifier="public" x:Name="ContentFrame"/>
+                <Rectangle VerticalAlignment="Top" Translation="0,0,32" IsHitTestVisible="False" Fill="Transparent" Margin="-15,-20,-15,0" Height="20" Shadow="{StaticResource SharedShadow}"/>
                 <Grid MinWidth="200" Margin="-4,-84,0,0" x:Name="LoadingUI" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemChromeMediumColor}">
                     <controls:ProgressRing Width="70" Height="70"/>
                 </Grid>
