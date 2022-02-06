@@ -569,8 +569,8 @@
                     <Image x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
                     
                 </controls:ParallaxView>
-                <Frame x:FieldModifier="public" x:Name="ContentFrame"/>
                 <Rectangle VerticalAlignment="Top" Translation="0,0,32" IsHitTestVisible="False" Fill="Transparent" Margin="-15,-20,-15,0" Height="20" Shadow="{StaticResource SharedShadow}"/>
+                <Frame x:FieldModifier="public" x:Name="ContentFrame"/>
                 <Grid MinWidth="200" Margin="-4,-84,0,0" x:Name="LoadingUI" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemChromeMediumColor}">
                     <controls:ProgressRing Width="70" Height="70"/>
                 </Grid>

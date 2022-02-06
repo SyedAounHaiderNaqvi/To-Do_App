@@ -710,7 +710,7 @@
                                 <ContentPresenter x:Name="HeaderContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Grid.Column="0" Content="{TemplateBinding Header}" Grid.ColumnSpan="2" Foreground="{ThemeResource TextControlHeaderForeground}" FontWeight="Normal" Margin="{ThemeResource TextBoxTopHeaderMargin}" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="Collapsed" x:DeferLoadStrategy="Lazy"/>
 
                                 <Border x:Name="BorderElement" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Grid.Column="0" Grid.ColumnSpan="2" Control.IsTemplateFocusTarget="True" MinWidth="{ThemeResource TextControlThemeMinWidth}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Grid.RowSpan="1" Grid.Row="1"/>
-                                <Border IsHitTestVisible="False" x:Name="bg" Opacity="0.5" Background="{ThemeResource SystemAltHighColor}" BorderThickness="0" CornerRadius="{TemplateBinding CornerRadius}" Grid.Column="0" Grid.ColumnSpan="2" MinWidth="{ThemeResource TextControlThemeMinWidth}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Grid.RowSpan="1" Grid.Row="1"/>
+                                <Border IsHitTestVisible="False" x:Name="bg" Opacity="0.1" Background="{ThemeResource SystemBaseLowColor}" BorderThickness="0" CornerRadius="{TemplateBinding CornerRadius}" Grid.Column="0" Grid.ColumnSpan="2" MinWidth="{ThemeResource TextControlThemeMinWidth}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Grid.RowSpan="1" Grid.Row="1"/>
                                 <ScrollViewer x:Name="ContentElement" AutomationProperties.AccessibilityView="Raw" Grid.Column="0" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled"/>
                                 <TextBlock x:Name="PlaceholderTextContentPresenter" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource Mode=TemplatedParent}, TargetNullValue={ThemeResource TextControlPlaceholderForeground}}" IsHitTestVisible="False" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" Text="{TemplateBinding PlaceholderText}"/>
                                 <Button x:Name="DeleteButton" AutomationProperties.AccessibilityView="Raw" BorderThickness="{TemplateBinding BorderThickness}" Grid.Column="1" FontSize="{TemplateBinding FontSize}" IsTabStop="False" Margin="{ThemeResource HelperButtonThemePadding}" MinWidth="34" Grid.Row="1" Style="{StaticResource DeleteButtonStyle}" VerticalAlignment="Stretch" Visibility="Collapsed"/>
@@ -767,24 +767,11 @@
                                                 </Button.Content>
                                             </Button>
                                             <CheckBox Margin="0,-2,0,0" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
-                                            <Button x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
+                                            <Button DataContext="{Binding ElementName=UserControl}" Click="OpenSplitView" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE712;"/>
                                                 </Button.Content>
-                                                <Button.Flyout>
-                                                    <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                                        <MenuFlyoutItem DataContext="{Binding ElementName=UserControl}" Click="LaunchEditBox" Text="Edit Task">
-                                                            <MenuFlyoutItem.Icon>
-                                                                <SymbolIcon Symbol="Edit"/>
-                                                            </MenuFlyoutItem.Icon>
-                                                        </MenuFlyoutItem>
-                                                        <MenuFlyoutItem Text="Delete Task" Click="MenuFlyoutItem_Click" DataContext="{Binding ElementName=UserControl}">
-                                                            <MenuFlyoutItem.Icon>
-                                                                <SymbolIcon Symbol="Delete"/>
-                                                            </MenuFlyoutItem.Icon>
-                                                        </MenuFlyoutItem>
-                                                    </MenuFlyout>
-                                                </Button.Flyout>
+
                                             </Button>
                                         </StackPanel>
                                     </Grid>
@@ -868,7 +855,7 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <StackPanel Translation="0,0,32" Shadow="{StaticResource SharedShadow}" Margin="5,5,5,0" Padding="20,40,20,20" Background="{ThemeResource ExpanderHeaderBackground}" CornerRadius="{ThemeResource OverlayCornerRadius}" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
+        <StackPanel Translation="0,0,32" Shadow="{StaticResource SharedShadow}" Margin="5,5,5,0" Padding="30,40,30,30" Background="{ThemeResource ExpanderHeaderBackground}" CornerRadius="{ThemeResource OverlayCornerRadius}" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Width="70" Height="70" Stretch="Uniform" Source="/Images/wand.png" />
             </Grid>
@@ -950,5 +937,60 @@
                 <ScalarTransition/>
             </FontIcon.OpacityTransition>
         </FontIcon>
+        <SplitView x:Name="moreOptionsSplitView" Margin="0,-80,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
+            <SplitView.Pane>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15" FontSize="20" FontWeight="SemiBold" Style="{ThemeResource SubheaderTextBlockStyle}" Text="More Options"/>
+                    <StackPanel Grid.Row="1" Spacing="10" Orientation="Vertical">
+                        <Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource SystemChromeMediumColor}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Edit task" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBox TextChanged="EditBoxTextChanged" x:Name="edittasktextbox" PlaceholderText="Type task name" Margin="8" Grid.Row="1">
+
+                                </TextBox>
+                            </Grid>
+                        </Border>
+                        <!--<Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Add due date" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <CalendarDatePicker FirstDayOfWeek="Monday" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" PlaceholderText="Pick a date"/>
+                            </Grid>
+                        </Border>-->
+                    </StackPanel>
+                    <Button Click="SaveChanges" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Content="Save Changes" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="confirmchangesBTN" Grid.Row="2">
+
+                    </Button>
+                    <Grid Grid.Row="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="40" Background="{ThemeResource LayerFillColorDefaultBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Click="CloseSplitView" ToolTipService.ToolTip="Close Pane" CornerRadius="0" Height="40" Width="40" Grid.Column="0">
+                            <FontIcon FontSize="17" Glyph="&#xE76C;"/>
+                        </Button>
+                        <!--<TextBlock Text="Created 31 months ago" Foreground="{ThemeResource SystemBaseMediumHighColor}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>-->
+                        <Button Click="DeleteTask" ToolTipService.ToolTip="Delete task" CornerRadius="0" Height="40" Width="40" Grid.Column="2">
+                            <FontIcon Foreground="{ThemeResource SystemControlErrorTextForegroundBrush}" FontSize="17" Glyph="&#xE74D;"/>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </SplitView.Pane>
+        </SplitView>
     </Grid>
 </Page>

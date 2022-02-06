@@ -63,12 +63,12 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <StackPanel Translation="0,0,32" Shadow="{StaticResource SharedShadow}" Margin="5,5,5,115" Padding="20,40,20,20" Background="{ThemeResource ExpanderHeaderBackground}" CornerRadius="{ThemeResource OverlayCornerRadius}" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
+        <StackPanel Translation="0,0,32" Shadow="{StaticResource SharedShadow}" Margin="5,5,5,115" Padding="20,40,20,30" Background="{ThemeResource ExpanderHeaderBackground}" CornerRadius="{ThemeResource OverlayCornerRadius}" x:Name="AllDone" Visibility="Visible" Orientation="Vertical" Spacing="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Width="70" Height="70" Stretch="Uniform" Source="/Images/eek.png" />
             </Grid>
-            <TextBlock HorizontalTextAlignment="Center" HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Yikes, nothing here!"/>
-            <TextBlock HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="View all your completed tasks here."/>
+            <TextBlock Margin="25,0,25,0" HorizontalTextAlignment="Center" HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Yikes, nothing here!"/>
+            <TextBlock Margin="25,0,25,10" HorizontalAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="View all your completed tasks here."/>
         </StackPanel>
         <TextBlock HorizontalAlignment="Left" Style="{ThemeResource TitleTextBlockStyle}" Grid.Row="0" Margin="35,-58,35,10" VerticalAlignment="Top" Text="Completed Tasks"/>
         <Button Click="ClearCompletedTaskList" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" x:Name="ClearListBtn" Margin="5,-53,35,10" VerticalContentAlignment="Center">

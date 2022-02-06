@@ -131,7 +131,7 @@ namespace To_Do
         public async void CallBackFunction(object sender, System.Timers.ElapsedEventArgs e)
         {
             (sender as System.Timers.Timer).Interval = (DateTime.Today.AddDays(1).Date - DateTime.Now).TotalMilliseconds;
-            
+
             //delete all tasks
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             () =>
@@ -849,23 +849,27 @@ namespace To_Do
             }
             else
             {
-                string selectedItemTag = selectedItem.Tag.ToString();
-                string pageName = "To_Do.NavigationPages." + selectedItemTag;
-                pageType = Type.GetType(pageName);
-                switch (selectedItemTag)
+                if (selectedItem != null)
                 {
-                    case "CompletedTasks":
-                        ContentFrame.Navigate(pageType, tasksToParse, info);
-                        tasksToParse.Clear();
-                        break;
-                    case "PendingTasks":
-                        ContentFrame.Navigate(pageType, null, info);
-                        break;
-                    case "MyDay":
-                        ContentFrame.Navigate(pageType, null, info);
-                        break;
-                    default:
-                        break;
+
+                    string selectedItemTag = selectedItem.Tag.ToString();
+                    string pageName = "To_Do.NavigationPages." + selectedItemTag;
+                    pageType = Type.GetType(pageName);
+                    switch (selectedItemTag)
+                    {
+                        case "CompletedTasks":
+                            ContentFrame.Navigate(pageType, tasksToParse, info);
+                            tasksToParse.Clear();
+                            break;
+                        case "PendingTasks":
+                            ContentFrame.Navigate(pageType, null, info);
+                            break;
+                        case "MyDay":
+                            ContentFrame.Navigate(pageType, null, info);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
             LoadingUI.Visibility = Visibility.Collapsed;

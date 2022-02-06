@@ -15,7 +15,6 @@ using System.Threading;
 using Microsoft.UI.Xaml.Controls;
 using System.Linq;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI;
 
 namespace To_Do.NavigationPages
 {
