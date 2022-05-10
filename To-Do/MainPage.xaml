@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
@@ -37,7 +38,7 @@
                     </Grid.ColumnDefinitions>
                     <FontIcon HorizontalAlignment="Left" Grid.Column="0" Grid.RowSpan="2" Glyph="{x:Bind glyph}" Foreground="{ThemeResource SystemAccentColor}"/>
                     <Grid HorizontalAlignment="Stretch" x:Name="t" Grid.Column="1" Margin="0,5,-5,0" Grid.Row="0">
-                        
+
                         <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{x:Bind Title}"/>
 
                     </Grid>
@@ -387,7 +388,7 @@
                                     </Grid>
                                     <Border x:Name="TopNavContentOverlayAreaGrid" Child="{TemplateBinding ContentOverlay}"/>
                                 </StackPanel>
-                                <SplitView x:Name="RootSplitView" CornerRadius="{ThemeResource NavViewSplitViewCorners}" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsTabStop="False" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{ThemeResource NavigationViewDefaultPaneBackground}" Grid.Row="1">
+                                <SplitView x:Name="RootSplitView" Margin="0,-1,0,-1" CornerRadius="{ThemeResource NavViewSplitViewCorners}" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsTabStop="False" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{ThemeResource NavigationViewDefaultPaneBackground}" Grid.Row="1">
                                     <SplitView.Pane>
                                         <Grid x:Name="PaneContentGrid" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" HorizontalAlignment="Left" Margin="{ThemeResource NavigationViewPaneContentGridMargin}" Visibility="{Binding TemplateSettings.LeftPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <Grid.RowDefinitions>
@@ -478,7 +479,7 @@
                                             </Grid>
                                         </Grid>
                                     </SplitView.Pane>
-                                    <Grid CornerRadius="{ThemeResource TopLeftNavViewContentCorner}" x:Name="ContentGrid" Background="Transparent" BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}" BorderBrush="{ThemeResource NavigationViewContentGridBorderBrush}" Margin="{ThemeResource NavigationViewContentMargin}">
+                                    <Grid CornerRadius="0" x:Name="ContentGrid" BorderThickness="{ThemeResource NavigationViewContentGridBorderThickness}" BorderBrush="{ThemeResource NavigationViewContentGridBorderBrush}" Margin="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
@@ -512,24 +513,43 @@
         </Grid.Resources>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState>
+                <VisualState x:Name="ExpandedState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="700" />
+                        <AdaptiveTrigger MinWindowWidth="860" />
                     </VisualState.StateTriggers>
 
-                    <VisualState.Setters>
-                        <Setter Target="searchBoxGrid.Margin" Value="150,3,150,0"/>
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames
+       Storyboard.TargetName="serchgrid"
+       Storyboard.TargetProperty="X"
+       Duration="0:0:0.07" EnableDependentAnimation="True">
 
-                    </VisualState.Setters>
+                            <LinearDoubleKeyFrame Value="50" KeyTime="0:0:0.07" />
+
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="CollapsedState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames
+       Storyboard.TargetName="serchgrid"
+       Storyboard.TargetProperty="X"
+       Duration="0:0:0.07" EnableDependentAnimation="True">
+
+                            <LinearDoubleKeyFrame Value="0" KeyTime="0:0:0.07" />
+
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Border IsHitTestVisible="True" Canvas.ZIndex="1" Margin="48,8,0,0" Height="40" VerticalAlignment="Top" Background="Transparent" x:Name="AppTitleBar">
+        <Border IsHitTestVisible="True" Background="Transparent" Margin="48,0,0,0" Height="48" VerticalAlignment="Top" x:Name="AppTitleBar">
         </Border>
-        <Grid x:Name="searchBoxGrid" Margin="48,3,150,0" Canvas.ZIndex="2" HorizontalAlignment="Stretch" Height="40" MaxWidth="540" VerticalAlignment="Top">
-            <AutoSuggestBox x:Name="searchbox" BorderThickness="0,1,0,0" Translation="0,0,16" Shadow="{StaticResource SharedShadow}" HorizontalContentAlignment="Left" VerticalAlignment="Center" Height="35" UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search"/>
-        </Grid>
-        <controls:NavigationView PaneTitle="To-Do" Canvas.ZIndex="2" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
+        
+        <controls:NavigationView PaneTitle="To-Do" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
             <controls:NavigationView.MenuItems>
                 <controls:NavigationViewItem ToolTipService.ToolTip="My Day" Tag="MyDay">
                     <controls:NavigationViewItem.Icon>
@@ -564,12 +584,20 @@
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>
             <Grid Background="{ThemeResource NavigationViewContentBackground}">
-                <Rectangle Fill="#06ffffff" IsHitTestVisible="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,-90,0,0"/>
-                <controls:ParallaxView x:Name="parallax" x:FieldModifier="public" IsHitTestVisible="False" VerticalSourceStartOffset="0" VerticalSourceEndOffset="1800" VerticalShift="100" VerticalSourceOffsetKind="Absolute">
+                <Rectangle Fill="{ThemeResource NavigationViewContentBackground}" IsHitTestVisible="False" VerticalAlignment="top" Height="85" HorizontalAlignment="Stretch" Margin="0,-85,0,0">
+                </Rectangle>
+                <controls:ParallaxView Margin="0,-83,0,0" x:Name="parallax" x:FieldModifier="public" IsHitTestVisible="False" VerticalSourceStartOffset="0" VerticalSourceEndOffset="0" VerticalShift="0" VerticalSourceOffsetKind="Absolute">
+                    <!--VerticleSourceEndOffset=1800, VerticalShift=100-->
                     <Image x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
-                    
+
                 </controls:ParallaxView>
-                <Rectangle VerticalAlignment="Top" Translation="0,0,32" IsHitTestVisible="False" Fill="Transparent" Margin="-15,-20,-15,0" Height="20" Shadow="{StaticResource SharedShadow}"/>
+
+                <Grid x:Name="searchBoxGrid" Margin="35,-77,150,0" Height="40" HorizontalAlignment="Stretch" MaxWidth="540" VerticalAlignment="Top">
+                    <Grid.RenderTransform>
+                        <TranslateTransform x:Name="serchgrid"/>
+                    </Grid.RenderTransform>
+                    <AutoSuggestBox x:Name="searchbox" BorderThickness="0,1,0,0" Translation="0,0,16" Shadow="{StaticResource SharedShadow}" HorizontalContentAlignment="Left" VerticalAlignment="Center" Height="35" UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Type here to search" AutomationProperties.Name="Search"/>
+                </Grid>
                 <Frame x:FieldModifier="public" x:Name="ContentFrame"/>
                 <Grid MinWidth="200" Margin="-4,-84,0,0" x:Name="LoadingUI" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemChromeMediumColor}">
                     <controls:ProgressRing Width="70" Height="70"/>

@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:toolcontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls">
     <Page.Resources>
         <ResourceDictionary>
@@ -722,7 +723,7 @@
             </Style>
         </ResourceDictionary>
     </Page.Resources>
-    <Grid Margin="0,0,0,20">
+    <Grid Margin="0,34,0,20">
         <Grid.Resources>
             <ThemeShadow x:Name="SharedShadow" />
         </Grid.Resources>
@@ -730,7 +731,7 @@
             <RowDefinition/>
             <RowDefinition MinHeight="80" Height="80"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" Margin="35,30,19,0" x:FieldModifier="public"  DragItemsCompleted="listOfTasks_DragItemsCompleted" CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0"  LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{x:Bind TaskItems}">
+        <ListView Grid.Row="0" Margin="35,15,19,0" x:FieldModifier="public"  DragItemsCompleted="listOfTasks_DragItemsCompleted" CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0"  LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{x:Bind TaskItems}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:TODOTask">
                     <UserControl PointerEntered="UserControl_PointerEntered" PointerExited="UserControl_PointerExited" x:Name="UserControl">
@@ -774,6 +775,7 @@
 
                                             </Button>
                                         </StackPanel>
+                                        <Rectangle Margin="-20,0,-70,-1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Fill="{ThemeResource SystemChromeAltHighColor}" IsHitTestVisible="False" Grid.ColumnSpan="2" Height="1"/>
                                     </Grid>
                                 </DataTemplate>
                             </controls:Expander.HeaderTemplate>
@@ -863,9 +865,12 @@
             <TextBlock HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="My Day list refreshes every day for your daily tasks."/>
         </StackPanel>
         <StackPanel Grid.Row="0" HorizontalAlignment="Left" Margin="35,-70,35,10" VerticalAlignment="Top" Orientation="Vertical">
-            
-            <TextBlock x:Name="title" Style="{ThemeResource TitleTextBlockStyle}" Text="My Day"/>
-            <TextBlock x:FieldModifier="public" x:Name="TodayTxt" Style="{ThemeResource BodyTextBlockStyle}"/>
+            <toolcontrols:DropShadowPanel BlurRadius="8" ShadowOpacity="0.5" OffsetX="0" OffsetY="0" Color="Black" IsMasked="True">
+                <TextBlock x:Name="title" Style="{ThemeResource TitleTextBlockStyle}" Text="My Day"/>
+            </toolcontrols:DropShadowPanel>
+            <toolcontrols:DropShadowPanel BlurRadius="8" ShadowOpacity="0.5" OffsetX="0" OffsetY="0" Color="Black" IsMasked="True">
+                <TextBlock x:FieldModifier="public" x:Name="TodayTxt" Style="{ThemeResource BodyTextBlockStyle}"/>
+            </toolcontrols:DropShadowPanel>
         </StackPanel>
 
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="35,-53,35,10">
@@ -875,61 +880,67 @@
                 <ColumnDefinition Width="9"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="0,0,7,0" Width="30" Height="32" CornerRadius="{ThemeResource ControlCornerRadius}" ToolTipService.ToolTip="Suggestions">
-                <Button.Content>
-                    <FontIcon Margin="-5,0,-5,0" FontSize="16" Glyph="&#xE82F;"/>
-                </Button.Content>
-                <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem Click="SuggestionChosen" Text="Birthday">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xEA3A;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                        <MenuFlyoutItem Click="SuggestionChosen" Text="Yoga">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xEA3A;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                        <MenuFlyoutItem Click="SuggestionChosen" Text="Consumables">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xEA3A;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                        <MenuFlyoutItem Click="SuggestionChosen" Text="Groceries">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xEA3A;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                        <MenuFlyoutItem Click="SuggestionChosen" Text="Visit dentist">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xEA3A;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                        <MenuFlyoutItem Click="SuggestionChosen" Text="Prepare research paper">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xEA3A;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                        <MenuFlyoutItem Click="SuggestionChosen" Text="Office meeting">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon Glyph="&#xEA3A;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                    </MenuFlyout>
-                </Button.Flyout>
-            </Button>
-            <FontIcon Grid.Column="1" VerticalAlignment="Center" Glyph="&#xE8CB;" ToolTipService.ToolTip="Sort by"/>
-            <controls:DropDownButton x:Name="SortingDropDown" ToolTipService.ToolTip="Sort by" Content="Time Created" Grid.Column="3" VerticalAlignment="Center">
-                <controls:DropDownButton.Flyout>
-                    <MenuFlyout Placement="Bottom">
-                        <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="b" IsChecked="True" Click="SortingOptionClicked" Text="Time Created"/>
-                        <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="b" Click="SortingOptionClicked" Text="Text"/>
-                        <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="b" Click="SortingOptionClicked" Text="Importance"/>
-                    </MenuFlyout>
-                </controls:DropDownButton.Flyout>
+            <Border Width="30" Height="32" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" Grid.Column="0" Margin="0,0,7,0">
 
-            </controls:DropDownButton>
+                <Button Width="30" Height="32" CornerRadius="{ThemeResource ControlCornerRadius}" ToolTipService.ToolTip="Suggestions">
+                    <Button.Content>
+                        <FontIcon Margin="-5,0,-5,0" FontSize="16" Glyph="&#xE82F;"/>
+                    </Button.Content>
+                    <Button.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Click="SuggestionChosen" Text="Birthday">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEA3A;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Click="SuggestionChosen" Text="Yoga">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEA3A;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Click="SuggestionChosen" Text="Consumables">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEA3A;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Click="SuggestionChosen" Text="Groceries">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEA3A;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Click="SuggestionChosen" Text="Visit dentist">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEA3A;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Click="SuggestionChosen" Text="Prepare research paper">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEA3A;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Click="SuggestionChosen" Text="Office meeting">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon Glyph="&#xEA3A;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </Border>
+            <FontIcon Grid.Column="1" VerticalAlignment="Center" Glyph="&#xE8CB;" ToolTipService.ToolTip="Sort by"/>
+            <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" Grid.Column="3" VerticalAlignment="Center">
+                
+                <controls:DropDownButton x:Name="SortingDropDown" ToolTipService.ToolTip="Sort by" Content="Time Created">
+                    <controls:DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="b" IsChecked="True" Click="SortingOptionClicked" Text="Time Created"/>
+                            <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="b" Click="SortingOptionClicked" Text="Text"/>
+                            <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="b" Click="SortingOptionClicked" Text="Importance"/>
+                        </MenuFlyout>
+                    </controls:DropDownButton.Flyout>
+
+                </controls:DropDownButton>
+            </Border>
         </Grid>
         <TextBox Translation="0,0,32" Shadow="{StaticResource SharedShadow}" BorderThickness="0" Style="{ThemeResource TextBoxStyle1}" GotFocus="NewTaskBox_GotFocus" LostFocus="NewTaskBox_LostFocus" KeyDown="NewTaskBox_KeyDown" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" VerticalContentAlignment="Center" PlaceholderText="Add a new task" Height="50" Padding="50,15,10,10" Margin="35,5,35,20" x:Name="NewTaskBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
         <FontIcon IsHitTestVisible="False" x:Name="boxIcon" Width="20" Height="20" Margin="55,0,0,15" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Glyph="&#xE710;">
@@ -937,19 +948,17 @@
                 <ScalarTransition/>
             </FontIcon.OpacityTransition>
         </FontIcon>
-        <SplitView x:Name="moreOptionsSplitView" Margin="0,-80,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
+        <SplitView x:Name="moreOptionsSplitView" Margin="0,-120,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
             <SplitView.Pane>
-                <Grid >
+                <Grid Margin="0,30,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15" FontSize="20" FontWeight="SemiBold" Style="{ThemeResource SubheaderTextBlockStyle}" Text="More Options"/>
                     <StackPanel Grid.Row="1" Spacing="10" Orientation="Vertical">
-                        <Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource SystemChromeMediumColor}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
+                        <Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
@@ -972,20 +981,20 @@
                             </Grid>
                         </Border>-->
                     </StackPanel>
-                    <Button Click="SaveChanges" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Content="Save Changes" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="confirmchangesBTN" Grid.Row="2">
-
-                    </Button>
-                    <Grid Grid.Row="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="40" Background="{ThemeResource LayerFillColorDefaultBrush}">
+                    <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="50">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-                        <Button Click="CloseSplitView" ToolTipService.ToolTip="Close Pane" CornerRadius="0" Height="40" Width="40" Grid.Column="0">
+                        <Button Height="40" Width="40" Margin="10,0,5,10" Click="CloseSplitView" ToolTipService.ToolTip="Close Pane" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="0">
                             <FontIcon FontSize="17" Glyph="&#xE76C;"/>
                         </Button>
+                        <Button Click="SaveChanges" Margin="0,0,0,10" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Content="Save Changes" VerticalAlignment="Center" Height="40" Width="150" HorizontalAlignment="Center" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="1" x:Name="confirmchangesBTN" Grid.Row="2">
+
+                        </Button>
                         <!--<TextBlock Text="Created 31 months ago" Foreground="{ThemeResource SystemBaseMediumHighColor}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>-->
-                        <Button Click="DeleteTask" ToolTipService.ToolTip="Delete task" CornerRadius="0" Height="40" Width="40" Grid.Column="2">
+                        <Button Height="40" Width="40" Margin="5,0,10,10" HorizontalAlignment="Right" Click="DeleteTask" ToolTipService.ToolTip="Delete task" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="2">
                             <FontIcon Foreground="{ThemeResource SystemControlErrorTextForegroundBrush}" FontSize="17" Glyph="&#xE74D;"/>
                         </Button>
                     </Grid>

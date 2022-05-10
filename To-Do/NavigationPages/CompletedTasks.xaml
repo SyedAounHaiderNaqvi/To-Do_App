@@ -6,9 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:toolcontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlPageBackgroundTransparentBrush}">
-    <Grid>
+    <Grid Margin="0,34,0,20">
         <Grid.Resources>
             <ThemeShadow x:Name="SharedShadow" />
         </Grid.Resources>
@@ -16,7 +17,7 @@
             <RowDefinition/>
             <RowDefinition Height="5" MinHeight="5"/>
         </Grid.RowDefinitions>
-        <ListView x:FieldModifier="public" Grid.Row="0" SelectionMode="None" BorderThickness="0" Margin="35,30,19,36" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{x:Bind CompleteTasks}">
+        <ListView x:FieldModifier="public" Grid.Row="0" SelectionMode="None" BorderThickness="0" Margin="35,15,19,36" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{x:Bind CompleteTasks}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:TODOTask">
                     <UserControl x:Name="UserControl" PointerEntered="UserControl_PointerEntered" PointerExited="UserControl_PointerExited">
@@ -70,14 +71,19 @@
             <TextBlock Margin="25,0,25,0" HorizontalTextAlignment="Center" HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Yikes, nothing here!"/>
             <TextBlock Margin="25,0,25,10" HorizontalAlignment="Center" HorizontalTextAlignment="Center" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="View all your completed tasks here."/>
         </StackPanel>
-        <TextBlock HorizontalAlignment="Left" Style="{ThemeResource TitleTextBlockStyle}" Grid.Row="0" Margin="35,-58,35,10" VerticalAlignment="Top" Text="Completed Tasks"/>
-        <Button Click="ClearCompletedTaskList" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" x:Name="ClearListBtn" Margin="5,-53,35,10" VerticalContentAlignment="Center">
-            <Button.Content>
-                <StackPanel Spacing="8" Orientation="Horizontal">
-                    <FontIcon FontSize="16" Glyph="&#xE74D;"/>
-                    <TextBlock Text="Clear list"/>
-                </StackPanel>
-            </Button.Content>
-        </Button>
+        <toolcontrols:DropShadowPanel Grid.Row="0" Margin="35,-58,35,10" VerticalAlignment="Top" BlurRadius="8" ShadowOpacity="0.5" OffsetX="0" OffsetY="0" Color="Black" HorizontalAlignment="Left" IsMasked="True">
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Completed Tasks"/>
+        </toolcontrols:DropShadowPanel>
+        <Border Margin="5,-53,35,10" Grid.Row="0" x:Name="ClearListBtn" VerticalAlignment="Top" HorizontalAlignment="Right" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}">
+            
+            <Button CornerRadius="{ThemeResource ControlCornerRadius}" Click="ClearCompletedTaskList" VerticalContentAlignment="Center">
+                <Button.Content>
+                    <StackPanel Spacing="8" Orientation="Horizontal">
+                        <FontIcon FontSize="16" Glyph="&#xE74D;"/>
+                        <TextBlock Text="Clear list"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Border>
     </Grid>
 </Page>

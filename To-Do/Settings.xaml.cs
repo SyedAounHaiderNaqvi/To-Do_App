@@ -56,12 +56,12 @@ namespace To_Do
                 {
                     case 0:
                         btntoggle.IsOn = false;
-                        bgimgbutton.Visibility = Visibility.Collapsed;
+                        bgimgbutton.IsEnabled = false;
                         MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
                         break;
                     case 1:
                         btntoggle.IsOn = true;
-                        bgimgbutton.Visibility = Visibility.Visible;
+                        bgimgbutton.IsEnabled = true;
 
                         if (localSettings.Values["token"] != null)
                         {
@@ -80,7 +80,7 @@ namespace To_Do
             else
             {
                 btntoggle.IsOn = false;
-                bgimgbutton.Visibility = Visibility.Collapsed;
+                bgimgbutton.IsEnabled = false;
                 localSettings.Values["useimg"] = 0;
             }
 
@@ -168,19 +168,19 @@ namespace To_Do
             grey.tooltip = "Dull Grey";
 
             var blueTwoTone = CreateNewTheme(60, 108, 176, 223, 237, 249);
-            blueTwoTone.darkThemeVariant = CreateNewTheme(51, 163, 255, 10, 10, 10);
+            blueTwoTone.darkThemeVariant = CreateNewTheme(51, 163, 255, 0,0,0);
             blueTwoTone.tooltip = "Blue, But Cooler";
 
             var purpleTwoTone = CreateNewTheme(132, 92, 154, 242, 231, 249);
-            purpleTwoTone.darkThemeVariant = CreateNewTheme(191, 104, 237, 10, 10, 10);
+            purpleTwoTone.darkThemeVariant = CreateNewTheme(191, 104, 237, 0,0,0);
             purpleTwoTone.tooltip = "Royal Purple";
 
             var redTwoTone = CreateNewTheme(190, 94, 122, 255, 228, 233);
-            redTwoTone.darkThemeVariant = CreateNewTheme(250, 57, 57, 10, 10, 10);
+            redTwoTone.darkThemeVariant = CreateNewTheme(250, 57, 57, 0,0,0);
             redTwoTone.tooltip = "Can't Get Enough Red";
 
             var orangeTwoTone = CreateNewTheme(178, 86, 62, 249, 232, 222);
-            orangeTwoTone.darkThemeVariant = CreateNewTheme(237, 113, 59, 10, 10, 10);
+            orangeTwoTone.darkThemeVariant = CreateNewTheme(237, 113, 59, 0,0,0);
             orangeTwoTone.tooltip = "Citrus-y";
 
             var coffee = CreateNewTheme(107, 54, 0, 255, 250, 245);
@@ -212,15 +212,15 @@ namespace To_Do
             orangeBlueTone.tooltip = "Beach and Inverse";
 
             var greenTwoTone = CreateNewTheme(51, 128, 96, 213, 241, 229);
-            greenTwoTone.darkThemeVariant = CreateNewTheme(50, 194, 101, 10, 10, 10);
+            greenTwoTone.darkThemeVariant = CreateNewTheme(50, 194, 101, 0,0,0);
             greenTwoTone.tooltip = "Yay Green";
 
             var aquaTwoTone = CreateNewTheme(40, 128, 133, 212, 255, 254);
-            aquaTwoTone.darkThemeVariant = CreateNewTheme(45, 207, 198, 10, 10, 10);
+            aquaTwoTone.darkThemeVariant = CreateNewTheme(45, 207, 198, 0,0,0);
             aquaTwoTone.tooltip = "Another Aqua";
 
             var greyTwoTone = CreateNewTheme(98, 110, 121, 231, 236, 240);
-            greyTwoTone.darkThemeVariant = CreateNewTheme(168, 180, 191, 10, 10, 10);
+            greyTwoTone.darkThemeVariant = CreateNewTheme(168, 180, 191, 0,0,0);
             greyTwoTone.tooltip = "More Dull Grey";
 
 
@@ -413,7 +413,7 @@ namespace To_Do
             if (btntoggle.IsOn)
             {
                 localSettings.Values["useimg"] = 1;
-                bgimgbutton.Visibility = Visibility.Visible;
+                bgimgbutton.IsEnabled = true;
                 MainPage.ins.bgIMG.Visibility = Visibility.Visible;
                 string token = (string)localSettings.Values["token"];
                 if (token != null)
@@ -442,7 +442,7 @@ namespace To_Do
             }
             else
             {
-                bgimgbutton.Visibility = Visibility.Collapsed;
+                bgimgbutton.IsEnabled = false;
                 localSettings.Values["useimg"] = 0;
                 MainPage.ins.bgIMG.Visibility = Visibility.Collapsed;
             }

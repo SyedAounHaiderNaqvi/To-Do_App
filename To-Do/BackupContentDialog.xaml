@@ -11,7 +11,20 @@
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     Title="Local Backup"
     PrimaryButtonText="Done">
-
+    <ContentDialog.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="#fe303030"/>
+                    <SolidColorBrush x:Key="ExpanderContentBackground" Color="#fe282828"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="#feffffff"/>
+                    <SolidColorBrush x:Key="ExpanderContentBackground" Color="#fef9f9f9"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </ContentDialog.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" Spacing="10" Width="400">
             <controls:Expander IsExpanded="True" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">

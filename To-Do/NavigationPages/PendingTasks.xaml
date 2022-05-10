@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:To_Do.NavigationPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:toolcontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls">
@@ -12,6 +14,7 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
                     <AcrylicBrush TintLuminosityOpacity="0.7" x:Key="TXTBGBrush" TintOpacity="0" BackgroundSource="Backdrop" TintColor="White"/>
+                    
                     <Style x:Key="CheckBoxStyle1" TargetType="CheckBox">
                         <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
                         <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
@@ -195,7 +198,7 @@
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <AcrylicBrush TintLuminosityOpacity="0.7" x:Key="TXTBGBrush" TintOpacity="0" BackgroundSource="Backdrop" TintColor="#333333"/>
-
+                    
                     <Style x:Key="CheckBoxStyle1" TargetType="CheckBox">
                         <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
                         <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
@@ -379,6 +382,7 @@
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+            
             <Style x:Key="StarCheck" TargetType="CheckBox">
                 <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
                 <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
@@ -711,7 +715,7 @@
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
                                 <ContentPresenter x:Name="HeaderContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Grid.Column="0" Content="{TemplateBinding Header}" Grid.ColumnSpan="2" Foreground="{ThemeResource TextControlHeaderForeground}" FontWeight="Normal" Margin="{ThemeResource TextBoxTopHeaderMargin}" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Visibility="Collapsed" x:DeferLoadStrategy="Lazy"/>
-                                
+
                                 <Border x:Name="BorderElement" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Grid.Column="0" Grid.ColumnSpan="2" Control.IsTemplateFocusTarget="True" MinWidth="{ThemeResource TextControlThemeMinWidth}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Grid.RowSpan="1" Grid.Row="1"/>
                                 <Border IsHitTestVisible="False" x:Name="bg" Opacity="0.1" Background="{ThemeResource SystemBaseLowColor}" BorderThickness="0" CornerRadius="{TemplateBinding CornerRadius}" Grid.Column="0" Grid.ColumnSpan="2" MinWidth="{ThemeResource TextControlThemeMinWidth}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Grid.RowSpan="1" Grid.Row="1"/>
                                 <ScrollViewer x:Name="ContentElement" AutomationProperties.AccessibilityView="Raw" Grid.Column="0" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled"/>
@@ -725,7 +729,7 @@
             </Style>
         </ResourceDictionary>
     </Page.Resources>
-    <Grid Margin="0,0,0,20">
+    <Grid Margin="0,34,0,20">
         <Grid.Resources>
             <ThemeShadow x:Name="SharedShadow" />
         </Grid.Resources>
@@ -733,7 +737,7 @@
             <RowDefinition/>
             <RowDefinition MinHeight="80" Height="80"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" Margin="35,30,19,0" x:FieldModifier="public"  DragItemsCompleted="listOfTasks_DragItemsCompleted" CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{x:Bind TaskItems}">
+        <ListView Grid.Row="0" Margin="35,15,19,0" x:FieldModifier="public"  DragItemsCompleted="listOfTasks_DragItemsCompleted" CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{x:Bind TaskItems}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:TODOTask">
                     <UserControl PointerEntered="UserControl_PointerEntered" PointerExited="UserControl_PointerExited" x:Name="UserControl">
@@ -741,6 +745,7 @@
                             <controls:Expander.HeaderTemplate>
                                 <DataTemplate x:DataType="local:TODOTask">
                                     <Grid x:Name="rootGrid">
+                                        
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="70"/>
                                             <ColumnDefinition Width="*"/>
@@ -777,6 +782,7 @@
                                                  
                                             </Button>
                                         </StackPanel>
+                                        <Rectangle Margin="-20,0,-70,-1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Fill="{ThemeResource SystemChromeAltHighColor}" IsHitTestVisible="False" Grid.ColumnSpan="2" Height="1"/>
                                     </Grid>
                                 </DataTemplate>
                             </controls:Expander.HeaderTemplate>
@@ -866,24 +872,28 @@
             <TextBlock HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="Create a new task so that you won't forget it later on."/>
         </StackPanel>
         <Grid Padding="35,25,35,15" Background="Transparent" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,-84,0,10">
-            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Pending Tasks"/>
+            <toolcontrols:DropShadowPanel BlurRadius="8" ShadowOpacity="0.5" OffsetX="0" OffsetY="0" Color="Black" VerticalAlignment="Center" HorizontalAlignment="Left" IsMasked="True">
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Pending Tasks"/>
+            </toolcontrols:DropShadowPanel>
             <Grid HorizontalAlignment="Right" Margin="0,5,0,0" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <FontIcon Grid.Column="0" VerticalAlignment="Center" Glyph="&#xE8CB;" ToolTipService.ToolTip="Sort by"/>
-                <controls:DropDownButton ToolTipService.ToolTip="Sort by" x:Name="SortingDropDown" Content="Date Created" Grid.Column="2" VerticalAlignment="Center">
-                    <controls:DropDownButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="t" IsChecked="True" Click="SortingOptionClicked" Text="Date Created"/>
-                            <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="t" Click="SortingOptionClicked" Text="Text"/>
-                            <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="t" Click="SortingOptionClicked" Text="Importance"/>
-                        </MenuFlyout>
-                    </controls:DropDownButton.Flyout>
+                <FontIcon VerticalAlignment="Center" Grid.Column="0" Glyph="&#xE8CB;" ToolTipService.ToolTip="Sort by"/>
+                <Border Background="{ThemeResource ExpanderHeaderBackground}" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="2" VerticalAlignment="Center">
+                    <controls:DropDownButton ToolTipService.ToolTip="Sort by" x:Name="SortingDropDown" Content="Date Created" >
+                        <controls:DropDownButton.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="t" IsChecked="True" Click="SortingOptionClicked" Text="Date Created"/>
+                                <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="t" Click="SortingOptionClicked" Text="Text"/>
+                                <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="t" Click="SortingOptionClicked" Text="Importance"/>
+                            </MenuFlyout>
+                        </controls:DropDownButton.Flyout>
 
-                </controls:DropDownButton>
+                    </controls:DropDownButton>
+                </Border>
 
             </Grid>
         </Grid>
@@ -895,19 +905,17 @@
                 <ScalarTransition/>
             </FontIcon.OpacityTransition>
         </FontIcon>
-        <SplitView x:Name="moreOptionsSplitView" Margin="0,-80,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
+        <SplitView x:Name="moreOptionsSplitView" Margin="0,-120,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
             <SplitView.Pane>
-                <Grid >
+                <Grid Margin="0,30,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15" FontSize="20" FontWeight="SemiBold" Style="{ThemeResource SubheaderTextBlockStyle}" Text="More Options"/>
                     <StackPanel Grid.Row="1" Spacing="10" Orientation="Vertical">
-                        <Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource SystemChromeMediumColor}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
+                        <Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
@@ -930,20 +938,21 @@
                             </Grid>
                         </Border>-->
                     </StackPanel>
-                    <Button Click="SaveChanges" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Content="Save Changes" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="confirmchangesBTN" Grid.Row="2">
-                        
-                    </Button>
-                    <Grid Grid.Row="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="40" Background="{ThemeResource LayerFillColorDefaultBrush}">
+                    
+                    <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="50">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-                        <Button Click="CloseSplitView" ToolTipService.ToolTip="Close Pane" CornerRadius="0" Height="40" Width="40" Grid.Column="0">
+                        <Button Height="40" Width="40" Margin="10,0,5,10" Click="CloseSplitView" ToolTipService.ToolTip="Close Pane" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="0">
                             <FontIcon FontSize="17" Glyph="&#xE76C;"/>
                         </Button>
+                        <Button Click="SaveChanges" Margin="0,0,0,10" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Content="Save Changes" VerticalAlignment="Center" Height="40" Width="150" HorizontalAlignment="Center" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="1" x:Name="confirmchangesBTN" Grid.Row="2">
+
+                        </Button>
                         <!--<TextBlock Text="Created 31 months ago" Foreground="{ThemeResource SystemBaseMediumHighColor}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>-->
-                        <Button Click="DeleteTask" ToolTipService.ToolTip="Delete task" CornerRadius="0" Height="40" Width="40" Grid.Column="2">
+                        <Button Height="40" Width="40" Margin="5,0,10,10" HorizontalAlignment="Right" Click="DeleteTask" ToolTipService.ToolTip="Delete task" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="2">
                             <FontIcon Foreground="{ThemeResource SystemControlErrorTextForegroundBrush}" FontSize="17" Glyph="&#xE74D;"/>
                         </Button>
                     </Grid>
