@@ -608,5 +608,10 @@
         <Grid Canvas.ZIndex="100" x:FieldModifier="public" x:Name="initialLoadingUI" Background="#222222" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <controls:ProgressRing Foreground="{ThemeResource SystemAccentColor}" Width="50" Height="50" IsIndeterminate="True"/>
         </Grid>
+        <Grid Canvas.ZIndex="101" VerticalAlignment="Top" HorizontalAlignment="Right" Width="138" IsHitTestVisible="False" Height="32">
+            <Grid.Background>
+                <media:AcrylicBrush BlurAmount="1" BackgroundSource="Backdrop" TintColor="Transparent" TintOpacity="0"/>
+            </Grid.Background>
+        </Grid>
     </Grid>
 </Page>
