@@ -116,13 +116,13 @@
             </DataTemplate>
         </ResourceDictionary>
     </Page.Resources>
-    <Grid Margin="0,34,0,0">
+    <Grid Margin="0,34,0,20">
         <Grid.BackgroundTransition>
             <BrushTransition/>
         </Grid.BackgroundTransition>
-        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="34,18,18,41">
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="35,15,19,40">
             <ScrollViewer x:FieldModifier="public" CornerRadius="{ThemeResource ControlCornerRadius}" x:Name="scroller" VerticalScrollBarVisibility="Auto">
-                <StackPanel Padding="20,10,20,20" Spacing="10">
+                <StackPanel Padding="0,0,15,0" Spacing="10">
                     <Border HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
                         <TextBlock Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="Appearance"/>
                     </Border>
