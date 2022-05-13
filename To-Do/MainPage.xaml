@@ -515,7 +515,7 @@
             <VisualStateGroup>
                 <VisualState x:Name="ExpandedState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="860" />
+                        <AdaptiveTrigger MinWindowWidth="760" />
                     </VisualState.StateTriggers>
 
                     <Storyboard>
@@ -592,7 +592,7 @@
 
                 </controls:ParallaxView>
 
-                <Grid x:Name="searchBoxGrid" Margin="35,-77,150,0" Height="40" HorizontalAlignment="Stretch" MaxWidth="540" VerticalAlignment="Top">
+                <Grid x:Name="searchBoxGrid" Margin="35,-77,150,0" Height="40" HorizontalAlignment="Stretch" MaxWidth="440" VerticalAlignment="Top">
                     <Grid.RenderTransform>
                         <TranslateTransform x:Name="serchgrid"/>
                     </Grid.RenderTransform>
