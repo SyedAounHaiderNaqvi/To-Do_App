@@ -7,6 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:toolcontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:ani="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Behaviors"
     mc:Ignorable="d">
     <Page.Resources>
         <ResourceDictionary>
@@ -88,30 +93,75 @@
             <SolidColorBrush x:Key="GridViewItemRevealPlaceholderBackground" Color="Transparent" />
 
             <DataTemplate x:Key="ImageTemplate" x:DataType="local:GridThemeItem">
-                <Grid Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Width="150" Height="105">
-                    <Grid VerticalAlignment="Top" CornerRadius="{ThemeResource ControlCornerRadius}">
-                        <Polygon Points="30,30 150,30 150,55, 30,55" Stroke="Transparent" Fill="#eeeeee"/>
-                        <Border Margin="38,45,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Height="50" Background="{x:Bind backgroundBrush}"/>
-                        <Polygon Points="40,70 150,70 150,105, 40,105" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.backgroundBrush}"/>
-                        <Polygon Points="0,30 40,30 40,80, 0,80" Stroke="Transparent" Fill="#eeeeee"/>
-                        <Polygon Points="0,70 40,70 40,105, 0,105" Stroke="Transparent" Fill="#3c3c3c"/>
-                        <Polygon Fill="Black" Points="50,38 70,38 70,40 50,40"/>
-                        <Polygon Fill="#aaeeeeee" Points="50,55 140,55 140,65 50,65"/>
-                        <Polygon Fill="#44888888" Points="50,75 140,75 140,85 50,85"/>
-                        <Polygon Points="65,59 135,59 135,61 65,61" Fill="#000000"/>
-                        <Polygon Points="65,79 135,79 135,81 65,81" Fill="#ffffff"/>
-                        <Ellipse Margin="-27,65,10,10" Width="4" Height="4" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
-                        <Polygon Points="0,96 40,96 40,102 0,102" Fill="#22cccccc"/>
-                        <Polygon Points="2,97 3,97 3,101 2,101" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
-                        <Polygon Points="6,98 25,98 25,100 6,100" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
-                        <Polygon Points="6,38 20,38 20,40 6,40" Fill="#000000"/>
-                        <Polygon Points="6,46 25,46 25,48 6,48" Fill="#000000"/>
-                        <Polygon Points="6,54 27,54 27,56 6,56" Fill="#000000"/>
-                        <Border Margin="-27,25,10,10" Width="4" Height="4" BorderThickness="1" Background="Transparent" CornerRadius="4" BorderBrush="#000000"/>
+                <Grid PointerEntered="ShowBlurredDetails" PointerExited="HideBlurredDetails" PointerCaptureLost="HideBlurredDetails" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="{ThemeResource ControlCornerRadius}" Width="150" Height="105">
+                    
+                    <Image Source="{x:Bind imgSource}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    <Grid x:Name="blurGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <media:UIElementExtensions.VisualFactory>
+                            <media:PipelineVisualFactory>
+                                <media:BlurEffect x:Name="ImageBlurEffect" IsAnimatable="True"/>
+                            </media:PipelineVisualFactory>
+                        </media:UIElementExtensions.VisualFactory>
+                        <ani:Explicit.Animations>
+                            <ani:AnimationSet x:Name="BlurAnimation">
+                                <ani:BlurEffectAnimation From="0"
+                                 To="8"
+                                 Duration="0:0:0.2"
+                                 EasingType="Linear"
+                                 EasingMode="EaseOut"
+                                 Target="{Binding ElementName=ImageBlurEffect}"/>
+                            </ani:AnimationSet>
+                            <ani:AnimationSet x:Name="UnBlurAnimation">
+                                <ani:BlurEffectAnimation From="8"
+                                 To="0"
+                                 Duration="0:0:0.2"
+                                 EasingType="Linear"
+                                 EasingMode="EaseOut"
+                                 Target="{Binding ElementName=ImageBlurEffect}"/>
+                            </ani:AnimationSet>
+                        </ani:Explicit.Animations>
+                        
                     </Grid>
-                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{ThemeResource SystemBaseLowColor}" CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1"/>
-                    <TextBlock Text="{x:Bind tooltip}" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}" FontSize="11" TextWrapping="Wrap" Margin="8,8,0,0"/>
-                    <Rectangle Opacity="0.4" Fill="Gray" VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="1" Margin="0,30,0,0"/>
+                    <Border x:Name="blurColor" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Opacity="0" BorderThickness="0" IsHitTestVisible="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Border.OpacityTransition>
+                            <ScalarTransition/>
+                        </Border.OpacityTransition>
+                    </Border>
+                    <Grid Translation="-50,0,0" Width="90" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                        
+                        <Grid.TranslationTransition>
+                            <Vector3Transition Duration="0:0:0.5"/>
+                        </Grid.TranslationTransition>
+                        <Grid RenderTransformOrigin="0,0" Width="90" Height="50" Background="{x:Bind darkThemeVariant.borderBrush}" Opacity="0.5">
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="45"/>
+                            </Grid.RenderTransform>
+                        </Grid>
+                    </Grid>
+                    <Grid Translation="-50,0,0" Width="80" Height="35" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                        <Grid.TranslationTransition>
+                            <Vector3Transition Duration="0:0:0.7"/>
+                        </Grid.TranslationTransition>
+                        <Grid RenderTransformOrigin="0,0" Width="80" Height="35" Background="{x:Bind darkThemeVariant.borderBrush}">
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="45"/>
+                            </Grid.RenderTransform>
+                        </Grid>
+                    </Grid>
+                    <Border IsHitTestVisible="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{ThemeResource SystemBaseLowColor}" CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1"/>
+                    <TextBlock IsHitTestVisible="False" Translation="0,20,0" Text="{x:Bind tooltip}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemBaseHighColor}" FontSize="11" TextWrapping="Wrap" Margin="8,0,0,8">
+                        <TextBlock.TranslationTransition>
+                            <Vector3Transition/>
+                        </TextBlock.TranslationTransition>
+                    </TextBlock>
+                    <interactivity:Interaction.Behaviors>
+                        <interactions:EventTriggerBehavior EventName="PointerExited">
+                            <behaviors:StartAnimationAction Animation="{Binding ElementName=UnBlurAnimation}"/>
+                        </interactions:EventTriggerBehavior>
+                        <interactions:EventTriggerBehavior EventName="PointerEntered">
+                            <behaviors:StartAnimationAction Animation="{Binding ElementName=BlurAnimation}"/>
+                        </interactions:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
                 </Grid>
             </DataTemplate>
         </ResourceDictionary>

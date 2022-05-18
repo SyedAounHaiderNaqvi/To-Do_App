@@ -26,6 +26,7 @@
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <PackageCertificateThumbprint>643F09A653D5B0BCAB8B62918863808E2C5EDCFD</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -210,6 +211,18 @@
     <Content Include="Images\complete.png" />
     <Content Include="Images\dark.jpg" />
     <Content Include="Images\eek.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_BlueButCooler.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_CantGetEnoughRed.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_Citrusy.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_CoolAqua.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_DefinitelyOrange.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_Discord.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_DullGrey.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_Lavender.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_NaturalGreen.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_PrettyPink.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_RoyalPurple.png" />
+    <Content Include="Images\ItemTemplates\ItemTemplate_SmoothCherry.png" />
     <Content Include="Images\light.jpg" />
     <Content Include="Images\settingsIcon.png" />
     <Content Include="Images\sun.png" />
@@ -269,6 +282,9 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>7.1.2</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Behaviors">
+      <Version>7.1.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
       <Version>7.1.2</Version>
     </PackageReference>
@@ -277,6 +293,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
