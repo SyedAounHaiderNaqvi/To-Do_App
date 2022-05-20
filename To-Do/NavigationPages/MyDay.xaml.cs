@@ -311,18 +311,18 @@ namespace To_Do.NavigationPages
 
         public void UpdateBadge()
         {
-            singletonReference.myDayinf.Value = TaskItems.Count;
-            //setBadgeNumber(TaskItems.Count);
+            //singletonReference.myDayinf.Value = TaskItems.Count;
+            ////setBadgeNumber(TaskItems.Count);
 
-            if (TaskItems.Count > 0)
-            {
-                singletonReference.myDayinf.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                singletonReference.myDayinf.Visibility = Visibility.Collapsed;
-                //BadgeUpdateManager.CreateBadgeUpdaterForApplication().Clear();
-            }
+            //if (TaskItems.Count > 0)
+            //{
+            //    singletonReference.myDayinf.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    singletonReference.myDayinf.Visibility = Visibility.Collapsed;
+            //    //BadgeUpdateManager.CreateBadgeUpdaterForApplication().Clear();
+            //}
         }
 
         private async void NewTaskBox_GotFocus(object sender, RoutedEventArgs e)

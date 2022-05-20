@@ -143,9 +143,6 @@
     <Compile Include="NavigationPages\CompletedTasks.xaml.cs">
       <DependentUpon>CompletedTasks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NavigationPages\MyDay.xaml.cs">
-      <DependentUpon>MyDay.xaml</DependentUpon>
-    </Compile>
     <Compile Include="NavigationPages\PendingTasks.xaml.cs">
       <DependentUpon>PendingTasks.xaml</DependentUpon>
     </Compile>
@@ -269,10 +266,6 @@
     <Page Include="NavigationPages\CompletedTasks.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NavigationPages\MyDay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NavigationPages\PendingTasks.xaml">
       <SubType>Designer</SubType>

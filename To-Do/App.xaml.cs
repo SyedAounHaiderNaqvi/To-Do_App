@@ -33,11 +33,6 @@ namespace To_Do
             JumpList jumpList = await JumpList.LoadCurrentAsync();
             jumpList.Items.Clear();
 
-            JumpListItem jl0 = JumpListItem.CreateWithArguments("GoToMyDay", "My Day");
-            jl0.Logo = new Uri("ms-appx:///Images/sun.png");
-            jl0.GroupName = "Quick Actions";
-            jumpList.Items.Add(jl0);
-
             JumpListItem jl1 = JumpListItem.CreateWithArguments("GoToPending", "Pending Tasks");
             jl1.Logo = new Uri("ms-appx:///Images/clock.png");
             jl1.GroupName = "Quick Actions";
@@ -59,43 +54,34 @@ namespace To_Do
         async void JumplistTransferCode(LaunchActivatedEventArgs e)
         {
             MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
-            MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
             MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
             MainPage.ins.ContentFrame.Navigate(typeof(Settings));
 
-            if (e.Arguments == "GoToPending")
+            switch (e.Arguments)
             {
-                MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
-                await Task.Delay(10);
-                MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[1];
-
-            }
-            else if (e.Arguments == "GoToCompleted")
-            {
-                while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(CompletedTasks))
-                {
-                    MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
-                }
-                await Task.Delay(10);
-                MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[2];
-            }
-            else if (e.Arguments == "GoToSettings")
-            {
-                while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(Settings))
-                {
-                    MainPage.ins.ContentFrame.Navigate(typeof(Settings));
-                }
-                await Task.Delay(10);
-                MainPage.ins.nview.SelectedItem = MainPage.ins.nview.SettingsItem;
-            }
-            else if (e.Arguments == "GoToMyDay")
-            {
-                while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(MyDay))
-                {
-                    MainPage.ins.ContentFrame.Navigate(typeof(MyDay));
-                }
-                await Task.Delay(10);
-                MainPage.ins.nview.SelectedItem = MainPage.ins.nview.MenuItems[0];
+                case "GoToPending":
+                    MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
+                    await Task.Delay(10);
+                    MainPage.ins.nview.SelectedItem = MainPage.ins.Categories[0];
+                    break;
+                case "GoToCompleted":
+                    while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(CompletedTasks))
+                    {
+                        MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
+                    }
+                    await Task.Delay(10);
+                    MainPage.ins.nview.SelectedItem = MainPage.ins.Categories[1];
+                    break;
+                case "GoToSettings":
+                    while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(Settings))
+                    {
+                        MainPage.ins.ContentFrame.Navigate(typeof(Settings));
+                    }
+                    await Task.Delay(10);
+                    MainPage.ins.nview.SelectedItem = MainPage.ins.nview.SettingsItem;
+                    break;
+                default:
+                    break;
             }
         }
 

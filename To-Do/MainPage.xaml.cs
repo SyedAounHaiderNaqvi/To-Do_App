@@ -22,6 +22,8 @@ using System.Linq;
 using Windows.UI.Core;
 using Windows.Foundation;
 using Windows.Storage.AccessCache;
+using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace To_Do
 {
@@ -34,26 +36,24 @@ namespace To_Do
         public List<string> completedSaving = new List<string>();
         public List<List<string>> savingSteps = new List<List<string>>();
 
-        public List<string> myDayTasksToSave = new List<string>();
-        public List<string> myDayDatesToSave = new List<string>();
-        public List<bool> myDayImpsToSave = new List<bool>();
-        public List<List<string>> myDayTaskStepsToSave = new List<List<string>>();
-
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public static MainPage ins;
         public int indexToParse;
         public List<List<string>> tasksToParse = new List<List<string>>();
         public int PendingTasksCount = 0;
-        public int MyDayTasksCount = 0;
         bool canSearch = true;
         public NavigationTransitionInfo info;
-        TimeSpan D;
-        DateTime loadedDate;
+
+        public ObservableCollection<CategoryBase> Categories { get; }
 
         public MainPage()
         {
             this.InitializeComponent();
             ins = this;
+            Categories = new ObservableCollection<CategoryBase>();
+            Categories.Add(new DefaultCategory { Name = "Pending Tasks", Glyph = "\uE823", Tag = "PendingTasks" });
+            Categories.Add(new DefaultCategory { Name = "Completed Tasks", Glyph = "\uE73E", Tag = "CompletedTasks" });
+
             var currentTheme = ThemeHelper.RootTheme.ToString();
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
@@ -80,87 +80,20 @@ namespace To_Do
                 indexToParse = 0;
             }
             currentTheme = ThemeHelper.RootTheme.ToString();
+
             Waiter();
-            if (localSettings.Values["datediff"] != null)
-            {
-                loadedDate = Convert.ToDateTime((string)localSettings.Values["datediff"]);
-                if (DateTime.Now.Date > loadedDate.Date)
-                {
-                    MyDay.instance.TodayTxt.Text = DateTime.Now.ToString("dddd, MMMM d");
-                    var pendingNow = MyDay.instance.TaskItems;
-                    if (pendingNow.Count > 0)
-                    {
-                        change.IsOpen = true;
-                        var cur = ContentFrame.CurrentSourcePageType;
-                        ContentFrame.Navigate(typeof(PendingTasks), pendingNow, new SuppressNavigationTransitionInfo());
-                        ContentFrame.Navigate(cur, null, new SuppressNavigationTransitionInfo());
-                    }
-                    MyDay.instance.TaskItems.Clear();
-                    MyDay.instance.listOfTasks.ItemsSource = MyDay.instance.TaskItems;
-                    MyDay.instance.UpdateBadge();
-                }
-                D = (DateTime.Today.AddDays(1).Date - loadedDate);
-                var T = new System.Timers.Timer();
-                T.Elapsed += CallBackFunction;
-                MyDay.instance.TodayTxt.Text = DateTime.Now.ToString("dddd, MMMM d");
-                T.Interval = D.TotalMilliseconds;
-                T.Start();
-            }
-            else
-            {
-                SetUpTimer();
-            }
             parallax.Source = PendingTasks.instance.listOfTasks;
             LoseFocus(searchbox);
-        }
-
-        public void SetUpTimer()
-        {
-            var T = new System.Timers.Timer();
-
-            T.Elapsed += CallBackFunction;
-
-            D = (DateTime.Today.AddDays(1).Date - DateTime.Now.Date);
-            MyDay.instance.TodayTxt.Text = DateTime.Now.ToString("dddd, MMMM d");
-
-            T.Interval = D.TotalMilliseconds;
-
-            T.Start();
-        }
-
-        public async void CallBackFunction(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            (sender as System.Timers.Timer).Interval = (DateTime.Today.AddDays(1).Date - DateTime.Now).TotalMilliseconds;
-
-            //delete all tasks
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-            () =>
-            {
-                // Your UI update code goes here!
-                MyDay.instance.TodayTxt.Text = DateTime.Now.AddDays(1).ToString("dddd, MMMM d");
-                var pendingNow = MyDay.instance.TaskItems;
-                if (pendingNow.Count > 0)
-                {
-                    change.IsOpen = true;
-                    var cur = ContentFrame.CurrentSourcePageType;
-                    ContentFrame.Navigate(typeof(PendingTasks), pendingNow, new SuppressNavigationTransitionInfo());
-                    ContentFrame.Navigate(cur, null, new SuppressNavigationTransitionInfo());
-                }
-                MyDay.instance.TaskItems.Clear();
-                MyDay.instance.listOfTasks.ItemsSource = MyDay.instance.TaskItems;
-                MyDay.instance.UpdateBadge();
-            }
-            );
         }
 
         public async void Waiter()
         {
             ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
-            ContentFrame.Navigate(typeof(MyDay), null, new SuppressNavigationTransitionInfo());
             ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
             await Task.Delay(10);
             ContentFrame.Navigate(typeof(PendingTasks));
-            nview.SelectedItem = nview.MenuItems[1];
+            //LoadingUI.Visibility = Visibility.Collapsed;
+            nview.SelectedItem = Categories[0];
         }
 
         public void ImageInitialize()
@@ -317,43 +250,34 @@ namespace To_Do
         {
             base.OnNavigatedTo(e);
             string argument = e.Parameter.ToString();
-            if (argument == "GoToPending")
+
+            switch (argument)
             {
-                ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
-                ContentFrame.Navigate(typeof(MyDay), null, new SuppressNavigationTransitionInfo());
-                ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
-                await Task.Delay(10);
-                ContentFrame.Navigate(typeof(PendingTasks));
-                nview.SelectedItem = nview.MenuItems[1];
-                parallax.Source = PendingTasks.instance.listOfTasks;
-            }
-            else if (argument == "GoToCompleted")
-            {
-                ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
-                ContentFrame.Navigate(typeof(MyDay), null, new SuppressNavigationTransitionInfo());
-                await Task.Delay(10);
-                ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
-                nview.SelectedItem = nview.MenuItems[2];
-                parallax.Source = CompletedTasks.instance.listOfTasks;
-            }
-            else if (argument == "GoToSettings")
-            {
-                ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
-                ContentFrame.Navigate(typeof(MyDay), null, new SuppressNavigationTransitionInfo());
-                ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
-                await Task.Delay(10);
-                ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
-                nview.SelectedItem = nview.SettingsItem;
-                parallax.Source = Settings.ins.scroller;
-            }
-            else if (argument == "GoToMyDay")
-            {
-                ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
-                ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
-                await Task.Delay(10);
-                ContentFrame.Navigate(typeof(MyDay));
-                nview.SelectedItem = nview.MenuItems[0];
-                parallax.Source = MyDay.instance.listOfTasks;
+                case "GoToPending":
+                    ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                    ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
+                    await Task.Delay(10);
+                    ContentFrame.Navigate(typeof(PendingTasks));
+                    nview.SelectedItem = Categories[0];
+                    parallax.Source = PendingTasks.instance.listOfTasks;
+                    break;
+                case "GoToCompleted":
+                    ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                    await Task.Delay(10);
+                    ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
+                    nview.SelectedItem = Categories[1];
+                    parallax.Source = CompletedTasks.instance.listOfTasks;
+                    break;
+                case "GoToSettings":
+                    ContentFrame.Navigate(typeof(PendingTasks), null, new SuppressNavigationTransitionInfo());
+                    ContentFrame.Navigate(typeof(CompletedTasks), null, new SuppressNavigationTransitionInfo());
+                    await Task.Delay(10);
+                    ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
+                    nview.SelectedItem = nview.SettingsItem;
+                    parallax.Source = Settings.ins.scroller;
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -681,7 +605,6 @@ namespace To_Do
         public async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
         {
             var def = e.GetDeferral();
-            localSettings.Values["datediff"] = DateTime.Now.Date.ToString();
             LoadingUI.Visibility = Visibility.Visible;
 
             PendingTasks ins = PendingTasks.instance;
@@ -706,29 +629,7 @@ namespace To_Do
                     savingSteps.Add(tempList);
                 }
             }
-            ContentFrame.Navigate(typeof(MyDay), null, new SuppressNavigationTransitionInfo());
-            MyDay mDayins = MyDay.instance;
-
-            foreach (TODOTask task in mDayins.TaskItems)
-            {
-                string temp = task.Description;
-                string date = task.Date;
-                bool importance = task.IsStarred;
-                myDayTasksToSave.Add(temp);
-                myDayDatesToSave.Add(date);
-                myDayImpsToSave.Add(importance);
-
-                List<TODOTask> steps = task.SubTasks;
-                List<string> tempList = new List<string>();
-                for (int i = 0; i < steps.Count; i++)
-                {
-                    tempList.Add(steps[i].Description);
-                }
-                if (steps != null)
-                {
-                    myDayTaskStepsToSave.Add(tempList);
-                }
-            }
+            
             Type pageType = Type.GetType("To_Do.NavigationPages.CompletedTasks");
             ContentFrame.Navigate(pageType, tasksToParse, new SuppressNavigationTransitionInfo());
             tasksToParse.Clear();
@@ -746,11 +647,6 @@ namespace To_Do
             string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
             string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
 
-            string myDayJsonFile = JsonConvert.SerializeObject(myDayTasksToSave);
-            string myDaydateJsonFile = JsonConvert.SerializeObject(myDayDatesToSave);
-            string myDayImpJsonFile = JsonConvert.SerializeObject(myDayImpsToSave);
-            string myDayStepsJsonFile = JsonConvert.SerializeObject(myDayTaskStepsToSave);
-
             StorageFolder folder = ApplicationData.Current.LocalFolder;
             StorageFolder rootFolder = await folder.CreateFolderAsync("App_Essential_Data", CreationCollisionOption.ReplaceExisting);
 
@@ -767,14 +663,6 @@ namespace To_Do
             StorageFile pendingstepsjson = await rootFolder.CreateFileAsync("pending_steps.json", CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
 
-            StorageFile mydaydescjson = await rootFolder.CreateFileAsync("md_desc.json", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(mydaydescjson, myDayJsonFile);
-            StorageFile mydayimpjson = await rootFolder.CreateFileAsync("md_imp_desc.json", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(mydayimpjson, myDayImpJsonFile);
-            StorageFile mydaystepsjson = await rootFolder.CreateFileAsync("md_steps.json", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(mydaystepsjson, myDayStepsJsonFile);
-            StorageFile mydaydatejson = await rootFolder.CreateFileAsync("md_dates.json", CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(mydaydatejson, myDaydateJsonFile);
             string deviceFamilyVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
             ulong version = ulong.Parse(deviceFamilyVersion);
             ulong build = (version & 0x00000000FFFF0000L) >> 16;
@@ -784,24 +672,6 @@ namespace To_Do
                 CreateThreeTileNotifications();
             }
             def.Complete();
-            //Application.Current.Exit();
-            //// Get the blank badge XML payload for a badge number
-            //XmlDocument badgeXml =
-            //    BadgeUpdateManager.GetTemplateContent(BadgeTemplateType.BadgeNumber);
-
-            //// Set the value of the badge in the XML to our number
-            //XmlElement badgeElement = badgeXml.SelectSingleNode("/badge") as XmlElement;
-            //badgeElement.SetAttribute("value", "7");
-
-            //// Create the badge notification
-            //BadgeNotification badge = new BadgeNotification(badgeXml);
-
-            //// Create the badge updater for the application
-            //BadgeUpdater badgeUpdater =
-            //    BadgeUpdateManager.CreateBadgeUpdaterForApplication();
-
-            //// And update the badge
-            //badgeUpdater.Update(badge);
         }
 
 
@@ -839,7 +709,7 @@ namespace To_Do
                     break;
             }
             Type pageType;
-            var selectedItem = (Microsoft.UI.Xaml.Controls.NavigationViewItem)args.SelectedItem;
+            
             if (args.IsSettingsSelected)
             {
                 pageType = Type.GetType("To_Do.Settings");
@@ -847,6 +717,7 @@ namespace To_Do
             }
             else
             {
+                var selectedItem = (DefaultCategory)args.SelectedItem;
                 if (selectedItem != null)
                 {
 
@@ -956,29 +827,6 @@ namespace To_Do
                 }
             }
 
-            if (MyDay.instance != null)
-            {
-                var matchingItems3 = MyDay.instance.TaskItems.ToList().Where(
-                    item =>
-                    {
-                        bool flag = true;
-                        foreach (string queryToken in querySplit)
-                        {
-                            // Check if token is not in string 
-                            if (item.Description.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
-                            {
-                                // Token is not in string, so we ignore this item. 
-                                flag = false;
-                            }
-                        }
-                        return flag;
-                    });
-                foreach (var item in matchingItems3)
-                {
-                    suggestions.Add(new QueryFormat(item.Description, "My Day", "\uE706"));
-                }
-            }
-
             return suggestions.OrderByDescending(i => i.Title.StartsWith(query, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title).ToList();
         }
 
@@ -1014,24 +862,9 @@ namespace To_Do
                         if (desc.Title.Equals(list[i].Description))
                         {
                             ContentFrame.Navigate(typeof(PendingTasks), null, info);
-                            nview.SelectedItem = nview.MenuItems[1];
+                            nview.SelectedItem = Categories[0];
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                 () => calc(i, PendingTasks.instance.listOfTasks));
-                            break;
-                        }
-                    }
-                }
-                else if (desc.location == "My Day")
-                {
-                    var list = MyDay.instance.TaskItems;
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        if (desc.Title.Equals(list[i].Description))
-                        {
-                            ContentFrame.Navigate(typeof(MyDay), null, info);
-                            nview.SelectedItem = nview.MenuItems[0];
-                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                () => calc(i, MyDay.instance.listOfTasks));
                             break;
                         }
                     }
@@ -1044,7 +877,7 @@ namespace To_Do
                         if (desc.Title.Equals(list[i].Description))
                         {
                             ContentFrame.Navigate(typeof(CompletedTasks), null, info);
-                            nview.SelectedItem = nview.MenuItems[2];
+                            nview.SelectedItem = Categories[1];
                             //await Task.Delay(500);
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                 () => calc(i, CompletedTasks.instance.listOfTasks));
@@ -1205,6 +1038,10 @@ namespace To_Do
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Categories.Add(new DefaultCategory { Tag="", Name = "New Category", Glyph = "\uEA37" });
+        }
     }
 
     public class QueryFormat
@@ -1218,6 +1055,30 @@ namespace To_Do
             Title = _title;
             location = _location;
             glyph = _glyph;
+        }
+    }
+
+    public class CategoryBase { }
+
+    public class DefaultCategory : CategoryBase
+    {
+        public string Name { get; set; }
+        public string Tag { get; set; }
+        public string Glyph { get; set; }
+    }
+    public class CustomCategory : CategoryBase
+    {
+        public SymbolIcon Icon { get; set; }
+        public string Title { get; set; }
+    }
+
+    public class MenuItemTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate DefaultItemTemlate { get; set; }
+        public DataTemplate CustomItemTemlate { get; set; }
+        protected override DataTemplate SelectTemplateCore(object item)
+        {
+            return item is CustomCategory ? CustomItemTemlate : DefaultItemTemlate;
         }
     }
 }

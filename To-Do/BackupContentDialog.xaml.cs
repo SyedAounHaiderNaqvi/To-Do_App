@@ -18,11 +18,6 @@ namespace To_Do
         public List<string> completedSaving = new List<string>();
         public List<List<string>> savingSteps = new List<List<string>>();
 
-        public List<string> myDayTasksToSave = new List<string>();
-        public List<string> myDayDatesToSave = new List<string>();
-        public List<bool> myDayImpsToSave = new List<bool>();
-        public List<List<string>> myDayTaskStepsToSave = new List<List<string>>();
-
         public BackupContentDialog()
         {
             this.InitializeComponent();
@@ -48,7 +43,7 @@ namespace To_Do
                     (sender as Button).IsEnabled = false;
                     restorebtn.IsEnabled = false;
 
-                    int total = PendingTasks.instance.TaskItems.Count + MyDay.instance.TaskItems.Count + CompletedTasks.instance.CompleteTasks.Count;
+                    int total = PendingTasks.instance.TaskItems.Count + CompletedTasks.instance.CompleteTasks.Count;
                     float step = 100 / total;
 
                     //get list of data to store
@@ -74,29 +69,7 @@ namespace To_Do
                         }
                         backupprogress.Value += step;
                     }
-                    MyDay mDayins = MyDay.instance;
-
-                    foreach (TODOTask task in mDayins.TaskItems)
-                    {
-                        string temp = task.Description;
-                        string date = task.Date;
-                        bool importance = task.IsStarred;
-                        myDayTasksToSave.Add(temp);
-                        myDayDatesToSave.Add(date);
-                        myDayImpsToSave.Add(importance);
-
-                        List<TODOTask> steps = task.SubTasks;
-                        List<string> tempList = new List<string>();
-                        for (int i = 0; i < steps.Count; i++)
-                        {
-                            tempList.Add(steps[i].Description);
-                        }
-                        if (steps != null)
-                        {
-                            myDayTaskStepsToSave.Add(tempList);
-                        }
-                        backupprogress.Value += step;
-                    }
+                    
                     foreach (TODOTask task in CompletedTasks.instance.CompleteTasks)
                     {
                         string temp = task.Description;
@@ -112,9 +85,6 @@ namespace To_Do
                     string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
                     string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
 
-                    string myDayJsonFile = JsonConvert.SerializeObject(myDayTasksToSave);
-                    string myDayImpJsonFile = JsonConvert.SerializeObject(myDayImpsToSave);
-                    string myDayStepsJsonFile = JsonConvert.SerializeObject(myDayTaskStepsToSave);
 
                     StorageFile pendingdescjson = await rootFolder.CreateFileAsync("pending_desc.json", CreationCollisionOption.ReplaceExisting);
                     await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
@@ -134,14 +104,6 @@ namespace To_Do
                     StorageFile pendingstepsjson = await rootFolder.CreateFileAsync("pending_steps.json", CreationCollisionOption.ReplaceExisting);
                     await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
 
-                    StorageFile mydaydescjson = await rootFolder.CreateFileAsync("md_desc.json", CreationCollisionOption.ReplaceExisting);
-                    await FileIO.WriteTextAsync(mydaydescjson, myDayJsonFile);
-
-                    StorageFile mydayimpjson = await rootFolder.CreateFileAsync("md_imp_desc.json", CreationCollisionOption.ReplaceExisting);
-                    await FileIO.WriteTextAsync(mydayimpjson, myDayImpJsonFile);
-
-                    StorageFile mydaystepsjson = await rootFolder.CreateFileAsync("md_steps.json", CreationCollisionOption.ReplaceExisting);
-                    await FileIO.WriteTextAsync(mydaystepsjson, myDayStepsJsonFile);
 
                     //enable buttons and controls
                     IsPrimaryButtonEnabled = true;
@@ -156,7 +118,7 @@ namespace To_Do
 
         private async void RestoreData(object sender, RoutedEventArgs e)
         {
-            string[] namesofFiles = new string[] { "md_steps.json", "md_imp_desc.json", "md_desc.json", "pending_desc.json", "comp_desc.json", "pending_dates.json", "comp_dates.json", "imp_desc.json", "pending_steps.json" };
+            string[] namesofFiles = new string[] { "pending_desc.json", "comp_desc.json", "pending_dates.json", "comp_dates.json", "imp_desc.json", "pending_steps.json" };
             var folderPicker = new Windows.Storage.Pickers.FolderPicker();
             folderPicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
             folderPicker.FileTypeFilter.Add("*");
@@ -198,11 +160,6 @@ namespace To_Do
                     List<string> loadedCompletedDescriptions = new List<string>();
                     List<string> loadedCompletedDates = new List<string>();
 
-                    //my day
-                    List<string> myDayDescriptions = new List<string>();
-                    List<bool> myDayImportance = new List<bool>();
-                    List<List<string>> myDaySteps = new List<List<string>>();
-
                     foreach (var file in files)
                     {
                         var jsonText = await FileIO.ReadTextAsync(file);
@@ -228,22 +185,11 @@ namespace To_Do
                                 loadedCompletedDates = JsonConvert.DeserializeObject<List<string>>(jsonText);
                                 break;
 
-                            //my day
-                            case "md_desc.json":
-                                myDayDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonText);
-                                break;
-                            case "md_imp_desc.json":
-                                myDayImportance = JsonConvert.DeserializeObject<List<bool>>(jsonText);
-                                break;
-                            case "md_steps.json":
-                                myDaySteps = JsonConvert.DeserializeObject<List<List<string>>>(jsonText);
-                                break;
-
                             default:
                                 break;
                         }
                     }
-                    int total = loadedCompletedDescriptions.Count + loadedDescriptions.Count + myDayDescriptions.Count;
+                    int total = loadedCompletedDescriptions.Count + loadedDescriptions.Count;
                     float step = 100 / total;
                     if (loadedDescriptions != null)
                     {
@@ -266,22 +212,6 @@ namespace To_Do
                         for (int i = 0; i < loadedCompletedDescriptions.Count; i++)
                         {
                             CompletedTasks.instance.AddATask(loadedCompletedDescriptions[i], loadedCompletedDates[i]);
-                            restoreprogressbar.Value += step;
-                        }
-                    }
-
-                    if (myDayDescriptions != null)
-                    {
-                        for (int i = 0; i < myDayDescriptions.Count; i++)
-                        {
-                            TODOTask newTask = new TODOTask() { Description = myDayDescriptions[i], Date = DateTime.Now.ToString("hh:mm:ss tt"), IsStarred = myDayImportance[i] };
-                            newTask.SubTasks = new List<TODOTask>();
-                            for (int x = 0; x < myDaySteps[i].Count; x++)
-                            {
-                                string descOfStep = myDaySteps[i][x];
-                                newTask.SubTasks.Add(new TODOTask() { Description = descOfStep });
-                            }
-                            MyDay.instance.AddATask(newTask);
                             restoreprogressbar.Value += step;
                         }
                     }

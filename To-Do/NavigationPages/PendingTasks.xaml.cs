@@ -15,6 +15,7 @@ using System.Threading;
 using Microsoft.UI.Xaml.Controls;
 using System.Linq;
 using Windows.UI.Xaml.Controls.Primitives;
+using System.Diagnostics;
 
 namespace To_Do.NavigationPages
 {
@@ -105,6 +106,7 @@ namespace To_Do.NavigationPages
                 listOfTasks.ItemsSource = TaskItems;
 
             }
+            Debug.WriteLine("Whew did initial stuff");
             MainPage.ins.initialLoadingUI.Visibility = Visibility.Collapsed;
         }
 
@@ -408,18 +410,18 @@ namespace To_Do.NavigationPages
 
         public void UpdateBadge()
         {
-            singletonReference.inf.Value = TaskItems.Count;
-            //setBadgeNumber(TaskItems.Count);
+            //singletonReference.inf.Value = TaskItems.Count;
+            ////setBadgeNumber(TaskItems.Count);
 
-            if (TaskItems.Count > 0)
-            {
-                singletonReference.inf.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                singletonReference.inf.Visibility = Visibility.Collapsed;
-                //BadgeUpdateManager.CreateBadgeUpdaterForApplication().Clear();
-            }
+            //if (TaskItems.Count > 0)
+            //{
+            //    singletonReference.inf.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    singletonReference.inf.Visibility = Visibility.Collapsed;
+            //    //BadgeUpdateManager.CreateBadgeUpdaterForApplication().Clear();
+            //}
         }
 
         private async void NewTaskBox_GotFocus(object sender, RoutedEventArgs e)
@@ -635,6 +637,7 @@ namespace To_Do.NavigationPages
             edittasktextbox.Text = string.Empty;
             Sort((string)SortingDropDown.Content);
         }
+
     }
 
     public class TODOTask : INotifyPropertyChanged
