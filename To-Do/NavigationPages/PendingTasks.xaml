@@ -4,8 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:To_Do.NavigationPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
-    xmlns:toolcontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls">
@@ -872,9 +870,9 @@
             <TextBlock HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="Create a new task so that you won't forget it later on."/>
         </StackPanel>
         <Grid Padding="35,25,35,15" Background="Transparent" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,-84,0,10">
-            <toolcontrols:DropShadowPanel BlurRadius="8" ShadowOpacity="0.5" OffsetX="0" OffsetY="0" Color="Black" VerticalAlignment="Center" HorizontalAlignment="Left" IsMasked="True">
-                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Pending Tasks"/>
-            </toolcontrols:DropShadowPanel>
+            <Border Margin="0,5,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
+                <TextBlock Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="Pending Tasks"/>
+            </Border>
             <Grid HorizontalAlignment="Right" Margin="0,5,0,0" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

@@ -196,14 +196,12 @@ namespace To_Do
                         Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
                         Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(1);
                         Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0);
-                        Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(1, 0, 0, 0);
                         break;
                     case 1:
                         Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
                         Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
                         Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
                         Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
-                        Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
                         break;
                     default:
                         break;
@@ -216,7 +214,6 @@ namespace To_Do
                 Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
                 Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
                 Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
-                Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
             }
         }
 
@@ -685,6 +682,7 @@ namespace To_Do
         {
             var def = e.GetDeferral();
             localSettings.Values["datediff"] = DateTime.Now.Date.ToString();
+            LoadingUI.Visibility = Visibility.Visible;
 
             PendingTasks ins = PendingTasks.instance;
             //save all descriptions

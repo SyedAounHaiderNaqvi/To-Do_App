@@ -94,7 +94,6 @@ namespace To_Do
                         Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
                         Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(1);
                         Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0);
-                        Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(1, 0, 0, 0);
                         break;
                     case 1:
                         RoundCornerToggle.IsOn = true;
@@ -102,7 +101,6 @@ namespace To_Do
                         Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
                         Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
                         Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
-                        Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
                         break;
                     default:
                         break;
@@ -116,7 +114,6 @@ namespace To_Do
                 Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
                 Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
                 Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
-                Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
             }
 
             if (ThemeHelper.IsDarkTheme())
@@ -199,37 +196,45 @@ namespace To_Do
             discord.tooltip = "Discord";
             discord.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Discord.png"));
 
-            //var saphire = CreateNewTheme(40, 62, 97, 119, 161, 197);
-            //saphire.darkThemeVariant = CreateNewTheme(133, 165, 194, 42, 54, 76);
-            //saphire.tooltip = "Sapphire";
+            var saphire = CreateNewTheme(40, 62, 97, 119, 161, 197);
+            saphire.darkThemeVariant = CreateNewTheme(133, 165, 194, 42, 54, 76);
+            saphire.tooltip = "Sapphire";
+            saphire.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Sapphire.png"));
 
-            //var kimbie = CreateNewTheme(162, 125, 109, 255, 236, 211);
-            //kimbie.darkThemeVariant = CreateNewTheme(179, 87, 5, 31, 19, 5);
-            //kimbie.tooltip = "Kimbie";
+            var kimbie = CreateNewTheme(162, 125, 109, 255, 236, 211);
+            kimbie.darkThemeVariant = CreateNewTheme(179, 87, 5, 31, 19, 5);
+            kimbie.tooltip = "Kimbie";
+            kimbie.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Kimbie.png"));
 
-            //var memory = CreateNewTheme(1, 1, 255, 255, 255, 255);
-            //memory.darkThemeVariant = CreateNewTheme(180, 180, 180, 1, 1, 255);
-            //memory.tooltip = "Nostalgia";
+            var memory = CreateNewTheme(1, 1, 255, 255, 255, 255);
+            memory.darkThemeVariant = CreateNewTheme(180, 180, 180, 1, 1, 255);
+            memory.tooltip = "Nostalgia";
+            memory.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Nostalgia.png"));
 
-            //var kde = CreateNewTheme(255, 255, 255, 61, 174, 233);
-            //kde.darkThemeVariant = CreateNewTheme(61, 174, 233, 28, 38, 43);
-            //kde.tooltip = "KDE";
+            var kde = CreateNewTheme(255, 255, 255, 61, 174, 233);
+            kde.darkThemeVariant = CreateNewTheme(61, 174, 233, 28, 38, 43);
+            kde.tooltip = "KDE";
+            kde.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_KDE.png"));
 
-            //var orangeBlueTone = CreateNewTheme(0, 116, 163, 245, 231, 220);
-            //orangeBlueTone.darkThemeVariant = CreateNewTheme(230, 122, 0, 10, 50, 92);
-            //orangeBlueTone.tooltip = "Beach and Inverse";
+            var orangeBlueTone = CreateNewTheme(0, 116, 163, 245, 231, 220);
+            orangeBlueTone.darkThemeVariant = CreateNewTheme(230, 122, 0, 10, 50, 92);
+            orangeBlueTone.tooltip = "Beach";
+            orangeBlueTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_BeachAndInverse.png"));
 
-            //var greenTwoTone = CreateNewTheme(51, 128, 96, 213, 241, 229);
-            //greenTwoTone.darkThemeVariant = CreateNewTheme(50, 194, 101, 0,0,0);
-            //greenTwoTone.tooltip = "Yay Green";
+            var greenTwoTone = CreateNewTheme(51, 128, 96, 213, 241, 229);
+            greenTwoTone.darkThemeVariant = CreateNewTheme(50, 194, 101, 0, 0, 0);
+            greenTwoTone.tooltip = "Fresher Green";
+            greenTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_YayGreen.png"));
 
-            //var aquaTwoTone = CreateNewTheme(40, 128, 133, 212, 255, 254);
-            //aquaTwoTone.darkThemeVariant = CreateNewTheme(45, 207, 198, 0,0,0);
-            //aquaTwoTone.tooltip = "Another Aqua";
+            var aquaTwoTone = CreateNewTheme(40, 128, 133, 212, 255, 254);
+            aquaTwoTone.darkThemeVariant = CreateNewTheme(45, 207, 198, 0, 0, 0);
+            aquaTwoTone.tooltip = "Another Aqua";
+            aquaTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_AnotherAqua.png"));
 
-            //var greyTwoTone = CreateNewTheme(98, 110, 121, 231, 236, 240);
-            //greyTwoTone.darkThemeVariant = CreateNewTheme(168, 180, 191, 0,0,0);
-            //greyTwoTone.tooltip = "More Dull Grey";
+            var greyTwoTone = CreateNewTheme(98, 110, 121, 231, 236, 240);
+            greyTwoTone.darkThemeVariant = CreateNewTheme(168, 180, 191, 0, 0, 0);
+            greyTwoTone.tooltip = "Smoky Day";
+            greyTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_MoreDullGrey.png"));
 
 
             gridItems.Add(lavender);
@@ -244,15 +249,15 @@ namespace To_Do
             gridItems.Add(purpleTwoTone);
             gridItems.Add(redTwoTone);
             gridItems.Add(orangeTwoTone);
-            //gridItems.Add(greenTwoTone);
-            //gridItems.Add(aquaTwoTone);
-            //gridItems.Add(greyTwoTone);
+            gridItems.Add(greenTwoTone);
+            gridItems.Add(aquaTwoTone);
+            gridItems.Add(greyTwoTone);
             gridItems.Add(discord);
-            //gridItems.Add(saphire);
-            //gridItems.Add(kimbie);
-            //gridItems.Add(memory);
-            //gridItems.Add(kde);
-            //gridItems.Add(orangeBlueTone);
+            gridItems.Add(saphire);
+            gridItems.Add(kimbie);
+            gridItems.Add(memory);
+            gridItems.Add(kde);
+            gridItems.Add(orangeBlueTone);
 
         }
 
@@ -490,7 +495,6 @@ namespace To_Do
                 Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
                 Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
                 Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
-                Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(8, 0, 0, 0);
             }
             else
             {
@@ -499,7 +503,6 @@ namespace To_Do
                 Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
                 Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(1);
                 Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0);
-                Application.Current.Resources["TopLeftNavViewContentCorner"] = new CornerRadius(1, 0, 0, 0);
             }
 
             if (ThemeHelper.IsDarkTheme())
@@ -596,32 +599,60 @@ namespace To_Do
 
         private void HideBlurredDetails(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
+            // Fetching appropriate elements
             Grid parent = sender as Grid;
             TextBlock block = VisualTreeHelper.GetChild(parent, 6) as TextBlock;
             Border color = VisualTreeHelper.GetChild(parent, 2) as Border;
+            Grid Tri = VisualTreeHelper.GetChild(parent, 4) as Grid;
+            Grid transparentTri = VisualTreeHelper.GetChild(parent, 3) as Grid;
+
+            // Animating them
             color.Opacity = 0;
             block.Translation = new System.Numerics.Vector3(0, 20, 0);
-
-            Grid transparentTri = VisualTreeHelper.GetChild(parent, 3) as Grid;
             transparentTri.Translation = new System.Numerics.Vector3(-50, 0, 0);
-
-            Grid Tri = VisualTreeHelper.GetChild(parent, 4) as Grid;
             Tri.Translation = new System.Numerics.Vector3(-50, 0, 0);
         }
 
         private void ShowBlurredDetails(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
+            // Fetching appropriate elements
             Grid parent = sender as Grid;
+            Grid transparentTriGrid = VisualTreeHelper.GetChild(parent, 3) as Grid;
+            Grid triGrid = VisualTreeHelper.GetChild(parent, 4) as Grid;
+            Grid transparentTri = VisualTreeHelper.GetChild(transparentTriGrid, 0) as Grid;
+            Grid tri = VisualTreeHelper.GetChild(triGrid, 0) as Grid;
             TextBlock block = VisualTreeHelper.GetChild(parent, 6) as TextBlock;
-            block.Translation = System.Numerics.Vector3.Zero;
             Border color = VisualTreeHelper.GetChild(parent, 2) as Border;
-            color.Opacity = 0.4;
 
-            Grid transparentTri = VisualTreeHelper.GetChild(parent, 3) as Grid;
-            transparentTri.Translation = System.Numerics.Vector3.Zero;
+            // Fetching hovered item's backend class
+            var gridThemeItemInstance = parent.DataContext as GridThemeItem;
+            Brush brushToUse;
+            if (ThemeHelper.IsDarkTheme())
+            {
+                brushToUse = gridThemeItemInstance.darkThemeVariant.borderBrush;
+            }
+            else
+            {
+                // Set color to light background one, if foreground is white
+                if ((gridThemeItemInstance.borderBrush as SolidColorBrush).Color == Colors.White)
+                {
+                    brushToUse = gridThemeItemInstance.backgroundBrush;
+                }
+                else
+                {
+                    brushToUse = gridThemeItemInstance.borderBrush;
+                }
+            }
+            // Here, we set dark or light colors of hover triangles depending on theme
+            transparentTri.Background = brushToUse;
+            tri.Background = brushToUse;
 
-            Grid Tri = VisualTreeHelper.GetChild(parent, 4) as Grid;
-            Tri.Translation = System.Numerics.Vector3.Zero;
+            // Animating implicitly appropriate elements
+            block.Translation = System.Numerics.Vector3.Zero;
+            color.Opacity = 0.7;
+            transparentTriGrid.Translation = System.Numerics.Vector3.Zero;
+            triGrid.Translation = System.Numerics.Vector3.Zero;
+            
         }
     }
 

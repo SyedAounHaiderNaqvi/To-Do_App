@@ -44,7 +44,6 @@
                     <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="ListViewItemCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="NavViewSplitViewCorners">0,8,8,0</CornerRadius>
-                    <CornerRadius x:Key="TopLeftNavViewContentCorner">8,0,0,0</CornerRadius>
                     <Style x:Key="ButtonStyle1" TargetType="Button">
                         <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
                         <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
@@ -204,7 +203,6 @@
                     <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="ListViewItemCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="NavViewSplitViewCorners">0,8,8,0</CornerRadius>
-                    <CornerRadius x:Key="TopLeftNavViewContentCorner">8,0,0,0</CornerRadius>
                     <Style x:Key="ButtonStyle1" TargetType="Button">
                         <Setter Property="Background" Value="{ThemeResource ButtonBackground}"/>
                         <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
@@ -363,7 +361,6 @@
                     <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="ListViewItemCornerRadius">4</CornerRadius>
                     <CornerRadius x:Key="NavViewSplitViewCorners">0,8,8,0</CornerRadius>
-                    <CornerRadius x:Key="TopLeftNavViewContentCorner">8,0,0,0</CornerRadius>
                     <Style BasedOn="{StaticResource ListViewItemRevealStyle}" x:Key="RoundedListViewItem" TargetType="ListViewItem">
                         <Setter Property="CornerRadius" Value="{ThemeResource ListViewItemCornerRadius}"/>
                         <Setter Property="Template">

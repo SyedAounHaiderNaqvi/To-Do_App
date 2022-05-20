@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:toolcontrols="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls">
     <Page.Resources>
         <ResourceDictionary>
@@ -864,20 +863,21 @@
             <TextBlock HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Today's tasks magically done!"/>
             <TextBlock HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="My Day list refreshes every day for your daily tasks."/>
         </StackPanel>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Left" Margin="35,-70,35,10" VerticalAlignment="Top" Orientation="Vertical">
-            <toolcontrols:DropShadowPanel BlurRadius="8" ShadowOpacity="0.5" OffsetX="0" OffsetY="0" Color="Black" IsMasked="True">
-                <TextBlock x:Name="title" Style="{ThemeResource TitleTextBlockStyle}" Text="My Day"/>
-            </toolcontrols:DropShadowPanel>
-            <toolcontrols:DropShadowPanel BlurRadius="8" ShadowOpacity="0.5" OffsetX="0" OffsetY="0" Color="Black" IsMasked="True">
-                <TextBlock x:FieldModifier="public" x:Name="TodayTxt" Style="{ThemeResource BodyTextBlockStyle}"/>
-            </toolcontrols:DropShadowPanel>
-        </StackPanel>
+        <Grid Grid.Row="0" HorizontalAlignment="Left" Margin="35,-54,35,10" VerticalAlignment="Top">
+            <Border VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
+                <StackPanel Orientation="Horizontal" Spacing="5" Padding="8,4,8,4" HorizontalAlignment="Center">
+                    <TextBlock x:Name="title" HorizontalTextAlignment="Left" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Margin="0,0,-2,0" Text="My Day"/>
+                    <Rectangle Opacity="0.2" Width="1" VerticalAlignment="Stretch" Margin="0,-4,0,-4" Fill="{ThemeResource SystemChromeAltLowColor}"/>
+                    <TextBlock x:FieldModifier="public" x:Name="TodayTxt" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-2,0" HorizontalTextAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="14"/>
+                </StackPanel>
+            </Border>
+        </Grid>
 
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="35,-53,35,10">
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="35,-54,35,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="9"/>
+                <ColumnDefinition Width="10"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border Width="30" Height="32" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" Grid.Column="0" Margin="0,0,7,0">
