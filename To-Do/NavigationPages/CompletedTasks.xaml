@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="To_Do.NavigationPages.CompletedTasks"
+    x:Class="To_Do.NavigationPages.completedtasks"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:To_Do.NavigationPages"

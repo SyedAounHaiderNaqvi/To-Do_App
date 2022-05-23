@@ -11,13 +11,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace To_Do.NavigationPages
 {
-    public sealed partial class CompletedTasks : Page
+    public sealed partial class completedtasks : Page
     {
         public ObservableCollection<TODOTask> CompleteTasks;
-        public static CompletedTasks instance;
+        public static completedtasks instance;
         public MainPage singletonReference = MainPage.ins;
 
-        public CompletedTasks()
+        public completedtasks()
         {
             this.InitializeComponent();
             instance = this;
@@ -36,25 +36,25 @@ namespace To_Do.NavigationPages
             StorageFolder folder = ApplicationData.Current.LocalFolder;
             StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync("App_Essential_Data");
 
-            if (rootFolder != null)
-            {
-                StorageFile descriptionFile = await rootFolder.GetFileAsync("comp_desc.json");
-                StorageFile datesFile = await rootFolder.GetFileAsync("comp_dates.json");
+            //if (rootFolder != null)
+            //{
+            //    StorageFile descriptionFile = await rootFolder.GetFileAsync("comp_desc.json");
+            //    StorageFile datesFile = await rootFolder.GetFileAsync("comp_dates.json");
 
-                string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
-                string jsonOfDateLoaded = await FileIO.ReadTextAsync(datesFile);
+            //    string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
+            //    string jsonOfDateLoaded = await FileIO.ReadTextAsync(datesFile);
 
-                List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
-                List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDateLoaded);
-                if (loadedDescriptions != null)
-                {
-                    for (int i = 0; i < loadedDescriptions.Count; i++)
-                    {
-                        AddATask(loadedDescriptions[i], loadedDates[i]);
-                    }
-                }
+            //    List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
+            //    List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDateLoaded);
+            //    if (loadedDescriptions != null)
+            //    {
+            //        for (int i = 0; i < loadedDescriptions.Count; i++)
+            //        {
+            //            AddATask(loadedDescriptions[i], loadedDates[i]);
+            //        }
+            //    }
 
-            }
+            //}
             MainPage.ins.initialLoadingUI.Visibility = Visibility.Collapsed;
         }
 
@@ -62,7 +62,7 @@ namespace To_Do.NavigationPages
         {
             base.OnNavigatedTo(e);
 
-            PendingTasks.instance.HideInfoBar();
+            //pendingtasks.instance.HideInfoBar();
 
             var parsedDescriptions = (List<List<string>>)e.Parameter;
             if (parsedDescriptions != null)

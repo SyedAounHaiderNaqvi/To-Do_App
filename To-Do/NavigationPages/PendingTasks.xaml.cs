@@ -19,13 +19,17 @@ using System.Diagnostics;
 
 namespace To_Do.NavigationPages
 {
-    public sealed partial class PendingTasks : Page
+    public sealed partial class pendingtasks : Page
     {
         public ObservableCollection<TODOTask> TaskItems;
+        public List<string> _savingDescriptions = new List<string>();
+        public List<string> _savingDates = new List<string>();
+        public List<bool> _savingImps = new List<bool>();
+        public List<List<string>> savingSteps = new List<List<string>>();
 
         public List<string> savingDescriptions;
 
-        public static PendingTasks instance;
+        public static pendingtasks instance;
         public MainPage singletonReference = MainPage.ins;
         public int undoIndex;
         public string undoText;
@@ -37,15 +41,33 @@ namespace To_Do.NavigationPages
         CancellationTokenSource token;
         public ContentDialog dialog;
 
-        public PendingTasks()
+
+        //for debug for now
+        public string _name;
+        public string _tag;
+
+        private bool navigatedTo = false;
+
+        public pendingtasks()
         {
             this.InitializeComponent();
             instance = this;
             InitializeData();
+            HideInfoBar();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
             listOfTasks.ItemsSource = TaskItems;
             listOfTasks.UpdateLayout();
             UpdateBadge();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            // What we have to do is save all data here to local files
+            SaveDataToFile();
+            TaskItems.Clear();
+            Debug.WriteLine("On navigated from: taskitem count = " + TaskItems.Count);
+            navigatedTo = false;
         }
 
         public void AddATask(TODOTask newTask)
@@ -58,23 +80,82 @@ namespace To_Do.NavigationPages
             UpdateBadge();
         }
 
-        private async void InitializeData()
+        public async void SaveDataToFile()
+        {
+            if (TaskItems.Count > 0)
+            {
+                foreach (TODOTask tODO in TaskItems)
+                {
+                    string temp = tODO.Description;
+                    string date = tODO.Date;
+                    bool importance = tODO.IsStarred;
+                    _savingDescriptions.Add(temp);
+                    _savingDates.Add(date);
+                    _savingImps.Add(importance);
+
+                    List<TODOTask> steps = tODO.SubTasks;
+                    List<string> tempList = new List<string>();
+                    for (int i = 0; i < steps.Count; i++)
+                    {
+                        tempList.Add(steps[i].Description);
+                    }
+                    if (steps != null)
+                    {
+                        savingSteps.Add(tempList);
+                    }
+                }
+                Debug.WriteLine("On before navigation from: taskitem count = " + TaskItems.Count);
+                string jsonFile = JsonConvert.SerializeObject(_savingDescriptions);
+                string dateJsonFile = JsonConvert.SerializeObject(_savingDates);
+                string importanceJsonFile = JsonConvert.SerializeObject(_savingImps);
+                string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
+
+                StorageFolder folder = ApplicationData.Current.LocalFolder;
+                StorageFolder rootFolder = await folder.CreateFolderAsync($"{_tag}", CreationCollisionOption.ReplaceExisting);
+
+                StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{_tag}_desc.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
+                StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{_tag}_dates.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
+                StorageFile impdescjson = await rootFolder.CreateFileAsync($"{_tag}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
+                StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{_tag}_steps.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
+
+                // reset all shit
+                _savingDescriptions.Clear();
+                _savingDates.Clear();
+                _savingImps.Clear();
+                savingSteps.Clear();
+            }
+        }
+
+        private void InitializeData()
         {
             if (TaskItems == null)
             {
                 TaskItems = new ObservableCollection<TODOTask>();
                 listOfTasks.ItemsSource = TaskItems;
             }
+            MainPage.ins.initialLoadingUI.Visibility = Visibility.Collapsed;
+        }
 
+        private void listOfTasks_LayoutUpdated(object sender, object e)
+        {
+            AllDone.Visibility = TaskItems.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public async void LoadDataFromFile()
+        {
             StorageFolder folder = ApplicationData.Current.LocalFolder;
-            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync("App_Essential_Data");
+            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{_tag}");
 
-            if (rootFolder != null)
+            if (rootFolder != null && TaskItems.Count <= 0)
             {
-                StorageFile descriptionFile = await rootFolder.GetFileAsync("pending_desc.json");
-                StorageFile datesFile = await rootFolder.GetFileAsync("pending_dates.json");
-                StorageFile importanceFile = await rootFolder.GetFileAsync("imp_desc.json");
-                StorageFile stepsFile = await rootFolder.GetFileAsync("pending_steps.json");
+                StorageFile descriptionFile = await rootFolder.GetFileAsync($"{_tag}_desc.json");
+                StorageFile datesFile = await rootFolder.GetFileAsync($"{_tag}_dates.json");
+                StorageFile importanceFile = await rootFolder.GetFileAsync($"{_tag}_imp_desc.json");
+                StorageFile stepsFile = await rootFolder.GetFileAsync($"{_tag}_steps.json");
 
                 string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
                 string jsonOfDatesLoaded = await FileIO.ReadTextAsync(datesFile);
@@ -87,8 +168,10 @@ namespace To_Do.NavigationPages
                 List<List<string>> loadedSteps = JsonConvert.DeserializeObject<List<List<string>>>(jsonOfStepsLoaded);
                 if (loadedDescriptions != null)
                 {
+                    TaskItems.Clear();
                     for (int i = 0; i < loadedDescriptions.Count; i++)
                     {
+                        Debug.WriteLine($"Ran this shit {i+1} time(s)");
                         TODOTask newTask = new TODOTask() { Description = loadedDescriptions[i], Date = loadedDates[i], IsStarred = loadedImportance[i] };
                         newTask.SubTasks = new List<TODOTask>();
                         for (int x = 0; x < loadedSteps[i].Count; x++)
@@ -99,39 +182,32 @@ namespace To_Do.NavigationPages
                         AddATask(newTask);
                     }
                 }
-
-                List<TODOTask> newList = new List<TODOTask>(TaskItems);
-                newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
-                TaskItems = new ObservableCollection<TODOTask>(newList);
-                listOfTasks.ItemsSource = TaskItems;
-
+                Debug.WriteLine("Loading stats");
+                Debug.WriteLine("LoadedDescriptions count = " + loadedDescriptions.Count);
+                //List<TODOTask> newList = new List<TODOTask>(TaskItems);
+                //newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                //TaskItems = new ObservableCollection<TODOTask>(newList);
+                //listOfTasks.ItemsSource = TaskItems;
+                Debug.WriteLine("On Navigated to: taskitem count = " + TaskItems.Count);
             }
-            Debug.WriteLine("Whew did initial stuff");
-            MainPage.ins.initialLoadingUI.Visibility = Visibility.Collapsed;
-        }
-
-        private void listOfTasks_LayoutUpdated(object sender, object e)
-        {
-            AllDone.Visibility = TaskItems.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e != null)
+            base.OnNavigatedTo(e);
+            if (e != null && !navigatedTo)
             {
-                ObservableCollection<TODOTask> parsed = e.Parameter as ObservableCollection<TODOTask>;
+                List<string> parsed = e.Parameter as List<string>;
+                
                 if (parsed != null && parsed.Count > 0)
                 {
-                    //now add
-                    foreach (TODOTask item in parsed)
-                    {
-                        TODOTask n = new TODOTask() { Date = DateTime.Now.AddDays(-1).ToString("dd-MMMM-yyyy hh:mm:ss tt"), Description = item.Description, IsStarred = item.IsStarred, SubTasks = item.SubTasks };
-                        AddATask(n);
-                    }
-                    Sort((string)SortingDropDown.Content);
+                    _name = parsed[0];
+                    _tag = parsed[1];
+                    Debug.WriteLine("Successfully parsed shit from mainpage");
+                    LoadDataFromFile();
                 }
+                navigatedTo = true;
             }
-            base.OnNavigatedTo(e);
             MainPage.ins.parallax.Source = listOfTasks;
         }
 
@@ -221,7 +297,7 @@ namespace To_Do.NavigationPages
                     }
                 }
                 redate = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt");
-                CompletedTasks.instance.AddATask(block.Text, redate);
+                completedtasks.instance.AddATask(block.Text, redate);
                 TaskItems.Remove(context);
                 UpdateBadge();
             }
@@ -293,7 +369,7 @@ namespace To_Do.NavigationPages
 
         private async void UndoDelete(object sender, RoutedEventArgs e)
         {
-            CompletedTasks.instance.DeleteTaskFromExternal(redate);
+            completedtasks.instance.DeleteTaskFromExternal(redate);
             TODOTask reMadeTask = new TODOTask() { Description = undoText, Date = undoDate, IsStarred = undoStar };
             reMadeTask.SubTasks = new List<TODOTask>(undoSteps);
             TaskItems.Insert(undoIndex, reMadeTask);
@@ -410,18 +486,22 @@ namespace To_Do.NavigationPages
 
         public void UpdateBadge()
         {
-            //singletonReference.inf.Value = TaskItems.Count;
-            ////setBadgeNumber(TaskItems.Count);
-
-            //if (TaskItems.Count > 0)
+            //for (int i = 0; i < MainPage.ins.Categories.Count; i++)
             //{
-            //    singletonReference.inf.Visibility = Visibility.Visible;
+            //    if (MainPage.ins.Categories[i].Tag == (string)this.Tag)
+            //    {
+            //        MainPage.ins.Categories[i].badgeNum = TaskItems.Count;
+            //        if (TaskItems.Count > 0)
+            //        {
+            //            MainPage.ins.Categories[i].opacity = 1f;
+            //        }
+            //        else
+            //        {
+            //            MainPage.ins.Categories[i].opacity = 0f;
+            //        }
+            //    }
             //}
-            //else
-            //{
-            //    singletonReference.inf.Visibility = Visibility.Collapsed;
-            //    //BadgeUpdateManager.CreateBadgeUpdaterForApplication().Clear();
-            //}
+            
         }
 
         private async void NewTaskBox_GotFocus(object sender, RoutedEventArgs e)

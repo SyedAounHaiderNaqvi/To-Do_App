@@ -11,9 +11,6 @@
     controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
-        <!--<DataTemplate x:Key="NavigationViewMenuItem" x:DataType="local:SingleNavItem">
-            <controls:NavigationViewItem Tag="{x:Bind Tag}" Content="{x:Bind Name}"/>
-        </DataTemplate>-->
         <local:MenuItemTemplateSelector x:Key="selector">
             <local:MenuItemTemplateSelector.DefaultItemTemlate>
                 <DataTemplate x:DataType="local:DefaultCategory">
@@ -21,16 +18,12 @@
                         <controls:NavigationViewItem.Icon>
                             <FontIcon Glyph="{x:Bind Glyph}" />
                         </controls:NavigationViewItem.Icon>
+                        <controls:NavigationViewItem.InfoBadge>
+                            <controls:InfoBadge Opacity="{x:Bind opacity, Mode=OneWay}" Value="{x:Bind badgeNum, Mode=OneWay}"/>
+                        </controls:NavigationViewItem.InfoBadge>
                     </controls:NavigationViewItem>
                 </DataTemplate>
             </local:MenuItemTemplateSelector.DefaultItemTemlate>
-            <local:MenuItemTemplateSelector.CustomItemTemlate>
-                <DataTemplate>
-                    <controls:NavigationViewItem Icon="{Binding Icon}">
-                        <TextBlock Text="{Binding Title}" />
-                    </controls:NavigationViewItem>
-                </DataTemplate>
-            </local:MenuItemTemplateSelector.CustomItemTemlate>
         </local:MenuItemTemplateSelector>
         <DataTemplate x:Key="suggestionTemplate" x:DataType="local:QueryFormat">
             <UserControl>
@@ -574,7 +567,7 @@
 
             <controls:NavigationView.PaneCustomContent>
                 <StackPanel Orientation="Vertical">
-                    <Button CornerRadius="{ThemeResource ControlCornerRadius}" Click="Button_Click" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Height="36" HorizontalAlignment="Stretch" Margin="4,2,4,2">
+                    <Button ToolTipService.ToolTip="Create New List" CornerRadius="{ThemeResource ControlCornerRadius}" Click="Button_Click" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Height="36" HorizontalAlignment="Stretch" Margin="4,2,4,2">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" Spacing="16">
                                 <FontIcon FontSize="16" Glyph="&#xE710;"/>

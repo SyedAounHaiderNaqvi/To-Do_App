@@ -53,21 +53,21 @@ namespace To_Do
 
         async void JumplistTransferCode(LaunchActivatedEventArgs e)
         {
-            MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
-            MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
+            MainPage.ins.ContentFrame.Navigate(typeof(pendingtasks));
+            MainPage.ins.ContentFrame.Navigate(typeof(completedtasks));
             MainPage.ins.ContentFrame.Navigate(typeof(Settings));
 
             switch (e.Arguments)
             {
                 case "GoToPending":
-                    MainPage.ins.ContentFrame.Navigate(typeof(PendingTasks));
+                    MainPage.ins.ContentFrame.Navigate(typeof(pendingtasks));
                     await Task.Delay(10);
                     MainPage.ins.nview.SelectedItem = MainPage.ins.Categories[0];
                     break;
                 case "GoToCompleted":
-                    while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(CompletedTasks))
+                    while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(completedtasks))
                     {
-                        MainPage.ins.ContentFrame.Navigate(typeof(CompletedTasks));
+                        MainPage.ins.ContentFrame.Navigate(typeof(completedtasks));
                     }
                     await Task.Delay(10);
                     MainPage.ins.nview.SelectedItem = MainPage.ins.Categories[1];

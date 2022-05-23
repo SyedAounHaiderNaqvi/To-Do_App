@@ -43,11 +43,11 @@ namespace To_Do
                     (sender as Button).IsEnabled = false;
                     restorebtn.IsEnabled = false;
 
-                    int total = PendingTasks.instance.TaskItems.Count + CompletedTasks.instance.CompleteTasks.Count;
+                    int total = pendingtasks.instance.TaskItems.Count + completedtasks.instance.CompleteTasks.Count;
                     float step = 100 / total;
 
                     //get list of data to store
-                    PendingTasks ins = PendingTasks.instance;
+                    pendingtasks ins = pendingtasks.instance;
                     foreach (TODOTask tODO in ins.TaskItems)
                     {
                         string temp = tODO.Description;
@@ -70,7 +70,7 @@ namespace To_Do
                         backupprogress.Value += step;
                     }
                     
-                    foreach (TODOTask task in CompletedTasks.instance.CompleteTasks)
+                    foreach (TODOTask task in completedtasks.instance.CompleteTasks)
                     {
                         string temp = task.Description;
                         string date = task.Date;
@@ -202,7 +202,7 @@ namespace To_Do
                                 string descOfStep = loadedSteps[i][x];
                                 newTask.SubTasks.Add(new TODOTask() { Description = descOfStep });
                             }
-                            PendingTasks.instance.AddATask(newTask);
+                            pendingtasks.instance.AddATask(newTask);
                             restoreprogressbar.Value += step;
                         }
                     }
@@ -211,7 +211,7 @@ namespace To_Do
                     {
                         for (int i = 0; i < loadedCompletedDescriptions.Count; i++)
                         {
-                            CompletedTasks.instance.AddATask(loadedCompletedDescriptions[i], loadedCompletedDates[i]);
+                            completedtasks.instance.AddATask(loadedCompletedDescriptions[i], loadedCompletedDates[i]);
                             restoreprogressbar.Value += step;
                         }
                     }

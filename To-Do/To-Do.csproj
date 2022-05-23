@@ -140,11 +140,14 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NavigationPages\CompletedTasks.xaml.cs">
-      <DependentUpon>CompletedTasks.xaml</DependentUpon>
+    <Compile Include="NavigationPages\completedtasks.xaml.cs">
+      <DependentUpon>completedtasks.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NavigationPages\PendingTasks.xaml.cs">
-      <DependentUpon>PendingTasks.xaml</DependentUpon>
+    <Compile Include="NavigationPages\pendingtasks.xaml.cs">
+      <DependentUpon>pendingtasks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewNavigationViewItemDialog.xaml.cs">
+      <DependentUpon>NewNavigationViewItemDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.xaml.cs">
@@ -263,11 +266,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="NavigationPages\CompletedTasks.xaml">
+    <Page Include="NavigationPages\completedtasks.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="NavigationPages\PendingTasks.xaml">
+    <Page Include="NavigationPages\pendingtasks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewNavigationViewItemDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
