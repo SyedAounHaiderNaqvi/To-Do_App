@@ -16,6 +16,7 @@ using Microsoft.UI.Xaml.Controls;
 using System.Linq;
 using Windows.UI.Xaml.Controls.Primitives;
 using System.Diagnostics;
+using Windows.UI.Core;
 
 namespace To_Do.NavigationPages
 {
@@ -31,43 +32,62 @@ namespace To_Do.NavigationPages
 
         public static pendingtasks instance;
         public MainPage singletonReference = MainPage.ins;
-        public int undoIndex;
-        public string undoText;
-        public string undoDate;
-        public bool undoStar;
+
         public string redate;
-        public List<TODOTask> undoSteps = new List<TODOTask>();
-        public int delay = 3000;
-        CancellationTokenSource token;
+        //public int delay = 3000;
         public ContentDialog dialog;
 
 
         //for debug for now
         public string _name;
         public string _tag;
+        public string lastDataParseTag = "pendingtasks";
 
-        private bool navigatedTo = false;
+        //bool isnavigated = false;
 
         public pendingtasks()
         {
             this.InitializeComponent();
             instance = this;
             InitializeData();
-            HideInfoBar();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
             listOfTasks.ItemsSource = TaskItems;
             listOfTasks.UpdateLayout();
             UpdateBadge();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected async override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            base.OnNavigatedFrom(e);
             // What we have to do is save all data here to local files
-            SaveDataToFile();
+            //await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            //        async () =>
+            //        {
+            //            //await Task.Factory.StartNew(SaveDataToFile);
+            //            //List<Task> t = new List<Task>();
+            //            //t.Add(Task.Run(SaveDataToFile));
+            //            //await Task.WhenAll(t.ToArray());
+            //            //Task.Run(SaveDataToFile);
+            //            await SaveDataToFile();
+            //        }
+            //        );
+            //await Task.Run(SaveDataToFile);
+            //var task = SaveDataToFile();
+            //task.Wait();
+            //Task.Run(async () => { await SaveDataToFile(); }).Wait();
+
+            //await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
+            //        async () =>
+            //        {
+                        //await Task.Run(async () => { await SaveDataToFile(); });
+                        await SaveDataToFile();
+                    //}
+                    //);
+
+
             TaskItems.Clear();
-            Debug.WriteLine("On navigated from: taskitem count = " + TaskItems.Count);
-            navigatedTo = false;
+            //isnavigated = false;
+            //await HideInfoBar();
+            base.OnNavigatingFrom(e);
         }
 
         public void AddATask(TODOTask newTask)
@@ -80,12 +100,14 @@ namespace To_Do.NavigationPages
             UpdateBadge();
         }
 
-        public async void SaveDataToFile()
+        public async Task SaveDataToFile()
         {
+            var t = _tag;
             if (TaskItems.Count > 0)
             {
                 foreach (TODOTask tODO in TaskItems)
                 {
+                    Debug.WriteLine("while fetching todo for saves tag: " + t);
                     string temp = tODO.Description;
                     string date = tODO.Date;
                     bool importance = tODO.IsStarred;
@@ -104,30 +126,39 @@ namespace To_Do.NavigationPages
                         savingSteps.Add(tempList);
                     }
                 }
-                Debug.WriteLine("On before navigation from: taskitem count = " + TaskItems.Count);
                 string jsonFile = JsonConvert.SerializeObject(_savingDescriptions);
                 string dateJsonFile = JsonConvert.SerializeObject(_savingDates);
                 string importanceJsonFile = JsonConvert.SerializeObject(_savingImps);
                 string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
 
+                Debug.WriteLine("just before writing tag: " + t);
+
                 StorageFolder folder = ApplicationData.Current.LocalFolder;
-                StorageFolder rootFolder = await folder.CreateFolderAsync($"{_tag}", CreationCollisionOption.ReplaceExisting);
-
-                StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{_tag}_desc.json", CreationCollisionOption.ReplaceExisting);
+                StorageFolder rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
+                StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
-                StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{_tag}_dates.json", CreationCollisionOption.ReplaceExisting);
+                StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{t}_dates.json", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
-                StorageFile impdescjson = await rootFolder.CreateFileAsync($"{_tag}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
+                StorageFile impdescjson = await rootFolder.CreateFileAsync($"{t}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
-                StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{_tag}_steps.json", CreationCollisionOption.ReplaceExisting);
+                StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
-
-                // reset all shit
-                _savingDescriptions.Clear();
-                _savingDates.Clear();
-                _savingImps.Clear();
-                savingSteps.Clear();
+                Debug.WriteLine("after writing tag: " + t);
             }
+            else
+            {
+                StorageFolder folder = ApplicationData.Current.LocalFolder;
+                StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
+                if (rootFolder != null)
+                {
+                    await rootFolder.DeleteAsync();
+                }
+            }
+
+            _savingDescriptions.Clear();
+            _savingDates.Clear();
+            _savingImps.Clear();
+            savingSteps.Clear();
         }
 
         private void InitializeData()
@@ -145,17 +176,20 @@ namespace To_Do.NavigationPages
             AllDone.Visibility = TaskItems.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public async void LoadDataFromFile()
+        public async Task LoadDataFromFile()
         {
+            var t = _tag;
+            Debug.WriteLine("before fetching folders tag: " + t);
             StorageFolder folder = ApplicationData.Current.LocalFolder;
-            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{_tag}");
+            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
 
             if (rootFolder != null && TaskItems.Count <= 0)
             {
-                StorageFile descriptionFile = await rootFolder.GetFileAsync($"{_tag}_desc.json");
-                StorageFile datesFile = await rootFolder.GetFileAsync($"{_tag}_dates.json");
-                StorageFile importanceFile = await rootFolder.GetFileAsync($"{_tag}_imp_desc.json");
-                StorageFile stepsFile = await rootFolder.GetFileAsync($"{_tag}_steps.json");
+                Debug.WriteLine("just before reading tag: " + t);
+                StorageFile descriptionFile = await rootFolder.GetFileAsync($"{t}_desc.json");
+                StorageFile datesFile = await rootFolder.GetFileAsync($"{t}_dates.json");
+                StorageFile importanceFile = await rootFolder.GetFileAsync($"{t}_imp_desc.json");
+                StorageFile stepsFile = await rootFolder.GetFileAsync($"{t}_steps.json");
 
                 string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
                 string jsonOfDatesLoaded = await FileIO.ReadTextAsync(datesFile);
@@ -166,12 +200,12 @@ namespace To_Do.NavigationPages
                 List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDatesLoaded);
                 List<bool> loadedImportance = JsonConvert.DeserializeObject<List<bool>>(jsonOfImpLoaded);
                 List<List<string>> loadedSteps = JsonConvert.DeserializeObject<List<List<string>>>(jsonOfStepsLoaded);
+                Debug.WriteLine("just after reading tag: " + t);
                 if (loadedDescriptions != null)
                 {
                     TaskItems.Clear();
                     for (int i = 0; i < loadedDescriptions.Count; i++)
                     {
-                        Debug.WriteLine($"Ran this shit {i+1} time(s)");
                         TODOTask newTask = new TODOTask() { Description = loadedDescriptions[i], Date = loadedDates[i], IsStarred = loadedImportance[i] };
                         newTask.SubTasks = new List<TODOTask>();
                         for (int x = 0; x < loadedSteps[i].Count; x++)
@@ -182,34 +216,53 @@ namespace To_Do.NavigationPages
                         AddATask(newTask);
                     }
                 }
-                Debug.WriteLine("Loading stats");
-                Debug.WriteLine("LoadedDescriptions count = " + loadedDescriptions.Count);
-                //List<TODOTask> newList = new List<TODOTask>(TaskItems);
-                //newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
-                //TaskItems = new ObservableCollection<TODOTask>(newList);
-                //listOfTasks.ItemsSource = TaskItems;
-                Debug.WriteLine("On Navigated to: taskitem count = " + TaskItems.Count);
+                List<TODOTask> newList = new List<TODOTask>(TaskItems);
+                newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                TaskItems = new ObservableCollection<TODOTask>(newList);
+                listOfTasks.ItemsSource = TaskItems;
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-            if (e != null && !navigatedTo)
+            if (e != null)
             {
                 List<string> parsed = e.Parameter as List<string>;
-                
+
                 if (parsed != null && parsed.Count > 0)
                 {
                     _name = parsed[0];
                     _tag = parsed[1];
-                    Debug.WriteLine("Successfully parsed shit from mainpage");
-                    LoadDataFromFile();
+                    this.Name = _name;
+                    this.Tag = _tag;
+                    pageTitle.Text = _name;
+                    //await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
+                    //async () =>
+                    //{
+                    Debug.WriteLine("ON NAVIGATING TO");
+                    Debug.WriteLine("last tag: " + lastDataParseTag);
+                    Debug.WriteLine("current tag: " + _tag);
+                    if (lastDataParseTag != _tag)
+                    {
+
+                        await LoadDataFromFile();
+                        lastDataParseTag = _tag;
+                    }
+                        //    await Task.Factory.StartNew(LoadDataFromFile);
+                        //    //List<Task> t = new List<Task>();
+                        //    //t.Add(Task.Run(LoadDataFromFile));
+                        //    //await Task.WhenAll(t.ToArray());
+                    //}
+                    //);
+                //await Task.Run(LoadDataFromFile);
+                //Task.Run(async () => { await LoadDataFromFile(); }).Wait();
                 }
-                navigatedTo = true;
             }
             MainPage.ins.parallax.Source = listOfTasks;
+            base.OnNavigatedTo(e);
         }
+
+
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -265,61 +318,52 @@ namespace To_Do.NavigationPages
 
         private async void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            token = new CancellationTokenSource();
-            token.Token.ThrowIfCancellationRequested();
-            if (confirmDoneNotif.IsOpen)
-            {
-                notif.Translation = new System.Numerics.Vector3(0, 170, 0);
-                notif.Opacity = 0;
-                confirmDoneNotif.IsOpen = false;
-            }
+            //token = new CancellationTokenSource();
+            //token.Token.ThrowIfCancellationRequested();
+            //if (confirmDoneNotif.IsOpen)
+            //{
+            //    notif.Translation = new System.Numerics.Vector3(0, 170, 0);
+            //    notif.Opacity = 0;
+            //    confirmDoneNotif.IsOpen = false;
+            //}
             // get checkbox that sent this function
             CheckBox cb = sender as CheckBox;
             if (VisualTreeHelper.GetParent(cb) is Grid cbparent)
             {
                 StackPanel panel = VisualTreeHelper.GetChild(cbparent, 1) as StackPanel;
                 TextBlock block = VisualTreeHelper.GetChild(panel, 0) as TextBlock;
-                undoText = block.Text;
                 block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
                 await Task.Delay(100);
                 cb.IsChecked = false;
                 UserControl top = cb.DataContext as UserControl;
                 TODOTask context = top.DataContext as TODOTask;
-                undoDate = context.Date;
-                undoStar = context.IsStarred;
-                undoSteps = context.SubTasks;
                 block.TextDecorations = Windows.UI.Text.TextDecorations.None;
-                for (int i = 0; i < TaskItems.Count; i++)
-                {
-                    if (TaskItems[i] == context)
-                    {
-                        undoIndex = i;
-                    }
-                }
                 redate = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt");
                 completedtasks.instance.AddATask(block.Text, redate);
                 TaskItems.Remove(context);
                 UpdateBadge();
             }
-            confirmDoneNotif.IsOpen = true;
-            notif.Translation = System.Numerics.Vector3.Zero;
-            notif.Opacity = 1;
-            try
-            {
-                await Task.Delay(delay, token.Token);
-            }
-            catch
-            {
+            //confirmDoneNotif.IsOpen = true;
+            //notif.Translation = System.Numerics.Vector3.Zero;
+            //notif.Opacity = 1;
+            //try
+            //{
+            //    await Task.Delay(delay, token.Token);
+            //}
+            //catch
+            //{
 
-            }
-            if (confirmDoneNotif.IsOpen)
-            {
-                notif.Translation = new System.Numerics.Vector3(0, 170, 0);
-                notif.Opacity = 0;
-                await Task.Delay(200);
-                confirmDoneNotif.IsOpen = false;
-                token.Cancel();
-            }
+            //}
+            //if (confirmDoneNotif.IsOpen)
+            //{
+            //    notif.Translation = new System.Numerics.Vector3(0, 170, 0);
+            //    notif.Opacity = 0;
+            //    await Task.Delay(200);
+            //    confirmDoneNotif.IsOpen = false;
+            //    token.Cancel();
+            //}
+
+            await SaveDataToFile();
         }
 
         private async void StepCheckToggled(object sender, RoutedEventArgs e)
@@ -367,29 +411,29 @@ namespace To_Do.NavigationPages
             rootList.ItemsSource = TaskItems[index].SubTasks;
         }
 
-        private async void UndoDelete(object sender, RoutedEventArgs e)
-        {
-            completedtasks.instance.DeleteTaskFromExternal(redate);
-            TODOTask reMadeTask = new TODOTask() { Description = undoText, Date = undoDate, IsStarred = undoStar };
-            reMadeTask.SubTasks = new List<TODOTask>(undoSteps);
-            TaskItems.Insert(undoIndex, reMadeTask);
-            UpdateBadge();
-            listOfTasks.ItemsSource = TaskItems;
-            listOfTasks.UpdateLayout();
-            token.Cancel();
-            notif.Translation = new System.Numerics.Vector3(0, 170, 0);
-            notif.Opacity = 0;
-            await Task.Delay(200);
-            confirmDoneNotif.IsOpen = false;
-        }
+        //private async void UndoDelete(object sender, RoutedEventArgs e)
+        //{
+        //    completedtasks.instance.DeleteTaskFromExternal(redate);
+        //    TODOTask reMadeTask = new TODOTask() { Description = undoText, Date = undoDate, IsStarred = undoStar };
+        //    reMadeTask.SubTasks = new List<TODOTask>(undoSteps);
+        //    TaskItems.Insert(undoIndex, reMadeTask);
+        //    UpdateBadge();
+        //    listOfTasks.ItemsSource = TaskItems;
+        //    listOfTasks.UpdateLayout();
+        //    token.Cancel();
+        //    notif.Translation = new System.Numerics.Vector3(0, 170, 0);
+        //    notif.Opacity = 0;
+        //    await Task.Delay(200);
+        //    confirmDoneNotif.IsOpen = false;
+        //}
 
-        public async void HideInfoBar()
-        {
-            notif.Translation = new System.Numerics.Vector3(0, 170, 0);
-            notif.Opacity = 0;
-            await Task.Delay(200);
-            confirmDoneNotif.IsOpen = false;
-        }
+        //public async Task HideInfoBar()
+        //{
+        //    notif.Translation = new System.Numerics.Vector3(0, 170, 0);
+        //    notif.Opacity = 0;
+        //    await Task.Delay(200);
+        //    confirmDoneNotif.IsOpen = false;
+        //}
 
         private void DeleteTask(object sender, RoutedEventArgs e)
         {
@@ -486,22 +530,22 @@ namespace To_Do.NavigationPages
 
         public void UpdateBadge()
         {
-            //for (int i = 0; i < MainPage.ins.Categories.Count; i++)
-            //{
-            //    if (MainPage.ins.Categories[i].Tag == (string)this.Tag)
-            //    {
-            //        MainPage.ins.Categories[i].badgeNum = TaskItems.Count;
-            //        if (TaskItems.Count > 0)
-            //        {
-            //            MainPage.ins.Categories[i].opacity = 1f;
-            //        }
-            //        else
-            //        {
-            //            MainPage.ins.Categories[i].opacity = 0f;
-            //        }
-            //    }
-            //}
-            
+            for (int i = 0; i < MainPage.ins.Categories.Count; i++)
+            {
+                if (MainPage.ins.Categories[i].Tag == (string)this.Tag)
+                {
+                    MainPage.ins.Categories[i].badgeNum = TaskItems.Count;
+                    if (TaskItems.Count > 0)
+                    {
+                        MainPage.ins.Categories[i].opacity = 1f;
+                    }
+                    else
+                    {
+                        MainPage.ins.Categories[i].opacity = 0f;
+                    }
+                }
+            }
+
         }
 
         private async void NewTaskBox_GotFocus(object sender, RoutedEventArgs e)

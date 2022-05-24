@@ -868,12 +868,12 @@
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Image Width="70" Height="70" Stretch="Uniform" Source="/Images/yay.png" />
             </Grid>
-            <TextBlock HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Yay, no pending tasks!"/>
+            <TextBlock HorizontalAlignment="Center" FontSize="22" Opacity="1" Style="{ThemeResource SubtitleTextBlockStyle}" Text="Yay, no more tasks!"/>
             <TextBlock HorizontalAlignment="Center" HorizontalTextAlignment="Center" MaxWidth="250" FontSize="16" Opacity="0.8" Style="{ThemeResource BodyTextBlockStyle}" TextWrapping="Wrap" Text="Create a new task so that you won't forget it later on."/>
         </StackPanel>
         <Grid Padding="35,25,35,15" Background="Transparent" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,-84,0,10">
             <Border Margin="0,5,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
-                <TextBlock Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="{x:Bind _name}"/>
+                <TextBlock x:Name="pageTitle" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="{x:Bind _name, Mode=OneWay}"/>
             </Border>
             <Grid HorizontalAlignment="Right" Margin="0,5,0,0" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -959,21 +959,18 @@
                 </Grid>
             </SplitView.Pane>
         </SplitView>
-        <Grid x:Name="notif" Opacity="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10,10,10,95" Grid.RowSpan="2" Translation="0,170,0">
+        <!--<Grid x:Name="notif" Opacity="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10,10,10,95" Grid.RowSpan="2" Translation="0,170,0">
             <Grid.TranslationTransition>
                 <Vector3Transition Duration="0:0:0.2"/>
             </Grid.TranslationTransition>
             <Grid.OpacityTransition>
                 <ScalarTransition/>
             </Grid.OpacityTransition>
-            <Border Background="Transparent" BorderBrush="{ThemeResource SystemBaseHighColor}" Opacity="0.3" BorderThickness="3" CornerRadius="{ThemeResource ControlCornerRadius}"/>
+            <Border Background="Transparent" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" Opacity="0.3" BorderThickness="2" CornerRadius="{ThemeResource ControlCornerRadius}"/>
             <controls:InfoBar CornerRadius="{ThemeResource ControlCornerRadius}" IsClosable="False" IsOpen="True" Background="{ThemeResource ExpanderHeaderBackground}" Severity="Informational" Message="Marked task as complete." x:Name="confirmDoneNotif">
 
-                <controls:InfoBar.ActionButton>
-                    <Button Click="UndoDelete" HorizontalAlignment="Right" Margin="50,0,0,0" Content="Undo" Style="{ThemeResource AccentButtonStyle}"/>
-                </controls:InfoBar.ActionButton>
             </controls:InfoBar>
 
-        </Grid>
+        </Grid>-->
     </Grid>
 </Page>

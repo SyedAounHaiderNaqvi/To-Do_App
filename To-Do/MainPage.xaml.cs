@@ -56,7 +56,7 @@ namespace To_Do
             Categories = new ObservableCollection<DefaultCategory>();
             Categories.Add(new DefaultCategory { Name = "Pending Tasks", Glyph = "\uE823", Tag = "pendingtasks"});
             Categories.Add(new DefaultCategory { Name = "Completed Tasks", Glyph = "\uE73E", Tag = "completedtasks", });
-            Categories.Add(new DefaultCategory { Name = "Test", Glyph = "\uE824", Tag = "Test"});
+            Categories.Add(new DefaultCategory { Name = "Test", Glyph = "\uE709", Tag = "Test"});
 
             var currentTheme = ThemeHelper.RootTheme.ToString();
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -92,18 +92,19 @@ namespace To_Do
 
         public async void Waiter()
         {
-            Debug.WriteLine("In waiter function, first time calling pending tasks");
             List<string> dataToParse = new List<string>();
             dataToParse.Add("Pending Tasks");
             dataToParse.Add("pendingtasks");
             ContentFrame.Navigate(typeof(pendingtasks), dataToParse, new SuppressNavigationTransitionInfo());
+            await Task.Delay(10);
             ContentFrame.Navigate(typeof(completedtasks), null, new SuppressNavigationTransitionInfo());
             await Task.Delay(10);
-            //ContentFrame.Navigate(typeof(pendingtasks));
+            ContentFrame.Navigate(typeof(pendingtasks), dataToParse);
             LoadingUI.Visibility = Visibility.Collapsed;
-            Debug.WriteLine("In waiter function, changed nav view selecteditem manually");
-            //nview.SelectedItem = Categories[0];
+            nview.SelectedItem = Categories[0];
 
+
+            //ContentFrame.Content = null;
             Categories[0].badgeNum = pendingtasks.instance.TaskItems.Count;
         }
 
@@ -613,7 +614,7 @@ namespace To_Do
             }
         }
 
-        public async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
+        public void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
         {
             var def = e.GetDeferral();
             //LoadingUI.Visibility = Visibility.Visible;
@@ -731,28 +732,30 @@ namespace To_Do
                 var selectedItem = (DefaultCategory)args.SelectedItem;
                 if (selectedItem != null)
                 {
-
-                    string selectedItemTag = selectedItem.Tag.ToString();
-                    string pageName = "To_Do.NavigationPages." + selectedItemTag;
+                    //Debug.WriteLine(selectedItem.Name + selectedItem.Tag);
+                    string selectedItemTag = selectedItem.Tag;
+                    string pageName = "";
+                    if (selectedItemTag.Equals("completedtasks"))
+                    {
+                        pageName = "To_Do.NavigationPages." + selectedItemTag;
+                    } else
+                    {
+                        pageName = "To_Do.NavigationPages.pendingtasks";
+                    }
                     pageType = Type.GetType(pageName);
+                    //Debug.WriteLine("page name is = " + pageType.FullName);
+                    List<string> dataToParse = new List<string>();
+                    dataToParse.Add(selectedItem.Name);
+                    dataToParse.Add(selectedItem.Tag);
                     switch (selectedItemTag)
                     {
                         case "completedtasks":
-                            Debug.WriteLine("navigation view selection changed to completed tasks");
+                            pendingtasks.instance.lastDataParseTag = "completedtasks";
                             ContentFrame.Navigate(pageType, tasksToParse, info);
                             tasksToParse.Clear();
                             break;
-                        case "pendingtasks":
-                            // i should pass the name, tag, maybe glyph?
-                            // in the page's OnNavigatedTo() i need to set these things too....
-                            Debug.WriteLine("navigation view selection changed to pending tasks");
-                            List<string> dataToParse = new List<string>();
-                            dataToParse.Add("Pending Tasks");
-                            dataToParse.Add("pendingtasks");
-                            ContentFrame.Navigate(pageType, dataToParse, info);
-                            break;
                         default:
-                            Debug.WriteLine(selectedItem.Name);
+                            ContentFrame.Navigate(pageType, dataToParse, info);
                             break;
                     }
                 }
