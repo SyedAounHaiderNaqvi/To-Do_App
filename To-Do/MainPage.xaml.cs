@@ -105,7 +105,7 @@ namespace To_Do
 
 
             //ContentFrame.Content = null;
-            Categories[0].badgeNum = pendingtasks.instance.TaskItems.Count;
+            //Categories[0].badgeNum = pendingtasks.instance.TaskItems.Count;
         }
 
         public void ImageInitialize()
