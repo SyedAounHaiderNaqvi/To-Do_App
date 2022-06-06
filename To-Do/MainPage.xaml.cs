@@ -614,66 +614,72 @@ namespace To_Do
             }
         }
 
-        public void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
+        public async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
         {
             var def = e.GetDeferral();
-            //LoadingUI.Visibility = Visibility.Visible;
+            LoadingUI.Visibility = Visibility.Visible;
 
-            //PendingTasks ins = PendingTasks.instance;
-            ////save all descriptions
-            //foreach (TODOTask tODO in ins.TaskItems)
-            //{
-            //    string temp = tODO.Description;
-            //    string date = tODO.Date;
-            //    bool importance = tODO.IsStarred;
-            //    savingDescriptions.Add(temp);
-            //    savingDates.Add(date);
-            //    savingImps.Add(importance);
+            pendingtasks ins = pendingtasks.instance;
+            string t = ins._tag;
 
-            //    List<TODOTask> steps = tODO.SubTasks;
-            //    List<string> tempList = new List<string>();
-            //    for (int i = 0; i < steps.Count; i++)
-            //    {
-            //        tempList.Add(steps[i].Description);
-            //    }
-            //    if (steps != null)
-            //    {
-            //        savingSteps.Add(tempList);
-            //    }
-            //}
+            foreach (TODOTask tODO in ins.TaskItems)
+            {
+                string temp = tODO.Description;
+                string date = tODO.Date;
+                bool importance = tODO.IsStarred;
+                savingDescriptions.Add(temp);
+                savingDates.Add(date);
+                savingImps.Add(importance);
+
+                List<TODOTask> steps = tODO.SubTasks;
+                List<string> tempList = new List<string>();
+                for (int i = 0; i < steps.Count; i++)
+                {
+                    tempList.Add(steps[i].Description);
+                }
+                if (steps != null)
+                {
+                    savingSteps.Add(tempList);
+                }
+            }
+
+            Type pageType = Type.GetType("To_Do.NavigationPages.completedtasks");
+            ContentFrame.Navigate(pageType, tasksToParse, new SuppressNavigationTransitionInfo());
+            tasksToParse.Clear();
+            foreach (TODOTask task in completedtasks.instance.CompleteTasks)
+            {
+                string temp = task.Description;
+                string date = task.Date;
+                completedSaving.Add(temp);
+                savingCompletedDates.Add(date);
+            }
+            string jsonFile = JsonConvert.SerializeObject(savingDescriptions);
+            string dateJsonFile = JsonConvert.SerializeObject(savingDates);
+            string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
+            string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
+            string compJsonFile = JsonConvert.SerializeObject(completedSaving);
+            string compdateJsonFile = JsonConvert.SerializeObject(savingCompletedDates);
+
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+
+            StorageFolder rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
+            StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
+            StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{t}_dates.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
+            StorageFile impdescjson = await rootFolder.CreateFileAsync($"{t}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
+            StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
+
+            Debug.WriteLine(t);
+
+            rootFolder = await folder.CreateFolderAsync("completedtasks", CreationCollisionOption.ReplaceExisting);
+            StorageFile completeddescjson = await rootFolder.CreateFileAsync("completedtasks_desc.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(completeddescjson, compJsonFile);
+            StorageFile compdatesjson = await rootFolder.CreateFileAsync("completedtasks_dates.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(compdatesjson, compdateJsonFile);
             
-            //Type pageType = Type.GetType("To_Do.NavigationPages.CompletedTasks");
-            //ContentFrame.Navigate(pageType, tasksToParse, new SuppressNavigationTransitionInfo());
-            //tasksToParse.Clear();
-            //foreach (TODOTask task in CompletedTasks.instance.CompleteTasks)
-            //{
-            //    string temp = task.Description;
-            //    string date = task.Date;
-            //    completedSaving.Add(temp);
-            //    savingCompletedDates.Add(date);
-            //}
-            //string jsonFile = JsonConvert.SerializeObject(savingDescriptions);
-            //string dateJsonFile = JsonConvert.SerializeObject(savingDates);
-            //string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
-            //string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
-            //string compJsonFile = JsonConvert.SerializeObject(completedSaving);
-            //string compdateJsonFile = JsonConvert.SerializeObject(savingCompletedDates);
-
-            //StorageFolder folder = ApplicationData.Current.LocalFolder;
-            //StorageFolder rootFolder = await folder.CreateFolderAsync("App_Essential_Data", CreationCollisionOption.ReplaceExisting);
-
-            //StorageFile pendingdescjson = await rootFolder.CreateFileAsync("pending_desc.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
-            //StorageFile completeddescjson = await rootFolder.CreateFileAsync("comp_desc.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(completeddescjson, compJsonFile);
-            //StorageFile pendingdatesjson = await rootFolder.CreateFileAsync("pending_dates.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
-            //StorageFile compdatesjson = await rootFolder.CreateFileAsync("comp_dates.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(compdatesjson, compdateJsonFile);
-            //StorageFile impdescjson = await rootFolder.CreateFileAsync("imp_desc.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
-            //StorageFile pendingstepsjson = await rootFolder.CreateFileAsync("pending_steps.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
 
             string deviceFamilyVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
             ulong version = ulong.Parse(deviceFamilyVersion);
