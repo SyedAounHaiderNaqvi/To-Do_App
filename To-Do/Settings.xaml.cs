@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using To_Do.NavigationPages;
 using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
@@ -37,6 +38,8 @@ namespace To_Do
         {
             base.OnNavigatedTo(e);
             MainPage.ins.parallax.Source = scroller;
+            pendingtasks.instance.lastDataParseTag = "settings";
+
         }
 
         public void Settings_Loaded(object sender, RoutedEventArgs e)

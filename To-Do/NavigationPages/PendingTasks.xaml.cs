@@ -52,7 +52,7 @@ namespace To_Do.NavigationPages
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
             listOfTasks.ItemsSource = TaskItems;
             listOfTasks.UpdateLayout();
-            UpdateBadge();
+            //UpdateBadge();
         }
         public void AddATask(TODOTask newTask)
         {
@@ -61,7 +61,7 @@ namespace To_Do.NavigationPages
 
             listOfTasks.UpdateLayout();
             listOfTasks.ScrollIntoView(newTask);
-            UpdateBadge();
+            //UpdateBadge();
         }
 
         public async Task SaveDataToFile()
@@ -195,18 +195,31 @@ namespace To_Do.NavigationPages
 
                 if (parsed != null && parsed.Count > 0)
                 {
+                    //if (lastDataParseTag.Equals("settings"))
+                    //{
+                    //    Debug.WriteLine("alternate line");
+                    //    TaskItems.Clear();
+                    //    // we didnt save here, since MainPage.xaml.cs already handled that
 
-                    if (!loadedForFirstTime)
-                    {
-                        await SaveDataToFile();
-                        TaskItems.Clear();
-                    }
-                    if (loadedForFirstTime)
-                    {
-                        _tag = parsed[1];
-                        await LoadDataFromFile();
-                    }
-                    loadedForFirstTime = false;
+                    //    _tag = parsed[1];
+                    //    await LoadDataFromFile();
+                    //    lastDataParseTag = _tag;
+                    //}
+                    //else
+                    //{
+                        if (!loadedForFirstTime)
+                        {
+                            await SaveDataToFile();
+                            TaskItems.Clear();
+                        }
+                        if (loadedForFirstTime)
+                        {
+                            _tag = parsed[1];
+                            await LoadDataFromFile();
+                        }
+                        loadedForFirstTime = false;
+                    //}
+                   
 
                     _tag = parsed[1];
                     if (lastDataParseTag != _tag)
