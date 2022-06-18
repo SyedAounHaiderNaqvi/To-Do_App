@@ -1,4 +1,5 @@
 ﻿<ContentDialog
+    Background="{ThemeResource ExpanderContentBackground}"
     CornerRadius="{ThemeResource OverlayCornerRadius}"
     RequestedTheme="{x:Bind THEME}"
     x:Class="To_Do.NewNavigationViewItemDialog"
@@ -15,21 +16,6 @@
     PrimaryButtonStyle="{ThemeResource AccentButtonStyle}"
     CloseButtonText="Cancel">
 
-    <ContentDialog.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="#fe303030"/>
-                    <SolidColorBrush x:Key="ExpanderContentBackground" Color="#fe282828"/>
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="#feffffff"/>
-                    <SolidColorBrush x:Key="ExpanderContentBackground" Color="#fef9f9f9"/>
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
-        </ResourceDictionary>
-    </ContentDialog.Resources>
-    
     <Grid>
         <StackPanel Orientation="Vertical" Spacing="10">
 

@@ -1,4 +1,5 @@
 ﻿<ContentDialog
+    Background="{ThemeResource ExpanderContentBackground}"
     CornerRadius="{ThemeResource OverlayCornerRadius}"
     RequestedTheme="{x:Bind THEME}"
     x:Class="To_Do.BackupContentDialog"
@@ -15,12 +16,18 @@
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="#fe303030"/>
-                    <SolidColorBrush x:Key="ExpanderContentBackground" Color="#fe282828"/>
+                    <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="#87101010"/>
+                    <SolidColorBrush x:Key="ExpanderHeaderBorderPointerOverBrush" Color="#87101010"/>
+                    <SolidColorBrush x:Key="ExpanderHeaderBorderPressedBrush" Color="#87101010"/>
+
+                    <SolidColorBrush x:Key="ExpanderContentBorderBrush" Color="#77101010"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="ExpanderHeaderBackground" Color="#feffffff"/>
-                    <SolidColorBrush x:Key="ExpanderContentBackground" Color="#fef9f9f9"/>
+                    <SolidColorBrush x:Key="ExpanderHeaderBorderBrush" Color="#82ffffff"/>
+                    <SolidColorBrush x:Key="ExpanderHeaderBorderPointerOverBrush" Color="#82ffffff"/>
+                    <SolidColorBrush x:Key="ExpanderHeaderBorderPressedBrush" Color="#82ffffff"/>
+                    
+                    <SolidColorBrush x:Key="ExpanderContentBorderBrush" Color="#72f9f9f9"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>

@@ -796,7 +796,7 @@
                                         <ListView.ItemTemplate>
                                             <DataTemplate x:DataType="local:TODOTask">
                                                 <UserControl x:Name="control" PointerEntered="SubTaskPointerEntered" PointerExited="SubTaskPointerExited">
-                                                    <Border Margin="20,0,0,0" Padding="10" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Background="{ThemeResource TextControlBackground}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                                    <Border Margin="20,0,0,0" Padding="10" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="10"/>

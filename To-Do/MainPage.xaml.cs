@@ -195,6 +195,29 @@ namespace To_Do
                 }
 
                 Color bgColor = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
+
+                Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                {
+                    BlurAmount = 8,
+                    TintOpacity = 0.95,
+                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                    TintColor = ChangeColorBrightness(bgColor, false),
+                };
+
+                Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                {
+                    BlurAmount = 8,
+                    TintOpacity = 0.9,
+                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                    TintColor = ChangeColorBrightness(bgColor, true),
+                };
+
+                Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+                Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
+
+                Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+
+                //a is 150
                 Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = bgR, G = bgG, B = bgB });
                 titleBar.ForegroundColor = bgColor;
                 titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];//ThemeHelper.IsDarkTheme() ? new Color() { A = 255, R = a2R, G = a2G, B = a2B } : bgColor;
@@ -220,6 +243,53 @@ namespace To_Do
                 titleBar.ButtonHoverForegroundColor = Colors.White;
                 titleBar.ButtonPressedBackgroundColor = fallBackPurple;
             }
+        }
+
+        public Color ChangeColorBrightness(Color c, bool isContent)
+        {
+            float r, g, b;
+            if (isContent)
+            {
+                if (ThemeHelper.IsDarkTheme())
+                {
+
+                    r = lerp(c.R, 125f, 0.2f);
+                    g = lerp(c.G, 125f, 0.2f);
+                    b = lerp(c.B, 125f, 0.2f);
+
+                }
+                else
+                {
+                    r = lerp(c.R, 255f, 0.7f);
+                    g = lerp(c.G, 255f, 0.7f);
+                    b = lerp(c.B, 255f, 0.7f);
+                }
+            }
+            else
+            {
+                if (ThemeHelper.IsDarkTheme())
+                {
+
+                    r = lerp(c.R, 255f, 0.1f);
+                    g = lerp(c.G, 255f, 0.1f);
+                    b = lerp(c.B, 255f, 0.1f);
+
+                }
+                else
+                {
+                    r = lerp(c.R, 255f, 0.8f);
+                    g = lerp(c.G, 255f, 0.8f);
+                    b = lerp(c.B, 255f, 0.8f);
+                }
+            }
+
+
+            return Color.FromArgb(c.A, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
+        }
+
+        float lerp(float a, float b, float f)
+        {
+            return (float)((a * (1.0 - f)) + (b * f));
         }
 
         async void LoadIMG()

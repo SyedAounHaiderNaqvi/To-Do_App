@@ -299,6 +299,7 @@ namespace To_Do
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
 
             Color b = (n.backgroundBrush as SolidColorBrush).Color;
+            //a is 150
             Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = b.R, G = b.G, B = b.B });
             titleBar.ButtonHoverForegroundColor = Colors.White;
             Color bgcolor = ((SolidColorBrush)n.backgroundBrush).Color;
@@ -328,6 +329,11 @@ namespace To_Do
                 BackgroundSource = AcrylicBackgroundSource.Backdrop,
                 TintColor = ChangeColorBrightness(b, true),
             };
+
+            Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+            Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
+
+            Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
 
 
             Application.Current.Resources["NavigationViewItemForegroundSelected"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
@@ -371,7 +377,7 @@ namespace To_Do
 
         public Color ChangeColorBrightness(Color c, bool isContent)
         {
-            float r = 0, g = 0, b = 0;
+            float r, g, b;
             if (isContent)
             {
                 if (ThemeHelper.IsDarkTheme())

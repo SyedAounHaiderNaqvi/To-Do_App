@@ -1,4 +1,5 @@
 ﻿<ContentDialog
+    Background="{ThemeResource ExpanderContentBackground}"
     CornerRadius="{ThemeResource OverlayCornerRadius}"
     RequestedTheme="{x:Bind THEME}"
     x:Class="To_Do.EditDialogContent"
