@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Toolkit.Uwp.UI.Media;
 
 namespace To_Do
 {
@@ -312,6 +313,23 @@ namespace To_Do
             Application.Current.Resources["SystemAccentColorLight2"] = ((SolidColorBrush)n.borderBrush).Color;
             Application.Current.Resources["SystemAccentColor"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
 
+            Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+            {
+                BlurAmount = 8,
+                TintOpacity = 0.95,
+                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                TintColor = ChangeColorBrightness(b, false),
+            };
+
+            Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+            {
+                BlurAmount = 8,
+                TintOpacity = 0.9,
+                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                TintColor = ChangeColorBrightness(b, true),
+            };
+
+
             Application.Current.Resources["NavigationViewItemForegroundSelected"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
             Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
             Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
@@ -349,6 +367,53 @@ namespace To_Do
             localSettings.Values["ACCENT2_R"] = ac2.R;
             localSettings.Values["ACCENT2_G"] = ac2.G;
             localSettings.Values["ACCENT2_B"] = ac2.B;
+        }
+
+        public Color ChangeColorBrightness(Color c, bool isContent)
+        {
+            float r = 0, g = 0, b = 0;
+            if (isContent)
+            {
+                if (ThemeHelper.IsDarkTheme())
+                {
+
+                    r = lerp(c.R, 125f, 0.2f);
+                    g = lerp(c.G, 125f, 0.2f);
+                    b = lerp(c.B, 125f, 0.2f);
+
+                }
+                else
+                {
+                    r = lerp(c.R, 255f, 0.7f);
+                    g = lerp(c.G, 255f, 0.7f);
+                    b = lerp(c.B, 255f, 0.7f);
+                }
+            }
+            else
+            {
+                if (ThemeHelper.IsDarkTheme())
+                {
+
+                    r = lerp(c.R, 255f, 0.1f);
+                    g = lerp(c.G, 255f, 0.1f);
+                    b = lerp(c.B, 255f, 0.1f);
+
+                }
+                else
+                {
+                    r = lerp(c.R, 255f, 0.8f);
+                    g = lerp(c.G, 255f, 0.8f);
+                    b = lerp(c.B, 255f, 0.8f);
+                }
+            }
+            
+            
+            return Color.FromArgb(c.A, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
+        }
+
+        float lerp(float a, float b, float f)
+        {
+            return (float)((a * (1.0 - f)) + (b * f));
         }
 
         private void themeGrid_ItemClick(object sender, ItemClickEventArgs e)
