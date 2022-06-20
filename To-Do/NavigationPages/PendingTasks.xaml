@@ -656,7 +656,12 @@
                                 </Grid.RowDefinitions>
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="CommonStates">
-                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.1"/>
+                                                <DoubleAnimation Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity" To="0.1" Duration="0:0:0.1"/>
+                                            </Storyboard>
+                                        </VisualState>
                                         <VisualState x:Name="PointerOver">
                                             <Storyboard>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
@@ -665,9 +670,8 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="Background">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ExpanderContentBackground}"/>
                                                 </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0.3"/>
-                                                </ObjectAnimationUsingKeyFrames>
+                                                <!--<DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="Opacity" To="0.5" Duration="0:0:0.1"/>-->
+                                                <DoubleAnimation Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity" To="0.3" Duration="0:0:0.1"/>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderTextContentPresenter" Storyboard.TargetProperty="Foreground">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding PlaceholderForeground, RelativeSource={RelativeSource Mode=TemplatedParent}, TargetNullValue={ThemeResource TextControlPlaceholderForegroundPointerOver}}"/>
                                                 </ObjectAnimationUsingKeyFrames>
@@ -684,9 +688,8 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="Background">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ExpanderContentBackground}"/>
                                                 </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                                                </ObjectAnimationUsingKeyFrames>
+                                                <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.1"/>
+                                                <DoubleAnimation Storyboard.TargetName="bg" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.1"/>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderElement" Storyboard.TargetProperty="BorderBrush">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextControlBorderBrushFocused}"/>
                                                 </ObjectAnimationUsingKeyFrames>
@@ -718,6 +721,7 @@
 
                                 <Border x:Name="BorderElement" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Grid.Column="0" Grid.ColumnSpan="2" Control.IsTemplateFocusTarget="True" MinWidth="{ThemeResource TextControlThemeMinWidth}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Grid.RowSpan="1" Grid.Row="1"/>
                                 <Border IsHitTestVisible="False" x:Name="bg" Opacity="0.1" Background="{ThemeResource SystemBaseLowColor}" BorderThickness="0" CornerRadius="{TemplateBinding CornerRadius}" Grid.Column="0" Grid.ColumnSpan="2" MinWidth="{ThemeResource TextControlThemeMinWidth}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Grid.RowSpan="1" Grid.Row="1"/>
+                                <Border IsHitTestVisible="False" x:Name="border" Opacity="0" BorderBrush="{ThemeResource SystemAccentColor}" Background="Transparent" BorderThickness="0,0,0,2" CornerRadius="{TemplateBinding CornerRadius}" Grid.Column="0" Grid.ColumnSpan="2" MinWidth="{ThemeResource TextControlThemeMinWidth}" MinHeight="{ThemeResource TextControlThemeMinHeight}" Grid.RowSpan="1" Grid.Row="1"/>
                                 <ScrollViewer x:Name="ContentElement" AutomationProperties.AccessibilityView="Raw" Grid.Column="0" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" IsTabStop="False" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled"/>
                                 <TextBlock x:Name="PlaceholderTextContentPresenter" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{Binding PlaceholderForeground, RelativeSource={RelativeSource Mode=TemplatedParent}, TargetNullValue={ThemeResource TextControlPlaceholderForeground}}" IsHitTestVisible="False" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" Text="{TemplateBinding PlaceholderText}"/>
                                 <Button x:Name="DeleteButton" AutomationProperties.AccessibilityView="Raw" BorderThickness="{TemplateBinding BorderThickness}" Grid.Column="1" FontSize="{TemplateBinding FontSize}" IsTabStop="False" Margin="{ThemeResource HelperButtonThemePadding}" MinWidth="34" Grid.Row="1" Style="{StaticResource DeleteButtonStyle}" VerticalAlignment="Stretch" Visibility="Collapsed"/>
@@ -905,7 +909,7 @@
                 <ScalarTransition/>
             </FontIcon.OpacityTransition>
         </FontIcon>
-        <SplitView x:Name="moreOptionsSplitView" Margin="0,-120,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
+        <SplitView PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}" x:Name="moreOptionsSplitView" Margin="0,-120,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
             <SplitView.Pane>
                 <Grid Margin="0,30,0,0">
                     <Grid.RowDefinitions>
