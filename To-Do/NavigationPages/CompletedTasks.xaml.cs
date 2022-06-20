@@ -34,27 +34,27 @@ namespace To_Do.NavigationPages
             }
 
             StorageFolder folder = ApplicationData.Current.LocalFolder;
-            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync("App_Essential_Data");
+            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync("completedtasks");
 
-            //if (rootFolder != null)
-            //{
-            //    StorageFile descriptionFile = await rootFolder.GetFileAsync("comp_desc.json");
-            //    StorageFile datesFile = await rootFolder.GetFileAsync("comp_dates.json");
+            if (rootFolder != null)
+            {
+                StorageFile descriptionFile = await rootFolder.GetFileAsync("completedtasks_desc.json");
+                StorageFile datesFile = await rootFolder.GetFileAsync("completedtasks_dates.json");
 
-            //    string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
-            //    string jsonOfDateLoaded = await FileIO.ReadTextAsync(datesFile);
+                string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
+                string jsonOfDateLoaded = await FileIO.ReadTextAsync(datesFile);
 
-            //    List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
-            //    List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDateLoaded);
-            //    if (loadedDescriptions != null)
-            //    {
-            //        for (int i = 0; i < loadedDescriptions.Count; i++)
-            //        {
-            //            AddATask(loadedDescriptions[i], loadedDates[i]);
-            //        }
-            //    }
+                List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
+                List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDateLoaded);
+                if (loadedDescriptions != null)
+                {
+                    for (int i = 0; i < loadedDescriptions.Count; i++)
+                    {
+                        AddATask(loadedDescriptions[i], loadedDates[i]);
+                    }
+                }
 
-            //}
+            }
             MainPage.ins.initialLoadingUI.Visibility = Visibility.Collapsed;
         }
 

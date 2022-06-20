@@ -56,7 +56,7 @@ namespace To_Do
             Categories = new ObservableCollection<DefaultCategory>();
             Categories.Add(new DefaultCategory { Name = "Pending Tasks", Glyph = "\uE823", Tag = "pendingtasks"});
             Categories.Add(new DefaultCategory { Name = "Completed Tasks", Glyph = "\uE73E", Tag = "completedtasks", });
-            Categories.Add(new DefaultCategory { Name = "Test", Glyph = "\uE709", Tag = "Test"});
+            Categories.Add(new DefaultCategory { Name = "Test", Glyph = "\uE709", Tag = "test"});
 
             var currentTheme = ThemeHelper.RootTheme.ToString();
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -195,6 +195,29 @@ namespace To_Do
                 }
 
                 Color bgColor = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
+
+                Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                {
+                    BlurAmount = 8,
+                    TintOpacity = 0.95,
+                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                    TintColor = ChangeColorBrightness(bgColor, false),
+                };
+
+                Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                {
+                    BlurAmount = 8,
+                    TintOpacity = 0.9,
+                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                    TintColor = ChangeColorBrightness(bgColor, true),
+                };
+
+                Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+                Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
+
+                Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+
+                //a is 150
                 Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = bgR, G = bgG, B = bgB });
                 titleBar.ForegroundColor = bgColor;
                 titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];//ThemeHelper.IsDarkTheme() ? new Color() { A = 255, R = a2R, G = a2G, B = a2B } : bgColor;
@@ -220,6 +243,53 @@ namespace To_Do
                 titleBar.ButtonHoverForegroundColor = Colors.White;
                 titleBar.ButtonPressedBackgroundColor = fallBackPurple;
             }
+        }
+
+        public Color ChangeColorBrightness(Color c, bool isContent)
+        {
+            float r, g, b;
+            if (isContent)
+            {
+                if (ThemeHelper.IsDarkTheme())
+                {
+
+                    r = lerp(c.R, 125f, 0.2f);
+                    g = lerp(c.G, 125f, 0.2f);
+                    b = lerp(c.B, 125f, 0.2f);
+
+                }
+                else
+                {
+                    r = lerp(c.R, 255f, 0.7f);
+                    g = lerp(c.G, 255f, 0.7f);
+                    b = lerp(c.B, 255f, 0.7f);
+                }
+            }
+            else
+            {
+                if (ThemeHelper.IsDarkTheme())
+                {
+
+                    r = lerp(c.R, 255f, 0.1f);
+                    g = lerp(c.G, 255f, 0.1f);
+                    b = lerp(c.B, 255f, 0.1f);
+
+                }
+                else
+                {
+                    r = lerp(c.R, 255f, 0.8f);
+                    g = lerp(c.G, 255f, 0.8f);
+                    b = lerp(c.B, 255f, 0.8f);
+                }
+            }
+
+
+            return Color.FromArgb(c.A, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
+        }
+
+        float lerp(float a, float b, float f)
+        {
+            return (float)((a * (1.0 - f)) + (b * f));
         }
 
         async void LoadIMG()
@@ -291,6 +361,99 @@ namespace To_Do
                 default:
                     break;
             }
+        }
+
+        async Task SaveCurrentPageData()
+        {
+            savingDescriptions.Clear();
+            savingDates.Clear();
+            savingImps.Clear();
+            savingSteps.Clear();
+            savingCompletedDates.Clear();
+            completedSaving.Clear();
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFolder rootFolder;
+            pendingtasks ins = pendingtasks.instance;
+            string t = ins._tag;
+            if (ins.TaskItems.Count > 0)
+            {
+                foreach (TODOTask tODO in ins.TaskItems)
+                {
+                    Debug.WriteLine("while fetching todo for saves tag: " + t);
+                    string temp = tODO.Description;
+                    string date = tODO.Date;
+                    bool importance = tODO.IsStarred;
+                    savingDescriptions.Add(temp);
+                    savingDates.Add(date);
+                    savingImps.Add(importance);
+
+                    List<TODOTask> steps = tODO.SubTasks;
+                    List<string> tempList = new List<string>();
+                    for (int i = 0; i < steps.Count; i++)
+                    {
+                        tempList.Add(steps[i].Description);
+                    }
+                    if (steps != null)
+                    {
+                        savingSteps.Add(tempList);
+                    }
+                }
+                string jsonFile = JsonConvert.SerializeObject(savingDescriptions);
+                string dateJsonFile = JsonConvert.SerializeObject(savingDates);
+                string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
+                string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
+
+
+                rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
+                StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
+                StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{t}_dates.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
+                StorageFile impdescjson = await rootFolder.CreateFileAsync($"{t}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
+                StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
+                Debug.WriteLine("after writing tag: " + t);
+            }
+            else
+            {
+                rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
+                if (rootFolder != null)
+                {
+                    await rootFolder.DeleteAsync();
+                }
+            }
+
+            Type pageType = Type.GetType("To_Do.NavigationPages.completedtasks");
+            ContentFrame.Navigate(pageType, tasksToParse, new SuppressNavigationTransitionInfo());
+            tasksToParse.Clear();
+            if(completedtasks.instance.CompleteTasks.Count > 0)
+            {
+                foreach (TODOTask task in completedtasks.instance.CompleteTasks)
+                {
+                    string temp = task.Description;
+                    string date = task.Date;
+                    completedSaving.Add(temp);
+                    savingCompletedDates.Add(date);
+                }
+                string compJsonFile = JsonConvert.SerializeObject(completedSaving);
+                string compdateJsonFile = JsonConvert.SerializeObject(savingCompletedDates);
+
+                rootFolder = await folder.CreateFolderAsync("completedtasks", CreationCollisionOption.ReplaceExisting);
+                StorageFile completeddescjson = await rootFolder.CreateFileAsync("completedtasks_desc.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(completeddescjson, compJsonFile);
+                StorageFile compdatesjson = await rootFolder.CreateFileAsync("completedtasks_dates.json", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(compdatesjson, compdateJsonFile);
+            }
+            else
+            {
+                rootFolder = (StorageFolder)await folder.TryGetItemAsync($"completedtasks");
+                if (rootFolder != null)
+                {
+                    await rootFolder.DeleteAsync();
+                }
+            }
+
         }
 
         public void CreateThreeTileNotifications()
@@ -614,67 +777,11 @@ namespace To_Do
             }
         }
 
-        public void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
+        public async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
         {
             var def = e.GetDeferral();
-            //LoadingUI.Visibility = Visibility.Visible;
-
-            //PendingTasks ins = PendingTasks.instance;
-            ////save all descriptions
-            //foreach (TODOTask tODO in ins.TaskItems)
-            //{
-            //    string temp = tODO.Description;
-            //    string date = tODO.Date;
-            //    bool importance = tODO.IsStarred;
-            //    savingDescriptions.Add(temp);
-            //    savingDates.Add(date);
-            //    savingImps.Add(importance);
-
-            //    List<TODOTask> steps = tODO.SubTasks;
-            //    List<string> tempList = new List<string>();
-            //    for (int i = 0; i < steps.Count; i++)
-            //    {
-            //        tempList.Add(steps[i].Description);
-            //    }
-            //    if (steps != null)
-            //    {
-            //        savingSteps.Add(tempList);
-            //    }
-            //}
-            
-            //Type pageType = Type.GetType("To_Do.NavigationPages.CompletedTasks");
-            //ContentFrame.Navigate(pageType, tasksToParse, new SuppressNavigationTransitionInfo());
-            //tasksToParse.Clear();
-            //foreach (TODOTask task in CompletedTasks.instance.CompleteTasks)
-            //{
-            //    string temp = task.Description;
-            //    string date = task.Date;
-            //    completedSaving.Add(temp);
-            //    savingCompletedDates.Add(date);
-            //}
-            //string jsonFile = JsonConvert.SerializeObject(savingDescriptions);
-            //string dateJsonFile = JsonConvert.SerializeObject(savingDates);
-            //string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
-            //string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
-            //string compJsonFile = JsonConvert.SerializeObject(completedSaving);
-            //string compdateJsonFile = JsonConvert.SerializeObject(savingCompletedDates);
-
-            //StorageFolder folder = ApplicationData.Current.LocalFolder;
-            //StorageFolder rootFolder = await folder.CreateFolderAsync("App_Essential_Data", CreationCollisionOption.ReplaceExisting);
-
-            //StorageFile pendingdescjson = await rootFolder.CreateFileAsync("pending_desc.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
-            //StorageFile completeddescjson = await rootFolder.CreateFileAsync("comp_desc.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(completeddescjson, compJsonFile);
-            //StorageFile pendingdatesjson = await rootFolder.CreateFileAsync("pending_dates.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
-            //StorageFile compdatesjson = await rootFolder.CreateFileAsync("comp_dates.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(compdatesjson, compdateJsonFile);
-            //StorageFile impdescjson = await rootFolder.CreateFileAsync("imp_desc.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
-            //StorageFile pendingstepsjson = await rootFolder.CreateFileAsync("pending_steps.json", CreationCollisionOption.ReplaceExisting);
-            //await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
-
+            LoadingUI.Visibility = Visibility.Visible;
+            await SaveCurrentPageData();
             string deviceFamilyVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
             ulong version = ulong.Parse(deviceFamilyVersion);
             ulong build = (version & 0x00000000FFFF0000L) >> 16;
@@ -695,7 +802,7 @@ namespace To_Do
             AppTitleBar.Margin = new Thickness(currMargin.Left, currMargin.Top, coreTitleBar.SystemOverlayRightInset, currMargin.Bottom);
         }
 
-        private void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
+        private async void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
             LoadingUI.Visibility = Visibility.Visible;
             int styleIndex = (int)localSettings.Values["navStyle"];
@@ -724,6 +831,7 @@ namespace To_Do
             
             if (args.IsSettingsSelected)
             {
+                await SaveCurrentPageData();
                 pageType = Type.GetType("To_Do.Settings");
                 ContentFrame.Navigate(pageType, null, info);
             }

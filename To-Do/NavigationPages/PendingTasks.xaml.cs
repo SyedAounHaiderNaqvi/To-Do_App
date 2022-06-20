@@ -42,8 +42,7 @@ namespace To_Do.NavigationPages
         public string _name = "Pending Tasks";
         public string _tag = "pendingtasks";
         public string lastDataParseTag = "pendingtasks";
-
-        //bool isnavigated = false;
+        bool loadedForFirstTime = true;
 
         public pendingtasks()
         {
@@ -53,43 +52,8 @@ namespace To_Do.NavigationPages
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
             listOfTasks.ItemsSource = TaskItems;
             listOfTasks.UpdateLayout();
-            UpdateBadge();
+            //UpdateBadge();
         }
-
-        //protected async override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        //{
-        //    // What we have to do is save all data here to local files
-        //    //await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-        //    //        async () =>
-        //    //        {
-        //    //            //await Task.Factory.StartNew(SaveDataToFile);
-        //    //            //List<Task> t = new List<Task>();
-        //    //            //t.Add(Task.Run(SaveDataToFile));
-        //    //            //await Task.WhenAll(t.ToArray());
-        //    //            //Task.Run(SaveDataToFile);
-        //    //            await SaveDataToFile();
-        //    //        }
-        //    //        );
-        //    //await Task.Run(SaveDataToFile);
-        //    //var task = SaveDataToFile();
-        //    //task.Wait();
-        //    //Task.Run(async () => { await SaveDataToFile(); }).Wait();
-
-        //    //await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
-        //    //        async () =>
-        //    //        {
-        //                //await Task.Run(async () => { await SaveDataToFile(); });
-        //                await SaveDataToFile();
-        //            //}
-        //            //);
-
-
-        //    TaskItems.Clear();
-        //    //isnavigated = false;
-        //    //await HideInfoBar();
-        //    base.OnNavigatingFrom(e);
-        //}
-
         public void AddATask(TODOTask newTask)
         {
             TaskItems.Add(newTask);
@@ -97,7 +61,7 @@ namespace To_Do.NavigationPages
 
             listOfTasks.UpdateLayout();
             listOfTasks.ScrollIntoView(newTask);
-            UpdateBadge();
+            //UpdateBadge();
         }
 
         public async Task SaveDataToFile()
@@ -231,21 +195,35 @@ namespace To_Do.NavigationPages
 
                 if (parsed != null && parsed.Count > 0)
                 {
-                    MainPage.ins.initialLoadingUI.Visibility = Visibility.Visible;
-                    //await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
-                    //async () =>
+                    //if (lastDataParseTag.Equals("settings"))
                     //{
-                    await SaveDataToFile();
-                    TaskItems.Clear();
+                    //    Debug.WriteLine("alternate line");
+                    //    TaskItems.Clear();
+                    //    // we didnt save here, since MainPage.xaml.cs already handled that
+
+                    //    _tag = parsed[1];
+                    //    await LoadDataFromFile();
+                    //    lastDataParseTag = _tag;
+                    //}
+                    //else
+                    //{
+                        if (!loadedForFirstTime)
+                        {
+                            await SaveDataToFile();
+                            TaskItems.Clear();
+                        }
+                        if (loadedForFirstTime)
+                        {
+                            _tag = parsed[1];
+                            await LoadDataFromFile();
+                        }
+                        loadedForFirstTime = false;
+                    //}
+                   
 
                     _tag = parsed[1];
-                    Debug.WriteLine("ON NAVIGATING TO");
-                    Debug.WriteLine("last tag: " + lastDataParseTag);
-                    Debug.WriteLine("current tag: " + _tag);
                     if (lastDataParseTag != _tag)
                     {
-                        //first we save data
-
                         await LoadDataFromFile();
                         lastDataParseTag = _tag;
                     }
@@ -253,15 +231,6 @@ namespace To_Do.NavigationPages
                     this.Name = _name;
                     this.Tag = _tag;
                     pageTitle.Text = _name;
-                    MainPage.ins.initialLoadingUI.Visibility = Visibility.Collapsed;
-                    //    await Task.Factory.StartNew(LoadDataFromFile);
-                    //    //List<Task> t = new List<Task>();
-                    //    //t.Add(Task.Run(LoadDataFromFile));
-                    //    //await Task.WhenAll(t.ToArray());
-                    //}
-                    //);
-                    //await Task.Run(LoadDataFromFile);
-                    //Task.Run(async () => { await LoadDataFromFile(); }).Wait();
                 }
             }
             MainPage.ins.parallax.Source = listOfTasks;

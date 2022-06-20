@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using To_Do.NavigationPages;
 using Windows.ApplicationModel;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
@@ -12,6 +13,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Toolkit.Uwp.UI.Media;
 
 namespace To_Do
 {
@@ -37,6 +39,8 @@ namespace To_Do
         {
             base.OnNavigatedTo(e);
             MainPage.ins.parallax.Source = scroller;
+            pendingtasks.instance.lastDataParseTag = "settings";
+
         }
 
         public void Settings_Loaded(object sender, RoutedEventArgs e)
@@ -295,6 +299,7 @@ namespace To_Do
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
 
             Color b = (n.backgroundBrush as SolidColorBrush).Color;
+            //a is 150
             Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = b.R, G = b.G, B = b.B });
             titleBar.ButtonHoverForegroundColor = Colors.White;
             Color bgcolor = ((SolidColorBrush)n.backgroundBrush).Color;
@@ -308,6 +313,28 @@ namespace To_Do
             titleBar.ForegroundColor = titleBar.ButtonHoverBackgroundColor;
             Application.Current.Resources["SystemAccentColorLight2"] = ((SolidColorBrush)n.borderBrush).Color;
             Application.Current.Resources["SystemAccentColor"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
+
+            Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+            {
+                BlurAmount = 8,
+                TintOpacity = 0.95,
+                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                TintColor = ChangeColorBrightness(b, false),
+            };
+
+            Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+            {
+                BlurAmount = 8,
+                TintOpacity = 0.9,
+                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                TintColor = ChangeColorBrightness(b, true),
+            };
+
+            Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+            Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
+
+            Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+
 
             Application.Current.Resources["NavigationViewItemForegroundSelected"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
             Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
@@ -346,6 +373,53 @@ namespace To_Do
             localSettings.Values["ACCENT2_R"] = ac2.R;
             localSettings.Values["ACCENT2_G"] = ac2.G;
             localSettings.Values["ACCENT2_B"] = ac2.B;
+        }
+
+        public Color ChangeColorBrightness(Color c, bool isContent)
+        {
+            float r, g, b;
+            if (isContent)
+            {
+                if (ThemeHelper.IsDarkTheme())
+                {
+
+                    r = lerp(c.R, 125f, 0.2f);
+                    g = lerp(c.G, 125f, 0.2f);
+                    b = lerp(c.B, 125f, 0.2f);
+
+                }
+                else
+                {
+                    r = lerp(c.R, 255f, 0.7f);
+                    g = lerp(c.G, 255f, 0.7f);
+                    b = lerp(c.B, 255f, 0.7f);
+                }
+            }
+            else
+            {
+                if (ThemeHelper.IsDarkTheme())
+                {
+
+                    r = lerp(c.R, 255f, 0.1f);
+                    g = lerp(c.G, 255f, 0.1f);
+                    b = lerp(c.B, 255f, 0.1f);
+
+                }
+                else
+                {
+                    r = lerp(c.R, 255f, 0.8f);
+                    g = lerp(c.G, 255f, 0.8f);
+                    b = lerp(c.B, 255f, 0.8f);
+                }
+            }
+            
+            
+            return Color.FromArgb(c.A, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
+        }
+
+        float lerp(float a, float b, float f)
+        {
+            return (float)((a * (1.0 - f)) + (b * f));
         }
 
         private void themeGrid_ItemClick(object sender, ItemClickEventArgs e)
