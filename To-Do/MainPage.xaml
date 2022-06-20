@@ -563,7 +563,7 @@
         <Border IsHitTestVisible="True" Background="Transparent" Margin="48,0,0,0" Height="48" VerticalAlignment="Top" x:Name="AppTitleBar">
         </Border>
 
-        <controls:NavigationView MenuItemTemplateSelector="{StaticResource selector}" MenuItemsSource="{x:Bind Categories, Mode=OneWay}" PaneTitle="To-Do" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
+        <controls:NavigationView MenuItemTemplateSelector="{StaticResource selector}" MenuItemsSource="{x:Bind Categories, Mode=OneWay}" PaneTitle="To-Do BETA" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
 
             <controls:NavigationView.PaneCustomContent>
                 <StackPanel Orientation="Vertical">

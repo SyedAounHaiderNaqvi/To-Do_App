@@ -8,13 +8,14 @@
     mc:Ignorable="d"
     Name="{x:Bind _name, Mode=OneWay}"
     Tag="{x:Bind _tag, Mode=OneWay}"
-    xmlns:controls="using:Microsoft.UI.Xaml.Controls">
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
                     <AcrylicBrush TintLuminosityOpacity="0.7" x:Key="TXTBGBrush" TintOpacity="0" BackgroundSource="Backdrop" TintColor="White"/>
-                    
+
                     <Style x:Key="CheckBoxStyle1" TargetType="CheckBox">
                         <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
                         <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
@@ -198,7 +199,7 @@
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <AcrylicBrush TintLuminosityOpacity="0.7" x:Key="TXTBGBrush" TintOpacity="0" BackgroundSource="Backdrop" TintColor="#333333"/>
-                    
+
                     <Style x:Key="CheckBoxStyle1" TargetType="CheckBox">
                         <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
                         <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
@@ -382,7 +383,7 @@
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-            
+
             <Style x:Key="StarCheck" TargetType="CheckBox">
                 <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
                 <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
@@ -731,6 +732,98 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style x:Key="DropDownButtonStyle1" TargetType="controls:DropDownButton">
+                <Setter Property="Background" Value="{ThemeResource ExpanderHeaderBackground}"/>
+                <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+                <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+                <Setter Property="FocusVisualMargin" Value="-3"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="controls:DropDownButton">
+                            <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{ThemeResource ControlCornerRadius}" Padding="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="ChevronIcon.(controls:AnimatedIcon.State)" Value="PointerOver"/>
+                                            </VisualState.Setters>
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ExpanderContentBackground}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="ChevronIcon.(controls:AnimatedIcon.State)" Value="Pressed"/>
+                                            </VisualState.Setters>
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ExpanderContentBackground}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChevronIcon" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource DropDownButtonForegroundSecondaryPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Target="ChevronIcon.(controls:AnimatedIcon.State)" Value="Normal"/>
+                                            </VisualState.Setters>
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundDisabled}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushDisabled}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChevronIcon" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <controls:AnimatedIcon x:Name="ChevronIcon" AutomationProperties.AccessibilityView="Raw" Grid.Column="1" Foreground="{ThemeResource DropDownButtonForegroundSecondary}" Height="12" Margin="8,0,0,0" controls:AnimatedIcon.State="Normal" Width="12">
+                                    <controls:AnimatedIcon.FallbackIconSource>
+                                        <controls:FontIconSource FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="8" Glyph="&#xE96E;" IsTextScaleFactorEnabled="False"/>
+                                    </controls:AnimatedIcon.FallbackIconSource>
+                                    <animatedvisuals:AnimatedChevronDownSmallVisualSource/>
+                                </controls:AnimatedIcon>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
     <Grid Margin="0,34,0,20">
@@ -749,7 +842,7 @@
                             <controls:Expander.HeaderTemplate>
                                 <DataTemplate x:DataType="local:TODOTask">
                                     <Grid x:Name="rootGrid">
-                                        
+
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="70"/>
                                             <ColumnDefinition Width="*"/>
@@ -783,24 +876,19 @@
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE712;"/>
                                                 </Button.Content>
-                                                 
+
                                             </Button>
                                         </StackPanel>
-                                        <Rectangle Margin="-20,0,-70,-1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Fill="{ThemeResource SystemChromeAltHighColor}" IsHitTestVisible="False" Grid.ColumnSpan="2" Height="1"/>
+                                        <Rectangle Margin="-20,0,-70,-1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Fill="{ThemeResource NavigationViewContentBackground}" IsHitTestVisible="False" Grid.ColumnSpan="2" Height="1"/>
                                     </Grid>
                                 </DataTemplate>
                             </controls:Expander.HeaderTemplate>
                             <controls:Expander.Content>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="0"/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <ListView Grid.Row="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{x:Bind SubTasks}" SelectionMode="None" BorderThickness="0" MaxHeight="350">
+                                <ListView Margin="20,0,0,0" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{x:Bind SubTasks}" SelectionMode="None" BorderThickness="0" MaxHeight="350">
                                         <ListView.ItemTemplate>
                                             <DataTemplate x:DataType="local:TODOTask">
                                                 <UserControl x:Name="control" PointerEntered="SubTaskPointerEntered" PointerExited="SubTaskPointerExited">
-                                                    <Border Margin="20,0,0,0" Padding="10" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                                    <Border Padding="10" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                                         <Grid>
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="10"/>
@@ -851,7 +939,6 @@
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                     </ListView>
-                                </Grid>
                             </controls:Expander.Content>
                         </controls:Expander>
                     </UserControl>
@@ -886,18 +973,17 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <FontIcon VerticalAlignment="Center" Grid.Column="0" Glyph="&#xE8CB;" ToolTipService.ToolTip="Sort by"/>
-                <Border Background="{ThemeResource ExpanderHeaderBackground}" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="2" VerticalAlignment="Center">
-                    <controls:DropDownButton ToolTipService.ToolTip="Sort by" x:Name="SortingDropDown" Content="Date Created" >
-                        <controls:DropDownButton.Flyout>
-                            <MenuFlyout Placement="Bottom">
-                                <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="t" IsChecked="True" Click="SortingOptionClicked" Text="Date Created"/>
-                                <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="t" Click="SortingOptionClicked" Text="Text"/>
-                                <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="t" Click="SortingOptionClicked" Text="Importance"/>
-                            </MenuFlyout>
-                        </controls:DropDownButton.Flyout>
 
-                    </controls:DropDownButton>
-                </Border>
+                <controls:DropDownButton CornerRadius="{ThemeResource ControlCornerRadius}" Style="{StaticResource DropDownButtonStyle1}"  ToolTipService.ToolTip="Sort by" VerticalAlignment="Center" Grid.Column="2" x:Name="SortingDropDown" Content="Date Created" >
+                    <controls:DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="t" IsChecked="True" Click="SortingOptionClicked" Text="Date Created"/>
+                            <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="t" Click="SortingOptionClicked" Text="Text"/>
+                            <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="t" Click="SortingOptionClicked" Text="Importance"/>
+                        </MenuFlyout>
+                    </controls:DropDownButton.Flyout>
+
+                </controls:DropDownButton>
 
             </Grid>
         </Grid>
@@ -927,7 +1013,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Edit task" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 <TextBox TextChanged="EditBoxTextChanged" x:Name="edittasktextbox" PlaceholderText="Type task name" Margin="8" Grid.Row="1">
-                                    
+
                                 </TextBox>
                             </Grid>
                         </Border>
@@ -942,7 +1028,7 @@
                             </Grid>
                         </Border>-->
                     </StackPanel>
-                    
+
                     <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="50">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60"/>

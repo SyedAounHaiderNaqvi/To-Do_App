@@ -263,7 +263,7 @@
                                         </ItemsPanelTemplate>
                                     </GridView.ItemsPanel>
                                 </GridView>
-                                <Rectangle Height="1" Margin="-20,0,-20,0" HorizontalAlignment="Stretch" Fill="{ThemeResource SystemChromeAltHighColor}"/>
+                                <Rectangle Height="1" Margin="-20,0,-20,0" HorizontalAlignment="Stretch" Fill="{ThemeResource NavigationViewContentBackground}"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -324,7 +324,7 @@
                                 <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Toggle using an image as wallpaper"/>
                             </StackPanel>
                             <ToggleSwitch Grid.Row="0" VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="btntoggle" Toggled="OnBGIMGToggled"/>
-                            <Rectangle Fill="{ThemeResource SystemChromeAltHighColor}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2"/>
+                            <Rectangle Fill="{ThemeResource NavigationViewContentBackground}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2"/>
                             <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
                                 <StackPanel Orientation="Vertical" Spacing="10">
                                     <TextBlock TextWrapping="Wrap" Text="Note: Images could have bad contrast with colors"/>
