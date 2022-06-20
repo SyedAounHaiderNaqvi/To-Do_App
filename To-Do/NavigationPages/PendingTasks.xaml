@@ -30,7 +30,7 @@
                         <Setter Property="MinWidth" Value="0"/>
                         <Setter Property="MinHeight" Value="0"/>
                         <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
-                        <Setter Property="FocusVisualMargin" Value="-7,-3,-7,-3"/>
+                        <Setter Property="FocusVisualMargin" Value="-3,-3,-3,-3"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="CheckBox">
@@ -214,7 +214,7 @@
                         <Setter Property="MinWidth" Value="0"/>
                         <Setter Property="MinHeight" Value="0"/>
                         <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
-                        <Setter Property="FocusVisualMargin" Value="-7,-3,-7,-3"/>
+                        <Setter Property="FocusVisualMargin" Value="-3,-3,-3,-3"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="CheckBox">
@@ -397,7 +397,7 @@
                 <Setter Property="MinWidth" Value="0"/>
                 <Setter Property="MinHeight" Value="0"/>
                 <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
-                <Setter Property="FocusVisualMargin" Value="-7,-3,-7,-3"/>
+                <Setter Property="FocusVisualMargin" Value="-2,3,-2,3"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="CheckBox">
@@ -778,7 +778,7 @@
                                                     <FontIcon FontSize="14" Glyph="&#xE710;"/>
                                                 </Button.Content>
                                             </Button>
-                                            <CheckBox Margin="0,-2,0,0" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
+                                            <CheckBox Margin="0,-2,0,0" CornerRadius="20" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
                                             <Button DataContext="{Binding ElementName=UserControl}" Click="OpenSplitView" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE712;"/>
