@@ -195,31 +195,18 @@ namespace To_Do.NavigationPages
 
                 if (parsed != null && parsed.Count > 0)
                 {
-                    //if (lastDataParseTag.Equals("settings"))
-                    //{
-                    //    Debug.WriteLine("alternate line");
-                    //    TaskItems.Clear();
-                    //    // we didnt save here, since MainPage.xaml.cs already handled that
 
-                    //    _tag = parsed[1];
-                    //    await LoadDataFromFile();
-                    //    lastDataParseTag = _tag;
-                    //}
-                    //else
-                    //{
-                        if (!loadedForFirstTime)
-                        {
-                            await SaveDataToFile();
-                            TaskItems.Clear();
-                        }
-                        if (loadedForFirstTime)
-                        {
-                            _tag = parsed[1];
-                            await LoadDataFromFile();
-                        }
-                        loadedForFirstTime = false;
-                    //}
-                   
+                    if (!loadedForFirstTime)
+                    {
+                        await SaveDataToFile();
+                        TaskItems.Clear();
+                    }
+                    if (loadedForFirstTime)
+                    {
+                        _tag = parsed[1];
+                        await LoadDataFromFile();
+                    }
+                    loadedForFirstTime = false;
 
                     _tag = parsed[1];
                     if (lastDataParseTag != _tag)
@@ -234,6 +221,9 @@ namespace To_Do.NavigationPages
                 }
             }
             MainPage.ins.parallax.Source = listOfTasks;
+            SortingDropDown.Content = "Date Created";
+            opt1.IsChecked = true;
+            Sort("Date Created");
             base.OnNavigatedTo(e);
         }
 
@@ -293,15 +283,7 @@ namespace To_Do.NavigationPages
 
         private async void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            //token = new CancellationTokenSource();
-            //token.Token.ThrowIfCancellationRequested();
-            //if (confirmDoneNotif.IsOpen)
-            //{
-            //    notif.Translation = new System.Numerics.Vector3(0, 170, 0);
-            //    notif.Opacity = 0;
-            //    confirmDoneNotif.IsOpen = false;
-            //}
-            // get checkbox that sent this function
+
             CheckBox cb = sender as CheckBox;
             if (VisualTreeHelper.GetParent(cb) is Grid cbparent)
             {
@@ -318,26 +300,6 @@ namespace To_Do.NavigationPages
                 TaskItems.Remove(context);
                 UpdateBadge();
             }
-            //confirmDoneNotif.IsOpen = true;
-            //notif.Translation = System.Numerics.Vector3.Zero;
-            //notif.Opacity = 1;
-            //try
-            //{
-            //    await Task.Delay(delay, token.Token);
-            //}
-            //catch
-            //{
-
-            //}
-            //if (confirmDoneNotif.IsOpen)
-            //{
-            //    notif.Translation = new System.Numerics.Vector3(0, 170, 0);
-            //    notif.Opacity = 0;
-            //    await Task.Delay(200);
-            //    confirmDoneNotif.IsOpen = false;
-            //    token.Cancel();
-            //}
-
             await SaveDataToFile();
         }
 
@@ -353,19 +315,9 @@ namespace To_Do.NavigationPages
             block.TextDecorations = Windows.UI.Text.TextDecorations.None;
             UserControl top = checkbox.DataContext as UserControl;
             TODOTask step = top.DataContext as TODOTask;
-            var lviewitempresenter = VisualTreeHelper.GetParent(top) as ListViewItemPresenter;
-            ListViewItem lvi = VisualTreeHelper.GetParent(lviewitempresenter) as ListViewItem;
-            ItemsStackPanel isp = VisualTreeHelper.GetParent(lvi) as ItemsStackPanel;
-            ItemsPresenter ip = VisualTreeHelper.GetParent(isp) as ItemsPresenter;
-            ScrollContentPresenter scp = VisualTreeHelper.GetParent(ip) as ScrollContentPresenter;
-            Grid grid = VisualTreeHelper.GetParent(scp) as Grid;
-            Border b = VisualTreeHelper.GetParent(grid) as Border;
-            ScrollViewer s = VisualTreeHelper.GetParent(b) as ScrollViewer;
-            Border b2 = VisualTreeHelper.GetParent(s) as Border;
-            ListView l = VisualTreeHelper.GetParent(b2) as ListView;
-            Grid grid2 = l.Parent as Grid;
-            Expander expander = grid2.Parent as Expander;
-            UserControl root = VisualTreeHelper.GetParent(expander) as UserControl;
+
+            UserControl root = FindParent<UserControl>(top, "UserControl");
+            Expander expander = VisualTreeHelper.GetChild(root, 0) as Expander;
             TODOTask context = root.DataContext as TODOTask;
 
             int index = 0;
@@ -381,34 +333,9 @@ namespace To_Do.NavigationPages
             var list = new List<TODOTask>(TaskItems[index].SubTasks);
             list.Remove(step);
             TaskItems[index].SubTasks = new List<TODOTask>(list);
-            Grid grid3 = expander.Content as Grid;
-            ListView rootList = VisualTreeHelper.GetChild(grid3, 0) as ListView;
+            ListView rootList = expander.Content as ListView;
             rootList.ItemsSource = TaskItems[index].SubTasks;
         }
-
-        //private async void UndoDelete(object sender, RoutedEventArgs e)
-        //{
-        //    completedtasks.instance.DeleteTaskFromExternal(redate);
-        //    TODOTask reMadeTask = new TODOTask() { Description = undoText, Date = undoDate, IsStarred = undoStar };
-        //    reMadeTask.SubTasks = new List<TODOTask>(undoSteps);
-        //    TaskItems.Insert(undoIndex, reMadeTask);
-        //    UpdateBadge();
-        //    listOfTasks.ItemsSource = TaskItems;
-        //    listOfTasks.UpdateLayout();
-        //    token.Cancel();
-        //    notif.Translation = new System.Numerics.Vector3(0, 170, 0);
-        //    notif.Opacity = 0;
-        //    await Task.Delay(200);
-        //    confirmDoneNotif.IsOpen = false;
-        //}
-
-        //public async Task HideInfoBar()
-        //{
-        //    notif.Translation = new System.Numerics.Vector3(0, 170, 0);
-        //    notif.Opacity = 0;
-        //    await Task.Delay(200);
-        //    confirmDoneNotif.IsOpen = false;
-        //}
 
         private void DeleteTask(object sender, RoutedEventArgs e)
         {
@@ -420,24 +347,38 @@ namespace To_Do.NavigationPages
             UpdateBadge();
         }
 
+        private static T FindParent<T>(DependencyObject child, string parentName)
+            where T : DependencyObject
+        {
+            if (child == null) return null;
+
+            T foundParent = null;
+            var currentParent = VisualTreeHelper.GetParent(child);
+
+            do
+            {
+                var frameworkElement = currentParent as FrameworkElement;
+                if (frameworkElement.Name == parentName && frameworkElement is T)
+                {
+                    foundParent = (T)currentParent;
+                    break;
+                }
+
+                currentParent = VisualTreeHelper.GetParent(currentParent);
+
+            } while (currentParent != null);
+
+            return foundParent;
+        }
+
         private void DeleteSubTask(object sender, RoutedEventArgs e)
         {
             Button item = sender as Button;
             UserControl top = item.DataContext as UserControl;
             TODOTask step = top.DataContext as TODOTask;
-            var lviewitempresenter = VisualTreeHelper.GetParent(top) as ListViewItemPresenter;
-            ListViewItem lvi = VisualTreeHelper.GetParent(lviewitempresenter) as ListViewItem;
-            ItemsStackPanel isp = VisualTreeHelper.GetParent(lvi) as ItemsStackPanel;
-            ItemsPresenter ip = VisualTreeHelper.GetParent(isp) as ItemsPresenter;
-            ScrollContentPresenter scp = VisualTreeHelper.GetParent(ip) as ScrollContentPresenter;
-            Grid grid = VisualTreeHelper.GetParent(scp) as Grid;
-            Border b = VisualTreeHelper.GetParent(grid) as Border;
-            ScrollViewer s = VisualTreeHelper.GetParent(b) as ScrollViewer;
-            Border b2 = VisualTreeHelper.GetParent(s) as Border;
-            ListView l = VisualTreeHelper.GetParent(b2) as ListView;
-            Grid grid2 = l.Parent as Grid;
-            Expander expander = grid2.Parent as Expander;
-            UserControl root = VisualTreeHelper.GetParent(expander) as UserControl;
+
+            UserControl root = FindParent<UserControl>(top, "UserControl");
+            Expander expander = VisualTreeHelper.GetChild(root, 0) as Expander;
             TODOTask context = root.DataContext as TODOTask;
             int index = 0;
             for (int i = 0; i < TaskItems.Count; i++)
@@ -452,8 +393,7 @@ namespace To_Do.NavigationPages
             var list = new List<TODOTask>(TaskItems[index].SubTasks);
             list.Remove(step);
             TaskItems[index].SubTasks = new List<TODOTask>(list);
-            Grid g = expander.Content as Grid;
-            ListView rootList = VisualTreeHelper.GetChild(g, 0) as ListView;
+            ListView rootList = expander.Content as ListView;
             rootList.ItemsSource = TaskItems[index].SubTasks;
         }
 
@@ -491,8 +431,8 @@ namespace To_Do.NavigationPages
                 };
                 TaskItems[index].SubTasks = new List<TODOTask>(list);
                 Expander expander = VisualTreeHelper.GetChild(top, 0) as Expander;
-                Grid g = expander.Content as Grid;
-                ListView rootList = VisualTreeHelper.GetChild(g, 0) as ListView;
+                ListView rootList = expander.Content as ListView;
+
                 rootList.ItemsSource = TaskItems[index].SubTasks;
                 EditTextBox.Text = string.Empty;
             }
