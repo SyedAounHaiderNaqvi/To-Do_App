@@ -54,9 +54,9 @@ namespace To_Do
             this.InitializeComponent();
             ins = this;
             Categories = new ObservableCollection<DefaultCategory>();
-            Categories.Add(new DefaultCategory { Name = "Pending Tasks", Glyph = "\uE823", Tag = "pendingtasks"});
+            Categories.Add(new DefaultCategory { Name = "Pending Tasks", Glyph = "\uE823", Tag = "pendingtasks" });
             Categories.Add(new DefaultCategory { Name = "Completed Tasks", Glyph = "\uE73E", Tag = "completedtasks", });
-            Categories.Add(new DefaultCategory { Name = "Test", Glyph = "\uE709", Tag = "test"});
+            Categories.Add(new DefaultCategory { Name = "Test", Glyph = "\uE709", Tag = "test" });
 
             var currentTheme = ThemeHelper.RootTheme.ToString();
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -99,13 +99,11 @@ namespace To_Do
             await Task.Delay(10);
             ContentFrame.Navigate(typeof(completedtasks), null, new SuppressNavigationTransitionInfo());
             await Task.Delay(10);
-            ContentFrame.Navigate(typeof(pendingtasks), dataToParse);
+            ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
+            await Task.Delay(10);
+            ContentFrame.Navigate(typeof(pendingtasks), dataToParse, new SuppressNavigationTransitionInfo());
             LoadingUI.Visibility = Visibility.Collapsed;
             nview.SelectedItem = Categories[0];
-
-
-            //ContentFrame.Content = null;
-            //Categories[0].badgeNum = pendingtasks.instance.TaskItems.Count;
         }
 
         public void ImageInitialize()
@@ -180,7 +178,9 @@ namespace To_Do
                 byte bgR = (byte)localSettings.Values["BG_R"];
                 byte bgG = (byte)localSettings.Values["BG_G"];
                 byte bgB = (byte)localSettings.Values["BG_B"];
+                int canUseMonet = (int)localSettings.Values["usemonet"];
 
+                Color bgColor = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
                 Application.Current.Resources["SystemAccentColorDark1"] = new Color() { A = 255, R = a1R, G = a1G, B = a1B };
                 Application.Current.Resources["SystemAccentColorDark2"] = new Color() { A = 255, R = a2R, G = a2G, B = a2B };
                 Application.Current.Resources["SystemAccentColorLight2"] = (Color)Application.Current.Resources["SystemAccentColorDark2"] == Colors.White ? Application.Current.Resources["SystemAccentColorDark1"] : Application.Current.Resources["SystemAccentColorDark2"];
@@ -194,7 +194,96 @@ namespace To_Do
                     Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = darkbrush;
                 }
 
-                Color bgColor = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
+                switch (canUseMonet)
+                {
+                    case 0:
+                        if (ThemeHelper.IsDarkTheme())
+                        {
+                            Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                            {
+                                BlurAmount = 8,
+                                TintOpacity = 0.95,
+                                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                                TintColor = Color.FromArgb(255, 32, 32, 32)
+                            };
+
+                            Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                            {
+                                BlurAmount = 8,
+                                TintOpacity = 0.95,
+                                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                                TintColor = Color.FromArgb(255, 33, 33, 33)
+                            };
+                        }
+                        else
+                        {
+                            Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                            {
+                                BlurAmount = 8,
+                                TintOpacity = 0.95,
+                                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                                TintColor = Colors.White
+                            };
+
+                            Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                            {
+                                BlurAmount = 8,
+                                TintOpacity = 0.9,
+                                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                                TintColor = Color.FromArgb(255, 245, 245, 245)
+                            };
+                        }
+                        break;
+                    case 1:
+                        Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                        {
+                            BlurAmount = 8,
+                            TintOpacity = 0.95,
+                            BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                            TintColor = ChangeColorBrightness(bgColor, false),
+                        };
+
+                        Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                        {
+                            BlurAmount = 8,
+                            TintOpacity = 0.9,
+                            BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                            TintColor = ChangeColorBrightness(bgColor, true),
+                        };
+                        break;
+                    default:
+                        break;
+                }
+                Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+                Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
+                Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+
+                //a is 150
+                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = bgR, G = bgG, B = bgB });
+                titleBar.ForegroundColor = bgColor;
+                titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];//ThemeHelper.IsDarkTheme() ? new Color() { A = 255, R = a2R, G = a2G, B = a2B } : bgColor;
+
+                titleBar.ButtonHoverForegroundColor = Colors.White;
+                titleBar.ButtonPressedBackgroundColor = ((SolidColorBrush)Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"]).Color;//new Color() { A = 255, R = a2R, G = a2G, B = a2B };
+            }
+            else
+            {
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+                Application.Current.Resources["SystemAccentColorDark1"] = fallBackPurple;
+                Application.Current.Resources["SystemAccentColorDark2"] = Colors.White;
+                Application.Current.Resources["SystemAccentColorLight2"] = (Color)Application.Current.Resources["SystemAccentColorDark2"] == Colors.White ? Application.Current.Resources["SystemAccentColorDark1"] : Application.Current.Resources["SystemAccentColorDark2"];
+                Application.Current.Resources["SystemAccentColor"] = ThemeHelper.IsDarkTheme() ? (Color)Application.Current.Resources["SystemAccentColorLight2"] : (Color)Application.Current.Resources["SystemAccentColorDark1"];
+
+                Application.Current.Resources["NavigationViewItemForegroundSelected"] = Application.Current.Resources["SystemAccentColor"];
+                Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = Application.Current.Resources["SystemAccentColor"];
+                Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = Application.Current.Resources["SystemAccentColor"];
+
+                Color bgColor = fallBackPurple;
+                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = fallBackPurple.R, G = fallBackPurple.G, B = fallBackPurple.B });
+                titleBar.ForegroundColor = bgColor;
+                titleBar.ButtonHoverBackgroundColor = bgColor;
+                titleBar.ButtonHoverForegroundColor = Colors.White;
+                titleBar.ButtonPressedBackgroundColor = fallBackPurple;
 
                 Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
                 {
@@ -212,36 +301,11 @@ namespace To_Do
                     TintColor = ChangeColorBrightness(bgColor, true),
                 };
 
+                localSettings.Values["usemonet"] = 1;
+
                 Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
                 Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
-
                 Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
-
-                //a is 150
-                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = bgR, G = bgG, B = bgB });
-                titleBar.ForegroundColor = bgColor;
-                titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];//ThemeHelper.IsDarkTheme() ? new Color() { A = 255, R = a2R, G = a2G, B = a2B } : bgColor;
-
-                titleBar.ButtonHoverForegroundColor = Colors.White;
-                titleBar.ButtonPressedBackgroundColor = ((SolidColorBrush)Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"]).Color;//new Color() { A = 255, R = a2R, G = a2G, B = a2B };
-            }
-            else
-            {
-                Application.Current.Resources["SystemAccentColorDark1"] = fallBackPurple;
-                Application.Current.Resources["SystemAccentColorDark2"] = Colors.White;
-                Application.Current.Resources["SystemAccentColorLight2"] = (Color)Application.Current.Resources["SystemAccentColorDark2"] == Colors.White ? Application.Current.Resources["SystemAccentColorDark1"] : Application.Current.Resources["SystemAccentColorDark2"];
-                Application.Current.Resources["SystemAccentColor"] = ThemeHelper.IsDarkTheme() ? (Color)Application.Current.Resources["SystemAccentColorLight2"] : (Color)Application.Current.Resources["SystemAccentColorDark1"];
-
-                Application.Current.Resources["NavigationViewItemForegroundSelected"] = Application.Current.Resources["SystemAccentColor"];
-                Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = Application.Current.Resources["SystemAccentColor"];
-                Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = Application.Current.Resources["SystemAccentColor"];
-
-                Color bgColor = fallBackPurple;
-                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = fallBackPurple.R, G = fallBackPurple.G, B = fallBackPurple.B });
-                titleBar.ForegroundColor = bgColor;
-                titleBar.ButtonHoverBackgroundColor = bgColor;
-                titleBar.ButtonHoverForegroundColor = Colors.White;
-                titleBar.ButtonPressedBackgroundColor = fallBackPurple;
             }
         }
 
@@ -287,7 +351,7 @@ namespace To_Do
             return Color.FromArgb(c.A, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
         }
 
-        float lerp(float a, float b, float f)
+        public float lerp(float a, float b, float f)
         {
             return (float)((a * (1.0 - f)) + (b * f));
         }
@@ -427,7 +491,7 @@ namespace To_Do
             Type pageType = Type.GetType("To_Do.NavigationPages.completedtasks");
             ContentFrame.Navigate(pageType, tasksToParse, new SuppressNavigationTransitionInfo());
             tasksToParse.Clear();
-            if(completedtasks.instance.CompleteTasks.Count > 0)
+            if (completedtasks.instance.CompleteTasks.Count > 0)
             {
                 foreach (TODOTask task in completedtasks.instance.CompleteTasks)
                 {
@@ -793,7 +857,6 @@ namespace To_Do
             def.Complete();
         }
 
-
         private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
         {
             AppTitleBar.Height = coreTitleBar.Height;
@@ -828,15 +891,17 @@ namespace To_Do
                     break;
             }
             Type pageType;
-            
+
             if (args.IsSettingsSelected)
             {
                 await SaveCurrentPageData();
                 pageType = Type.GetType("To_Do.Settings");
                 ContentFrame.Navigate(pageType, null, info);
+                searchBoxGrid.Visibility = Visibility.Collapsed;
             }
             else
             {
+                searchBoxGrid.Visibility = Visibility.Visible;
                 var selectedItem = (DefaultCategory)args.SelectedItem;
                 if (selectedItem != null)
                 {
@@ -846,7 +911,8 @@ namespace To_Do
                     if (selectedItemTag.Equals("completedtasks"))
                     {
                         pageName = "To_Do.NavigationPages." + selectedItemTag;
-                    } else
+                    }
+                    else
                     {
                         pageName = "To_Do.NavigationPages.pendingtasks";
                     }
@@ -898,38 +964,43 @@ namespace To_Do
         {
             var suggestions = new List<QueryFormat>();
             var querySplit = query.Split(" ");
-
-            if (pendingtasks.instance != null)
+            string currentPageTag;
+            string currentPageName;
+            if (ContentFrame.CurrentSourcePageType == typeof(completedtasks))
             {
-                var matchingItems = pendingtasks.instance.TaskItems.ToList().Where(
-                    item =>
-                    {
-                        // Idea: check for every word entered (separated by space) if it is in the name,  
-                        // e.g. for query "split button" the only result should "SplitButton" since its the only query to contain "split" and "button" 
-                        // If any of the sub tokens is not in the string, we ignore the item. So the search gets more precise with more words 
-                        bool flag = true;
-                        foreach (string queryToken in querySplit)
-                        {
-                            // Check if token is not in string 
-                            if (item.Description.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
-                            {
-                                // Token is not in string, so we ignore this item. 
-                                flag = false;
-                            }
-                        }
-                        return flag;
-                    });
-
-                foreach (var item in matchingItems)
-                {
-                    suggestions.Add(new QueryFormat(item.Description, "Pending Tasks", "\uE823"));
-                }
-
+                currentPageTag = "completedtasks";
+                currentPageName = "Completed Tasks";
+            }
+            else
+            {
+                currentPageName = pendingtasks.instance._name;
+                currentPageTag = pendingtasks.instance._tag;
             }
 
-            if (completedtasks.instance != null)
+            if (currentPageTag != "completedtasks")
             {
-
+                var matchingItems = pendingtasks.instance.TaskItems.ToList().Where(
+                item =>
+                {
+                    bool flag = true;
+                    foreach (string queryToken in querySplit)
+                    {
+                        // Check if token is not in string 
+                        if (item.Description.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
+                        {
+                            // Token is not in string, so we ignore this item. 
+                            flag = false;
+                        }
+                    }
+                    return flag;
+                });
+                foreach (var item in matchingItems)
+                {
+                    suggestions.Add(new QueryFormat(item.Description, currentPageName, "\uF08F"));
+                }
+            }
+            else
+            {
                 var matchingItems2 = completedtasks.instance.CompleteTasks.ToList().Where(
                     item =>
                     {
@@ -950,7 +1021,7 @@ namespace To_Do
                     });
                 foreach (var item in matchingItems2)
                 {
-                    suggestions.Add(new QueryFormat(item.Description, "Completed Tasks", "\uE73E"));
+                    suggestions.Add(new QueryFormat(item.Description, "Completed Tasks", "\uF08F"));
                 }
             }
 
@@ -981,31 +1052,25 @@ namespace To_Do
         {
             if (desc != null && desc.location != "Everywhere")
             {
-                if (desc.location == "Pending Tasks")
+                if (ContentFrame.CurrentSourcePageType == typeof(pendingtasks))
                 {
                     var list = pendingtasks.instance.TaskItems;
-                    for (int i = 0; i < list.Count; i++)
+                    for (int j = 0; j < list.Count; j++)
                     {
-                        if (desc.Title.Equals(list[i].Description))
+                        if (desc.Title.Equals(list[j].Description))
                         {
-                            ContentFrame.Navigate(typeof(pendingtasks), null, info);
-                            nview.SelectedItem = Categories[0];
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                () => calc(i, pendingtasks.instance.listOfTasks));
+                                () => calc(j, pendingtasks.instance.listOfTasks));
                             break;
                         }
                     }
-                }
-                else
+                } else
                 {
                     var list = completedtasks.instance.CompleteTasks;
                     for (int i = 0; i < list.Count; i++)
                     {
                         if (desc.Title.Equals(list[i].Description))
                         {
-                            ContentFrame.Navigate(typeof(completedtasks), null, info);
-                            nview.SelectedItem = Categories[1];
-                            //await Task.Delay(500);
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                 () => calc(i, completedtasks.instance.listOfTasks));
                             break;
@@ -1178,6 +1243,22 @@ namespace To_Do
                 string tag = ((string)localSettings.Values["NEWlistTag"]);
                 string glyph = (string)localSettings.Values["NEWlistIcon"];
                 Categories.Add(new DefaultCategory { Tag = tag, Name = name, Glyph = glyph, badgeNum = 0 });
+            }
+        }
+
+        private void searchbox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (canSearch)
+            {
+                var suggestions = SearchControls(((AutoSuggestBox)sender).Text);
+                if (suggestions.Count > 0)
+                {
+                    ((AutoSuggestBox)sender).ItemsSource = suggestions;
+                }
+                else
+                {
+                    ((AutoSuggestBox)sender).ItemsSource = new List<QueryFormat> { new QueryFormat("No results found", "Everywhere", "\uE711") };
+                }
             }
         }
     }

@@ -17,7 +17,7 @@
     PrimaryButtonStyle="{ThemeResource AccentButtonStyle}"
     CloseButtonText="Cancel">
 
-    <Grid>
+    <ScrollViewer>
         <StackPanel Orientation="Vertical" Spacing="10">
 
             <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
@@ -174,5 +174,5 @@
                 </Grid>
             </Border>
         </StackPanel>
-    </Grid>
+    </ScrollViewer>
 </ContentDialog>

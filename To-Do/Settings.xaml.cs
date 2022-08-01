@@ -120,6 +120,40 @@ namespace To_Do
                 Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
             }
 
+            if (localSettings.Values["usemonet"] != null)
+            {
+
+                switch ((int)localSettings.Values["usemonet"])
+                {
+                    case 0:
+                        MonetToggle.IsOn = false;
+                        MonetToggleLogic(false, Colors.Black);
+                        break;
+                    case 1:
+                        MonetToggle.IsOn = true;
+                        byte bgR = (byte)localSettings.Values["BG_R"];
+                        byte bgG = (byte)localSettings.Values["BG_G"];
+                        byte bgB = (byte)localSettings.Values["BG_B"];
+
+                        Color bgColor = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
+                        MonetToggleLogic(true, bgColor);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                MonetToggle.IsOn = true;
+                localSettings.Values["usemonet"] = 1;
+                byte bgR = (byte)localSettings.Values["BG_R"];
+                byte bgG = (byte)localSettings.Values["BG_G"];
+                byte bgB = (byte)localSettings.Values["BG_B"];
+
+                Color bgColor = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
+                MonetToggleLogic(true, bgColor);
+            }
+
             if (ThemeHelper.IsDarkTheme())
             {
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
@@ -298,11 +332,10 @@ namespace To_Do
             }
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
 
-            Color b = (n.backgroundBrush as SolidColorBrush).Color;
             //a is 150
-            Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = b.R, G = b.G, B = b.B });
-            titleBar.ButtonHoverForegroundColor = Colors.White;
             Color bgcolor = ((SolidColorBrush)n.backgroundBrush).Color;
+            Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = bgcolor.R, G = bgcolor.G, B = bgcolor.B });
+            titleBar.ButtonHoverForegroundColor = Colors.White;
             localSettings.Values["BG_R"] = bgcolor.R;
             localSettings.Values["BG_G"] = bgcolor.G;
             localSettings.Values["BG_B"] = bgcolor.B;
@@ -314,27 +347,28 @@ namespace To_Do
             Application.Current.Resources["SystemAccentColorLight2"] = ((SolidColorBrush)n.borderBrush).Color;
             Application.Current.Resources["SystemAccentColor"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
 
-            Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+            bool canUseMonet;
+            if (localSettings.Values["usemonet"] != null)
             {
-                BlurAmount = 8,
-                TintOpacity = 0.95,
-                BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                TintColor = ChangeColorBrightness(b, false),
-            };
-
-            Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                switch ((int)localSettings.Values["usemonet"])
+                {
+                    case 1:
+                        canUseMonet = true;
+                        break;
+                    case 0:
+                        canUseMonet = false;
+                        break;
+                    default:
+                        canUseMonet = true;
+                        break;
+                }
+            } else
             {
-                BlurAmount = 8,
-                TintOpacity = 0.9,
-                BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                TintColor = ChangeColorBrightness(b, true),
-            };
+                canUseMonet = true;
+            }
 
-            Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
-            Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
 
-            Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
-
+            MonetToggleLogic(canUseMonet, bgcolor);
 
             Application.Current.Resources["NavigationViewItemForegroundSelected"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
             Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
@@ -375,51 +409,71 @@ namespace To_Do
             localSettings.Values["ACCENT2_B"] = ac2.B;
         }
 
-        public Color ChangeColorBrightness(Color c, bool isContent)
+        void MonetToggleLogic(bool canUseMonet, Color bgcolor)
         {
-            float r, g, b;
-            if (isContent)
+            if (canUseMonet)
             {
-                if (ThemeHelper.IsDarkTheme())
+                Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
                 {
+                    BlurAmount = 8,
+                    TintOpacity = 0.95,
+                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                    TintColor = MainPage.ins.ChangeColorBrightness(bgcolor, false),
+                };
 
-                    r = lerp(c.R, 125f, 0.2f);
-                    g = lerp(c.G, 125f, 0.2f);
-                    b = lerp(c.B, 125f, 0.2f);
-
-                }
-                else
+                Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
                 {
-                    r = lerp(c.R, 255f, 0.7f);
-                    g = lerp(c.G, 255f, 0.7f);
-                    b = lerp(c.B, 255f, 0.7f);
-                }
+                    BlurAmount = 8,
+                    TintOpacity = 0.9,
+                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                    TintColor = MainPage.ins.ChangeColorBrightness(bgcolor, true),
+                };
             }
             else
             {
                 if (ThemeHelper.IsDarkTheme())
                 {
+                    Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                    {
+                        BlurAmount = 8,
+                        TintOpacity = 0.95,
+                        BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                        TintColor = Color.FromArgb(255, 32, 32, 32)
+                    };
 
-                    r = lerp(c.R, 255f, 0.1f);
-                    g = lerp(c.G, 255f, 0.1f);
-                    b = lerp(c.B, 255f, 0.1f);
-
+                    Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                    {
+                        BlurAmount = 8,
+                        TintOpacity = 0.95,
+                        BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                        TintColor = Color.FromArgb(255, 33, 33, 33)
+                    };
                 }
                 else
                 {
-                    r = lerp(c.R, 255f, 0.8f);
-                    g = lerp(c.G, 255f, 0.8f);
-                    b = lerp(c.B, 255f, 0.8f);
+                    Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                    {
+                        BlurAmount = 8,
+                        TintOpacity = 0.95,
+                        BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                        TintColor = Colors.White
+                    };
+
+                    Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                    {
+                        BlurAmount = 8,
+                        TintOpacity = 0.9,
+                        BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                        TintColor = Color.FromArgb(255, 245, 245, 245)
+                    };
                 }
             }
-            
-            
-            return Color.FromArgb(c.A, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
-        }
 
-        float lerp(float a, float b, float f)
-        {
-            return (float)((a * (1.0 - f)) + (b * f));
+            Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+            Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
+
+            Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+
         }
 
         private void themeGrid_ItemClick(object sender, ItemClickEventArgs e)
@@ -726,7 +780,38 @@ namespace To_Do
             color.Opacity = 0.7;
             transparentTriGrid.Translation = System.Numerics.Vector3.Zero;
             triGrid.Translation = System.Numerics.Vector3.Zero;
-            
+
+        }
+
+        private void OnMonetToggled(object sender, RoutedEventArgs e)
+        {
+            if (MonetToggle.IsOn)
+            {
+                localSettings.Values["usemonet"] = 1;
+                byte bgR = (byte)localSettings.Values["BG_R"];
+                byte bgG = (byte)localSettings.Values["BG_G"];
+                byte bgB = (byte)localSettings.Values["BG_B"];
+
+                Color bgColor = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
+                MonetToggleLogic(true, bgColor);
+            }
+            else
+            {
+                localSettings.Values["usemonet"] = 0;
+                MonetToggleLogic(false, Colors.Black);
+            }
+
+            if (ThemeHelper.IsDarkTheme())
+            {
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
+
+            }
+            else
+            {
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+            }
         }
     }
 

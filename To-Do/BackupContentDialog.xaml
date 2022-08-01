@@ -32,7 +32,7 @@
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </ContentDialog.Resources>
-    <Grid>
+    <ScrollViewer>
         <StackPanel Orientation="Vertical" Spacing="10" Width="400">
             <controls:Expander IsExpanded="True" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                 <controls:Expander.Header>
@@ -105,5 +105,5 @@
                 </controls:Expander.Content>
             </controls:Expander>
         </StackPanel>
-    </Grid>
+    </ScrollViewer>
 </ContentDialog>

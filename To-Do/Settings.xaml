@@ -281,6 +281,19 @@
                                 <ColumnDefinition MinWidth="170" Width="*"/>
                                 <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
                             </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Accent color on backplate"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use accent color on surfaces like searchbar and cards"/>
+                            </StackPanel>
+                            <ToggleSwitch VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="MonetToggle" Toggled="OnMonetToggled"/>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="170" Width="*"/>
+                                <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
+                            </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch"  Spacing="3" Orientation="Vertical">
                                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Navigation transition style"/>
