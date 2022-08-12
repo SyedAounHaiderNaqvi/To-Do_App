@@ -207,6 +207,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Images\app_icon.png" />
     <Content Include="Images\app_icon.tiff" />
     <Content Include="Images\clock.png" />
     <Content Include="Images\complete.png" />
@@ -233,6 +234,10 @@
     <Content Include="Images\ItemTemplates\ItemTemplate_SmoothCherry.png" />
     <Content Include="Images\ItemTemplates\ItemTemplate_YayGreen.png" />
     <Content Include="Images\light.jpg" />
+    <Content Include="Images\Screenshots\ss1.png" />
+    <Content Include="Images\Screenshots\ss2.png" />
+    <Content Include="Images\Screenshots\ss3.png" />
+    <Content Include="Images\Screenshots\ss4.png" />
     <Content Include="Images\settingsIcon.png" />
     <Content Include="Images\sun.png" />
     <Content Include="Images\tileIcon.png" />
