@@ -21,10 +21,37 @@ The good thing about To-Do is that there is no sign-in required, however that me
 ### For normal users
 - Search the Microsoft Store for To-Do by FireCubeStudios (thanks to [@FireCubeStudios](https://github.com/FireCubeStudios) for hosting this app on their account).
 - Download and install the app (NOTE: Store version might be older than GitHub one. If so, use the below method).
-- Enjoy!
 ### For advanced users
 - Go to the Releases view, and download the zip file of the latest stable (recommended) or pre-release version.
 - Unzip the downloaded file, and run the msixbundle file to install it.
-- Enjoy!
+
+## Roadmap
+- [ ] \(Pre-release) Complete the dynamic page content algorithm
+- [ ] \(Pre-release) Fix backup algorithm
+- [ ] \(Pre-release) Polish the loading experience for pages
+- [ ] Reduce unnecessary modules and XAML controls
+- [ ] Add comments to code for ease of understanding
+
+## Contribution
+I look forward to fixing issues pointed out by valuable users. Feel free to fork and experiment with this repository, or star it and be notified of new features. There is a [Discord server](https://discord.com/invite/PsUS2rjCtu) where I have my own channel dedicated to this app, and that is where I am active almost all the time. Feel free to chat and request features either there or here.
 
 ## Screenshots
+<h3 align="center">Pending Tasks</h3>
+<p align="center" width="100%">
+    <img src="To-Do/Images/Screenshots/ss1.png" alt="Pending Tasks page of app">
+</p>
+
+<h3 align="center">Completed Tasks</h3>
+<p align="center" width="100%">
+    <img src="To-Do/Images/Screenshots/ss2.png" alt="Completed Tasks page of app">
+</p>
+
+<h3 align="center">Custom Page & Background</h3>
+<p align="center" width="100%">
+    <img src="To-Do/Images/Screenshots/ss3.png" alt="Custom page & image as chosen by users">
+</p>
+
+<h3 align="center">Settings</h3>
+<p align="center" width="100%">
+    <img src="To-Do/Images/Screenshots/ss4.png" alt="Settings page of app">
+</p>
