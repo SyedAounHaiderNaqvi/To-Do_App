@@ -18,8 +18,8 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" Spacing="10">
-
-            <TextBox VerticalContentAlignment="Center" Padding="12,4,0,0" x:FieldModifier="public" TextChanged="TextChanged" x:Name="ListNameTextBox" AcceptsReturn="False" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write list name"/>
+            <TextBlock Text="Name"/>
+            <TextBox VerticalContentAlignment="Center" Padding="12,4,0,0" x:FieldModifier="public" TextChanged="TextChanged" x:Name="ListNameTextBox" KeyDown="ListNameTextBox_KeyDown" AcceptsReturn="False" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write list name"/>
             <TextBlock x:Name="error" TextWrapping="Wrap" Visibility="Collapsed" Text="*Cannot use this name. The tag is not unique." Foreground="{ThemeResource SystemErrorTextColor}"/>
             <Border Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                 <Grid>

@@ -32,9 +32,11 @@ namespace To_Do
 
         public string RemoveWhitespace(string input)
         {
-            return new string(input.ToCharArray()
+            string res = new string(input.ToCharArray()
                 .Where(c => !Char.IsWhiteSpace(c))
                 .ToArray());
+            res.Replace(Environment.NewLine, " ");
+            return res;
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -61,6 +63,10 @@ namespace To_Do
                     {
                         isUniqueTag = false;
                     }
+                    if (extractTag == "navlists")
+                    {
+                        isUniqueTag = false;
+                    }
                 }
                 if (isUniqueTag)
                 {
@@ -84,6 +90,48 @@ namespace To_Do
         private void Chooseicon(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ListNameTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                bool isUniqueTag = true;
+                if (!string.IsNullOrEmpty(ListNameTextBox.Text) && !string.IsNullOrWhiteSpace(ListNameTextBox.Text))
+                {
+                    string extractTag = RemoveWhitespace(ListNameTextBox.Text).ToLower();
+                    foreach (DefaultCategory item in MainPage.ins.Categories)
+                    {
+                        if (extractTag.Equals(item.Tag))
+                        {
+                            isUniqueTag = false;
+                        }
+                    }
+                    if (isUniqueTag)
+                    {
+                        //proceed
+                        error.Visibility = Visibility.Collapsed;
+                        this.IsPrimaryButtonEnabled = true;
+                        string extTag = RemoveWhitespace(ListNameTextBox.Text);
+                        error.Visibility = Visibility.Collapsed;
+                        localSettings.Values["NEWlistName"] = ListNameTextBox.Text;
+                        localSettings.Values["NEWlistTag"] = extTag;
+                        localSettings.Values["NEWlistIcon"] = defaultIconGlyph;
+
+                        ListNameTextBox.Text = string.Empty;
+                    }
+                    else
+                    {
+                        // error
+                        error.Visibility = Visibility.Visible;
+                        this.IsPrimaryButtonEnabled = false;
+                    }
+                }
+                else
+                {
+                    this.IsPrimaryButtonEnabled = false;
+                }
+            }
         }
     }
 }

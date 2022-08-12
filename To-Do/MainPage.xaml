@@ -14,7 +14,22 @@
         <local:MenuItemTemplateSelector x:Key="selector">
             <local:MenuItemTemplateSelector.DefaultItemTemlate>
                 <DataTemplate x:DataType="local:DefaultCategory">
-                    <controls:NavigationViewItem ToolTipService.ToolTip="{x:Bind Name}" Tag="{x:Bind Tag}" Content="{x:Bind Name}">
+                    <controls:NavigationViewItem Canvas.ZIndex="1" x:Name="e" PointerCaptureLost="NavigationViewItem_PointerCaptureLost" PointerEntered="NavigationViewItem_PointerEntered" PointerExited="NavigationViewItem_PointerExited" ToolTipService.ToolTip="{x:Bind Name}" Tag="{x:Bind Tag}">
+                        <controls:NavigationViewItem.Content>
+                            <Grid Margin="0,0,-12,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock TextTrimming="CharacterEllipsis" Grid.Column="0" Text="{x:Bind Name}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <Button Canvas.ZIndex="5" DataContext="{Binding ElementName=e}" Grid.Column="1" Click="DeleteList" Padding="0" Visibility="Collapsed" x:Name="deleteListButton" ToolTipService.ToolTip="Delete List" Height="20" Width="20" CornerRadius="16" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Button.Content>
+                                        <FontIcon Glyph="&#xE711;" FontSize="8"/>
+                                    </Button.Content>
+                                </Button>
+
+                            </Grid>
+                        </controls:NavigationViewItem.Content>
                         <controls:NavigationViewItem.Icon>
                             <FontIcon Glyph="{x:Bind Glyph}" />
                         </controls:NavigationViewItem.Icon>
