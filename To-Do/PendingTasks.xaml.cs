@@ -339,6 +339,7 @@ namespace To_Do.NavigationPages
             TaskItems[index].SubTasks = new List<TODOTask>(list);
             ListView rootList = expander.Content as ListView;
             rootList.ItemsSource = TaskItems[index].SubTasks;
+            Sort((string)SortingDropDown.Content);
         }
 
         private async void AddStep(object sender, RoutedEventArgs e)
@@ -379,6 +380,7 @@ namespace To_Do.NavigationPages
 
                 rootList.ItemsSource = TaskItems[index].SubTasks;
                 EditTextBox.Text = string.Empty;
+                Sort((string)SortingDropDown.Content);
             }
         }
 
@@ -477,6 +479,9 @@ namespace To_Do.NavigationPages
                     case "Text":
                         list.Sort((x, y) => string.Compare(x.Description, y.Description));
                         break;
+                    case "Steps":
+                        list = list.OrderBy(x => x.SubTasks.Count).Reverse().ToList();
+                        break;
                     case "Importance":
                         var query = from task in list
                                     orderby !task.IsStarred
@@ -507,6 +512,7 @@ namespace To_Do.NavigationPages
                 opt2.IsChecked = false;
                 opt3.IsChecked = false;
                 opt4.IsChecked = false;
+                opt5.IsChecked = false;
             }
         }
 
@@ -527,40 +533,34 @@ namespace To_Do.NavigationPages
         {
             var c = sender as Control;
             var strip = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "rect");
-            strip.Opacity = 0;
+            strip.Translation = new System.Numerics.Vector3(0, 10, 0);
             var delbtn = UtilityFunctions.FindControl<Button>(c, typeof(Button), "delsubtask");
             delbtn.Translation = new System.Numerics.Vector3(50, 0, 0);
             delbtn.Opacity = 0;
-
             var back = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "backplate");
             back.Opacity = 0;
         }
 
         private void SubTaskPointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse || e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
-            {
-                var c = sender as Control;
-                var strip = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "rect");
-                var delbtn = UtilityFunctions.FindControl<Button>(c, typeof(Button), "delsubtask");
-                delbtn.Translation = System.Numerics.Vector3.Zero;
-                delbtn.Opacity = 1;
-                strip.Opacity = 1;
-
-
-                var back = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "backplate");
-                back.Opacity = 0.2f;
-            }
+            var c = sender as Control;
+            var strip = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "rect");
+            var delbtn = UtilityFunctions.FindControl<Button>(c, typeof(Button), "delsubtask");
+            delbtn.Translation = System.Numerics.Vector3.Zero;
+            delbtn.Opacity = 1;
+            strip.Translation = new System.Numerics.Vector3(0, 2, 0);
+            var back = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "backplate");
+            back.Opacity = 0.1f;
         }
 
         private void BTN_SubTaskPointerCaptureLost(object sender, PointerRoutedEventArgs e)
         {
-            Button cb = sender as Button;
-            var c = cb.DataContext as Control;
+            Button delbtn = sender as Button;
+            var c = delbtn.DataContext as Control;
             var strip = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "rect");
-            cb.Translation = new System.Numerics.Vector3(50, 0, 0);
-            cb.Opacity = 0;
-            strip.Opacity = 0;
+            delbtn.Translation = new System.Numerics.Vector3(50, 0, 0);
+            delbtn.Opacity = 0;
+            strip.Translation = new System.Numerics.Vector3(0, 10, 0);
             var back = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "backplate");
             back.Opacity = 0;
         }

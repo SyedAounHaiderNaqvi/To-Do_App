@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Name="{x:Bind _name, Mode=OneWay}"
     Tag="{x:Bind _tag, Mode=OneWay}"
-    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls" 
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
         <ResourceDictionary>
@@ -383,7 +383,6 @@
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-
             <Style x:Key="StarCheck" TargetType="CheckBox">
                 <Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundUnchecked}"/>
                 <Setter Property="Foreground" Value="{ThemeResource CheckBoxForegroundUnchecked}"/>
@@ -791,25 +790,7 @@
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
-                                        <VisualState x:Name="Disabled">
-                                            <VisualState.Setters>
-                                                <Setter Target="ChevronIcon.(controls:AnimatedIcon.State)" Value="Normal"/>
-                                            </VisualState.Setters>
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundDisabled}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="BorderBrush">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushDisabled}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ChevronIcon" Storyboard.TargetProperty="Foreground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}"/>
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
+                                        
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
                                 <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
@@ -820,6 +801,61 @@
                                     <animatedvisuals:AnimatedChevronDownSmallVisualSource/>
                                 </controls:AnimatedIcon>
                             </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="MonetButton" TargetType="Button">
+                <Setter Property="Background" Value="{ThemeResource ExpanderHeaderBackground}"/>
+                <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
+                <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+                <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontWeight" Value="Normal"/>
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+                <Setter Property="FocusVisualMargin" Value="-3"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" Background="{TemplateBinding Background}" BackgroundSizing="{TemplateBinding BackgroundSizing}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{ThemeResource ControlCornerRadius}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ExpanderContentBackground}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPointerOver}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ExpanderContentBackground}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPressed}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ContentPresenter>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -885,60 +921,60 @@
                             </controls:Expander.HeaderTemplate>
                             <controls:Expander.Content>
                                 <ListView Margin="20,0,0,0" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{x:Bind SubTasks}" SelectionMode="None" BorderThickness="0" MaxHeight="350">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate x:DataType="local:TODOTask">
-                                                <UserControl x:Name="control" PointerEntered="SubTaskPointerEntered" PointerExited="SubTaskPointerExited">
-                                                    <Border Padding="10" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="10"/>
-                                                                <ColumnDefinition Width="50"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="50"/>
-                                                            </Grid.ColumnDefinitions>
-                                                            <Grid Background="{ThemeResource SystemAccentColor}" CornerRadius="{ThemeResource ListViewItemCornerRadius}" x:Name="backplate" Margin="-10,-10,-10,-10" Opacity="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                                <Grid.OpacityTransition>
-                                                                    <ScalarTransition Duration="0:0:0.2"/>
-                                                                </Grid.OpacityTransition>
-                                                            </Grid>
-                                                            <Grid Opacity="0" Margin="-10,-10,-10,-10" x:Name="rect" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                                <Border BorderBrush="{ThemeResource SystemAccentColor}" CornerRadius="{ThemeResource ListViewItemCornerRadius}" BorderThickness="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                                                </Border>
-                                                                <Grid.OpacityTransition>
-                                                                    <ScalarTransition Duration="0:0:0.2"/>
-                                                                </Grid.OpacityTransition>
-                                                            </Grid>
-                                                            <CheckBox PointerCaptureLost="SubTaskPointerCaptureLost" DataContext="{Binding ElementName=control}" Checked="StepCheckToggled" Margin="5,0,0,0" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" Grid.Column="1">
-
-                                                            </CheckBox>
-                                                            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Text="{x:Bind Description}"/>
-                                                            <Button Opacity="0" Translation="50,0,0" PointerCaptureLost="BTN_SubTaskPointerCaptureLost" Click="DeleteSubTask" DataContext="{Binding ElementName=control}" Grid.Column="3" Width="42" Height="46" x:Name="delsubtask" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" CornerRadius="20" ToolTipService.ToolTip="Delete step">
-                                                                <Button.Content>
-                                                                    <FontIcon FontSize="14" Glyph="&#xE74D;"/>
-                                                                </Button.Content>
-                                                                <Button.TranslationTransition>
-                                                                    <Vector3Transition Duration="0:0:0.2"/>
-                                                                </Button.TranslationTransition>
-                                                                <Button.OpacityTransition>
-                                                                    <ScalarTransition Duration="0:0:0.2"/>
-                                                                </Button.OpacityTransition>
-                                                            </Button>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate x:DataType="local:TODOTask">
+                                            <UserControl x:Name="control" PointerEntered="SubTaskPointerEntered" PointerExited="SubTaskPointerExited">
+                                                <Border Padding="10" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="10"/>
+                                                            <ColumnDefinition Width="50"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="50"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid Background="{ThemeResource SystemBaseHighColor}" CornerRadius="{ThemeResource ListViewItemCornerRadius}" x:Name="backplate" Margin="-12,-10,-12,-10" Opacity="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                            <Grid.OpacityTransition>
+                                                                <ScalarTransition Duration="0:0:0.2"/>
+                                                            </Grid.OpacityTransition>
                                                         </Grid>
-                                                    </Border>
-                                                </UserControl>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                        <ListView.ItemContainerStyle>
-                                            <Style BasedOn="{StaticResource RoundedListViewItem}" TargetType="ListViewItem">
-                                                <Setter Property="Background" Value="Transparent"/>
-                                                <Setter Property="Margin" Value="0,3,16,0"/>
-                                                <Setter Property="Padding" Value="0"/>
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                            </Style>
-                                        </ListView.ItemContainerStyle>
-                                    </ListView>
+                                                        <Grid Translation="0,10,0" Margin="-20,-10,-20,-10" x:Name="rect" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                            <Border BorderBrush="{ThemeResource SystemAccentColor}" CornerRadius="0" BorderThickness="0,0,0,4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                            </Border>
+                                                            <Grid.TranslationTransition>
+                                                                <Vector3Transition Duration="0:0:0.2"/>
+                                                            </Grid.TranslationTransition>
+                                                        </Grid>
+                                                        <CheckBox PointerCaptureLost="SubTaskPointerCaptureLost" DataContext="{Binding ElementName=control}" Checked="StepCheckToggled" Margin="5,0,0,0" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" Grid.Column="1">
+
+                                                        </CheckBox>
+                                                        <TextBlock Style="{ThemeResource BaseTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Text="{x:Bind Description}"/>
+                                                        <Button Opacity="0" Translation="50,0,0" PointerCaptureLost="BTN_SubTaskPointerCaptureLost" Click="DeleteSubTask" DataContext="{Binding ElementName=control}" Grid.Column="3" Width="42" Height="46" x:Name="delsubtask" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" CornerRadius="20" ToolTipService.ToolTip="Delete step">
+                                                            <Button.Content>
+                                                                <FontIcon FontSize="14" Glyph="&#xE74D;"/>
+                                                            </Button.Content>
+                                                            <Button.TranslationTransition>
+                                                                <Vector3Transition Duration="0:0:0.2"/>
+                                                            </Button.TranslationTransition>
+                                                            <Button.OpacityTransition>
+                                                                <ScalarTransition Duration="0:0:0.2"/>
+                                                            </Button.OpacityTransition>
+                                                        </Button>
+                                                    </Grid>
+                                                </Border>
+                                            </UserControl>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <ListView.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource RoundedListViewItem}" TargetType="ListViewItem">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Margin" Value="0,3,16,0"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                </ListView>
                             </controls:Expander.Content>
                         </controls:Expander>
                     </UserControl>
@@ -972,15 +1008,19 @@
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <FontIcon VerticalAlignment="Center" Grid.Column="0" Glyph="&#xE8CB;" ToolTipService.ToolTip="Sort by"/>
+
+                <Button Style="{StaticResource MonetButton}" Grid.Column="0" Width="32" VerticalAlignment="Stretch" Padding="0" Tag="Ascending Order View" x:Name="OrderButton" ToolTipService.ToolTip="{x:Bind OrderButton.Tag, Mode=OneWay}">
+                    <FontIcon FontSize="13" Glyph="&#xE74A;"/>
+                </Button>
 
                 <controls:DropDownButton CornerRadius="{ThemeResource ControlCornerRadius}" Style="{StaticResource DropDownButtonStyle1}"  ToolTipService.ToolTip="Sort by" VerticalAlignment="Center" Grid.Column="2" x:Name="SortingDropDown" Content="Date Created" >
                     <controls:DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">
                             <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="t" IsChecked="True" Click="SortingOptionClicked" Text="Date Created"/>
                             <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="t" Click="SortingOptionClicked" Text="Text"/>
-                            <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="t" Click="SortingOptionClicked" Text="Completed"/>
-                            <controls:RadioMenuFlyoutItem x:Name="opt4" GroupName="t" Click="SortingOptionClicked" Text="Importance"/>
+                            <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="t" Click="SortingOptionClicked" Text="Steps"/>
+                            <controls:RadioMenuFlyoutItem x:Name="opt4" GroupName="t" Click="SortingOptionClicked" Text="Completed"/>
+                            <controls:RadioMenuFlyoutItem x:Name="opt5" GroupName="t" Click="SortingOptionClicked" Text="Importance"/>
                         </MenuFlyout>
                     </controls:DropDownButton.Flyout>
 
