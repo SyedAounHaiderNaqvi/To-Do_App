@@ -7,7 +7,6 @@ using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using To_Do.NavigationPages;
 
 namespace To_Do
 {

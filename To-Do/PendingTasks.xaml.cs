@@ -19,7 +19,7 @@ using System.Diagnostics;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Data;
 
-namespace To_Do.NavigationPages
+namespace To_Do
 {
     public sealed partial class pendingtasks : Page
     {

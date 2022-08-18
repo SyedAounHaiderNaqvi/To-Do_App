@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using To_Do.NavigationPages;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI.Core.Preview;
@@ -912,7 +911,7 @@ namespace To_Do
                 var selectedItem = (CustomNavViewItem)args.SelectedItem;
                 if (selectedItem != null)
                 {
-                    pageType = Type.GetType("To_Do.NavigationPages.pendingtasks");
+                    pageType = Type.GetType("To_Do.pendingtasks");
                     List<string> dataToParse = new List<string>
                     {
                         selectedItem.Name,
@@ -1253,11 +1252,11 @@ namespace To_Do
                         string pageName;
                         if (selectedItemTag.Equals("completedtasks"))
                         {
-                            pageName = "To_Do.NavigationPages." + selectedItemTag;
+                            pageName = "To_Do." + selectedItemTag;
                         }
                         else
                         {
-                            pageName = "To_Do.NavigationPages.pendingtasks";
+                            pageName = "To_Do.pendingtasks";
                         }
                         Type pageType = Type.GetType(pageName);
                         List<string> dataToParse = new List<string>

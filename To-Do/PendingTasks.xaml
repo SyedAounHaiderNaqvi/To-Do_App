@@ -1,13 +1,13 @@
 ﻿<Page
-    x:Class="To_Do.NavigationPages.pendingtasks"
+    x:Class="To_Do.pendingtasks"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:To_Do.NavigationPages"
+    xmlns:local="using:To_Do"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Name="{x:Bind _name, Mode=OneWay}"
-    Tag="{x:Bind _tag, Mode=OneWay}"
+    Name="{x:Bind _name}"
+    Tag="{x:Bind _tag}"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls" 
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
@@ -1000,7 +1000,7 @@
         </StackPanel>
         <Grid Padding="35,25,35,15" Background="Transparent" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,-84,0,10">
             <Border MaxWidth="700" Margin="0,5,200,0" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
-                <TextBlock MaxLines="2" x:Name="pageTitle" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="{x:Bind _name, Mode=OneWay}"/>
+                <TextBlock MaxLines="2" x:Name="pageTitle" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="{x:Bind _name}"/>
             </Border>
             <Grid HorizontalAlignment="Right" Margin="0,5,0,0" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
