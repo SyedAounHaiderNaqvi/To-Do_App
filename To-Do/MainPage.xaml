@@ -11,35 +11,6 @@
     controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
-        <local:MenuItemTemplateSelector x:Key="selector">
-            <local:MenuItemTemplateSelector.DefaultItemTemlate>
-                <DataTemplate x:DataType="local:DefaultCategory">
-                    <controls:NavigationViewItem Canvas.ZIndex="1" x:Name="e" PointerCaptureLost="NavigationViewItem_PointerCaptureLost" PointerEntered="NavigationViewItem_PointerEntered" PointerExited="NavigationViewItem_PointerExited" ToolTipService.ToolTip="{x:Bind Name}" Tag="{x:Bind Tag}">
-                        <controls:NavigationViewItem.Content>
-                            <Grid Margin="0,0,-12,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="30"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock TextTrimming="CharacterEllipsis" Grid.Column="0" Text="{x:Bind Name}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <Button Canvas.ZIndex="5" DataContext="{Binding ElementName=e}" Grid.Column="1" Click="DeleteList" Padding="0" Visibility="Collapsed" x:Name="deleteListButton" ToolTipService.ToolTip="Delete List" Height="20" Width="20" CornerRadius="16" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <Button.Content>
-                                        <FontIcon Glyph="&#xE711;" FontSize="8"/>
-                                    </Button.Content>
-                                </Button>
-
-                            </Grid>
-                        </controls:NavigationViewItem.Content>
-                        <controls:NavigationViewItem.Icon>
-                            <FontIcon Glyph="{x:Bind Glyph}" />
-                        </controls:NavigationViewItem.Icon>
-                        <!--<controls:NavigationViewItem.InfoBadge>
-                            <controls:InfoBadge Opacity="{x:Bind opacity, Mode=OneWay}" Value="{x:Bind badgeNum, Mode=OneWay}"/>
-                        </controls:NavigationViewItem.InfoBadge>-->
-                    </controls:NavigationViewItem>
-                </DataTemplate>
-            </local:MenuItemTemplateSelector.DefaultItemTemlate>
-        </local:MenuItemTemplateSelector>
         <DataTemplate x:Key="suggestionTemplate" x:DataType="local:QueryFormat">
             <UserControl>
                 <Grid HorizontalAlignment="Left" Width="270" Background="Transparent">
@@ -571,8 +542,34 @@
         <Border IsHitTestVisible="True" Background="Transparent" Margin="48,0,0,0" Height="48" VerticalAlignment="Top" x:Name="AppTitleBar">
         </Border>
 
-        <controls:NavigationView MenuItemTemplateSelector="{StaticResource selector}" MenuItemsSource="{x:Bind Categories, Mode=OneWay}" PaneTitle="To-Do BETA" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
+        <controls:NavigationView MenuItemsSource="{x:Bind Categories, Mode=OneWay}" PaneTitle="To-Do BETA" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
+            <controls:NavigationView.MenuItemTemplate>
+                <DataTemplate x:DataType="local:CustomNavViewItem">
+                    <controls:NavigationViewItem Canvas.ZIndex="1" x:Name="parent" PointerCaptureLost="NavigationViewItem_PointerCaptureLost" PointerEntered="NavigationViewItem_PointerEntered" PointerExited="NavigationViewItem_PointerExited" ToolTipService.ToolTip="{x:Bind Name}" Tag="{x:Bind Tag}">
+                        <controls:NavigationViewItem.Content>
+                            <Grid Margin="0,0,-12,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock TextTrimming="CharacterEllipsis" Grid.Column="0" Text="{x:Bind Name}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <Button Padding="0" DataContext="{Binding ElementName=parent}" Grid.Column="1" Click="DeleteList" Visibility="Collapsed" x:Name="deleteListButton" ToolTipService.ToolTip="Delete List" Height="20" Width="20" CornerRadius="16" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Button.Content>
+                                        <FontIcon Glyph="&#xE711;" FontSize="8"/>
+                                    </Button.Content>
+                                </Button>
 
+                            </Grid>
+                        </controls:NavigationViewItem.Content>
+                        <controls:NavigationViewItem.Icon>
+                            <FontIcon Glyph="{x:Bind Glyph}" />
+                        </controls:NavigationViewItem.Icon>
+                        <!--<controls:NavigationViewItem.InfoBadge>
+                            <controls:InfoBadge Opacity="{x:Bind opacity, Mode=OneWay}" Value="{x:Bind badgeNum, Mode=OneWay}"/>
+                        </controls:NavigationViewItem.InfoBadge>-->
+                    </controls:NavigationViewItem>
+                </DataTemplate>
+            </controls:NavigationView.MenuItemTemplate>
             <controls:NavigationView.PaneCustomContent>
                 <StackPanel Orientation="Vertical">
                     <Button ToolTipService.ToolTip="Create New List" CornerRadius="{ThemeResource ControlCornerRadius}" Click="Button_Click" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Height="36" HorizontalAlignment="Stretch" Margin="4,2,4,2">
@@ -609,10 +606,16 @@
             </Grid>
         </controls:NavigationView>
         <controls:InfoBar Canvas.ZIndex="2" Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}" x:Name="change" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="45,60,45,50" IsOpen="False" Severity="Informational" Title="My Day" Message="Leftover task(s) from My Day have been shifted to Pending Tasks."/>
-        <Grid Canvas.ZIndex="100" x:FieldModifier="public" x:Name="initialLoadingUI" Background="#222222" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Canvas.ZIndex="50" x:FieldModifier="public" x:Name="initialLoadingUI" Background="#222222" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <controls:ProgressRing Foreground="{ThemeResource SystemAccentColor}" Width="50" Height="50" IsIndeterminate="True"/>
         </Grid>
-        <Grid Canvas.ZIndex="101" VerticalAlignment="Top" HorizontalAlignment="Right" Width="138" IsHitTestVisible="False" Height="32">
+
+        <Grid Visibility="Collapsed" Canvas.ZIndex="51" x:Name="DEBUG_DeletePrompt" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <controls:ProgressRing Foreground="{ThemeResource SystemAccentColor}" Width="50" Height="50" IsIndeterminate="True"/>
+        </Grid>
+        
+        <!--Titlebar blur-->
+        <Grid Canvas.ZIndex="52" VerticalAlignment="Top" HorizontalAlignment="Right" Width="138" IsHitTestVisible="False" Height="32">
             <Grid.Background>
                 <media:AcrylicBrush BlurAmount="1" BackgroundSource="Backdrop" TintColor="Transparent" TintOpacity="0"/>
             </Grid.Background>

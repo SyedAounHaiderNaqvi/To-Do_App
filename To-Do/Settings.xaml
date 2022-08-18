@@ -74,58 +74,33 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <AcrylicBrush TintLuminosityOpacity="0.4" x:Key="LightThemeBrush" TintOpacity="0.3" BackgroundSource="Backdrop" TintColor="White"/>
-            <AcrylicBrush x:Key="DarkThemeBrush" TintOpacity="0.6" BackgroundSource="Backdrop" TintColor="Black"/>
-            <SolidColorBrush x:Key="SystemControlTransparentRevealBackgroundBrush" Color="Transparent" />
-            <SolidColorBrush x:Key="SystemControlTransparentRevealBorderBrush" Color="Transparent" />
-            <SolidColorBrush x:Key="GridViewItemRevealBorderBrush" Color="Transparent" />
-            <Thickness x:Key="ListViewItemRevealBorderThemeThickness">0</Thickness>
-            <Thickness x:Key="GridViewItemRevealBorderThemeThickness">0</Thickness>
-            <SolidColorBrush x:Key="ListViewItemRevealBackgroundSelectedPressed" Color="Transparent" />
-            <SolidColorBrush x:Key="ListViewItemRevealPlaceholderBackground" Color="Transparent" />
-            <SolidColorBrush x:Key="GridViewItemRevealBackground" Color="Transparent" />
-            <SolidColorBrush x:Key="GridViewItemRevealBackgroundPointerOver" Color="Transparent" />
-            <SolidColorBrush x:Key="GridViewItemRevealBackgroundPressed" Color="Transparent" />
-            <SolidColorBrush x:Key="GridViewItemRevealBackgroundSelected" Color="Transparent" />
-            <SolidColorBrush x:Key="GridViewItemRevealBackgroundSelectedPointerOver" Color="Transparent" />
-            <SolidColorBrush x:Key="GridViewItemRevealBackgroundSelectedPressed" Color="Transparent" />
-            <SolidColorBrush x:Key="GridViewItemRevealPlaceholderBackground" Color="Transparent" />
+            <media:AcrylicBrush x:Key="LightThemeBrush" BlurAmount="8" BackgroundSource="Backdrop" FallbackColor="#99ffffff" TintColor="White" TintOpacity="0.3"/>
+            <media:AcrylicBrush x:Key="DarkThemeBrush" BlurAmount="8" BackgroundSource="Backdrop" FallbackColor="#99000000" TintColor="#101010" TintOpacity="0.6"/>
+            
 
             <DataTemplate x:Key="ImageTemplate" x:DataType="local:GridThemeItem">
                 <Grid PointerEntered="ShowBlurredDetails" PointerExited="HideBlurredDetails" PointerCaptureLost="HideBlurredDetails" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Width="150" Height="105">
                     
                     <Image Source="{x:Bind imgSource}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                    <Grid x:Name="blurGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <media:UIElementExtensions.VisualFactory>
-                            <media:PipelineVisualFactory>
-                                <media:BlurEffect x:Name="ImageBlurEffect" IsAnimatable="True"/>
-                            </media:PipelineVisualFactory>
-                        </media:UIElementExtensions.VisualFactory>
+                    <Grid x:Name="opacityGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <ani:Explicit.Animations>
-                            <ani:AnimationSet x:Name="BlurAnimation">
-                                <ani:BlurEffectAnimation From="0"
-                                 To="8"
+                            <ani:AnimationSet x:Name="ColorifyAnimation">
+                                <ani:OpacityAnimation From="0"
+                                 To="0.9"
                                  Duration="0:0:0.2"
                                  EasingType="Linear"
-                                 EasingMode="EaseOut"
-                                 Target="{Binding ElementName=ImageBlurEffect}"/>
+                                 EasingMode="EaseOut"/>
                             </ani:AnimationSet>
-                            <ani:AnimationSet x:Name="UnBlurAnimation">
-                                <ani:BlurEffectAnimation From="8"
+                            <ani:AnimationSet x:Name="UnColorifyAnimation">
+                                <ani:OpacityAnimation From="0.9"
                                  To="0"
                                  Duration="0:0:0.2"
                                  EasingType="Linear"
-                                 EasingMode="EaseOut"
-                                 Target="{Binding ElementName=ImageBlurEffect}"/>
+                                 EasingMode="EaseOut"/>
                             </ani:AnimationSet>
                         </ani:Explicit.Animations>
-                        
+
                     </Grid>
-                    <Border x:Name="blurColor" Background="{ThemeResource SystemAltHighColor}" Opacity="0" BorderThickness="0" IsHitTestVisible="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <Border.OpacityTransition>
-                            <ScalarTransition/>
-                        </Border.OpacityTransition>
-                    </Border>
                     <Grid Translation="-50,0,0" Width="90" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                         
                         <Grid.TranslationTransition>
@@ -155,10 +130,13 @@
                     </TextBlock>
                     <interactivity:Interaction.Behaviors>
                         <interactions:EventTriggerBehavior EventName="PointerExited">
-                            <behaviors:StartAnimationAction Animation="{Binding ElementName=UnBlurAnimation}"/>
+                            <behaviors:StartAnimationAction Animation="{Binding ElementName=UnColorifyAnimation}"/>
+                        </interactions:EventTriggerBehavior>
+                        <interactions:EventTriggerBehavior EventName="Loaded">
+                            <behaviors:StartAnimationAction Animation="{Binding ElementName=UnColorifyAnimation}"/>
                         </interactions:EventTriggerBehavior>
                         <interactions:EventTriggerBehavior EventName="PointerEntered">
-                            <behaviors:StartAnimationAction Animation="{Binding ElementName=BlurAnimation}"/>
+                            <behaviors:StartAnimationAction Animation="{Binding ElementName=ColorifyAnimation}"/>
                         </interactions:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </Grid>
@@ -288,7 +266,9 @@
                             <ToggleSwitch VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="MonetToggle" Toggled="OnMonetToggled"/>
                         </Grid>
                     </Border>
-                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                    
+                    <!--DISABLED OPTION BELOW-->
+                    <Border Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="170" Width="*"/>

@@ -34,8 +34,6 @@ namespace To_Do
         public List<string> savingDescriptions = new List<string>();
         public List<string> savingDates = new List<string>();
         public List<bool> savingImps = new List<bool>();
-        public List<string> savingCompletedDates = new List<string>();
-        public List<string> completedSaving = new List<string>();
         public List<List<string>> savingSteps = new List<List<string>>();
 
         public List<string> navListsNames = new List<string>();
@@ -50,20 +48,18 @@ namespace To_Do
         bool canSearch = true;
         public NavigationTransitionInfo info;
 
-        public ObservableCollection<DefaultCategory> Categories { get; }
+        public ObservableCollection<CustomNavViewItem> Categories { get; }
         public ContentDialog dialog;
         StorageFolder folder;
-
-        bool canNavigate = true;
 
         public MainPage()
         {
             this.InitializeComponent();
             ins = this;
             folder = ApplicationData.Current.LocalFolder;
-            Categories = new ObservableCollection<DefaultCategory>();
+            Categories = new ObservableCollection<CustomNavViewItem>();
             Task.Run(() => LoadNavViewLists()).Wait();
-            Task.Run(() => DeletionOfUnnecessaryLists()).Wait();
+            //Task.Run(() => DeletionOfUnnecessaryLists()).Wait();
             var currentTheme = ThemeHelper.RootTheme.ToString();
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
@@ -98,12 +94,12 @@ namespace To_Do
 
         public async void Waiter()
         {
-            List<string> dataToParse = new List<string>();
-            dataToParse.Add("Pending Tasks");
-            dataToParse.Add("pendingtasks");
+            List<string> dataToParse = new List<string>
+            {
+                "Pending Tasks",
+                "pendingtasks"
+            };
             ContentFrame.Navigate(typeof(pendingtasks), dataToParse, new SuppressNavigationTransitionInfo());
-            await Task.Delay(10);
-            ContentFrame.Navigate(typeof(completedtasks), null, new SuppressNavigationTransitionInfo());
             await Task.Delay(10);
             ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
             await Task.Delay(10);
@@ -134,14 +130,14 @@ namespace To_Do
                     Categories.Clear();
                     for (int i = 0; i < loadedNames.Count; i++)
                     {
-                        DefaultCategory cat = new DefaultCategory { Name = loadedNames[i], Glyph = loadedGlyphs[i], Tag = loadedTags[i] };
+                        CustomNavViewItem cat = new CustomNavViewItem { Name = loadedNames[i], Glyph = loadedGlyphs[i], Tag = loadedTags[i] };
                         Categories.Add(cat);
                     }
                 }
-            } else
+            }
+            else
             {
-                Categories.Add(new DefaultCategory { Name = "Pending Tasks", Glyph = "\uE823", Tag = "pendingtasks" });
-                Categories.Add(new DefaultCategory { Name = "Completed Tasks", Glyph = "\uE73E", Tag = "completedtasks", });
+                Categories.Add(new CustomNavViewItem { Name = "Pending Tasks", Glyph = "\uE823", Tag = "pendingtasks" });
             }
         }
 
@@ -279,7 +275,7 @@ namespace To_Do
                             BlurAmount = 8,
                             TintOpacity = 0.95,
                             BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                            TintColor = ChangeColorBrightness(bgColor, false),
+                            TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, false),
                         };
 
                         Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
@@ -287,7 +283,7 @@ namespace To_Do
                             BlurAmount = 8,
                             TintOpacity = 0.9,
                             BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                            TintColor = ChangeColorBrightness(bgColor, true),
+                            TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, true),
                         };
                         break;
                     default:
@@ -329,7 +325,7 @@ namespace To_Do
                     BlurAmount = 8,
                     TintOpacity = 0.95,
                     BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                    TintColor = ChangeColorBrightness(bgColor, false),
+                    TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, false),
                 };
 
                 Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
@@ -337,7 +333,7 @@ namespace To_Do
                     BlurAmount = 8,
                     TintOpacity = 0.9,
                     BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                    TintColor = ChangeColorBrightness(bgColor, true),
+                    TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, true),
                 };
 
                 localSettings.Values["usemonet"] = 1;
@@ -348,52 +344,7 @@ namespace To_Do
             }
         }
 
-        public Color ChangeColorBrightness(Color c, bool isContent)
-        {
-            float r, g, b;
-            if (isContent)
-            {
-                if (ThemeHelper.IsDarkTheme())
-                {
-
-                    r = lerp(c.R, 125f, 0.2f);
-                    g = lerp(c.G, 125f, 0.2f);
-                    b = lerp(c.B, 125f, 0.2f);
-
-                }
-                else
-                {
-                    r = lerp(c.R, 255f, 0.7f);
-                    g = lerp(c.G, 255f, 0.7f);
-                    b = lerp(c.B, 255f, 0.7f);
-                }
-            }
-            else
-            {
-                if (ThemeHelper.IsDarkTheme())
-                {
-
-                    r = lerp(c.R, 255f, 0.1f);
-                    g = lerp(c.G, 255f, 0.1f);
-                    b = lerp(c.B, 255f, 0.1f);
-
-                }
-                else
-                {
-                    r = lerp(c.R, 255f, 0.8f);
-                    g = lerp(c.G, 255f, 0.8f);
-                    b = lerp(c.B, 255f, 0.8f);
-                }
-            }
-
-
-            return Color.FromArgb(c.A, Convert.ToByte(r), Convert.ToByte(g), Convert.ToByte(b));
-        }
-
-        public float lerp(float a, float b, float f)
-        {
-            return (float)((a * (1.0 - f)) + (b * f));
-        }
+        
 
         async void LoadIMG()
         {
@@ -439,25 +390,14 @@ namespace To_Do
             switch (argument)
             {
                 case "GoToPending":
-                    ContentFrame.Navigate(typeof(pendingtasks), null, new SuppressNavigationTransitionInfo());
-                    ContentFrame.Navigate(typeof(completedtasks), null, new SuppressNavigationTransitionInfo());
-                    await Task.Delay(10);
                     ContentFrame.Navigate(typeof(pendingtasks));
                     nview.SelectedItem = Categories[0];
                     parallax.Source = pendingtasks.instance.listOfTasks;
                     break;
-                case "GoToCompleted":
-                    ContentFrame.Navigate(typeof(pendingtasks), null, new SuppressNavigationTransitionInfo());
-                    await Task.Delay(10);
-                    ContentFrame.Navigate(typeof(completedtasks), null, new SuppressNavigationTransitionInfo());
-                    nview.SelectedItem = Categories[1];
-                    parallax.Source = completedtasks.instance.listOfTasks;
-                    break;
                 case "GoToSettings":
-                    ContentFrame.Navigate(typeof(pendingtasks), null, new SuppressNavigationTransitionInfo());
-                    ContentFrame.Navigate(typeof(completedtasks), null, new SuppressNavigationTransitionInfo());
+                    ContentFrame.Navigate(typeof(pendingtasks));
                     await Task.Delay(10);
-                    ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
+                    ContentFrame.Navigate(typeof(Settings));
                     nview.SelectedItem = nview.SettingsItem;
                     parallax.Source = Settings.ins.scroller;
                     break;
@@ -472,8 +412,7 @@ namespace To_Do
             savingDates.Clear();
             savingImps.Clear();
             savingSteps.Clear();
-            savingCompletedDates.Clear();
-            completedSaving.Clear();
+
             StorageFolder rootFolder;
             pendingtasks ins = pendingtasks.instance;
             string t = ins._tag;
@@ -525,37 +464,6 @@ namespace To_Do
                     await rootFolder.DeleteAsync();
                 }
             }
-
-            Type pageType = Type.GetType("To_Do.NavigationPages.completedtasks");
-            ContentFrame.Navigate(pageType, tasksToParse, new SuppressNavigationTransitionInfo());
-            tasksToParse.Clear();
-            if (completedtasks.instance.CompleteTasks.Count > 0)
-            {
-                foreach (TODOTask task in completedtasks.instance.CompleteTasks)
-                {
-                    string temp = task.Description;
-                    string date = task.Date;
-                    completedSaving.Add(temp);
-                    savingCompletedDates.Add(date);
-                }
-                string compJsonFile = JsonConvert.SerializeObject(completedSaving);
-                string compdateJsonFile = JsonConvert.SerializeObject(savingCompletedDates);
-
-                rootFolder = await folder.CreateFolderAsync("completedtasks", CreationCollisionOption.ReplaceExisting);
-                StorageFile completeddescjson = await rootFolder.CreateFileAsync("completedtasks_desc.json", CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(completeddescjson, compJsonFile);
-                StorageFile compdatesjson = await rootFolder.CreateFileAsync("completedtasks_dates.json", CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(compdatesjson, compdateJsonFile);
-            }
-            else
-            {
-                rootFolder = (StorageFolder)await folder.TryGetItemAsync($"completedtasks");
-                if (rootFolder != null)
-                {
-                    await rootFolder.DeleteAsync();
-                }
-            }
-
         }
 
         async Task SaveNavigationPageItems()
@@ -564,7 +472,7 @@ namespace To_Do
             navListsNames.Clear();
             navListsTags.Clear();
             StorageFolder rootFolder = await folder.CreateFolderAsync($"navlists", CreationCollisionOption.ReplaceExisting);
-            
+
             for (int i = 0; i < Categories.Count; i++)
             {
                 navListsTags.Add(Categories[i].Tag);
@@ -919,7 +827,7 @@ namespace To_Do
             {
                 CreateThreeTileNotifications();
             }
-            
+
             def.Complete();
         }
 
@@ -950,9 +858,9 @@ namespace To_Do
                         }
                     }
                 }
-                
+
             }
-            
+
         }
 
         private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
@@ -965,78 +873,55 @@ namespace To_Do
 
         private async void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
-            if (canNavigate)
-            {
-                LoadingUI.Visibility = Visibility.Visible;
-                int styleIndex = (int)localSettings.Values["navStyle"];
-                switch (styleIndex)
-                {
-                    case 0:
-                        info = new EntranceNavigationTransitionInfo();
-                        break;
-                    case 1:
-                        info = new DrillInNavigationTransitionInfo();
-                        break;
-                    case 2:
-                        info = new SuppressNavigationTransitionInfo();
-                        break;
-                    case 3:
-                        info = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft };
-                        break;
-                    case 4:
-                        info = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight };
-                        break;
-                    default:
-                        info = new EntranceNavigationTransitionInfo();
-                        break;
-                }
-                Type pageType;
+            LoadingUI.Visibility = Visibility.Visible;
+            //int styleIndex = (int)localSettings.Values["navStyle"];
+            //switch (styleIndex)
+            //{
+            //    case 0:
+            //        info = new EntranceNavigationTransitionInfo();
+            //        break;
+            //    case 1:
+            //        info = new DrillInNavigationTransitionInfo();
+            //        break;
+            //    case 2:
+            //        info = new SuppressNavigationTransitionInfo();
+            //        break;
+            //    case 3:
+            //        info = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft };
+            //        break;
+            //    case 4:
+            //        info = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight };
+            //        break;
+            //    default:
+            //        info = new EntranceNavigationTransitionInfo();
+            //        break;
+            //}
+            info = new SuppressNavigationTransitionInfo();
+            Type pageType;
 
-                if (args.IsSettingsSelected)
-                {
-                    await SaveCurrentPageData();
-                    pageType = Type.GetType("To_Do.Settings");
-                    ContentFrame.Navigate(pageType, null, info);
-                    searchBoxGrid.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    searchBoxGrid.Visibility = Visibility.Visible;
-                    var selectedItem = (DefaultCategory)args.SelectedItem;
-                    if (selectedItem != null)
-                    {
-                        //Debug.WriteLine(selectedItem.Name + selectedItem.Tag);
-                        string selectedItemTag = selectedItem.Tag;
-                        string pageName = "";
-                        if (selectedItemTag.Equals("completedtasks"))
-                        {
-                            pageName = "To_Do.NavigationPages." + selectedItemTag;
-                        }
-                        else
-                        {
-                            pageName = "To_Do.NavigationPages.pendingtasks";
-                        }
-                        pageType = Type.GetType(pageName);
-                        //Debug.WriteLine("page name is = " + pageType.FullName);
-                        List<string> dataToParse = new List<string>();
-                        dataToParse.Add(selectedItem.Name);
-                        dataToParse.Add(selectedItem.Tag);
-                        switch (selectedItemTag)
-                        {
-                            case "completedtasks":
-                                pendingtasks.instance.lastDataParseTag = "completedtasks";
-                                ContentFrame.Navigate(pageType, tasksToParse, info);
-                                tasksToParse.Clear();
-                                break;
-                            default:
-                                ContentFrame.Navigate(pageType, dataToParse, info);
-                                break;
-                        }
-                    }
-                }
-                LoadingUI.Visibility = Visibility.Collapsed;
+            if (args.IsSettingsSelected)
+            {
+                await SaveCurrentPageData();
+                pageType = Type.GetType("To_Do.Settings");
+                ContentFrame.Navigate(pageType, null, info);
+                searchBoxGrid.Visibility = Visibility.Collapsed;
             }
-            
+            else
+            {
+                searchBoxGrid.Visibility = Visibility.Visible;
+                var selectedItem = (CustomNavViewItem)args.SelectedItem;
+                if (selectedItem != null)
+                {
+                    pageType = Type.GetType("To_Do.NavigationPages.pendingtasks");
+                    List<string> dataToParse = new List<string>
+                    {
+                        selectedItem.Name,
+                        selectedItem.Tag
+                    };
+                    ContentFrame.Navigate(pageType, dataToParse, info);
+                }
+            }
+            LoadingUI.Visibility = Visibility.Collapsed;
         }
 
         private void nview_DisplayModeChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewDisplayModeChangedEventArgs args)
@@ -1066,22 +951,10 @@ namespace To_Do
         {
             var suggestions = new List<QueryFormat>();
             var querySplit = query.Split(" ");
-            string currentPageTag;
-            string currentPageName;
-            if (ContentFrame.CurrentSourcePageType == typeof(completedtasks))
-            {
-                currentPageTag = "completedtasks";
-                currentPageName = "Completed Tasks";
-            }
-            else
-            {
-                currentPageName = pendingtasks.instance._name;
-                currentPageTag = pendingtasks.instance._tag;
-            }
+            string currentPageTag = pendingtasks.instance._tag;
+            string currentPageName = pendingtasks.instance._name;
 
-            if (currentPageTag != "completedtasks")
-            {
-                var matchingItems = pendingtasks.instance.TaskItems.ToList().Where(
+            var matchingItems = pendingtasks.instance.TaskItems.ToList().Where(
                 item =>
                 {
                     bool flag = true;
@@ -1096,35 +969,10 @@ namespace To_Do
                     }
                     return flag;
                 });
-                foreach (var item in matchingItems)
-                {
-                    suggestions.Add(new QueryFormat(item.Description, currentPageName, "\uF08F"));
-                }
-            }
-            else
+            foreach (var item in matchingItems)
             {
-                var matchingItems2 = completedtasks.instance.CompleteTasks.ToList().Where(
-                    item =>
-                    {
-                        // Idea: check for every word entered (separated by space) if it is in the name,  
-                        // e.g. for query "split button" the only result should "SplitButton" since its the only query to contain "split" and "button" 
-                        // If any of the sub tokens is not in the string, we ignore the item. So the search gets more precise with more words 
-                        bool flag = true;
-                        foreach (string queryToken in querySplit)
-                        {
-                            // Check if token is not in string 
-                            if (item.Description.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
-                            {
-                                // Token is not in string, so we ignore this item. 
-                                flag = false;
-                            }
-                        }
-                        return flag;
-                    });
-                foreach (var item in matchingItems2)
-                {
-                    suggestions.Add(new QueryFormat(item.Description, "Completed Tasks", "\uF08F"));
-                }
+                string glyph = item.IsCompleted ? "\uE73E" : "\uF08F";
+                suggestions.Add(new QueryFormat(item.Description, currentPageName, glyph));
             }
 
             return suggestions.OrderByDescending(i => i.Title.StartsWith(query, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title).ToList();
@@ -1163,18 +1011,6 @@ namespace To_Do
                         {
                             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                                 () => calc(j, pendingtasks.instance.listOfTasks));
-                            break;
-                        }
-                    }
-                } else
-                {
-                    var list = completedtasks.instance.CompleteTasks;
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        if (desc.Title.Equals(list[i].Description))
-                        {
-                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                                () => calc(i, completedtasks.instance.listOfTasks));
                             break;
                         }
                     }
@@ -1345,7 +1181,7 @@ namespace To_Do
                 string name = (string)localSettings.Values["NEWlistName"];
                 string tag = ((string)localSettings.Values["NEWlistTag"]);
                 string glyph = (string)localSettings.Values["NEWlistIcon"];
-                Categories.Add(new DefaultCategory { Tag = tag, Name = name, Glyph = glyph, badgeNum = 0 });
+                Categories.Add(new CustomNavViewItem { Tag = tag, Name = name, Glyph = glyph });
             }
         }
 
@@ -1368,57 +1204,39 @@ namespace To_Do
         private void NavigationViewItem_PointerCaptureLost(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             var parentControl = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
-            Button btn = FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
+            Button btn = UtilityFunctions.FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
             btn.Visibility = Visibility.Collapsed;
         }
 
         private void NavigationViewItem_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             var parentControl = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
-            Button btn = FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
-            if ((string)parentControl.Tag == "pendingtasks" || (string)parentControl.Tag == "completedtasks")
+            Button btn = UtilityFunctions.FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
+            if ((string)parentControl.Tag == "pendingtasks")
             {
                 btn.Visibility = Visibility.Collapsed;
-            } else
+            }
+            else
             {
                 btn.Visibility = Visibility.Visible;
             }
+
         }
 
         private void NavigationViewItem_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             var parentControl = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
-            Button btn = FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
+            Button btn = UtilityFunctions.FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
             btn.Visibility = Visibility.Collapsed;
         }
 
-        public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
-        {
-
-            if (parent == null) return null;
-
-            if (parent.GetType() == targetType && ((T)parent).Name == ControlName)
-            {
-                return (T)parent;
-            }
-            T result = null;
-            int count = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < count; i++)
-            {
-                UIElement child = (UIElement)VisualTreeHelper.GetChild(parent, i);
-
-                if (FindControl<T>(child, targetType, ControlName) != null)
-                {
-                    result = FindControl<T>(child, targetType, ControlName);
-                    break;
-                }
-            }
-            return result;
-        }
 
         private async void DeleteList(object sender, RoutedEventArgs e)
         {
-            canNavigate = false;
+            DEBUG_DeletePrompt.Visibility = Visibility.Visible;
+            //hasNavigated = false;
+            //nview.IsEnabled = false;
+            //nview.IsEnabled = true;
             //get the current index
             //load the previous list in array Categories, then delete this item after deleting the folder.
             Microsoft.UI.Xaml.Controls.NavigationViewItem parent = (Microsoft.UI.Xaml.Controls.NavigationViewItem)(sender as Button).DataContext;
@@ -1427,7 +1245,7 @@ namespace To_Do
                 if ((string)parent.Tag == Categories[i].Tag)
                 {
                     //found the match, load previous one
-                    canNavigate = true;
+                    //hasNavigated = true;
                     var selectedItem = Categories[i - 1];
                     if (selectedItem != null)
                     {
@@ -1458,6 +1276,7 @@ namespace To_Do
                                 ContentFrame.Navigate(pageType, dataToParse, info);
                                 break;
                         }
+                        await Task.Delay(100);
                         //now delete the previous one's files                        
                         //StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{Categories[i].Tag}");
                         //while (rootFolder != null)
@@ -1471,8 +1290,8 @@ namespace To_Do
                     }
                 }
             }
-            //DefaultCategory rootCat = parent.DataContext as DefaultCategory;
-            Debug.WriteLine("Deleting");
+            DEBUG_DeletePrompt.Visibility = Visibility.Collapsed;
+            //CustomNavViewItem rootCat = parent.DataContext as CustomNavViewItem;
         }
     }
 
@@ -1490,45 +1309,17 @@ namespace To_Do
         }
     }
 
-    public class DefaultCategory : INotifyPropertyChanged
+    public class CustomNavViewItem : INotifyPropertyChanged
     {
         public string Name { get; set; }
         public string Tag { get; set; }
         public string Glyph { get; set; }
-        private int _badgeNum;
-        private double _opacity;
-
-        public DefaultCategory()
-        {
-            opacity = 0;
-            badgeNum = 0;
-        }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public int badgeNum
-        {
-            get => _badgeNum;
-            set { _badgeNum = value; OnPropertyChanged("badgeNum"); }
-        }
-        public double opacity
-        {
-            get => _opacity;
-            set { _opacity = value; OnPropertyChanged("opacity"); }
-        }
-    }
-
-    public class MenuItemTemplateSelector : DataTemplateSelector
-    {
-        public DataTemplate DefaultItemTemlate { get; set; }
-        protected override DataTemplate SelectTemplateCore(object item)
-        {
-            return DefaultItemTemlate;
         }
     }
 }

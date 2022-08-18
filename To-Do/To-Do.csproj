@@ -141,9 +141,6 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NavigationPages\completedtasks.xaml.cs">
-      <DependentUpon>completedtasks.xaml</DependentUpon>
-    </Compile>
     <Compile Include="NavigationPages\pendingtasks.xaml.cs">
       <DependentUpon>pendingtasks.xaml</DependentUpon>
     </Compile>
@@ -155,6 +152,7 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="ThemeHelper.cs" />
+    <Compile Include="UtilityFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -269,10 +267,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NavigationPages\completedtasks.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -17,6 +17,7 @@ using System.Linq;
 using Windows.UI.Xaml.Controls.Primitives;
 using System.Diagnostics;
 using Windows.UI.Core;
+using Windows.UI.Xaml.Data;
 
 namespace To_Do.NavigationPages
 {
@@ -26,15 +27,14 @@ namespace To_Do.NavigationPages
         public List<string> _savingDescriptions = new List<string>();
         public List<string> _savingDates = new List<string>();
         public List<bool> _savingImps = new List<bool>();
+        public List<bool> _savingCompletedState = new List<bool>();
         public List<List<string>> savingSteps = new List<List<string>>();
 
         public List<string> savingDescriptions;
 
         public static pendingtasks instance;
-        public MainPage singletonReference = MainPage.ins;
 
-        public string redate;
-        //public int delay = 3000;
+        //public string redate;
         public ContentDialog dialog;
 
 
@@ -43,6 +43,7 @@ namespace To_Do.NavigationPages
         public string _tag = "pendingtasks";
         public string lastDataParseTag = "pendingtasks";
         bool loadedForFirstTime = true;
+        public bool finallyLoaded = false;
 
         public pendingtasks()
         {
@@ -189,6 +190,7 @@ namespace To_Do.NavigationPages
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            finallyLoaded = false;
             if (e != null)
             {
                 List<string> parsed = e.Parameter as List<string>;
@@ -225,9 +227,8 @@ namespace To_Do.NavigationPages
             opt1.IsChecked = true;
             Sort("Date Created");
             base.OnNavigatedTo(e);
+            finallyLoaded = true;
         }
-
-
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -254,53 +255,20 @@ namespace To_Do.NavigationPages
             var truth = (bool)cb.IsChecked;
             cb.ClearValue(CheckBox.IsCheckedProperty);
             task.IsStarred = truth;
-            var list = TaskItems.ToList();
-            if ((string)SortingDropDown.Content != "Custom")
-            {
-                switch ((string)SortingDropDown.Content)
-                {
-                    case "Date Created":
-                        list.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
-                        break;
-                    case "Text":
-                        list.Sort((x, y) => string.Compare(x.Description, y.Description));
-                        break;
-                    case "Importance":
-                        var query = from x in list
-                                    orderby !x.IsStarred
-                                    select x;
-                        list = query.ToList();
-                        break;
-                    default:
-                        break;
-                }
-
-                TaskItems = new ObservableCollection<TODOTask>(list);
-                listOfTasks.ItemsSource = TaskItems;
-            }
+            Sort((string)SortingDropDown.Content);
             return;
         }
 
-        private async void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-
             CheckBox cb = sender as CheckBox;
-            if (VisualTreeHelper.GetParent(cb) is Grid cbparent)
-            {
-                StackPanel panel = VisualTreeHelper.GetChild(cbparent, 1) as StackPanel;
-                TextBlock block = VisualTreeHelper.GetChild(panel, 0) as TextBlock;
-                block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-                await Task.Delay(100);
-                cb.IsChecked = false;
-                UserControl top = cb.DataContext as UserControl;
-                TODOTask context = top.DataContext as TODOTask;
-                block.TextDecorations = Windows.UI.Text.TextDecorations.None;
-                redate = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt");
-                completedtasks.instance.AddATask(block.Text, redate);
-                TaskItems.Remove(context);
-                UpdateBadge();
-            }
-            await SaveDataToFile();
+            UserControl top = cb.DataContext as UserControl;
+            TODOTask task = top.DataContext as TODOTask;
+            var truth = (bool)cb.IsChecked;
+            cb.ClearValue(CheckBox.IsCheckedProperty);
+            task.IsCompleted = truth;
+            Sort((string)SortingDropDown.Content);
+            return;
         }
 
         private async void StepCheckToggled(object sender, RoutedEventArgs e)
@@ -316,7 +284,7 @@ namespace To_Do.NavigationPages
             UserControl top = checkbox.DataContext as UserControl;
             TODOTask step = top.DataContext as TODOTask;
 
-            UserControl root = FindParent<UserControl>(top, "UserControl");
+            UserControl root = UtilityFunctions.FindParent<UserControl>(top, "UserControl");
             Expander expander = VisualTreeHelper.GetChild(root, 0) as Expander;
             TODOTask context = root.DataContext as TODOTask;
 
@@ -347,37 +315,13 @@ namespace To_Do.NavigationPages
             UpdateBadge();
         }
 
-        private static T FindParent<T>(DependencyObject child, string parentName)
-            where T : DependencyObject
-        {
-            if (child == null) return null;
-
-            T foundParent = null;
-            var currentParent = VisualTreeHelper.GetParent(child);
-
-            do
-            {
-                var frameworkElement = currentParent as FrameworkElement;
-                if (frameworkElement.Name == parentName && frameworkElement is T)
-                {
-                    foundParent = (T)currentParent;
-                    break;
-                }
-
-                currentParent = VisualTreeHelper.GetParent(currentParent);
-
-            } while (currentParent != null);
-
-            return foundParent;
-        }
-
         private void DeleteSubTask(object sender, RoutedEventArgs e)
         {
             Button item = sender as Button;
             UserControl top = item.DataContext as UserControl;
             TODOTask step = top.DataContext as TODOTask;
 
-            UserControl root = FindParent<UserControl>(top, "UserControl");
+            UserControl root = UtilityFunctions.FindParent<UserControl>(top, "UserControl");
             Expander expander = VisualTreeHelper.GetChild(root, 0) as Expander;
             TODOTask context = root.DataContext as TODOTask;
             int index = 0;
@@ -445,21 +389,21 @@ namespace To_Do.NavigationPages
 
         public void UpdateBadge()
         {
-            for (int i = 0; i < MainPage.ins.Categories.Count; i++)
-            {
-                if (MainPage.ins.Categories[i].Tag == (string)this.Tag)
-                {
-                    MainPage.ins.Categories[i].badgeNum = TaskItems.Count;
-                    if (TaskItems.Count > 0)
-                    {
-                        MainPage.ins.Categories[i].opacity = 1f;
-                    }
-                    else
-                    {
-                        MainPage.ins.Categories[i].opacity = 0f;
-                    }
-                }
-            }
+            //for (int i = 0; i < MainPage.ins.Categories.Count; i++)
+            //{
+            //    if (MainPage.ins.Categories[i].Tag == (string)this.Tag)
+            //    {
+            //        MainPage.ins.Categories[i].badgeNum = TaskItems.Count;
+            //        if (TaskItems.Count > 0)
+            //        {
+            //            MainPage.ins.Categories[i].opacity = 1f;
+            //        }
+            //        else
+            //        {
+            //            MainPage.ins.Categories[i].opacity = 0f;
+            //        }
+            //    }
+            //}
 
         }
 
@@ -484,8 +428,8 @@ namespace To_Do.NavigationPages
             if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse || e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
             {
                 var c = sender as Control;
-                var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-                var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+                var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
+                var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
                 panel.Translation = System.Numerics.Vector3.Zero;
                 panel.Opacity = 1;
                 block.Translation = System.Numerics.Vector3.Zero;
@@ -495,43 +439,19 @@ namespace To_Do.NavigationPages
         private void UserControl_PointerExited(object sender, PointerRoutedEventArgs e)
         {
             var c = sender as Control;
-            var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-            var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+            var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
+            var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
             panel.Translation = new System.Numerics.Vector3(0, 20, 0);
             panel.Opacity = 0;
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
-        }
-
-        public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
-        {
-
-            if (parent == null) return null;
-
-            if (parent.GetType() == targetType && ((T)parent).Name == ControlName)
-            {
-                return (T)parent;
-            }
-            T result = null;
-            int count = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < count; i++)
-            {
-                UIElement child = (UIElement)VisualTreeHelper.GetChild(parent, i);
-
-                if (FindControl<T>(child, targetType, ControlName) != null)
-                {
-                    result = FindControl<T>(child, targetType, ControlName);
-                    break;
-                }
-            }
-            return result;
         }
 
         private void CheckBox_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
             var c = cb.DataContext as Control;
-            var panel = FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-            var block = FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+            var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
+            var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
             panel.Translation = new System.Numerics.Vector3(0, 20, 0);
             panel.Opacity = 0;
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
@@ -563,6 +483,12 @@ namespace To_Do.NavigationPages
                                     select task;
                         list = query.ToList();
                         break;
+                    case "Completed":
+                        var q = from task in list
+                                orderby !task.IsCompleted
+                                select task;
+                        list = q.ToList();
+                        break;
                     default:
                         break;
                 }
@@ -580,6 +506,7 @@ namespace To_Do.NavigationPages
                 opt1.IsChecked = false;
                 opt2.IsChecked = false;
                 opt3.IsChecked = false;
+                opt4.IsChecked = false;
             }
         }
 
@@ -587,25 +514,25 @@ namespace To_Do.NavigationPages
         {
             CheckBox cb = sender as CheckBox;
             var c = cb.DataContext as Control;
-            var strip = FindControl<Grid>(c, typeof(Grid), "rect");
-            var delbtn = FindControl<Button>(c, typeof(Button), "delsubtask");
+            var strip = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "rect");
+            var delbtn = UtilityFunctions.FindControl<Button>(c, typeof(Button), "delsubtask");
             delbtn.Translation = new System.Numerics.Vector3(50, 0, 0);
             delbtn.Opacity = 0;
             strip.Opacity = 0;
-            var back = FindControl<Grid>(c, typeof(Grid), "backplate");
+            var back = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "backplate");
             back.Opacity = 0;
         }
 
         private void SubTaskPointerExited(object sender, PointerRoutedEventArgs e)
         {
             var c = sender as Control;
-            var strip = FindControl<Grid>(c, typeof(Grid), "rect");
+            var strip = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "rect");
             strip.Opacity = 0;
-            var delbtn = FindControl<Button>(c, typeof(Button), "delsubtask");
+            var delbtn = UtilityFunctions.FindControl<Button>(c, typeof(Button), "delsubtask");
             delbtn.Translation = new System.Numerics.Vector3(50, 0, 0);
             delbtn.Opacity = 0;
 
-            var back = FindControl<Grid>(c, typeof(Grid), "backplate");
+            var back = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "backplate");
             back.Opacity = 0;
         }
 
@@ -614,14 +541,14 @@ namespace To_Do.NavigationPages
             if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse || e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
             {
                 var c = sender as Control;
-                var strip = FindControl<Grid>(c, typeof(Grid), "rect");
-                var delbtn = FindControl<Button>(c, typeof(Button), "delsubtask");
+                var strip = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "rect");
+                var delbtn = UtilityFunctions.FindControl<Button>(c, typeof(Button), "delsubtask");
                 delbtn.Translation = System.Numerics.Vector3.Zero;
                 delbtn.Opacity = 1;
                 strip.Opacity = 1;
 
 
-                var back = FindControl<Grid>(c, typeof(Grid), "backplate");
+                var back = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "backplate");
                 back.Opacity = 0.2f;
             }
         }
@@ -630,11 +557,11 @@ namespace To_Do.NavigationPages
         {
             Button cb = sender as Button;
             var c = cb.DataContext as Control;
-            var strip = FindControl<Grid>(c, typeof(Grid), "rect");
+            var strip = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "rect");
             cb.Translation = new System.Numerics.Vector3(50, 0, 0);
             cb.Opacity = 0;
             strip.Opacity = 0;
-            var back = FindControl<Grid>(c, typeof(Grid), "backplate");
+            var back = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "backplate");
             back.Opacity = 0;
         }
 
@@ -677,6 +604,19 @@ namespace To_Do.NavigationPages
             Sort((string)SortingDropDown.Content);
         }
 
+        private void TaskDesc_Loaded(object sender, RoutedEventArgs e)
+        {
+            var textBlock = sender as TextBlock;
+            CheckBox cb = (CheckBox)textBlock.DataContext;
+            if ((bool)cb.IsChecked)
+            {
+                textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+            }
+            else
+            {
+                textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
+            }
+        }
     }
 
     public class TODOTask : INotifyPropertyChanged
@@ -684,6 +624,7 @@ namespace To_Do.NavigationPages
         private string description { get; set; }
         private string date { get; set; }
         private bool isStarred = false;
+        private bool isCompleted = false;
         private List<TODOTask> subTasks;
 
         public string Date
@@ -713,6 +654,16 @@ namespace To_Do.NavigationPages
             {
                 isStarred = value;
                 OnPropertyChanged("IsStarred");
+            }
+        }
+
+        public bool IsCompleted
+        {
+            get => isCompleted;
+            set
+            {
+                isCompleted = value;
+                OnPropertyChanged("IsCompleted");
             }
         }
 

@@ -57,7 +57,7 @@ namespace To_Do
             if (!string.IsNullOrEmpty(ListNameTextBox.Text) && !string.IsNullOrWhiteSpace(ListNameTextBox.Text))
             {
                 string extractTag = RemoveWhitespace(ListNameTextBox.Text).ToLower();
-                foreach (DefaultCategory item in MainPage.ins.Categories)
+                foreach (CustomNavViewItem item in MainPage.ins.Categories)
                 {
                     if (extractTag.Equals(item.Tag))
                     {
@@ -100,7 +100,7 @@ namespace To_Do
                 if (!string.IsNullOrEmpty(ListNameTextBox.Text) && !string.IsNullOrWhiteSpace(ListNameTextBox.Text))
                 {
                     string extractTag = RemoveWhitespace(ListNameTextBox.Text).ToLower();
-                    foreach (DefaultCategory item in MainPage.ins.Categories)
+                    foreach (CustomNavViewItem item in MainPage.ins.Categories)
                     {
                         if (extractTag.Equals(item.Tag))
                         {

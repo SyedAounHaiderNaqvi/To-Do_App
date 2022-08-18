@@ -418,7 +418,7 @@ namespace To_Do
                     BlurAmount = 8,
                     TintOpacity = 0.95,
                     BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                    TintColor = MainPage.ins.ChangeColorBrightness(bgcolor, false),
+                    TintColor = UtilityFunctions.ChangeColorBrightness(bgcolor, false),
                 };
 
                 Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
@@ -426,7 +426,7 @@ namespace To_Do
                     BlurAmount = 8,
                     TintOpacity = 0.9,
                     BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                    TintColor = MainPage.ins.ChangeColorBrightness(bgcolor, true),
+                    TintColor = UtilityFunctions.ChangeColorBrightness(bgcolor, true),
                 };
             }
             else
@@ -655,30 +655,6 @@ namespace To_Do
             return string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
         }
 
-        public static T FindControl<T>(UIElement parent, Type targetType, string ControlName) where T : FrameworkElement
-        {
-
-            if (parent == null) return null;
-
-            if (parent.GetType() == targetType && ((T)parent).Name == ControlName)
-            {
-                return (T)parent;
-            }
-            T result = null;
-            int count = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < count; i++)
-            {
-                UIElement child = (UIElement)VisualTreeHelper.GetChild(parent, i);
-
-                if (FindControl<T>(child, targetType, ControlName) != null)
-                {
-                    result = FindControl<T>(child, targetType, ControlName);
-                    break;
-                }
-            }
-            return result;
-        }
-
         private void TextBlock_Loaded(object sender, RoutedEventArgs e)
         {
             var txtb = sender as TextBlock;
@@ -729,13 +705,11 @@ namespace To_Do
         {
             // Fetching appropriate elements
             Grid parent = sender as Grid;
-            TextBlock block = VisualTreeHelper.GetChild(parent, 6) as TextBlock;
-            Border color = VisualTreeHelper.GetChild(parent, 2) as Border;
-            Grid Tri = VisualTreeHelper.GetChild(parent, 4) as Grid;
-            Grid transparentTri = VisualTreeHelper.GetChild(parent, 3) as Grid;
+            TextBlock block = VisualTreeHelper.GetChild(parent, 5) as TextBlock;
+            Grid Tri = VisualTreeHelper.GetChild(parent, 3) as Grid;
+            Grid transparentTri = VisualTreeHelper.GetChild(parent, 2) as Grid;
 
             // Animating them
-            color.Opacity = 0;
             block.Translation = new System.Numerics.Vector3(0, 20, 0);
             transparentTri.Translation = new System.Numerics.Vector3(-50, 0, 0);
             Tri.Translation = new System.Numerics.Vector3(-50, 0, 0);
@@ -745,18 +719,19 @@ namespace To_Do
         {
             // Fetching appropriate elements
             Grid parent = sender as Grid;
-            Grid transparentTriGrid = VisualTreeHelper.GetChild(parent, 3) as Grid;
-            Grid triGrid = VisualTreeHelper.GetChild(parent, 4) as Grid;
+            Grid colorGrid = VisualTreeHelper.GetChild(parent, 1) as Grid;
+            Grid transparentTriGrid = VisualTreeHelper.GetChild(parent, 2) as Grid;
+            Grid triGrid = VisualTreeHelper.GetChild(parent, 3) as Grid;
+            TextBlock block = VisualTreeHelper.GetChild(parent, 5) as TextBlock;
             Grid transparentTri = VisualTreeHelper.GetChild(transparentTriGrid, 0) as Grid;
             Grid tri = VisualTreeHelper.GetChild(triGrid, 0) as Grid;
-            TextBlock block = VisualTreeHelper.GetChild(parent, 6) as TextBlock;
-            Border color = VisualTreeHelper.GetChild(parent, 2) as Border;
 
             // Fetching hovered item's backend class
             var gridThemeItemInstance = parent.DataContext as GridThemeItem;
             Brush brushToUse;
             if (ThemeHelper.IsDarkTheme())
             {
+                colorGrid.Background = gridThemeItemInstance.darkThemeVariant.backgroundBrush;
                 brushToUse = gridThemeItemInstance.darkThemeVariant.borderBrush;
             }
             else
@@ -764,10 +739,12 @@ namespace To_Do
                 // Set color to light background one, if foreground is white
                 if ((gridThemeItemInstance.borderBrush as SolidColorBrush).Color == Colors.White)
                 {
+                    colorGrid.Background = gridThemeItemInstance.borderBrush;
                     brushToUse = gridThemeItemInstance.backgroundBrush;
                 }
                 else
                 {
+                    colorGrid.Background = gridThemeItemInstance.backgroundBrush;
                     brushToUse = gridThemeItemInstance.borderBrush;
                 }
             }
@@ -777,7 +754,6 @@ namespace To_Do
 
             // Animating implicitly appropriate elements
             block.Translation = System.Numerics.Vector3.Zero;
-            color.Opacity = 0.7;
             transparentTriGrid.Translation = System.Numerics.Vector3.Zero;
             triGrid.Translation = System.Numerics.Vector3.Zero;
 

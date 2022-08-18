@@ -38,11 +38,6 @@ namespace To_Do
             jl1.GroupName = "Quick Actions";
             jumpList.Items.Add(jl1);
 
-            JumpListItem jl2 = JumpListItem.CreateWithArguments("GoToCompleted", "Completed Tasks");
-            jl2.Logo = new Uri("ms-appx:///Images/complete.png");
-            jl2.GroupName = "Quick Actions";
-            jumpList.Items.Add(jl2);
-
             JumpListItem jl3 = JumpListItem.CreateWithArguments("GoToSettings", "Settings");
             jl3.Logo = new Uri("ms-appx:///Images/settingsIcon.png");
             jl3.GroupName = "Quick Actions";
@@ -54,7 +49,6 @@ namespace To_Do
         async void JumplistTransferCode(LaunchActivatedEventArgs e)
         {
             MainPage.ins.ContentFrame.Navigate(typeof(pendingtasks));
-            MainPage.ins.ContentFrame.Navigate(typeof(completedtasks));
             MainPage.ins.ContentFrame.Navigate(typeof(Settings));
 
             switch (e.Arguments)
@@ -63,14 +57,6 @@ namespace To_Do
                     MainPage.ins.ContentFrame.Navigate(typeof(pendingtasks));
                     await Task.Delay(10);
                     MainPage.ins.nview.SelectedItem = MainPage.ins.Categories[0];
-                    break;
-                case "GoToCompleted":
-                    while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(completedtasks))
-                    {
-                        MainPage.ins.ContentFrame.Navigate(typeof(completedtasks));
-                    }
-                    await Task.Delay(10);
-                    MainPage.ins.nview.SelectedItem = MainPage.ins.Categories[1];
                     break;
                 case "GoToSettings":
                     while (MainPage.ins.ContentFrame.CurrentSourcePageType != typeof(Settings))
