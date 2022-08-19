@@ -83,9 +83,11 @@
                     
                     <!--<Image Source="{x:Bind imgSource}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
                     <Grid VerticalAlignment="Top" CornerRadius="{ThemeResource ControlCornerRadius}">
-                        
+
+                        <Border Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Height="60" Background="#abeeeeee"/>
                         <Border Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Height="60" Background="{x:Bind backgroundBrush}"/>
                         <Border Margin="40,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="50" Height="5"  Background="#eeeeee"/>
+                        <Polygon Points="40,60 150,60 150,105, 40,105" Stroke="Transparent" Fill="#3b3b3b"/>
                         <Polygon Points="40,60 150,60 150,105, 40,105" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.backgroundBrush}"/>
                         <Polygon Points="0,0 40,0 40,60, 0,60" Stroke="Transparent" Fill="#eeeeee"/>
                         <Polygon Points="0,60 40,60 40,105, 0,105" Stroke="Transparent" Fill="#3c3c3c"/>
@@ -294,7 +296,7 @@
                     </Border>
                     
                     <!--DISABLED OPTION BELOW-->
-                    <Border Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                    <!--<Border Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="170" Width="*"/>
@@ -313,7 +315,7 @@
                                 <ComboBoxItem Content="Slide from right"/>
                             </ComboBox>
                         </Grid>
-                    </Border>
+                    </Border>-->
                     <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>

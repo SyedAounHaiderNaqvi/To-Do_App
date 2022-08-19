@@ -212,9 +212,10 @@ namespace To_Do
                 byte bgR = (byte)localSettings.Values["BG_R"];
                 byte bgG = (byte)localSettings.Values["BG_G"];
                 byte bgB = (byte)localSettings.Values["BG_B"];
+                byte bgA = (byte)localSettings.Values["BG_A"];
                 int canUseMonet = (int)localSettings.Values["usemonet"];
 
-                Color bgColor = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
+                Color bgColorThatIsOpaque = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
                 Application.Current.Resources["SystemAccentColorDark1"] = new Color() { A = 255, R = a1R, G = a1G, B = a1B };
                 Application.Current.Resources["SystemAccentColorDark2"] = new Color() { A = 255, R = a2R, G = a2G, B = a2B };
                 Application.Current.Resources["SystemAccentColorLight2"] = (Color)Application.Current.Resources["SystemAccentColorDark2"] == Colors.White ? Application.Current.Resources["SystemAccentColorDark1"] : Application.Current.Resources["SystemAccentColorDark2"];
@@ -274,7 +275,7 @@ namespace To_Do
                             BlurAmount = 8,
                             TintOpacity = 0.95,
                             BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                            TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, false),
+                            TintColor = UtilityFunctions.ChangeColorBrightness(bgColorThatIsOpaque, false),
                         };
 
                         Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
@@ -282,7 +283,7 @@ namespace To_Do
                             BlurAmount = 8,
                             TintOpacity = 0.9,
                             BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                            TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, true),
+                            TintColor = UtilityFunctions.ChangeColorBrightness(bgColorThatIsOpaque, true),
                         };
                         break;
                     default:
@@ -293,11 +294,12 @@ namespace To_Do
                 Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
 
                 //a is 150
-                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = bgR, G = bgG, B = bgB });
-                titleBar.ForegroundColor = bgColor;
-                titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColor"];//ThemeHelper.IsDarkTheme() ? new Color() { A = 255, R = a2R, G = a2G, B = a2B } : bgColor;
+                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = bgA, R = bgR, G = bgG, B = bgB });
+                titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColorDark2"];
+                titleBar.ForegroundColor = titleBar.ButtonHoverBackgroundColor;
 
                 titleBar.ButtonHoverForegroundColor = Colors.White;
+
                 titleBar.ButtonPressedBackgroundColor = ((SolidColorBrush)Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"]).Color;//new Color() { A = 255, R = a2R, G = a2G, B = a2B };
             }
             else
@@ -305,15 +307,15 @@ namespace To_Do
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
                 Application.Current.Resources["SystemAccentColorDark1"] = fallBackPurple;
                 Application.Current.Resources["SystemAccentColorDark2"] = Colors.White;
-                Application.Current.Resources["SystemAccentColorLight2"] = (Color)Application.Current.Resources["SystemAccentColorDark2"] == Colors.White ? Application.Current.Resources["SystemAccentColorDark1"] : Application.Current.Resources["SystemAccentColorDark2"];
-                Application.Current.Resources["SystemAccentColor"] = ThemeHelper.IsDarkTheme() ? (Color)Application.Current.Resources["SystemAccentColorLight2"] : (Color)Application.Current.Resources["SystemAccentColorDark1"];
+                Application.Current.Resources["SystemAccentColorLight2"] = Application.Current.Resources["SystemAccentColorDark1"];
+                Application.Current.Resources["SystemAccentColor"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
 
                 Application.Current.Resources["NavigationViewItemForegroundSelected"] = Application.Current.Resources["SystemAccentColor"];
                 Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = Application.Current.Resources["SystemAccentColor"];
                 Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = Application.Current.Resources["SystemAccentColor"];
 
                 Color bgColor = fallBackPurple;
-                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = fallBackPurple.R, G = fallBackPurple.G, B = fallBackPurple.B });
+                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(fallBackPurple);
                 titleBar.ForegroundColor = bgColor;
                 titleBar.ButtonHoverBackgroundColor = bgColor;
                 titleBar.ButtonHoverForegroundColor = Colors.White;

@@ -14,10 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using Microsoft.UI.Xaml.Controls;
 using System.Linq;
-using Windows.UI.Xaml.Controls.Primitives;
 using System.Diagnostics;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Data;
 
 namespace To_Do
 {

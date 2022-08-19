@@ -12,7 +12,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using Microsoft.Toolkit.Uwp.UI.Media;
 
 namespace To_Do
 {
@@ -30,7 +29,7 @@ namespace To_Do
             Loaded += Settings_Loaded;
             ins = this;
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
-            navStyleCombo.SelectedIndex = MainPage.ins.indexToParse;
+            //navStyleCombo.SelectedIndex = MainPage.ins.indexToParse;
             LoadGridItems();
         }
 
@@ -166,92 +165,96 @@ namespace To_Do
             }
         }
 
-        private GridThemeItem CreateNewTheme(byte borderR, byte borderG, byte borderB, byte bgR, byte bgG, byte bgB)
+        private GridThemeItem CreateNewTheme(byte borderR, byte borderG, byte borderB, byte bgR, byte bgG, byte bgB, byte bgA)
         {
-            return new GridThemeItem(new SolidColorBrush(Color.FromArgb(255, borderR, borderG, borderB)), new SolidColorBrush(Color.FromArgb(255, bgR, bgG, bgB)));
+            return new GridThemeItem(new SolidColorBrush(Color.FromArgb(255, borderR, borderG, borderB)), new SolidColorBrush(Color.FromArgb(bgA, bgR, bgG, bgB)));
         }
 
         void LoadGridItems()
         {
-            var lavender = CreateNewTheme(255, 255, 255, 103, 123, 202);
-            lavender.darkThemeVariant = CreateNewTheme(150, 173, 255, 44, 57, 107);
+            var lavender = CreateNewTheme(255, 255, 255, 103, 123, 202, 255);
+            lavender.darkThemeVariant = CreateNewTheme(150, 173, 255, 44, 57, 107, 255);
             lavender.tooltip = "Lush Lavender";
 
-            var pink = CreateNewTheme(255, 255, 255, 171, 107, 173);
-            pink.darkThemeVariant = CreateNewTheme(227, 100, 232, 57, 13, 59);
+            var pink = CreateNewTheme(255, 255, 255, 171, 107, 173, 255);
+            pink.darkThemeVariant = CreateNewTheme(227, 100, 232, 57, 13, 59, 255);
             pink.tooltip = "Pretty Pink";
 
-            var red = CreateNewTheme(255, 255, 255, 211, 92, 124);
-            red.darkThemeVariant = CreateNewTheme(222, 71, 71, 46, 0, 0);
+            var red = CreateNewTheme(255, 255, 255, 211, 92, 124, 255);
+            red.darkThemeVariant = CreateNewTheme(222, 71, 71, 46, 0, 0, 255);
             red.tooltip = "Rich Red";
 
-            var orange = CreateNewTheme(255, 255, 255, 218, 98, 94);
-            orange.darkThemeVariant = CreateNewTheme(227, 115, 59, 66, 22, 0);
+            var orange = CreateNewTheme(255, 255, 255, 218, 98, 94, 255);
+            orange.darkThemeVariant = CreateNewTheme(227, 115, 59, 66, 22, 0, 255);
             orange.tooltip = "Bright Orange";
 
-            var green = CreateNewTheme(255, 255, 255, 62, 149, 110);
-            green.darkThemeVariant = CreateNewTheme(50, 227, 103, 0, 54, 30);
+            var green = CreateNewTheme(255, 255, 255, 62, 149, 110, 255);
+            green.darkThemeVariant = CreateNewTheme(50, 227, 103, 0, 54, 30, 255);
             green.tooltip = "Natural Green";
 
-            var aqua = CreateNewTheme(255, 255, 255, 56, 145, 140);
-            aqua.darkThemeVariant = CreateNewTheme(49, 214, 207, 0, 48, 46);
+            var aqua = CreateNewTheme(255, 255, 255, 56, 145, 140, 255);
+            aqua.darkThemeVariant = CreateNewTheme(49, 214, 207, 0, 48, 46, 255);
             aqua.tooltip = "Cool Aqua";
 
-            var grey = CreateNewTheme(255, 255, 255, 123, 137, 148);
-            grey.darkThemeVariant = CreateNewTheme(137, 157, 173, 29, 34, 38);
+            var grey = CreateNewTheme(255, 255, 255, 123, 137, 148, 255);
+            grey.darkThemeVariant = CreateNewTheme(137, 157, 173, 29, 34, 38, 255);
             grey.tooltip = "Dull Grey";
 
-            var blueTwoTone = CreateNewTheme(60, 108, 176, 223, 237, 249);
-            blueTwoTone.darkThemeVariant = CreateNewTheme(51, 163, 255, 0, 0, 0);
+            var blueTwoTone = CreateNewTheme(60, 108, 176, 223, 237, 249, 255);
+            blueTwoTone.darkThemeVariant = CreateNewTheme(51, 163, 255, 0, 0, 0, 255);
             blueTwoTone.tooltip = "Navy Blue";
 
-            var purpleTwoTone = CreateNewTheme(132, 92, 154, 242, 231, 249);
-            purpleTwoTone.darkThemeVariant = CreateNewTheme(191, 104, 237, 0, 0, 0);
+            var purpleTwoTone = CreateNewTheme(132, 92, 154, 242, 231, 249, 255);
+            purpleTwoTone.darkThemeVariant = CreateNewTheme(191, 104, 237, 0, 0, 0, 255);
             purpleTwoTone.tooltip = "Royal Purple";
 
-            var redTwoTone = CreateNewTheme(190, 94, 122, 255, 228, 233);
-            redTwoTone.darkThemeVariant = CreateNewTheme(250, 57, 57, 0, 0, 0);
+            var redTwoTone = CreateNewTheme(190, 94, 122, 255, 228, 233, 255);
+            redTwoTone.darkThemeVariant = CreateNewTheme(250, 57, 57, 0, 0, 0, 255);
             redTwoTone.tooltip = "Cold Red";
 
-            var orangeTwoTone = CreateNewTheme(178, 86, 62, 249, 232, 222);
-            orangeTwoTone.darkThemeVariant = CreateNewTheme(237, 113, 59, 0, 0, 0);
+            var orangeTwoTone = CreateNewTheme(178, 86, 62, 249, 232, 222, 255);
+            orangeTwoTone.darkThemeVariant = CreateNewTheme(237, 113, 59, 0, 0, 0, 255);
             orangeTwoTone.tooltip = "Citrus-y";
 
-            var discord = CreateNewTheme(71, 82, 196, 242, 243, 245);
-            discord.darkThemeVariant = CreateNewTheme(104, 116, 242, 35, 37, 43);
+            var discord = CreateNewTheme(71, 82, 196, 242, 243, 245, 255);
+            discord.darkThemeVariant = CreateNewTheme(104, 116, 242, 35, 37, 43, 255);
             discord.tooltip = "Discord";
 
-            var saphire = CreateNewTheme(40, 62, 97, 119, 161, 197);
-            saphire.darkThemeVariant = CreateNewTheme(133, 165, 194, 42, 54, 76);
+            var saphire = CreateNewTheme(40, 62, 97, 119, 161, 197, 255);
+            saphire.darkThemeVariant = CreateNewTheme(133, 165, 194, 42, 54, 76, 255);
             saphire.tooltip = "Sapphire";
 
-            var kimbie = CreateNewTheme(162, 125, 109, 255, 236, 211);
-            kimbie.darkThemeVariant = CreateNewTheme(179, 87, 5, 31, 19, 5);
+            var kimbie = CreateNewTheme(162, 125, 109, 255, 236, 211, 255);
+            kimbie.darkThemeVariant = CreateNewTheme(179, 87, 5, 31, 19, 5, 255);
             kimbie.tooltip = "Kimbie";
 
-            var memory = CreateNewTheme(1, 1, 255, 255, 255, 255);
-            memory.darkThemeVariant = CreateNewTheme(180, 180, 180, 1, 1, 255);
+            var memory = CreateNewTheme(1, 1, 255, 255, 255, 255, 255);
+            memory.darkThemeVariant = CreateNewTheme(180, 180, 180, 1, 1, 255, 255);
             memory.tooltip = "Nostalgia";
 
-            var kde = CreateNewTheme(255, 255, 255, 61, 174, 233);
-            kde.darkThemeVariant = CreateNewTheme(61, 174, 233, 28, 38, 43);
+            var kde = CreateNewTheme(255, 255, 255, 61, 174, 233, 255);
+            kde.darkThemeVariant = CreateNewTheme(61, 174, 233, 28, 38, 43, 255);
             kde.tooltip = "KDE";
 
-            var orangeBlueTone = CreateNewTheme(0, 116, 163, 245, 231, 220);
-            orangeBlueTone.darkThemeVariant = CreateNewTheme(230, 122, 0, 10, 50, 92);
+            var orangeBlueTone = CreateNewTheme(0, 116, 163, 245, 231, 220, 255);
+            orangeBlueTone.darkThemeVariant = CreateNewTheme(230, 122, 0, 10, 50, 92, 255);
             orangeBlueTone.tooltip = "Beach";
 
-            var greenTwoTone = CreateNewTheme(51, 128, 96, 213, 241, 229);
-            greenTwoTone.darkThemeVariant = CreateNewTheme(50, 194, 101, 0, 0, 0);
+            var greenTwoTone = CreateNewTheme(51, 128, 96, 213, 241, 229, 255);
+            greenTwoTone.darkThemeVariant = CreateNewTheme(50, 194, 101, 0, 0, 0, 255);
             greenTwoTone.tooltip = "Fresher Green";
 
-            var aquaTwoTone = CreateNewTheme(40, 128, 133, 212, 255, 254);
-            aquaTwoTone.darkThemeVariant = CreateNewTheme(45, 207, 198, 0, 0, 0);
+            var aquaTwoTone = CreateNewTheme(40, 128, 133, 212, 255, 254, 255);
+            aquaTwoTone.darkThemeVariant = CreateNewTheme(45, 207, 198, 0, 0, 0, 255);
             aquaTwoTone.tooltip = "Another Aqua";
 
-            var greyTwoTone = CreateNewTheme(98, 110, 121, 231, 236, 240);
-            greyTwoTone.darkThemeVariant = CreateNewTheme(168, 180, 191, 0, 0, 0);
+            var greyTwoTone = CreateNewTheme(98, 110, 121, 231, 236, 240, 255);
+            greyTwoTone.darkThemeVariant = CreateNewTheme(168, 180, 191, 0, 0, 0, 255);
             greyTwoTone.tooltip = "Smoky Day";
+
+            var micaDefault = CreateNewTheme(60, 108, 176, 255, 255, 255, 0);
+            micaDefault.darkThemeVariant = CreateNewTheme(51, 163, 255, 20, 20, 20, 0);
+            micaDefault.tooltip = "Mica\u2122";
 
             gridItems.Add(lavender);
             gridItems.Add(pink);
@@ -274,12 +277,13 @@ namespace To_Do
             gridItems.Add(memory);
             gridItems.Add(kde);
             gridItems.Add(orangeBlueTone);
+            gridItems.Add(micaDefault);
 
         }
 
         private void navStyleCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            localSettings.Values["navStyle"] = navStyleCombo.SelectedIndex;
+            //localSettings.Values["navStyle"] = navStyleCombo.SelectedIndex;
         }
 
         void changecol(GridThemeItem item, bool chosenFromGrid, bool custom)
@@ -311,19 +315,26 @@ namespace To_Do
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
 
             //a is 150
-            Color bgcolor = ((SolidColorBrush)n.backgroundBrush).Color;
-            Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = 150, R = bgcolor.R, G = bgcolor.G, B = bgcolor.B });
+            Color bgcolorThatCanBeClear = ((SolidColorBrush)n.backgroundBrush).Color;
+            Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(bgcolorThatCanBeClear);
             titleBar.ButtonHoverForegroundColor = Colors.White;
-            localSettings.Values["BG_R"] = bgcolor.R;
-            localSettings.Values["BG_G"] = bgcolor.G;
-            localSettings.Values["BG_B"] = bgcolor.B;
+            localSettings.Values["BG_R"] = bgcolorThatCanBeClear.R;
+            localSettings.Values["BG_G"] = bgcolorThatCanBeClear.G;
+            localSettings.Values["BG_B"] = bgcolorThatCanBeClear.B;
+            localSettings.Values["BG_A"] = bgcolorThatCanBeClear.A;
 
-            Application.Current.Resources["SystemAccentColorDark1"] = ((SolidColorBrush)n.borderBrush).Color == Colors.White ? ((SolidColorBrush)n.backgroundBrush).Color : ((SolidColorBrush)n.borderBrush).Color;
+            Color bgcolorThatIsOpaque = new Color() { A=255, R = bgcolorThatCanBeClear.R, G = bgcolorThatCanBeClear.G, B = bgcolorThatCanBeClear.B };
+
+            Application.Current.Resources["SystemAccentColorDark1"] = ((SolidColorBrush)n.borderBrush).Color == Colors.White ? bgcolorThatIsOpaque : ((SolidColorBrush)n.borderBrush).Color;
             Application.Current.Resources["SystemAccentColorDark2"] = ((SolidColorBrush)n.borderBrush).Color;
-            titleBar.ButtonHoverBackgroundColor = ((SolidColorBrush)n.borderBrush).Color == Colors.White ? (Color)Application.Current.Resources["SystemAccentColorDark1"] : (Color)Application.Current.Resources["SystemAccentColorDark2"];//ThemeHelper.IsDarkTheme() ? ((SolidColorBrush)n.borderBrush).Color : ((SolidColorBrush)n.backgroundBrush).Color;
+            titleBar.ButtonHoverBackgroundColor = ((SolidColorBrush)n.borderBrush).Color == Colors.White ? Colors.White : (Color)Application.Current.Resources["SystemAccentColorDark2"];//ThemeHelper.IsDarkTheme() ? ((SolidColorBrush)n.borderBrush).Color : ((SolidColorBrush)n.backgroundBrush).Color;
             titleBar.ForegroundColor = titleBar.ButtonHoverBackgroundColor;
             Application.Current.Resources["SystemAccentColorLight2"] = ((SolidColorBrush)n.borderBrush).Color;
             Application.Current.Resources["SystemAccentColor"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
+            if (titleBar.ButtonHoverBackgroundColor == Colors.White)
+            {
+                titleBar.ButtonHoverForegroundColor = (Color)Application.Current.Resources["SystemAccentColor"];
+            }
 
             bool canUseMonet;
             if (localSettings.Values["usemonet"] != null)
@@ -346,7 +357,7 @@ namespace To_Do
             }
 
 
-            MonetToggleLogic(canUseMonet, bgcolor);
+            MonetToggleLogic(canUseMonet, new Color() { A=255, R=bgcolorThatCanBeClear.R, G=bgcolorThatCanBeClear.G,B=bgcolorThatCanBeClear.B});
 
             Application.Current.Resources["NavigationViewItemForegroundSelected"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
             Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
@@ -485,14 +496,14 @@ namespace To_Do
                 {
                     if ((int)localSettings.Values["colorindex"] == 666)
                     {
-                        Color lightthemebgcolor = Color.FromArgb(255, (byte)localSettings.Values["tempLightBG_R"], (byte)localSettings.Values["tempLightBG_G"], (byte)localSettings.Values["tempLightBG_B"]);
+                        Color lightthemebgcolor = Color.FromArgb((byte)localSettings.Values["tempLightBG_A"], (byte)localSettings.Values["tempLightBG_R"], (byte)localSettings.Values["tempLightBG_G"], (byte)localSettings.Values["tempLightBG_B"]);
                         Color lightthemeaccentcolor = Color.FromArgb(255, (byte)localSettings.Values["tempLightACCENT_R"], (byte)localSettings.Values["tempLightACCENT_G"], (byte)localSettings.Values["tempLightACCENT_B"]);
 
-                        Color darkthemebgcolor = Color.FromArgb(255, (byte)localSettings.Values["tempDarkBG_R"], (byte)localSettings.Values["tempDarkBG_G"], (byte)localSettings.Values["tempDarkBG_B"]);
+                        Color darkthemebgcolor = Color.FromArgb((byte)localSettings.Values["tempDarkBG_A"], (byte)localSettings.Values["tempDarkBG_R"], (byte)localSettings.Values["tempDarkBG_G"], (byte)localSettings.Values["tempDarkBG_B"]);
                         Color darkthemeaccentcolor = Color.FromArgb(255, (byte)localSettings.Values["tempDarkACCENT_R"], (byte)localSettings.Values["tempDarkACCENT_G"], (byte)localSettings.Values["tempDarkACCENT_B"]);
 
-                        var custom = CreateNewTheme(lightthemeaccentcolor.R, lightthemeaccentcolor.G, lightthemeaccentcolor.B, lightthemebgcolor.R, lightthemebgcolor.G, lightthemebgcolor.B);
-                        custom.darkThemeVariant = CreateNewTheme(darkthemeaccentcolor.R, darkthemeaccentcolor.G, darkthemeaccentcolor.B, darkthemebgcolor.R, darkthemebgcolor.G, darkthemebgcolor.B);
+                        var custom = CreateNewTheme(lightthemeaccentcolor.R, lightthemeaccentcolor.G, lightthemeaccentcolor.B, lightthemebgcolor.R, lightthemebgcolor.G, lightthemebgcolor.B, lightthemebgcolor.A);
+                        custom.darkThemeVariant = CreateNewTheme(darkthemeaccentcolor.R, darkthemeaccentcolor.G, darkthemeaccentcolor.B, darkthemebgcolor.R, darkthemebgcolor.G, darkthemebgcolor.B, darkthemebgcolor.A);
                         custom.tooltip = "Custom";
                         changecol(custom, false, true);
 
@@ -657,14 +668,14 @@ namespace To_Do
             ContentDialogResult result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                Color lightthemebgcolor = Color.FromArgb(255, (byte)localSettings.Values["tempLightBG_R"], (byte)localSettings.Values["tempLightBG_G"], (byte)localSettings.Values["tempLightBG_B"]);
+                Color lightthemebgcolor = Color.FromArgb((byte)localSettings.Values["tempLightBG_A"], (byte)localSettings.Values["tempLightBG_R"], (byte)localSettings.Values["tempLightBG_G"], (byte)localSettings.Values["tempLightBG_B"]);
                 Color lightthemeaccentcolor = Color.FromArgb(255, (byte)localSettings.Values["tempLightACCENT_R"], (byte)localSettings.Values["tempLightACCENT_G"], (byte)localSettings.Values["tempLightACCENT_B"]);
 
-                Color darkthemebgcolor = Color.FromArgb(255, (byte)localSettings.Values["tempDarkBG_R"], (byte)localSettings.Values["tempDarkBG_G"], (byte)localSettings.Values["tempDarkBG_B"]);
+                Color darkthemebgcolor = Color.FromArgb((byte)localSettings.Values["tempDarkBG_A"], (byte)localSettings.Values["tempDarkBG_R"], (byte)localSettings.Values["tempDarkBG_G"], (byte)localSettings.Values["tempDarkBG_B"]);
                 Color darkthemeaccentcolor = Color.FromArgb(255, (byte)localSettings.Values["tempDarkACCENT_R"], (byte)localSettings.Values["tempDarkACCENT_G"], (byte)localSettings.Values["tempDarkACCENT_B"]);
 
-                var custom = CreateNewTheme(lightthemeaccentcolor.R, lightthemeaccentcolor.G, lightthemeaccentcolor.B, lightthemebgcolor.R, lightthemebgcolor.G, lightthemebgcolor.B);
-                custom.darkThemeVariant = CreateNewTheme(darkthemeaccentcolor.R, darkthemeaccentcolor.G, darkthemeaccentcolor.B, darkthemebgcolor.R, darkthemebgcolor.G, darkthemebgcolor.B);
+                var custom = CreateNewTheme(lightthemeaccentcolor.R, lightthemeaccentcolor.G, lightthemeaccentcolor.B, lightthemebgcolor.R, lightthemebgcolor.G, lightthemebgcolor.B, lightthemebgcolor.A);
+                custom.darkThemeVariant = CreateNewTheme(darkthemeaccentcolor.R, darkthemeaccentcolor.G, darkthemeaccentcolor.B, darkthemebgcolor.R, darkthemebgcolor.G, darkthemebgcolor.B, darkthemebgcolor.A);
                 custom.tooltip = "Custom";
 
                 changecol(custom, false, true);
@@ -709,8 +720,20 @@ namespace To_Do
             Brush brushToUse;
             if (ThemeHelper.IsDarkTheme())
             {
-                colorGrid.Background = gridThemeItemInstance.darkThemeVariant.backgroundBrush;
                 brushToUse = gridThemeItemInstance.darkThemeVariant.borderBrush;
+                if (((SolidColorBrush)gridThemeItemInstance.darkThemeVariant.backgroundBrush).Color.A.Equals(0))
+                {
+                    //fallback
+                    colorGrid.Background = new SolidColorBrush(new Color() { 
+                        A = 255,
+                        R = ((SolidColorBrush)gridThemeItemInstance.darkThemeVariant.backgroundBrush).Color.R,
+                        G = ((SolidColorBrush)gridThemeItemInstance.darkThemeVariant.backgroundBrush).Color.G,
+                        B = ((SolidColorBrush)gridThemeItemInstance.darkThemeVariant.backgroundBrush).Color.B
+                    });
+                } else
+                {
+                    colorGrid.Background = gridThemeItemInstance.darkThemeVariant.backgroundBrush;
+                }
             }
             else
             {
@@ -722,8 +745,23 @@ namespace To_Do
                 }
                 else
                 {
-                    colorGrid.Background = gridThemeItemInstance.backgroundBrush;
                     brushToUse = gridThemeItemInstance.borderBrush;
+
+                    if (((SolidColorBrush)gridThemeItemInstance.backgroundBrush).Color.A.Equals(0))
+                    {
+                        //fallback
+                        colorGrid.Background = new SolidColorBrush(new Color()
+                        {
+                            A = 255,
+                            R = ((SolidColorBrush)gridThemeItemInstance.backgroundBrush).Color.R,
+                            G = ((SolidColorBrush)gridThemeItemInstance.backgroundBrush).Color.G,
+                            B = ((SolidColorBrush)gridThemeItemInstance.backgroundBrush).Color.B
+                        });
+                    }
+                    else
+                    {
+                        colorGrid.Background = gridThemeItemInstance.backgroundBrush;
+                    }
                 }
             }
             // Here, we set dark or light colors of hover triangles depending on theme

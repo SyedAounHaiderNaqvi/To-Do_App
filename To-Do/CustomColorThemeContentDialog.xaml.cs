@@ -3,8 +3,6 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace To_Do
 {
     public sealed partial class CustomColorThemeContentDialog : ContentDialog
@@ -43,6 +41,7 @@ namespace To_Do
             localSettings.Values["tempLightBG_R"] = lightBGColorPicker.Color.R;
             localSettings.Values["tempLightBG_G"] = lightBGColorPicker.Color.G;
             localSettings.Values["tempLightBG_B"] = lightBGColorPicker.Color.B;
+            localSettings.Values["tempLightBG_A"] = lightBGColorPicker.Color.A;
 
             localSettings.Values["tempLightACCENT_R"] = lightaccentColorPicker.Color.R;
             localSettings.Values["tempLightACCENT_G"] = lightaccentColorPicker.Color.G;
@@ -51,6 +50,7 @@ namespace To_Do
             localSettings.Values["tempDarkBG_R"] = darkBGColorPicker.Color.R;
             localSettings.Values["tempDarkBG_G"] = darkBGColorPicker.Color.G;
             localSettings.Values["tempDarkBG_B"] = darkBGColorPicker.Color.B;
+            localSettings.Values["tempDarkBG_A"] = darkBGColorPicker.Color.A;
 
             localSettings.Values["tempDarkACCENT_R"] = darkaccentColorPicker.Color.R;
             localSettings.Values["tempDarkACCENT_G"] = darkaccentColorPicker.Color.G;
@@ -61,9 +61,9 @@ namespace To_Do
         {
             if (localSettings.Values["tempLightBG_R"] != null)
             {
-                lightBGColorPicker.Color = Color.FromArgb(255, (byte)localSettings.Values["tempLightBG_R"], (byte)localSettings.Values["tempLightBG_G"], (byte)localSettings.Values["tempLightBG_B"]);
+                lightBGColorPicker.Color = Color.FromArgb((byte)localSettings.Values["tempLightBG_A"], (byte)localSettings.Values["tempLightBG_R"], (byte)localSettings.Values["tempLightBG_G"], (byte)localSettings.Values["tempLightBG_B"]);
                 lightaccentColorPicker.Color = Color.FromArgb(255, (byte)localSettings.Values["tempLightACCENT_R"], (byte)localSettings.Values["tempLightACCENT_G"], (byte)localSettings.Values["tempLightACCENT_B"]);
-                darkBGColorPicker.Color = Color.FromArgb(255, (byte)localSettings.Values["tempDarkBG_R"], (byte)localSettings.Values["tempDarkBG_G"], (byte)localSettings.Values["tempDarkBG_B"]);
+                darkBGColorPicker.Color = Color.FromArgb((byte)localSettings.Values["tempDarkBG_A"], (byte)localSettings.Values["tempDarkBG_R"], (byte)localSettings.Values["tempDarkBG_G"], (byte)localSettings.Values["tempDarkBG_B"]);
                 darkaccentColorPicker.Color = Color.FromArgb(255, (byte)localSettings.Values["tempDarkACCENT_R"], (byte)localSettings.Values["tempDarkACCENT_G"], (byte)localSettings.Values["tempDarkACCENT_B"]);
             } else
             {
