@@ -176,103 +176,82 @@ namespace To_Do
             var lavender = CreateNewTheme(255, 255, 255, 103, 123, 202);
             lavender.darkThemeVariant = CreateNewTheme(150, 173, 255, 44, 57, 107);
             lavender.tooltip = "Lush Lavender";
-            lavender.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Lavender.png"));
 
             var pink = CreateNewTheme(255, 255, 255, 171, 107, 173);
             pink.darkThemeVariant = CreateNewTheme(227, 100, 232, 57, 13, 59);
             pink.tooltip = "Pretty Pink";
-            pink.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_PrettyPink.png"));
 
             var red = CreateNewTheme(255, 255, 255, 211, 92, 124);
             red.darkThemeVariant = CreateNewTheme(222, 71, 71, 46, 0, 0);
             red.tooltip = "Rich Red";
-            red.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_SmoothCherry.png"));
 
             var orange = CreateNewTheme(255, 255, 255, 218, 98, 94);
             orange.darkThemeVariant = CreateNewTheme(227, 115, 59, 66, 22, 0);
             orange.tooltip = "Bright Orange";
-            orange.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_DefinitelyOrange.png"));
 
             var green = CreateNewTheme(255, 255, 255, 62, 149, 110);
             green.darkThemeVariant = CreateNewTheme(50, 227, 103, 0, 54, 30);
             green.tooltip = "Natural Green";
-            green.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_NaturalGreen.png"));
 
             var aqua = CreateNewTheme(255, 255, 255, 56, 145, 140);
             aqua.darkThemeVariant = CreateNewTheme(49, 214, 207, 0, 48, 46);
             aqua.tooltip = "Cool Aqua";
-            aqua.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_CoolAqua.png"));
 
             var grey = CreateNewTheme(255, 255, 255, 123, 137, 148);
             grey.darkThemeVariant = CreateNewTheme(137, 157, 173, 29, 34, 38);
             grey.tooltip = "Dull Grey";
-            grey.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_DullGrey.png"));
 
             var blueTwoTone = CreateNewTheme(60, 108, 176, 223, 237, 249);
             blueTwoTone.darkThemeVariant = CreateNewTheme(51, 163, 255, 0, 0, 0);
             blueTwoTone.tooltip = "Navy Blue";
-            blueTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_BlueButCooler.png"));
 
             var purpleTwoTone = CreateNewTheme(132, 92, 154, 242, 231, 249);
             purpleTwoTone.darkThemeVariant = CreateNewTheme(191, 104, 237, 0, 0, 0);
             purpleTwoTone.tooltip = "Royal Purple";
-            purpleTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_RoyalPurple.png"));
 
             var redTwoTone = CreateNewTheme(190, 94, 122, 255, 228, 233);
             redTwoTone.darkThemeVariant = CreateNewTheme(250, 57, 57, 0, 0, 0);
             redTwoTone.tooltip = "Cold Red";
-            redTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_CantGetEnoughRed.png"));
 
             var orangeTwoTone = CreateNewTheme(178, 86, 62, 249, 232, 222);
             orangeTwoTone.darkThemeVariant = CreateNewTheme(237, 113, 59, 0, 0, 0);
             orangeTwoTone.tooltip = "Citrus-y";
-            orangeTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Citrusy.png"));
 
             var discord = CreateNewTheme(71, 82, 196, 242, 243, 245);
             discord.darkThemeVariant = CreateNewTheme(104, 116, 242, 35, 37, 43);
             discord.tooltip = "Discord";
-            discord.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Discord.png"));
 
             var saphire = CreateNewTheme(40, 62, 97, 119, 161, 197);
             saphire.darkThemeVariant = CreateNewTheme(133, 165, 194, 42, 54, 76);
             saphire.tooltip = "Sapphire";
-            saphire.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Sapphire.png"));
 
             var kimbie = CreateNewTheme(162, 125, 109, 255, 236, 211);
             kimbie.darkThemeVariant = CreateNewTheme(179, 87, 5, 31, 19, 5);
             kimbie.tooltip = "Kimbie";
-            kimbie.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Kimbie.png"));
 
             var memory = CreateNewTheme(1, 1, 255, 255, 255, 255);
             memory.darkThemeVariant = CreateNewTheme(180, 180, 180, 1, 1, 255);
             memory.tooltip = "Nostalgia";
-            memory.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_Nostalgia.png"));
 
             var kde = CreateNewTheme(255, 255, 255, 61, 174, 233);
             kde.darkThemeVariant = CreateNewTheme(61, 174, 233, 28, 38, 43);
             kde.tooltip = "KDE";
-            kde.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_KDE.png"));
 
             var orangeBlueTone = CreateNewTheme(0, 116, 163, 245, 231, 220);
             orangeBlueTone.darkThemeVariant = CreateNewTheme(230, 122, 0, 10, 50, 92);
             orangeBlueTone.tooltip = "Beach";
-            orangeBlueTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_BeachAndInverse.png"));
 
             var greenTwoTone = CreateNewTheme(51, 128, 96, 213, 241, 229);
             greenTwoTone.darkThemeVariant = CreateNewTheme(50, 194, 101, 0, 0, 0);
             greenTwoTone.tooltip = "Fresher Green";
-            greenTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_YayGreen.png"));
 
             var aquaTwoTone = CreateNewTheme(40, 128, 133, 212, 255, 254);
             aquaTwoTone.darkThemeVariant = CreateNewTheme(45, 207, 198, 0, 0, 0);
             aquaTwoTone.tooltip = "Another Aqua";
-            aquaTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_AnotherAqua.png"));
 
             var greyTwoTone = CreateNewTheme(98, 110, 121, 231, 236, 240);
             greyTwoTone.darkThemeVariant = CreateNewTheme(168, 180, 191, 0, 0, 0);
             greyTwoTone.tooltip = "Smoky Day";
-            greyTwoTone.imgSource = new BitmapImage(new Uri("ms-appx:///Images/ItemTemplates/ItemTemplate_MoreDullGrey.png"));
-
 
             gridItems.Add(lavender);
             gridItems.Add(pink);
@@ -796,7 +775,6 @@ namespace To_Do
         public Brush backgroundBrush { get; set; }
         public GridThemeItem darkThemeVariant { get; set; }
         public string tooltip { get; set; }
-        public BitmapImage imgSource;
 
         public GridThemeItem(Brush _border, Brush _bg)
         {

@@ -938,7 +938,7 @@
                                                             </Grid.OpacityTransition>
                                                         </Grid>
                                                         <Grid Translation="0,10,0" Margin="-20,-10,-20,-10" x:Name="rect" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                            <Border BorderBrush="{ThemeResource SystemAccentColor}" CornerRadius="0" BorderThickness="0,0,0,4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                            <Border BorderBrush="{ThemeResource SystemAccentColor}" CornerRadius="0" BorderThickness="0,0,0,3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                                             </Border>
                                                             <Grid.TranslationTransition>
                                                                 <Vector3Transition Duration="0:0:0.2"/>

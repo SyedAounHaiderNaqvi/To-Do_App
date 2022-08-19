@@ -81,7 +81,33 @@
             <DataTemplate x:Key="ImageTemplate" x:DataType="local:GridThemeItem">
                 <Grid PointerEntered="ShowBlurredDetails" PointerExited="HideBlurredDetails" PointerCaptureLost="HideBlurredDetails" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Width="150" Height="105">
                     
-                    <Image Source="{x:Bind imgSource}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    <!--<Image Source="{x:Bind imgSource}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
+                    <Grid VerticalAlignment="Top" CornerRadius="{ThemeResource ControlCornerRadius}">
+                        
+                        <Border Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Height="60" Background="{x:Bind backgroundBrush}"/>
+                        <Border Margin="40,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="50" Height="5"  Background="#eeeeee"/>
+                        <Polygon Points="40,60 150,60 150,105, 40,105" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.backgroundBrush}"/>
+                        <Polygon Points="0,0 40,0 40,60, 0,60" Stroke="Transparent" Fill="#eeeeee"/>
+                        <Polygon Points="0,60 40,60 40,105, 0,105" Stroke="Transparent" Fill="#3c3c3c"/>
+                        <Polygon Fill="{x:Bind borderBrush}" Points="50,17 65,17 65,20 50,20"/>
+                        <Polygon Fill="#aaeeeeee" Points="50,45 140,45 140,55 50,55"/>
+                        <Polygon Fill="#aaeeeeee" Points="50,27 140,27 140,37 50,37"/>
+                        <Polygon Fill="#44888888" Points="50,65 140,65 140,75 50,75"/>
+                        <Polygon Fill="#44888888" Points="50,83 140,83 140,93 50,93"/>
+                        <Polygon Points="65,31 135,31 135,33 65,33" Fill="#000000"/>
+                        <Polygon Points="65,49 135,49 135,51 65,51" Fill="#000000"/>
+                        <Polygon Points="65,69 135,69 135,71 65,71" Fill="#ffffff"/>
+                        <Polygon Points="65,87 135,87 135,89 65,89" Fill="#ffffff"/>
+                        <Ellipse Margin="-27,80,10,10" Width="4" Height="4" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                        <Polygon Points="0,96 40,96 40,102 0,102" Fill="#22cccccc"/>
+                        <Polygon Points="2,97 3,97 3,101 2,101" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                        <Polygon Points="6,98 25,98 25,100 6,100" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                        <Polygon Points="6,8 25,8 25,10 6,10" Fill="#000000"/>
+                        <Polygon Points="6,16 29,16 29,18 6,18" Fill="#000000"/>
+                        <Border Margin="-27,30,10,10" VerticalAlignment="Top" Width="4" Height="4" BorderThickness="1" Background="Transparent" CornerRadius="4" BorderBrush="#000000"/>
+                        <Border Margin="-27,10,10,33" VerticalAlignment="Bottom" Width="4" Height="4" BorderThickness="1" Background="Transparent" CornerRadius="4" BorderBrush="#cccccc"/>
+                        <Ellipse Margin="-27,5,10,10" Width="4" Height="4" Fill="{x:Bind borderBrush}"/>
+                    </Grid>
                     <Grid x:Name="opacityGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <ani:Explicit.Animations>
                             <ani:AnimationSet x:Name="ColorifyAnimation">
@@ -260,8 +286,8 @@
                                 <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Accent color on backplate"/>
-                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use accent color on surfaces like searchbar and cards"/>
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Secondary color on backplate"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use secondary accent color on surfaces like searchbar"/>
                             </StackPanel>
                             <ToggleSwitch VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="MonetToggle" Toggled="OnMonetToggled"/>
                         </Grid>
