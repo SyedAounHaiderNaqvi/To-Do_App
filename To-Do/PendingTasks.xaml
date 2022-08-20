@@ -1009,7 +1009,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button Style="{StaticResource MonetButton}" Grid.Column="0" Width="32" VerticalAlignment="Stretch" Padding="0" Tag="Ascending Order View" x:Name="OrderButton" ToolTipService.ToolTip="{x:Bind OrderButton.Tag, Mode=OneWay}">
+                <!--DEBUGGGGGG-->
+                <Button Visibility="Collapsed" Style="{StaticResource MonetButton}" Grid.Column="0" Width="32" VerticalAlignment="Stretch" Padding="0" Tag="Ascending Order View" x:Name="OrderButton" ToolTipService.ToolTip="{x:Bind OrderButton.Tag, Mode=OneWay}">
                     <FontIcon FontSize="13" Glyph="&#xE74A;"/>
                 </Button>
 

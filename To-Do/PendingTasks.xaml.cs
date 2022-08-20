@@ -51,6 +51,8 @@ namespace To_Do
             listOfTasks.ItemsSource = TaskItems;
             listOfTasks.UpdateLayout();
             //UpdateBadge();
+            MainPage.ins.LoadingUI.Visibility = Visibility.Collapsed;
+            MainPage.ins.Ring.IsActive = false;
         }
         public void AddATask(TODOTask newTask)
         {
@@ -130,7 +132,6 @@ namespace To_Do
                 TaskItems = new ObservableCollection<TODOTask>();
                 listOfTasks.ItemsSource = TaskItems;
             }
-            MainPage.ins.initialLoadingUI.Visibility = Visibility.Collapsed;
         }
 
         private void listOfTasks_LayoutUpdated(object sender, object e)
@@ -225,6 +226,8 @@ namespace To_Do
             Sort("Date Created");
             base.OnNavigatedTo(e);
             finallyLoaded = true;
+            MainPage.ins.LoadingUI.Visibility = Visibility.Collapsed;
+            MainPage.ins.Ring.IsActive = false;
         }
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)

@@ -41,7 +41,6 @@ namespace To_Do
 
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public static MainPage ins;
-        public int indexToParse;
         public List<List<string>> tasksToParse = new List<List<string>>();
         public int PendingTasksCount = 0;
         bool canSearch = true;
@@ -57,9 +56,14 @@ namespace To_Do
             ins = this;
             folder = ApplicationData.Current.LocalFolder;
             Categories = new ObservableCollection<CustomNavViewItem>();
+            LoadingUI.Visibility = Visibility.Visible;
+            Ring.IsActive = true;
             Task.Run(() => LoadNavViewLists()).Wait();
             //Task.Run(() => DeletionOfUnnecessaryLists()).Wait();
             var currentTheme = ThemeHelper.RootTheme.ToString();
+            ImageInitialize();
+            RoundCornerInitialize();
+            LoadTheme();
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
             titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
@@ -69,23 +73,9 @@ namespace To_Do
             Window.Current.SetTitleBar(AppTitleBar);
             coreTitleBar.LayoutMetricsChanged += (s, a) => UpdateTitleBarLayout(s);
             coreTitleBar.IsVisibleChanged += CoreTitlebar_IsVisibleChanged;
-            ImageInitialize();
-            RoundCornerInitialize();
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
             TileUpdateManager.CreateTileUpdaterForApplication().Clear();
-            LoadTheme();
-            if (localSettings.Values["navStyle"] != null)
-            {
-                indexToParse = (int)localSettings.Values["navStyle"];
-            }
-            else
-            {
-                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
-                localSettings.Values["navStyle"] = 0;
-                indexToParse = 0;
-            }
             currentTheme = ThemeHelper.RootTheme.ToString();
-
             Waiter();
             parallax.Source = pendingtasks.instance.listOfTasks;
             LoseFocus(searchbox);
@@ -103,8 +93,8 @@ namespace To_Do
             ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
             await Task.Delay(10);
             ContentFrame.Navigate(typeof(pendingtasks), dataToParse, new SuppressNavigationTransitionInfo());
-            LoadingUI.Visibility = Visibility.Collapsed;
             nview.SelectedItem = Categories[0];
+
         }
 
         async Task LoadNavViewLists()
@@ -345,8 +335,6 @@ namespace To_Do
             }
         }
 
-        
-
         async void LoadIMG()
         {
             string token = (string)localSettings.Values["token"];
@@ -401,6 +389,8 @@ namespace To_Do
                     ContentFrame.Navigate(typeof(Settings));
                     nview.SelectedItem = nview.SettingsItem;
                     parallax.Source = Settings.ins.scroller;
+                    LoadingUI.Visibility = Visibility.Collapsed;
+                    Ring.IsActive = false;
                     break;
                 default:
                     break;
@@ -444,7 +434,6 @@ namespace To_Do
                 string dateJsonFile = JsonConvert.SerializeObject(savingDates);
                 string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
                 string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
-
 
                 rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
                 StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
@@ -874,29 +863,8 @@ namespace To_Do
 
         private async void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
+            Ring.IsActive = true;
             LoadingUI.Visibility = Visibility.Visible;
-            //int styleIndex = (int)localSettings.Values["navStyle"];
-            //switch (styleIndex)
-            //{
-            //    case 0:
-            //        info = new EntranceNavigationTransitionInfo();
-            //        break;
-            //    case 1:
-            //        info = new DrillInNavigationTransitionInfo();
-            //        break;
-            //    case 2:
-            //        info = new SuppressNavigationTransitionInfo();
-            //        break;
-            //    case 3:
-            //        info = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft };
-            //        break;
-            //    case 4:
-            //        info = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight };
-            //        break;
-            //    default:
-            //        info = new EntranceNavigationTransitionInfo();
-            //        break;
-            //}
             info = new SuppressNavigationTransitionInfo();
             Type pageType;
 
@@ -906,6 +874,8 @@ namespace To_Do
                 pageType = Type.GetType("To_Do.Settings");
                 ContentFrame.Navigate(pageType, null, info);
                 searchBoxGrid.Visibility = Visibility.Collapsed;
+                LoadingUI.Visibility = Visibility.Collapsed;
+                Ring.IsActive = false;
             }
             else
             {
@@ -922,7 +892,7 @@ namespace To_Do
                     ContentFrame.Navigate(pageType, dataToParse, info);
                 }
             }
-            LoadingUI.Visibility = Visibility.Collapsed;
+            
         }
 
         private void nview_DisplayModeChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewDisplayModeChangedEventArgs args)
@@ -1234,7 +1204,6 @@ namespace To_Do
 
         private async void DeleteList(object sender, RoutedEventArgs e)
         {
-            DEBUG_DeletePrompt.Visibility = Visibility.Visible;
             //hasNavigated = false;
             //nview.IsEnabled = false;
             //nview.IsEnabled = true;
@@ -1291,7 +1260,6 @@ namespace To_Do
                     }
                 }
             }
-            DEBUG_DeletePrompt.Visibility = Visibility.Collapsed;
             //CustomNavViewItem rootCat = parent.DataContext as CustomNavViewItem;
         }
     }

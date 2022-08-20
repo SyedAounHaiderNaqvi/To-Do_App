@@ -281,11 +281,6 @@ namespace To_Do
 
         }
 
-        private void navStyleCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //localSettings.Values["navStyle"] = navStyleCombo.SelectedIndex;
-        }
-
         void changecol(GridThemeItem item, bool chosenFromGrid, bool custom)
         {
             GridThemeItem n;
