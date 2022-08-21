@@ -942,7 +942,7 @@ namespace To_Do
                 });
             foreach (var item in matchingItems)
             {
-                string glyph = item.IsCompleted ? "\uE73E" : "\uF08F";
+                string glyph = item.IsCompleted ? "\uE73E" : "\uEA3A";
                 suggestions.Add(new QueryFormat(item.Description, currentPageName, glyph));
             }
 

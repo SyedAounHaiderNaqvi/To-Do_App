@@ -36,7 +36,7 @@
                         <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <FontIcon HorizontalAlignment="Left" FontSize="12" Grid.Column="0" Grid.RowSpan="2" Glyph="{x:Bind glyph}" Foreground="{ThemeResource SystemAccentColor}"/>
+                    <FontIcon HorizontalAlignment="Left" Margin="0,0,0,1" FontSize="14" Grid.Column="0" Grid.RowSpan="2" Glyph="{x:Bind glyph}" Foreground="{ThemeResource SystemAccentColor}"/>
                     <Grid HorizontalAlignment="Stretch" x:Name="t" Grid.Column="1" Margin="0,5,-5,0" Grid.Row="0">
                         <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{x:Bind Title}"/>
                     </Grid>

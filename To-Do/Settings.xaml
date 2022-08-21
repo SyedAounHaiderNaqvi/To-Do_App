@@ -76,11 +76,11 @@
             </Style>
             <media:AcrylicBrush x:Key="LightThemeBrush" BlurAmount="8" BackgroundSource="Backdrop" FallbackColor="#99ffffff" TintColor="White" TintOpacity="0.3"/>
             <media:AcrylicBrush x:Key="DarkThemeBrush" BlurAmount="8" BackgroundSource="Backdrop" FallbackColor="#99000000" TintColor="#101010" TintOpacity="0.6"/>
-            
+
 
             <DataTemplate x:Key="ImageTemplate" x:DataType="local:GridThemeItem">
                 <Grid PointerEntered="ShowBlurredDetails" PointerExited="HideBlurredDetails" PointerCaptureLost="HideBlurredDetails" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Width="150" Height="105">
-                    
+
                     <!--<Image Source="{x:Bind imgSource}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
                     <Grid VerticalAlignment="Top" CornerRadius="{ThemeResource ControlCornerRadius}">
 
@@ -110,27 +110,41 @@
                         <Border Margin="-27,10,10,33" VerticalAlignment="Bottom" Width="4" Height="4" BorderThickness="1" Background="Transparent" CornerRadius="4" BorderBrush="#cccccc"/>
                         <Ellipse Margin="-27,5,10,10" Width="4" Height="4" Fill="{x:Bind borderBrush}"/>
                     </Grid>
+                    <Grid x:Name="blurGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <media:UIElementExtensions.VisualFactory>
+                            <media:PipelineVisualFactory>
+                                <media:BlurEffect x:Name="ImageBlurEffect" IsAnimatable="True"/>
+                            </media:PipelineVisualFactory>
+                        </media:UIElementExtensions.VisualFactory>
+                    </Grid>
                     <Grid x:Name="opacityGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <ani:Explicit.Animations>
-                            <ani:AnimationSet x:Name="ColorifyAnimation">
-                                <ani:OpacityAnimation From="0"
-                                 To="0.9"
-                                 Duration="0:0:0.2"
-                                 EasingType="Linear"
-                                 EasingMode="EaseOut"/>
+                            <ani:AnimationSet x:Name="BlurAnimation">
+                                <ani:BlurEffectAnimation From="0"
+                                        To="4"
+                                        Duration="0:0:0.2"
+                                        EasingType="Linear"
+                                        Target="{Binding ElementName=ImageBlurEffect}"
+                                        EasingMode="EaseOut"/>
                             </ani:AnimationSet>
-                            <ani:AnimationSet x:Name="UnColorifyAnimation">
-                                <ani:OpacityAnimation From="0.9"
-                                 To="0"
-                                 Duration="0:0:0.2"
-                                 EasingType="Linear"
-                                 EasingMode="EaseOut"/>
+                            <ani:AnimationSet x:Name="UnBlurAnimation">
+                                <ani:BlurEffectAnimation From="4"
+                                        To="0"
+                                        Duration="0:0:0.2"
+                                        EasingType="Linear"
+                                        Target="{Binding ElementName=ImageBlurEffect}"
+                                        EasingMode="EaseOut"/>
                             </ani:AnimationSet>
                         </ani:Explicit.Animations>
 
                     </Grid>
+                    <Border x:Name="blurColor" Background="{ThemeResource SystemAltHighColor}" Opacity="0" BorderThickness="0" IsHitTestVisible="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Border.OpacityTransition>
+                            <ScalarTransition/>
+                        </Border.OpacityTransition>
+                    </Border>
                     <Grid Translation="-50,0,0" Width="90" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                        
+
                         <Grid.TranslationTransition>
                             <Vector3Transition Duration="0:0:0.5"/>
                         </Grid.TranslationTransition>
@@ -158,13 +172,13 @@
                     </TextBlock>
                     <interactivity:Interaction.Behaviors>
                         <interactions:EventTriggerBehavior EventName="PointerExited">
-                            <behaviors:StartAnimationAction Animation="{Binding ElementName=UnColorifyAnimation}"/>
+                            <behaviors:StartAnimationAction Animation="{Binding ElementName=UnBlurAnimation}"/>
                         </interactions:EventTriggerBehavior>
-                        <interactions:EventTriggerBehavior EventName="Loaded">
-                            <behaviors:StartAnimationAction Animation="{Binding ElementName=UnColorifyAnimation}"/>
-                        </interactions:EventTriggerBehavior>
+                        <!--<interactions:EventTriggerBehavior EventName="Loaded">
+                                <behaviors:StartAnimationAction Animation="{Binding ElementName=UnColorifyAnimation}"/>
+                            </interactions:EventTriggerBehavior>-->
                         <interactions:EventTriggerBehavior EventName="PointerEntered">
-                            <behaviors:StartAnimationAction Animation="{Binding ElementName=ColorifyAnimation}"/>
+                            <behaviors:StartAnimationAction Animation="{Binding ElementName=BlurAnimation}"/>
                         </interactions:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </Grid>
@@ -184,9 +198,9 @@
                     <controls:Expander HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
                             <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
-                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="App theme"/>
-                                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Select which app theme to display"/>
-                                </StackPanel>
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="App theme"/>
+                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Select which app theme to display"/>
+                            </StackPanel>
                         </controls:Expander.Header>
                         <controls:Expander.Content>
                             <StackPanel Orientation="Horizontal">
@@ -247,8 +261,8 @@
                     <controls:Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
                             <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
-                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Color theme"/>
-                                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Polish your app experience with color themes"/>
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Color theme"/>
+                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Polish your app experience with color themes"/>
                             </StackPanel>
                         </controls:Expander.Header>
                         <controls:Expander.Content>
@@ -294,7 +308,7 @@
                             <ToggleSwitch VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="MonetToggle" Toggled="OnMonetToggled"/>
                         </Grid>
                     </Border>
-                    
+
                     <!--DISABLED OPTION BELOW-->
                     <!--<Border Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>

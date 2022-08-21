@@ -689,11 +689,13 @@ namespace To_Do
         {
             // Fetching appropriate elements
             Grid parent = sender as Grid;
-            TextBlock block = VisualTreeHelper.GetChild(parent, 5) as TextBlock;
-            Grid Tri = VisualTreeHelper.GetChild(parent, 3) as Grid;
-            Grid transparentTri = VisualTreeHelper.GetChild(parent, 2) as Grid;
+            TextBlock block = VisualTreeHelper.GetChild(parent, 7) as TextBlock;
+            Border color = VisualTreeHelper.GetChild(parent, 3) as Border;
+            Grid Tri = VisualTreeHelper.GetChild(parent, 5) as Grid;
+            Grid transparentTri = VisualTreeHelper.GetChild(parent, 4) as Grid;
 
             // Animating them
+            color.Opacity = 0;
             block.Translation = new System.Numerics.Vector3(0, 20, 0);
             transparentTri.Translation = new System.Numerics.Vector3(-50, 0, 0);
             Tri.Translation = new System.Numerics.Vector3(-50, 0, 0);
@@ -703,10 +705,10 @@ namespace To_Do
         {
             // Fetching appropriate elements
             Grid parent = sender as Grid;
-            Grid colorGrid = VisualTreeHelper.GetChild(parent, 1) as Grid;
-            Grid transparentTriGrid = VisualTreeHelper.GetChild(parent, 2) as Grid;
-            Grid triGrid = VisualTreeHelper.GetChild(parent, 3) as Grid;
-            TextBlock block = VisualTreeHelper.GetChild(parent, 5) as TextBlock;
+            Border color = VisualTreeHelper.GetChild(parent, 3) as Border;
+            Grid transparentTriGrid = VisualTreeHelper.GetChild(parent, 4) as Grid;
+            Grid triGrid = VisualTreeHelper.GetChild(parent, 5) as Grid;
+            TextBlock block = VisualTreeHelper.GetChild(parent, 7) as TextBlock;
             Grid transparentTri = VisualTreeHelper.GetChild(transparentTriGrid, 0) as Grid;
             Grid tri = VisualTreeHelper.GetChild(triGrid, 0) as Grid;
 
@@ -716,47 +718,17 @@ namespace To_Do
             if (ThemeHelper.IsDarkTheme())
             {
                 brushToUse = gridThemeItemInstance.darkThemeVariant.borderBrush;
-                if (((SolidColorBrush)gridThemeItemInstance.darkThemeVariant.backgroundBrush).Color.A.Equals(0))
-                {
-                    //fallback
-                    colorGrid.Background = new SolidColorBrush(new Color() { 
-                        A = 255,
-                        R = ((SolidColorBrush)gridThemeItemInstance.darkThemeVariant.backgroundBrush).Color.R,
-                        G = ((SolidColorBrush)gridThemeItemInstance.darkThemeVariant.backgroundBrush).Color.G,
-                        B = ((SolidColorBrush)gridThemeItemInstance.darkThemeVariant.backgroundBrush).Color.B
-                    });
-                } else
-                {
-                    colorGrid.Background = gridThemeItemInstance.darkThemeVariant.backgroundBrush;
-                }
             }
             else
             {
                 // Set color to light background one, if foreground is white
                 if ((gridThemeItemInstance.borderBrush as SolidColorBrush).Color == Colors.White)
                 {
-                    colorGrid.Background = gridThemeItemInstance.borderBrush;
                     brushToUse = gridThemeItemInstance.backgroundBrush;
                 }
                 else
                 {
                     brushToUse = gridThemeItemInstance.borderBrush;
-
-                    if (((SolidColorBrush)gridThemeItemInstance.backgroundBrush).Color.A.Equals(0))
-                    {
-                        //fallback
-                        colorGrid.Background = new SolidColorBrush(new Color()
-                        {
-                            A = 255,
-                            R = ((SolidColorBrush)gridThemeItemInstance.backgroundBrush).Color.R,
-                            G = ((SolidColorBrush)gridThemeItemInstance.backgroundBrush).Color.G,
-                            B = ((SolidColorBrush)gridThemeItemInstance.backgroundBrush).Color.B
-                        });
-                    }
-                    else
-                    {
-                        colorGrid.Background = gridThemeItemInstance.backgroundBrush;
-                    }
                 }
             }
             // Here, we set dark or light colors of hover triangles depending on theme
@@ -765,6 +737,7 @@ namespace To_Do
 
             // Animating implicitly appropriate elements
             block.Translation = System.Numerics.Vector3.Zero;
+            color.Opacity = 0.7;
             transparentTriGrid.Translation = System.Numerics.Vector3.Zero;
             triGrid.Translation = System.Numerics.Vector3.Zero;
 
