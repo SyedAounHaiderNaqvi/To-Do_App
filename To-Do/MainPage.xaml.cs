@@ -15,7 +15,6 @@ using Windows.UI.Xaml.Media;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Threading.Tasks;
-using Windows.System.Profile;
 using System.Linq;
 using Windows.UI.Core;
 using Windows.Foundation;
