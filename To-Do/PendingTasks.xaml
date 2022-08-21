@@ -1091,8 +1091,5 @@
                 </Grid>
             </SplitView.Pane>
         </SplitView>
-        <Grid Grid.RowSpan="2" Background="Red" Width="100" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="DEB">
-            
-        </Grid>
     </Grid>
 </Page>

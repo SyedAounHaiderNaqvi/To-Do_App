@@ -781,17 +781,9 @@ namespace To_Do
         {
             var def = e.GetDeferral();
             LoadingUI.Visibility = Visibility.Visible;
+            CreateThreeTileNotifications();
             await SaveCurrentPageData();
             await SaveNavigationPageItems();
-            string deviceFamilyVersion = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
-            ulong version = ulong.Parse(deviceFamilyVersion);
-            ulong build = (version & 0x00000000FFFF0000L) >> 16;
-
-            if (Convert.ToInt16(build) < 22000)
-            {
-                CreateThreeTileNotifications();
-            }
-
             def.Complete();
         }
 

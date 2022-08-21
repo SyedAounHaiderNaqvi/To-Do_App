@@ -230,14 +230,12 @@ namespace To_Do
                 string d = NewTaskBox.Text;
                 if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
                 {
-                    DEB.Visibility = Visibility.Visible;
                     TODOTask newTask = new TODOTask() { Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false };
                     newTask.SubTasks = new List<TODOTask>();
                     AddATask(newTask);
                     NewTaskBox.Text = string.Empty;
                     e.Handled = true;
                     Sort((string)SortingDropDown.Content);
-                    DEB.Visibility = Visibility.Collapsed;
                 }
             }
         }
