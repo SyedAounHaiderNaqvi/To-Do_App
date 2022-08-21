@@ -14,17 +14,16 @@ using Windows.UI;
 using Windows.UI.Xaml.Media;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.System.Profile;
 using System.Linq;
 using Windows.UI.Core;
 using Windows.Foundation;
 using Windows.Storage.AccessCache;
-using System.Diagnostics;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 namespace To_Do
 {
@@ -44,7 +43,7 @@ namespace To_Do
         public List<List<string>> tasksToParse = new List<List<string>>();
         public int PendingTasksCount = 0;
         bool canSearch = true;
-        public NavigationTransitionInfo info;
+        public NavigationTransitionInfo info = new SuppressNavigationTransitionInfo();
 
         public ObservableCollection<CustomNavViewItem> Categories { get; }
         public ContentDialog dialog;
@@ -79,22 +78,25 @@ namespace To_Do
             Waiter();
             parallax.Source = pendingtasks.instance.listOfTasks;
             LoseFocus(searchbox);
+
         }
 
         public async void Waiter()
         {
+            
             List<string> dataToParse = new List<string>
             {
                 "Pending Tasks",
                 "pendingtasks"
             };
-            ContentFrame.Navigate(typeof(pendingtasks), dataToParse, new SuppressNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(pendingtasks), dataToParse, info);
             await Task.Delay(10);
-            ContentFrame.Navigate(typeof(Settings), null, new SuppressNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(Settings), null, info);
             await Task.Delay(10);
-            ContentFrame.Navigate(typeof(pendingtasks), dataToParse, new SuppressNavigationTransitionInfo());
+            ContentFrame.Navigate(typeof(pendingtasks), dataToParse, info);
             nview.SelectedItem = Categories[0];
-
+            LoadingUI.Visibility = Visibility.Collapsed;
+            Ring.IsActive = false;
         }
 
         async Task LoadNavViewLists()
@@ -371,32 +373,6 @@ namespace To_Do
             AppTitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            string argument = e.Parameter.ToString();
-
-            switch (argument)
-            {
-                case "GoToPending":
-                    ContentFrame.Navigate(typeof(pendingtasks));
-                    nview.SelectedItem = Categories[0];
-                    parallax.Source = pendingtasks.instance.listOfTasks;
-                    break;
-                case "GoToSettings":
-                    ContentFrame.Navigate(typeof(pendingtasks));
-                    await Task.Delay(10);
-                    ContentFrame.Navigate(typeof(Settings));
-                    nview.SelectedItem = nview.SettingsItem;
-                    parallax.Source = Settings.ins.scroller;
-                    LoadingUI.Visibility = Visibility.Collapsed;
-                    Ring.IsActive = false;
-                    break;
-                default:
-                    break;
-            }
-        }
-
         async Task SaveCurrentPageData()
         {
             savingDescriptions.Clear();
@@ -411,7 +387,6 @@ namespace To_Do
             {
                 foreach (TODOTask tODO in ins.TaskItems)
                 {
-                    Debug.WriteLine("while fetching todo for saves tag: " + t);
                     string temp = tODO.Description;
                     string date = tODO.Date;
                     bool importance = tODO.IsStarred;
@@ -444,7 +419,6 @@ namespace To_Do
                 await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
                 StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
-                Debug.WriteLine("after writing tag: " + t);
             }
             else
             {
@@ -865,7 +839,7 @@ namespace To_Do
         {
             Ring.IsActive = true;
             LoadingUI.Visibility = Visibility.Visible;
-            info = new SuppressNavigationTransitionInfo();
+
             Type pageType;
 
             if (args.IsSettingsSelected)
@@ -890,6 +864,8 @@ namespace To_Do
                         selectedItem.Tag
                     };
                     ContentFrame.Navigate(pageType, dataToParse, info);
+                    //LoadingUI.Visibility = Visibility.Collapsed;
+                    //Ring.IsActive = false;
                 }
             }
             

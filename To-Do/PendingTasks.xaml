@@ -1091,18 +1091,8 @@
                 </Grid>
             </SplitView.Pane>
         </SplitView>
-        <!--<Grid x:Name="notif" Opacity="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10,10,10,95" Grid.RowSpan="2" Translation="0,170,0">
-            <Grid.TranslationTransition>
-                <Vector3Transition Duration="0:0:0.2"/>
-            </Grid.TranslationTransition>
-            <Grid.OpacityTransition>
-                <ScalarTransition/>
-            </Grid.OpacityTransition>
-            <Border Background="Transparent" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" Opacity="0.3" BorderThickness="2" CornerRadius="{ThemeResource ControlCornerRadius}"/>
-            <controls:InfoBar CornerRadius="{ThemeResource ControlCornerRadius}" IsClosable="False" IsOpen="True" Background="{ThemeResource ExpanderHeaderBackground}" Severity="Informational" Message="Marked task as complete." x:Name="confirmDoneNotif">
-
-            </controls:InfoBar>
-
-        </Grid>-->
+        <Grid Grid.RowSpan="2" Background="Red" Width="100" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="DEB">
+            
+        </Grid>
     </Grid>
 </Page>

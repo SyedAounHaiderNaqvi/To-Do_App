@@ -14,7 +14,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using Microsoft.UI.Xaml.Controls;
 using System.Linq;
-using System.Diagnostics;
 
 namespace To_Do
 {
@@ -71,7 +70,6 @@ namespace To_Do
             {
                 foreach (TODOTask tODO in TaskItems)
                 {
-                    Debug.WriteLine("while fetching todo for saves tag: " + t);
                     string temp = tODO.Description;
                     string date = tODO.Date;
                     bool importance = tODO.IsStarred;
@@ -95,8 +93,6 @@ namespace To_Do
                 string importanceJsonFile = JsonConvert.SerializeObject(_savingImps);
                 string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
 
-                Debug.WriteLine("just before writing tag: " + t);
-
                 StorageFolder folder = ApplicationData.Current.LocalFolder;
                 StorageFolder rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
                 StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
@@ -107,7 +103,6 @@ namespace To_Do
                 await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
                 StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
-                Debug.WriteLine("after writing tag: " + t);
             }
             else
             {
@@ -142,13 +137,11 @@ namespace To_Do
         public async Task LoadDataFromFile()
         {
             var t = _tag;
-            Debug.WriteLine("before fetching folders tag: " + t);
             StorageFolder folder = ApplicationData.Current.LocalFolder;
             StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
 
             if (rootFolder != null && TaskItems.Count <= 0)
             {
-                Debug.WriteLine("just before reading tag: " + t);
                 StorageFile descriptionFile = await rootFolder.GetFileAsync($"{t}_desc.json");
                 StorageFile datesFile = await rootFolder.GetFileAsync($"{t}_dates.json");
                 StorageFile importanceFile = await rootFolder.GetFileAsync($"{t}_imp_desc.json");
@@ -163,7 +156,6 @@ namespace To_Do
                 List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDatesLoaded);
                 List<bool> loadedImportance = JsonConvert.DeserializeObject<List<bool>>(jsonOfImpLoaded);
                 List<List<string>> loadedSteps = JsonConvert.DeserializeObject<List<List<string>>>(jsonOfStepsLoaded);
-                Debug.WriteLine("just after reading tag: " + t);
                 if (loadedDescriptions != null)
                 {
                     TaskItems.Clear();
@@ -224,10 +216,11 @@ namespace To_Do
             SortingDropDown.Content = "Date Created";
             opt1.IsChecked = true;
             Sort("Date Created");
-            base.OnNavigatedTo(e);
-            finallyLoaded = true;
             MainPage.ins.LoadingUI.Visibility = Visibility.Collapsed;
             MainPage.ins.Ring.IsActive = false;
+            base.OnNavigatedTo(e);
+            finallyLoaded = true;
+            
         }
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -237,12 +230,14 @@ namespace To_Do
                 string d = NewTaskBox.Text;
                 if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
                 {
+                    DEB.Visibility = Visibility.Visible;
                     TODOTask newTask = new TODOTask() { Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false };
                     newTask.SubTasks = new List<TODOTask>();
                     AddATask(newTask);
                     NewTaskBox.Text = string.Empty;
                     e.Handled = true;
                     Sort((string)SortingDropDown.Content);
+                    DEB.Visibility = Visibility.Collapsed;
                 }
             }
         }
