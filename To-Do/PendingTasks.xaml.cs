@@ -43,12 +43,11 @@ namespace To_Do
 
         public pendingtasks()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             instance = this;
             InitializeData();
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            NavigationCacheMode = NavigationCacheMode.Enabled;
             listOfTasks.ItemsSource = TaskItems;
-            listOfTasks.UpdateLayout();
             //UpdateBadge();
             MainPage.ins.LoadingUI.Visibility = Visibility.Collapsed;
             MainPage.ins.Ring.IsActive = false;
@@ -96,13 +95,11 @@ namespace To_Do
                 StorageFolder folder = ApplicationData.Current.LocalFolder;
                 StorageFolder rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
                 StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
                 StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{t}_dates.json", CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
                 StorageFile impdescjson = await rootFolder.CreateFileAsync($"{t}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
                 StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
-                await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
+
+                await Task.WhenAll(FileIO.WriteTextAsync(pendingdescjson, jsonFile).AsTask(), FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile).AsTask(), FileIO.WriteTextAsync(impdescjson, importanceJsonFile).AsTask(), FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile).AsTask());
             }
             else
             {
