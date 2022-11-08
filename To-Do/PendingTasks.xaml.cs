@@ -216,11 +216,11 @@ namespace To_Do
             SortingDropDown.Content = "Date Created";
             opt1.IsChecked = true;
             Sort("Date Created");
-            MainPage.ins.LoadingUI.Visibility = Visibility.Collapsed;
-            MainPage.ins.Ring.IsActive = false;
+            
             base.OnNavigatedTo(e);
             finallyLoaded = true;
-            
+            MainPage.ins.LoadingUI.Visibility = Visibility.Collapsed;
+            MainPage.ins.Ring.IsActive = false;
         }
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)

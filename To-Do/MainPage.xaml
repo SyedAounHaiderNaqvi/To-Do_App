@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:To_Do"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    Loaded="Page_Loaded"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
@@ -11,6 +12,7 @@
     controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.Resources>
+
         <DataTemplate x:Key="suggestionTemplate" x:DataType="local:QueryFormat">
             <UserControl>
                 <Grid HorizontalAlignment="Left" Width="270" Background="Transparent">
@@ -302,7 +304,7 @@
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid>
+                            <Grid Background="{ThemeResource SideBarColor}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
@@ -381,7 +383,7 @@
                                     </Grid>
                                     <Border x:Name="TopNavContentOverlayAreaGrid" Child="{TemplateBinding ContentOverlay}"/>
                                 </StackPanel>
-                                <SplitView x:Name="RootSplitView" Margin="0,-1,0,-1" CornerRadius="{ThemeResource NavViewSplitViewCorners}" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsTabStop="False" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenPaneLength="{TemplateBinding OpenPaneLength}" PaneBackground="{ThemeResource NavigationViewDefaultPaneBackground}" Grid.Row="1">
+                                <SplitView PaneBackground="{ThemeResource ExpanderContentBackground}" Background="{TemplateBinding Background}" x:Name="RootSplitView" Margin="0,-1,0,-1" CornerRadius="{ThemeResource NavViewSplitViewCorners}"  BorderThickness="1" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" CompactPaneLength="{TemplateBinding CompactPaneLength}" DisplayMode="Inline" IsTabStop="False" IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" OpenPaneLength="{TemplateBinding OpenPaneLength}"  Grid.Row="1">
                                     <SplitView.Pane>
                                         <Grid x:Name="PaneContentGrid" BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}" HorizontalAlignment="Left" Margin="{ThemeResource NavigationViewPaneContentGridMargin}" Visibility="{Binding TemplateSettings.LeftPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <Grid.RowDefinitions>

@@ -397,6 +397,8 @@ namespace To_Do
         {
             if (canUseMonet)
             {
+                Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = bgcolor.R, G = bgcolor.G, B = bgcolor.B });
+
                 Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
                 {
                     BlurAmount = 8,
@@ -417,6 +419,7 @@ namespace To_Do
             {
                 if (ThemeHelper.IsDarkTheme())
                 {
+                    Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 33, G = 33, B = 33 });
                     Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
                     {
                         BlurAmount = 8,
@@ -435,6 +438,7 @@ namespace To_Do
                 }
                 else
                 {
+                    Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 245, G = 245, B = 245 });
                     Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
                     {
                         BlurAmount = 8,

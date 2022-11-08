@@ -23,6 +23,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
+using Windows.UI.Xaml.Navigation;
 
 namespace To_Do
 {
@@ -50,53 +51,41 @@ namespace To_Do
 
         public MainPage()
         {
+            
             this.InitializeComponent();
             ins = this;
             folder = ApplicationData.Current.LocalFolder;
             Categories = new ObservableCollection<CustomNavViewItem>();
-            LoadingUI.Visibility = Visibility.Visible;
-            Ring.IsActive = true;
-            Task.Run(() => LoadNavViewLists()).Wait();
-            //Task.Run(() => DeletionOfUnnecessaryLists()).Wait();
-            var currentTheme = ThemeHelper.RootTheme.ToString();
-            ImageInitialize();
-            RoundCornerInitialize();
-            LoadTheme();
-            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            titleBar.ButtonBackgroundColor = Colors.Transparent;
-            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
-            UpdateTitleBarLayout(coreTitleBar);
-            Window.Current.SetTitleBar(AppTitleBar);
-            coreTitleBar.LayoutMetricsChanged += (s, a) => UpdateTitleBarLayout(s);
-            coreTitleBar.IsVisibleChanged += CoreTitlebar_IsVisibleChanged;
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
             TileUpdateManager.CreateTileUpdaterForApplication().Clear();
-            currentTheme = ThemeHelper.RootTheme.ToString();
-            Waiter();
-            parallax.Source = pendingtasks.instance.listOfTasks;
-            LoseFocus(searchbox);
-
+            Debug.WriteLine("xzxzx");
         }
 
-        public async void Waiter()
-        {
-            
-            List<string> dataToParse = new List<string>
-            {
-                "Pending Tasks",
-                "pendingtasks"
-            };
-            ContentFrame.Navigate(typeof(pendingtasks), dataToParse, info);
-            await Task.Delay(10);
-            ContentFrame.Navigate(typeof(Settings), null, info);
-            await Task.Delay(10);
-            ContentFrame.Navigate(typeof(pendingtasks), dataToParse, info);
-            nview.SelectedItem = Categories[0];
-            LoadingUI.Visibility = Visibility.Collapsed;
-            Ring.IsActive = false;
-        }
+        //protected async override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    base.OnNavigatedTo(e);
+        //    string argument = e.Parameter.ToString();
+
+        //    switch (argument)
+        //    {
+        //        case "GoToPending":
+        //            ContentFrame.Navigate(typeof(pendingtasks), null, info);
+        //            await Task.Delay(10);
+        //            ContentFrame.Navigate(typeof(pendingtasks));
+        //            nview.SelectedItem = Categories[0];
+        //            parallax.Source = pendingtasks.instance.listOfTasks;
+        //            break;
+        //        case "GoToSettings":
+        //            ContentFrame.Navigate(typeof(pendingtasks), null, info);
+        //            await Task.Delay(10);
+        //            ContentFrame.Navigate(typeof(Settings), null, info);
+        //            nview.SelectedItem = nview.SettingsItem;
+        //            parallax.Source = Settings.ins.scroller;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         async Task LoadNavViewLists()
         {
@@ -225,6 +214,7 @@ namespace To_Do
                     case 0:
                         if (ThemeHelper.IsDarkTheme())
                         {
+                            Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 33, G = 33, B = 33 });
                             Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
                             {
                                 BlurAmount = 8,
@@ -243,6 +233,7 @@ namespace To_Do
                         }
                         else
                         {
+                            Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 245, G = 245, B = 245 });
                             Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
                             {
                                 BlurAmount = 8,
@@ -261,6 +252,7 @@ namespace To_Do
                         }
                         break;
                     case 1:
+                        Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = bgR, G = bgG, B = bgB });
                         Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
                         {
                             BlurAmount = 8,
@@ -286,12 +278,13 @@ namespace To_Do
 
                 //a is 150
                 Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = bgA, R = bgR, G = bgG, B = bgB });
+                
                 titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColorDark2"];
                 titleBar.ForegroundColor = titleBar.ButtonHoverBackgroundColor;
 
                 titleBar.ButtonHoverForegroundColor = Colors.White;
 
-                titleBar.ButtonPressedBackgroundColor = ((SolidColorBrush)Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"]).Color;//new Color() { A = 255, R = a2R, G = a2G, B = a2B };
+                titleBar.ButtonPressedBackgroundColor = ((SolidColorBrush)Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"]).Color;
             }
             else
             {
@@ -307,6 +300,7 @@ namespace To_Do
 
                 Color bgColor = fallBackPurple;
                 Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(fallBackPurple);
+                Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = fallBackPurple.R, G = fallBackPurple.G, B = fallBackPurple.B });
                 titleBar.ForegroundColor = bgColor;
                 titleBar.ButtonHoverBackgroundColor = bgColor;
                 titleBar.ButtonHoverForegroundColor = Colors.White;
@@ -855,8 +849,6 @@ namespace To_Do
                         selectedItem.Tag
                     };
                     ContentFrame.Navigate(pageType, dataToParse, info);
-                    //LoadingUI.Visibility = Visibility.Collapsed;
-                    //Ring.IsActive = false;
                 }
             }
             
@@ -1184,50 +1176,93 @@ namespace To_Do
                     //found the match, load previous one
                     //hasNavigated = true;
                     var selectedItem = Categories[i - 1];
-                    if (selectedItem != null)
-                    {
-                        string selectedItemTag = selectedItem.Tag;
-                        string pageName;
-                        if (selectedItemTag.Equals("completedtasks"))
-                        {
-                            pageName = "To_Do." + selectedItemTag;
-                        }
-                        else
-                        {
-                            pageName = "To_Do.pendingtasks";
-                        }
-                        Type pageType = Type.GetType(pageName);
-                        List<string> dataToParse = new List<string>
-                        {
-                            selectedItem.Name,
-                            selectedItem.Tag
-                        };
-                        switch (selectedItemTag)
-                        {
-                            case "completedtasks":
-                                pendingtasks.instance.lastDataParseTag = "completedtasks";
-                                ContentFrame.Navigate(pageType, tasksToParse, info);
-                                tasksToParse.Clear();
-                                break;
-                            default:
-                                ContentFrame.Navigate(pageType, dataToParse, info);
-                                break;
-                        }
-                        await Task.Delay(100);
-                        //now delete the previous one's files                        
-                        //StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{Categories[i].Tag}");
-                        //while (rootFolder != null)
-                        //{
-                        //    await rootFolder.DeleteAsync();
-                        //    rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{Categories[i].Tag}");
-                        //}
-                        Categories.RemoveAt(i);
-                        nview.SelectedItem = selectedItem;
-                        break;
-                    }
+                    Debug.WriteLine(selectedItem.Tag);
+                    //if (selectedItem != null)
+                    //{
+                    //    string selectedItemTag = selectedItem.Tag;
+                    //    string pageName;
+                    //    if (selectedItemTag.Equals("completedtasks"))
+                    //    {
+                    //        pageName = "To_Do." + selectedItemTag;
+                    //    }
+                    //    else
+                    //    {
+                    //        pageName = "To_Do.pendingtasks";
+                    //    }
+                    //    Type pageType = Type.GetType(pageName);
+                    //    List<string> dataToParse = new List<string>
+                    //    {
+                    //        selectedItem.Name,
+                    //        selectedItem.Tag
+                    //    };
+                    //    switch (selectedItemTag)
+                    //    {
+                    //        case "completedtasks":
+                    //            pendingtasks.instance.lastDataParseTag = "completedtasks";
+                    //            ContentFrame.Navigate(pageType, tasksToParse, info);
+                    //            tasksToParse.Clear();
+                    //            break;
+                    //        default:
+                    //            ContentFrame.Navigate(pageType, dataToParse, info);
+                    //            break;
+                    //    }
+                    //    await Task.Delay(100);
+                    //    //now delete the previous one's files                        
+                    //    //StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{Categories[i].Tag}");
+                    //    //while (rootFolder != null)
+                    //    //{
+                    //    //    await rootFolder.DeleteAsync();
+                    //    //    rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{Categories[i].Tag}");
+                    //    //}
+                    //    Categories.RemoveAt(i);
+                    //    nview.SelectedItem = selectedItem;
+                    //    break;
+                    //}
                 }
             }
             //CustomNavViewItem rootCat = parent.DataContext as CustomNavViewItem;
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("123");
+            await LoadNavViewLists();
+            LoadTheme();
+            LoadingUI.Visibility = Visibility.Visible;
+            Ring.IsActive = true;
+            //var currentTheme = ThemeHelper.RootTheme.ToString();
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+            UpdateTitleBarLayout(coreTitleBar);
+            Window.Current.SetTitleBar(AppTitleBar);
+            coreTitleBar.LayoutMetricsChanged += (s, a) => UpdateTitleBarLayout(s);
+            coreTitleBar.IsVisibleChanged += CoreTitlebar_IsVisibleChanged;
+
+            ImageInitialize();
+            RoundCornerInitialize();
+
+            ContentFrame.Navigate(typeof(pendingtasks), null, info);
+            List<string> dataToParse = new List<string>
+            {
+                "Pending Tasks",
+                "pendingtasks"
+            };
+
+
+            ContentFrame.Navigate(typeof(pendingtasks), dataToParse, info);
+            await Task.Delay(10);
+            ContentFrame.Navigate(typeof(Settings), null, info);
+            await Task.Delay(10);
+            ContentFrame.Navigate(typeof(pendingtasks), dataToParse, info);
+            nview.SelectedItem = Categories[0];
+            LoadingUI.Visibility = Visibility.Collapsed;
+            
+            Ring.IsActive = false;
+            parallax.Source = pendingtasks.instance.listOfTasks;
+            LoseFocus(searchbox);
         }
     }
 
