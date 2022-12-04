@@ -2,6 +2,7 @@
 using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -12,8 +13,8 @@ namespace To_Do
     {
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
         }
 
         public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
@@ -45,16 +46,17 @@ namespace To_Do
                 Window.Current.Content = rootFrame;
             }
 
-            if (e.PrelaunchActivated == false)
+            if (!e.PrelaunchActivated)
             {
+                CoreApplication.EnablePrelaunch(true);
                 if (rootFrame.Content == null)
                 {
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
                 // Ensure the current window is active
-                ThemeHelper.Initialize();
                 Window.Current.Activate();
             }
+
             ThemeHelper.Initialize();
         }
 
