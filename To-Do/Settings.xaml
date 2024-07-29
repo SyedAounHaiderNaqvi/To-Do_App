@@ -1,0 +1,416 @@
+﻿<Page
+    x:Class="To_Do.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:To_Do"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:ani="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Behaviors"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="RadioButtonStyle1" TargetType="RadioButton">
+                <Setter Property="UseSystemFocusVisuals" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="CheckStates">
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txt" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unchecked"/>
+                                        <VisualState x:Name="Indeterminate"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid x:Name="myGrid" Height="32" VerticalAlignment="Top">
+                                    <TextBlock HorizontalAlignment="Center" x:Name="txt" VerticalAlignment="Center" Text="Light"/>
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="RadioButtonStyle2" TargetType="RadioButton">
+                <Setter Property="UseSystemFocusVisuals" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="CheckStates">
+                                        <VisualState x:Name="Checked">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="txt" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemAccentColor}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Unchecked"/>
+                                        <VisualState x:Name="Indeterminate"/>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid x:Name="myGrid" Height="32" VerticalAlignment="Top">
+                                    <TextBlock HorizontalAlignment="Center" x:Name="txt" VerticalAlignment="Center" Text="Dark"/>
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <media:AcrylicBrush x:Key="LightThemeBrush" BlurAmount="8" BackgroundSource="Backdrop" FallbackColor="#99ffffff" TintColor="White" TintOpacity="0.3"/>
+            <media:AcrylicBrush x:Key="DarkThemeBrush" BlurAmount="8" BackgroundSource="Backdrop" FallbackColor="#99000000" TintColor="#101010" TintOpacity="0.6"/>
+
+
+            <DataTemplate x:Key="ImageTemplate" x:DataType="local:GridThemeItem">
+                <Grid PointerEntered="ShowBlurredDetails" PointerExited="HideBlurredDetails" PointerCaptureLost="HideBlurredDetails" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="{ThemeResource ListViewItemCornerRadius}" Width="150" Height="105">
+
+                    <!--<Image Source="{x:Bind imgSource}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
+                    <Grid VerticalAlignment="Top" CornerRadius="{ThemeResource ControlCornerRadius}">
+
+                        <Border Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Height="60" Background="#abeeeeee"/>
+                        <Border Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="115" Height="60" Background="{x:Bind backgroundBrush}"/>
+                        <Border Margin="40,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="50" Height="5"  Background="#eeeeee"/>
+                        <Polygon Points="40,60 150,60 150,105, 40,105" Stroke="Transparent" Fill="#3b3b3b"/>
+                        <Polygon Points="40,60 150,60 150,105, 40,105" Stroke="Transparent" Fill="{x:Bind darkThemeVariant.backgroundBrush}"/>
+                        <Polygon Points="0,0 40,0 40,60, 0,60" Stroke="Transparent" Fill="#eeeeee"/>
+                        <Polygon Points="0,60 40,60 40,105, 0,105" Stroke="Transparent" Fill="#3c3c3c"/>
+                        <Polygon Fill="{x:Bind borderBrush}" Points="50,17 65,17 65,20 50,20"/>
+                        <Polygon Fill="#aaeeeeee" Points="50,45 140,45 140,55 50,55"/>
+                        <Polygon Fill="#aaeeeeee" Points="50,27 140,27 140,37 50,37"/>
+                        <Polygon Fill="#44888888" Points="50,65 140,65 140,75 50,75"/>
+                        <Polygon Fill="#44888888" Points="50,83 140,83 140,93 50,93"/>
+                        <Polygon Points="65,31 135,31 135,33 65,33" Fill="#000000"/>
+                        <Polygon Points="65,49 135,49 135,51 65,51" Fill="#000000"/>
+                        <Polygon Points="65,69 135,69 135,71 65,71" Fill="#ffffff"/>
+                        <Polygon Points="65,87 135,87 135,89 65,89" Fill="#ffffff"/>
+                        <Ellipse Margin="-27,80,10,10" Width="4" Height="4" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                        <Polygon Points="0,96 40,96 40,102 0,102" Fill="#22cccccc"/>
+                        <Polygon Points="2,97 3,97 3,101 2,101" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                        <Polygon Points="6,98 25,98 25,100 6,100" Fill="{x:Bind darkThemeVariant.borderBrush}"/>
+                        <Polygon Points="6,8 25,8 25,10 6,10" Fill="#000000"/>
+                        <Polygon Points="6,16 29,16 29,18 6,18" Fill="#000000"/>
+                        <Border Margin="-27,30,10,10" VerticalAlignment="Top" Width="4" Height="4" BorderThickness="1" Background="Transparent" CornerRadius="4" BorderBrush="#000000"/>
+                        <Border Margin="-27,10,10,33" VerticalAlignment="Bottom" Width="4" Height="4" BorderThickness="1" Background="Transparent" CornerRadius="4" BorderBrush="#cccccc"/>
+                        <Ellipse Margin="-27,5,10,10" Width="4" Height="4" Fill="{x:Bind borderBrush}"/>
+                    </Grid>
+                    <Grid x:Name="blurGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <media:UIElementExtensions.VisualFactory>
+                            <media:PipelineVisualFactory>
+                                <media:BlurEffect x:Name="ImageBlurEffect" IsAnimatable="True"/>
+                            </media:PipelineVisualFactory>
+                        </media:UIElementExtensions.VisualFactory>
+                    </Grid>
+                    <Grid x:Name="opacityGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <ani:Explicit.Animations>
+                            <ani:AnimationSet x:Name="BlurAnimation">
+                                <ani:BlurEffectAnimation From="0"
+                                        To="4"
+                                        Duration="0:0:0.2"
+                                        EasingType="Linear"
+                                        Target="{Binding ElementName=ImageBlurEffect}"
+                                        EasingMode="EaseOut"/>
+                            </ani:AnimationSet>
+                            <ani:AnimationSet x:Name="UnBlurAnimation">
+                                <ani:BlurEffectAnimation From="4"
+                                        To="0"
+                                        Duration="0:0:0.2"
+                                        EasingType="Linear"
+                                        Target="{Binding ElementName=ImageBlurEffect}"
+                                        EasingMode="EaseOut"/>
+                            </ani:AnimationSet>
+                        </ani:Explicit.Animations>
+
+                    </Grid>
+                    <Border x:Name="blurColor" Background="{ThemeResource SystemAltHighColor}" Opacity="0" BorderThickness="0" IsHitTestVisible="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Border.OpacityTransition>
+                            <ScalarTransition/>
+                        </Border.OpacityTransition>
+                    </Border>
+                    <Grid Translation="-50,0,0" Width="90" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+
+                        <Grid.TranslationTransition>
+                            <Vector3Transition Duration="0:0:0.5"/>
+                        </Grid.TranslationTransition>
+                        <Grid RenderTransformOrigin="0,0" Width="90" Height="50" Opacity="0.5">
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="45"/>
+                            </Grid.RenderTransform>
+                        </Grid>
+                    </Grid>
+                    <Grid Translation="-50,0,0" Width="80" Height="35" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                        <Grid.TranslationTransition>
+                            <Vector3Transition Duration="0:0:0.7"/>
+                        </Grid.TranslationTransition>
+                        <Grid RenderTransformOrigin="0,0" Width="80" Height="35">
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="45"/>
+                            </Grid.RenderTransform>
+                        </Grid>
+                    </Grid>
+                    <Border IsHitTestVisible="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{ThemeResource SystemBaseLowColor}" CornerRadius="{ThemeResource ControlCornerRadius}" BorderThickness="1"/>
+                    <TextBlock IsHitTestVisible="False" Translation="0,20,0" Text="{x:Bind tooltip}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}" Foreground="{ThemeResource SystemBaseHighColor}" FontSize="11" TextWrapping="Wrap" Margin="8,0,0,8">
+                        <TextBlock.TranslationTransition>
+                            <Vector3Transition/>
+                        </TextBlock.TranslationTransition>
+                    </TextBlock>
+                    <interactivity:Interaction.Behaviors>
+                        <interactions:EventTriggerBehavior EventName="PointerExited">
+                            <behaviors:StartAnimationAction Animation="{Binding ElementName=UnBlurAnimation}"/>
+                        </interactions:EventTriggerBehavior>
+                        <!--<interactions:EventTriggerBehavior EventName="Loaded">
+                                <behaviors:StartAnimationAction Animation="{Binding ElementName=UnColorifyAnimation}"/>
+                            </interactions:EventTriggerBehavior>-->
+                        <interactions:EventTriggerBehavior EventName="PointerEntered">
+                            <behaviors:StartAnimationAction Animation="{Binding ElementName=BlurAnimation}"/>
+                        </interactions:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Margin="0,34,0,20">
+        <Grid.BackgroundTransition>
+            <BrushTransition/>
+        </Grid.BackgroundTransition>
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="35,15,19,40">
+            <ScrollViewer x:FieldModifier="public" CornerRadius="{ThemeResource ControlCornerRadius}" x:Name="scroller" VerticalScrollBarVisibility="Auto">
+                <StackPanel Padding="0,0,15,0" Spacing="10">
+                    <Border HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
+                        <TextBlock Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="Appearance"/>
+                    </Border>
+                    <controls:Expander HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                        <controls:Expander.Header>
+                            <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="App theme"/>
+                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Select which app theme to display"/>
+                            </StackPanel>
+                        </controls:Expander.Header>
+                        <controls:Expander.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <Grid Width="auto" Height="160">
+                                        <Grid Width="130" Height="160" CornerRadius="{ThemeResource ControlCornerRadius}">
+                                            <controls:ParallaxView Source="{Binding ElementName=scroller}" VerticalShift="70">
+                                                <Image Stretch="UniformToFill" Source="/Images/light.jpg" />
+
+                                            </controls:ParallaxView>
+                                            <StackPanel Spacing="10" VerticalAlignment="Center" Width="100" HorizontalAlignment="Center" Orientation="Vertical">
+                                                <StackPanel Spacing="5" Orientation="Vertical" Height="40" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{StaticResource LightThemeBrush}">
+                                                    <Border Opacity="0.4" Background="Black" VerticalAlignment="Center" Margin="10,10,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="40" Height="8"/>
+                                                    <Border Opacity="0.4" Background="Black" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="80" Height="8"/>
+                                                </StackPanel>
+                                                <StackPanel Spacing="5" Orientation="Vertical" Height="40" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{StaticResource LightThemeBrush}">
+                                                    <Border Opacity="0.4" Background="Black" VerticalAlignment="Center" Margin="10,10,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="40" Height="8"/>
+                                                    <Border Opacity="0.4" Background="Black" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="80" Height="8"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <Button Opacity="0.5" Click="LightModeChosen" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent"/>
+                                            <Border IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="#666666" VerticalAlignment="Stretch"/>
+                                            <Border x:Name="lightthemeborder" IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="{ThemeResource SystemAccentColor}" VerticalAlignment="Stretch"/>
+                                        </Grid>
+                                    </Grid>
+                                    <RadioButton Style="{StaticResource RadioButtonStyle1}" x:Name="lightradio" HorizontalAlignment="Center" GroupName="theme" Tag="Light" Checked="OnThemeRadioButtonChecked">
+
+                                    </RadioButton>
+                                </StackPanel>
+                                <StackPanel Margin="50,0,0,0" Orientation="Vertical">
+                                    <Grid Width="auto" Height="160">
+                                        <Grid Width="130" Height="160" CornerRadius="{ThemeResource ControlCornerRadius}">
+                                            <controls:ParallaxView Source="{Binding ElementName=scroller}" VerticalShift="70">
+                                                <Image Stretch="UniformToFill" Source="/Images/dark.jpg" />
+
+                                            </controls:ParallaxView>
+                                            <StackPanel Spacing="10" VerticalAlignment="Center" Width="100" HorizontalAlignment="Center" Orientation="Vertical">
+                                                <StackPanel Spacing="5" Orientation="Vertical" Height="40" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{StaticResource DarkThemeBrush}">
+                                                    <Border Opacity="0.5" Background="White" VerticalAlignment="Center" Margin="10,10,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="40" Height="8"/>
+                                                    <Border Opacity="0.5" Background="White" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="80" Height="8"/>
+                                                </StackPanel>
+                                                <StackPanel Spacing="5" Orientation="Vertical" Height="40" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{StaticResource DarkThemeBrush}">
+                                                    <Border Opacity="0.5" Background="White" VerticalAlignment="Center" Margin="10,10,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="40" Height="8"/>
+                                                    <Border Opacity="0.5" Background="White" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Width="80" Height="8"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <Button Opacity="0.5" Click="DarkModeChosen" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent"/>
+                                            <Border IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="#666666" VerticalAlignment="Stretch"/>
+                                            <Border x:Name="darkthemeborder" IsHitTestVisible="False" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="2" BorderBrush="{ThemeResource SystemAccentColor}" VerticalAlignment="Stretch"/>
+                                        </Grid>
+                                    </Grid>
+                                    <RadioButton Margin="5,0,0,0" Style="{ThemeResource RadioButtonStyle2}" x:Name="darkradio" GroupName="theme" Tag="Dark" Checked="OnThemeRadioButtonChecked">
+                                    </RadioButton>
+                                </StackPanel>
+                            </StackPanel>
+                        </controls:Expander.Content>
+                    </controls:Expander>
+                    <controls:Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                        <controls:Expander.Header>
+                            <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Color theme"/>
+                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Polish your app experience with color themes"/>
+                            </StackPanel>
+                        </controls:Expander.Header>
+                        <controls:Expander.Content>
+                            <StackPanel Orientation="Vertical" Spacing="10">
+
+                                <GridView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" ItemClick="themeGrid_ItemClick" ItemsSource="{x:Bind gridItems}" ItemTemplate="{StaticResource ImageTemplate}" SelectionMode="None" IsItemClickEnabled="True" x:Name="themeGrid">
+                                    <GridView.ItemContainerStyle>
+                                        <Style TargetType="GridViewItem">
+                                            <Setter Property="Margin" Value="3, 3, 3, 3"/>
+                                        </Style>
+                                    </GridView.ItemContainerStyle>
+
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <ItemsWrapGrid x:Name="MaxItemsWrapGrid"
+                                   MaximumRowsOrColumns="15"
+                                   Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
+                                </GridView>
+                                <Rectangle Height="1" Margin="-20,0,-20,0" HorizontalAlignment="Stretch" Fill="{ThemeResource NavigationViewContentBackground}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Choose custom theme" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="2,0,0,-5"/>
+                                    <Button Grid.Column="1" VerticalAlignment="Center" Margin="0,0,38,-5" HorizontalAlignment="Right" Click="OpenCustomColorDialog" Content="Create theme"/>
+                                </Grid>
+                            </StackPanel>
+                        </controls:Expander.Content>
+                    </controls:Expander>
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="170" Width="*"/>
+                                <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Secondary color on backplate"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use secondary accent color on surfaces like searchbar"/>
+                            </StackPanel>
+                            <ToggleSwitch VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="MonetToggle" Toggled="OnMonetToggled"/>
+                        </Grid>
+                    </Border>
+
+                    <!--DISABLED OPTION BELOW-->
+                    <!--<Border Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="170" Width="*"/>
+                                <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch"  Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Navigation transition style"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose how transitions to different pages are shown"/>
+                            </StackPanel>
+                            <ComboBox VerticalAlignment="Center" Margin="10,0,54,0" HorizontalAlignment="Right" Grid.Column="1" SelectionChanged="navStyleCombo_SelectionChanged" x:Name="navStyleCombo">
+                                <ComboBoxItem Content="Entrance"/>
+                                <ComboBoxItem Content="Drill"/>
+                                <ComboBoxItem Content="Suppress"/>
+                                <ComboBoxItem Content="Slide from left"/>
+                                <ComboBoxItem Content="Slide from right"/>
+                            </ComboBox>
+                        </Grid>
+                    </Border>-->
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="170" Width="*"/>
+                                <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Rounded corners for controls"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use rounded corners introduced in WinUI 2.6 (app restart needed)"/>
+                            </StackPanel>
+                            <ToggleSwitch VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="RoundCornerToggle" Toggled="OnRoundedCornerToggled"/>
+                        </Grid>
+                    </Border>
+
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="170" Width="*"/>
+                                <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Row="0" VerticalAlignment="Stretch" Grid.Column="0" Margin="17,0,0,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Background image"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Toggle using an image as wallpaper"/>
+                            </StackPanel>
+                            <ToggleSwitch Grid.Row="0" VerticalAlignment="Center" Margin="10,0,-30,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="btntoggle" Toggled="OnBGIMGToggled"/>
+                            <Rectangle Fill="{ThemeResource NavigationViewContentBackground}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2"/>
+                            <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                                <StackPanel Orientation="Vertical" Spacing="10">
+                                    <TextBlock TextWrapping="Wrap" Text="Note: Images could have bad contrast with colors"/>
+                                    <Button x:Name="bgimgbutton" Click="Chooseimg" Content="Choose Image"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <!--<controls:Expander.Content>
+                            
+                        </controls:Expander.Content>-->
+                    </Border>
+                    <Border Margin="0,20,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
+                        <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" FontSize="18" Text="Miscellaneous"/>
+                    </Border>
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="170" Width="*"/>
+                                <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch" Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Backup &amp; Restore"/>
+                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Create or restore data backup"/>
+                            </StackPanel>
+                            <Button VerticalAlignment="Center" Margin="10,0,54,0" Content="See more" Click="OpenBackupDialog" Grid.Column="1" HorizontalAlignment="Right">
+
+                            </Button>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="170" Width="*"/>
+                                <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch" Spacing="3" Orientation="Vertical">
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="About this app"/>
+                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Loaded="TextBlock_Loaded"/>
+                            </StackPanel>
+                            <HyperlinkButton VerticalAlignment="Center" Margin="10,0,54,0" Grid.Column="1" HorizontalAlignment="Right" NavigateUri="https://github.com/BigFloppa404/To-Do_App">
+                                <HyperlinkButton.Content>
+                                    <TextBlock Foreground="{ThemeResource SystemAccentColor}" Text="GitHub page"/>
+                                </HyperlinkButton.Content>
+                            </HyperlinkButton>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        <Border Grid.Row="0" Margin="35,-54,35,10" VerticalAlignment="Top" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
+            <TextBlock Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="Settings"/>
+        </Border>
+    </Grid>
+</Page>
