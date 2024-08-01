@@ -10,26 +10,7 @@ namespace To_Do.Models
 
         public TaskService()
         {
-            ObjTasksList = new ObservableCollection<TaskModel>()
-            {
-                new TaskModel()
-                {
-                    Id = 0,
-                    Description = "Test",
-                    IsCompleted = false,
-                    IsStarred = false,
-                    SubTasks = new List<TaskModel>()
-                    {
-                        new TaskModel()
-                        {
-                            Id=10,
-                            Description="Subbtsdasdasd"
-                        }
-                    },
-                    Date = System.DateTime.Now.ToString()
-                }
-            };
-            Debug.WriteLine("Constructed Task Service with one task in the model");
+            ObjTasksList = new ObservableCollection<TaskModel>();
         }
 
         public ObservableCollection<TaskModel> GetAll()

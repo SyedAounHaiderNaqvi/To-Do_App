@@ -33,10 +33,10 @@ namespace To_Do.Views
 
         public static TaskPage instance;
 
+        TaskViewModel viewModel;
+
         //public string redate;
         public ContentDialog dialog;
-        //TaskViewModel viewModel;
-
 
         //for debug for now
         public string _name = "Pending Tasks";
@@ -47,21 +47,12 @@ namespace To_Do.Views
 
         public TaskPage()
         {
-            //viewModel = new TaskViewModel();
             this.InitializeComponent();
-            //this.DataContext = viewModel;
             instance = this;
-            //this.listOfTasks.ItemsSource = viewModel.TasksList;
-            //ObservableCollection <TaskModel> sdsd = this.listOfTasks.ItemsSource as ObservableCollection<TaskModel>;
-            Debug.WriteLine(this.DataContext);
-            Debug.WriteLine(this.listOfTasks.ItemsSource);
+            viewModel = (TaskViewModel)this.DataContext;
             //InitializeData();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
-            //listOfTasks.ItemsSource = _tasks;
-            //listOfTasks.UpdateLayout();
             //UpdateBadge();
-            //MainPage.ins.LoadingUI.Visibility = Visibility.Collapsed;
-            //MainPage.ins.Ring.IsActive = false;
         }
         //public void AddATask(TaskModel newTask)
         //{
@@ -141,7 +132,7 @@ namespace To_Do.Views
 
         private void listOfTasks_LayoutUpdated(object sender, object e)
         {
-            AllDone.Visibility = TaskService.ObjTasksList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            AllDone.Visibility = viewModel.TasksList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         //public async Task LoadDataFromFile()
@@ -236,19 +227,21 @@ namespace To_Do.Views
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            //if (e.Key == Windows.System.VirtualKey.Enter)
-            //{
-            //    string d = NewTaskBox.Text;
-            //    if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
-            //    {
-            //        TaskModel newTask = new TaskModel() { Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false };
-            //        newTask.SubTasks = new List<TaskModel>();
-            //        AddATask(newTask);
-            //        NewTaskBox.Text = string.Empty;
-            //        e.Handled = true;
-            //        Sort((string)SortingDropDown.Content);
-            //    }
-            //}
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                string d = NewTaskBox.Text;
+                if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
+                {
+                    TaskModel newTask = new TaskModel() { Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false };
+                    newTask.SubTasks = new List<TaskModel>();
+                    var vm = (TaskViewModel)this.DataContext;
+                    vm.Add(newTask);
+                    NewTaskBox.Text = string.Empty;
+                    e.Handled = true;
+                    Sort((string)SortingDropDown.Content);
+                    listOfTasks.ScrollIntoView(newTask);
+                }
+            }
         }
 
         private void StarChecked(object sender, RoutedEventArgs e)
@@ -465,59 +458,59 @@ namespace To_Do.Views
 
         private void SortingOptionClicked(object sender, RoutedEventArgs e)
         {
-            //MenuFlyoutItem item = sender as MenuFlyoutItem;
-            //SortingDropDown.Content = item.Text;
-            //Sort(item.Text);
+            MenuFlyoutItem item = sender as MenuFlyoutItem;
+            SortingDropDown.Content = item.Text;
+            Sort(item.Text);
         }
 
         void Sort(string typeOfSort)
         {
-            //if (typeOfSort != "Custom")
-            //{
-            //    var list = new List<TaskModel>(_tasks);
-            //    switch (typeOfSort)
-            //    {
-            //        case "Date Created":
-            //            list.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
-            //            break;
-            //        case "Text":
-            //            list.Sort((x, y) => string.Compare(x.Description, y.Description));
-            //            break;
-            //        case "Steps":
-            //            list = list.OrderBy(x => x.SubTasks.Count).Reverse().ToList();
-            //            break;
-            //        case "Importance":
-            //            var query = from task in list
-            //                        orderby !task.IsStarred
-            //                        select task;
-            //            list = query.ToList();
-            //            break;
-            //        case "Completed":
-            //            var q = from task in list
-            //                    orderby !task.IsCompleted
-            //                    select task;
-            //            list = q.ToList();
-            //            break;
-            //        default:
-            //            break;
-            //    }
-
-            //    _tasks = new ObservableCollection<TaskModel>(list);
-            //    listOfTasks.ItemsSource = _tasks;
-            //}
+            Debug.WriteLine(typeOfSort);
+            if (typeOfSort != "Custom")
+            {
+                var list = new List<TaskModel>(viewModel.TasksList);
+                switch (typeOfSort)
+                {
+                    case "Date Created":
+                        list.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                        break;
+                    case "Text":
+                        list.Sort((x, y) => string.Compare(x.Description, y.Description));
+                        break;
+                    case "Steps":
+                        list = list.OrderBy(x => x.SubTasks.Count).Reverse().ToList();
+                        break;
+                    case "Importance":
+                        var query = from task in list
+                                    orderby !task.IsStarred
+                                    select task;
+                        list = query.ToList();
+                        break;
+                    case "Completed":
+                        var q = from task in list
+                                orderby !task.IsCompleted
+                                select task;
+                        list = q.ToList();
+                        break;
+                    default:
+                        break;
+                }
+                TaskService.ObjTasksList = new ObservableCollection<TaskModel>(list);
+                viewModel.LoadData();
+            }
         }
 
         private void listOfTasks_DragItemsCompleted(ListViewBase sender, DragItemsCompletedEventArgs args)
         {
-            //if (args != null)
-            //{
-            //    SortingDropDown.Content = "Custom";
-            //    opt1.IsChecked = false;
-            //    opt2.IsChecked = false;
-            //    opt3.IsChecked = false;
-            //    opt4.IsChecked = false;
-            //    opt5.IsChecked = false;
-            //}
+            if (args != null)
+            {
+                SortingDropDown.Content = "Custom";
+                opt1.IsChecked = false;
+                opt2.IsChecked = false;
+                opt3.IsChecked = false;
+                opt4.IsChecked = false;
+                opt5.IsChecked = false;
+            }
         }
 
         private void SubTaskPointerCaptureLost(object sender, PointerRoutedEventArgs e)
@@ -622,17 +615,6 @@ namespace To_Do.Views
             //{
             //    textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
             //}
-        }
-
-        private void CreateNewTask(object sender, RoutedEventArgs e)
-        {
-            
-            //this.viewModel.AddTask();
-        }
-
-        private void EditTask(object sender, RoutedEventArgs e)
-        {
-            //this.viewModel.EditTask();
         }
     }
 

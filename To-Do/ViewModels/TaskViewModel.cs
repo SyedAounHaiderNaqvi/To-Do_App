@@ -21,24 +21,24 @@ namespace To_Do.ViewModels
 
         TaskService ObjTaskService;
 
-        private RelayCommand saveCommand;
-        public RelayCommand SaveCommand
-        {
-            get { return saveCommand; }
-        }
+        //private RelayCommand addCommand;
+        //public RelayCommand AddCommand
+        //{
+        //    get { return addCommand; }
+        //}
 
-        private RelayCommand randomCommand;
-        public RelayCommand RandomCommand
-        {
-            get { return randomCommand; }
-        }
+        //private RelayCommand randomCommand;
+        //public RelayCommand RandomCommand
+        //{
+        //    get { return randomCommand; }
+        //}
 
         public TaskViewModel()
         {
             ObjTaskService = new TaskService();
             LoadData();
-            saveCommand = new RelayCommand(Save);
-            randomCommand = new RelayCommand(Randomize);
+            //addCommand = new RelayCommand(Add);
+            //randomCommand = new RelayCommand(Randomize);
             Debug.WriteLine("Successfully constrcuted viewmodel and loadeddata");
         }
 
@@ -53,28 +53,18 @@ namespace To_Do.ViewModels
             }
         }
 
-        private void LoadData()
+        public void LoadData()
         {
             TasksList = new ObservableCollection<TaskModel>(ObjTaskService.GetAll());
         }
 
-        
-
-        public void Save()
+        public void Add(TaskModel task)
         {
             Debug.WriteLine("Clicked");
             try
             {
-                var isSaved = ObjTaskService.AddTask(new TaskModel() { Description = "sdsdsdsdsd", Date = "sdsd", Id = System.DateTime.Now.Second, IsCompleted = false, IsStarred = false, SubTasks = new List<TaskModel>() });
-                if (isSaved)
-                {
-                    Debug.WriteLine("Saved");
-                    LoadData();
-                }
-                else
-                {
-                    Debug.WriteLine("Save failed");
-                }
+                ObjTaskService.AddTask(task);
+                LoadData();
             }
             catch (Exception ex)
             {

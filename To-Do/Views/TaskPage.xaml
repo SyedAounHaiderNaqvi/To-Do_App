@@ -1033,15 +1033,15 @@
         </Grid>
 
 
-        <!--<TextBox Translation="0,0,32" Shadow="{StaticResource SharedShadow}" BorderThickness="0" Style="{ThemeResource TextBoxStyle1}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="50,15,10,10" Margin="35,5,35,20" GotFocus="NewTaskBox_GotFocus" LostFocus="NewTaskBox_LostFocus" KeyDown="NewTaskBox_KeyDown" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" VerticalContentAlignment="Center" PlaceholderText="Add a new task" Height="50"  x:Name="NewTaskBox"/>-->
+        <TextBox Translation="0,0,32" Shadow="{StaticResource SharedShadow}" BorderThickness="0" Style="{ThemeResource TextBoxStyle1}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="50,15,10,10" Margin="35,5,35,20" GotFocus="NewTaskBox_GotFocus" LostFocus="NewTaskBox_LostFocus" KeyDown="NewTaskBox_KeyDown" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" VerticalContentAlignment="Center" PlaceholderText="Add a new task" Height="50"  x:Name="NewTaskBox"/>
 
 
 
-        <StackPanel Orientation="Vertical" Spacing="20">
+        <!--<StackPanel Orientation="Vertical" Spacing="20">
 
-            <Button Content="Add Task" Command="{Binding Path=SaveCommand}"/>
+            <Button Content="Add Task" Command="{Binding Path=AddCommand}"/>
             <Button Content="Edit random Task" Command="{Binding Path=RandomCommand}"/>
-        </StackPanel>
+        </StackPanel>-->
 
 
 
