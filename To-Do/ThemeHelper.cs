@@ -62,7 +62,7 @@ namespace To_Do
 
         public static void Initialize()
         {
-            // Add reference as this might be null when the user is in another app
+            // AddTask reference as this might be null when the user is in another app
             CurrentApplicationWindow = Window.Current;
             string savedTheme = ApplicationData.Current.LocalSettings.Values[SelectedAppThemeKey]?.ToString();
 

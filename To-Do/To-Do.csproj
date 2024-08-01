@@ -133,7 +133,6 @@
     <Compile Include="CustomColorThemeContentDialog.xaml.cs">
       <DependentUpon>CustomColorThemeContentDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\TaskService.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

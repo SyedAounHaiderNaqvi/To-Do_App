@@ -56,7 +56,7 @@ namespace To_Do.Views
         }
         //public void AddATask(TaskModel newTask)
         //{
-        //    _tasks.Add(newTask);
+        //    _tasks.AddTask(newTask);
         //    listOfTasks.ItemsSource = _tasks;
 
         //    listOfTasks.UpdateLayout();
@@ -74,19 +74,19 @@ namespace To_Do.Views
         //            string temp = tODO.Description;
         //            string date = tODO.Date;
         //            bool importance = tODO.IsStarred;
-        //            _savingDescriptions.Add(temp);
-        //            _savingDates.Add(date);
-        //            _savingImps.Add(importance);
+        //            _savingDescriptions.AddTask(temp);
+        //            _savingDates.AddTask(date);
+        //            _savingImps.AddTask(importance);
 
         //            List<TaskModel> steps = tODO.SubTasks;
         //            List<string> tempList = new List<string>();
         //            for (int i = 0; i < steps.Count; i++)
         //            {
-        //                tempList.Add(steps[i].Description);
+        //                tempList.AddTask(steps[i].Description);
         //            }
         //            if (steps != null)
         //            {
-        //                savingSteps.Add(tempList);
+        //                savingSteps.AddTask(tempList);
         //            }
         //        }
         //        string jsonFile = JsonConvert.SerializeObject(_savingDescriptions);
@@ -167,7 +167,7 @@ namespace To_Do.Views
         //                for (int x = 0; x < loadedSteps[i].Count; x++)
         //                {
         //                    string descOfStep = loadedSteps[i][x];
-        //                    newTask.SubTasks.Add(new TaskModel() { Description = descOfStep });
+        //                    newTask.SubTasks.AddTask(new TaskModel() { Description = descOfStep });
         //                }
         //                AddATask(newTask);
         //            }
@@ -232,10 +232,12 @@ namespace To_Do.Views
                 string d = NewTaskBox.Text;
                 if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
                 {
-                    TaskModel newTask = new TaskModel() { Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false };
+                    string id = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
+                    Debug.WriteLine(id);
+                    TaskModel newTask = new TaskModel() { Id = id, Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false };
                     newTask.SubTasks = new List<TaskModel>();
                     var vm = (TaskViewModel)this.DataContext;
-                    vm.Add(newTask);
+                    vm.AddTask(newTask);
                     NewTaskBox.Text = string.Empty;
                     e.Handled = true;
                     Sort((string)SortingDropDown.Content);
@@ -246,14 +248,7 @@ namespace To_Do.Views
 
         private void StarChecked(object sender, RoutedEventArgs e)
         {
-            //CheckBox cb = sender as CheckBox;
-            //UserControl ct = cb.DataContext as UserControl;
-            //TaskModel task = ct.DataContext as TaskModel;
-            //var truth = (bool)cb.IsChecked;
-            //cb.ClearValue(CheckBox.IsCheckedProperty);
-            //task.IsStarred = truth;
-            //Sort((string)SortingDropDown.Content);
-            //return;
+            Sort((string)SortingDropDown.Content);
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -344,7 +339,7 @@ namespace To_Do.Views
             //dialog = new EditDialogContent();
             //Grid.SetRowSpan(dialog, 2);
             //dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
-            //dialog.Title = "Add Step";
+            //dialog.Title = "AddTask Step";
             //int index = 0;
             //Button item = sender as Button;
             //UserControl top = item.DataContext as UserControl;
@@ -426,34 +421,34 @@ namespace To_Do.Views
         {
             if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse || e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
             {
-                var c = sender as Control;
-                var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-                var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-                panel.Translation = System.Numerics.Vector3.Zero;
-                panel.Opacity = 1;
-                block.Translation = System.Numerics.Vector3.Zero;
+                //var c = sender as Control;
+                //var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
+                //var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+                //panel.Translation = System.Numerics.Vector3.Zero;
+                //panel.Opacity = 1;
+                //block.Translation = System.Numerics.Vector3.Zero;
             }
         }
 
         private void UserControl_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            var c = sender as Control;
-            var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-            var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-            panel.Translation = new System.Numerics.Vector3(0, 20, 0);
-            panel.Opacity = 0;
-            block.Translation = new System.Numerics.Vector3(0, 12, 0);
+            //var c = sender as Control;
+            //var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
+            //var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+            //panel.Translation = new System.Numerics.Vector3(0, 20, 0);
+            //panel.Opacity = 0;
+            //block.Translation = new System.Numerics.Vector3(0, 12, 0);
         }
 
         private void CheckBox_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
         {
-            CheckBox cb = sender as CheckBox;
-            var c = cb.DataContext as Control;
-            var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-            var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-            panel.Translation = new System.Numerics.Vector3(0, 20, 0);
-            panel.Opacity = 0;
-            block.Translation = new System.Numerics.Vector3(0, 12, 0);
+            //CheckBox cb = sender as CheckBox;
+            //var c = cb.DataContext as Control;
+            //var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
+            //var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+            //panel.Translation = new System.Numerics.Vector3(0, 20, 0);
+            //panel.Opacity = 0;
+            //block.Translation = new System.Numerics.Vector3(0, 12, 0);
         }
 
         private void SortingOptionClicked(object sender, RoutedEventArgs e)
@@ -465,7 +460,6 @@ namespace To_Do.Views
 
         void Sort(string typeOfSort)
         {
-            Debug.WriteLine(typeOfSort);
             if (typeOfSort != "Custom")
             {
                 var list = new List<TaskModel>(viewModel.TasksList);
@@ -495,8 +489,7 @@ namespace To_Do.Views
                     default:
                         break;
                 }
-                TaskService.ObjTasksList = new ObservableCollection<TaskModel>(list);
-                viewModel.LoadData();
+                viewModel.TasksList = new ObservableCollection<TaskModel>(list);
             }
         }
 
@@ -681,69 +674,6 @@ namespace To_Do.Views
     //    public void OnPropertyChanged([CallerMemberName] string propertyName = null)
     //    {
     //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-    //    }
-    //}
-
-    //public class TaskViewModel : INotifyPropertyChanged
-    //{
-    //    private ObservableCollection<TaskModel> _tasks;
-    //    private TaskModel _selectedTask;
-
-    //    public ObservableCollection<TaskModel> Tasks
-    //    {
-    //        get => _tasks;
-    //        set
-    //        {
-    //            _tasks = value;
-    //            OnPropertyChanged(nameof(Tasks));
-    //        }
-    //    }
-
-    //    public TaskModel SelectedTask
-    //    {
-    //        get => _selectedTask;
-    //        set
-    //        {
-    //            _selectedTask = value;
-    //            OnPropertyChanged(nameof(SelectedTask));
-    //        }
-    //    }
-
-    //    public TaskViewModel()
-    //    {
-    //        _tasks = new ObservableCollection<TaskModel>();
-    //    }
-
-    //    public void AddTask()
-    //    {
-    //        // Logic to add a new task
-    //        Console.WriteLine("Ssdsdad");
-    //        TaskModel newTask = new TaskModel()
-    //        {
-    //            Description = System.DateTime.Now.ToShortTimeString(),
-    //            IsStarred = true
-    //        };
-    //        Tasks.Add(newTask);
-    //    }
-
-    //    public void RemoveTask()
-    //    {
-    //        // Logic to remove the selected task
-    //    }
-
-    //    public void EditTask()
-    //    {
-    //        // Logic to edit the selected task
-    //        Random rnd = new Random();
-    //        int index = rnd.Next(0, Tasks.Count);
-    //        Tasks[index].Description = rnd.Next().ToString();
-    //    }
-
-    //    public event PropertyChangedEventHandler PropertyChanged;
-
-    //    protected virtual void OnPropertyChanged(string propertyName)
-    //    {
-    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     //    }
     //}
 }

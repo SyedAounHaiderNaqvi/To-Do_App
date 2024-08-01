@@ -6,8 +6,8 @@ namespace To_Do.Models
 {
     public class TaskModel
     {
-        private int id;
-        public int Id
+        private string id;
+        public string Id
         {
             get { return id; }
             set
@@ -77,8 +77,7 @@ namespace To_Do.Models
 
         private void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged!=null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

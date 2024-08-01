@@ -11,36 +11,14 @@ namespace To_Do.ViewModels
 {
     public class TaskViewModel : INotifyPropertyChanged
     {
+        #region OnPropertyChangedHandler
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        TaskService ObjTaskService;
-
-        //private RelayCommand addCommand;
-        //public RelayCommand AddCommand
-        //{
-        //    get { return addCommand; }
-        //}
-
-        //private RelayCommand randomCommand;
-        //public RelayCommand RandomCommand
-        //{
-        //    get { return randomCommand; }
-        //}
-
-        public TaskViewModel()
-        {
-            ObjTaskService = new TaskService();
-            LoadData();
-            //addCommand = new RelayCommand(Add);
-            //randomCommand = new RelayCommand(Randomize);
-            Debug.WriteLine("Successfully constrcuted viewmodel and loadeddata");
-        }
+        #endregion
 
         private ObservableCollection<TaskModel> tasksList;
         public ObservableCollection<TaskModel> TasksList
@@ -53,34 +31,50 @@ namespace To_Do.ViewModels
             }
         }
 
-        public void LoadData()
+        public TaskViewModel()
         {
-            TasksList = new ObservableCollection<TaskModel>(ObjTaskService.GetAll());
+            TasksList = new ObservableCollection<TaskModel>();
         }
 
-        public void Add(TaskModel task)
+        public void AddTask(TaskModel task)
         {
-            Debug.WriteLine("Clicked");
-            try
-            {
-                ObjTaskService.AddTask(task);
-                LoadData();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            TasksList.Add(task);
         }
 
-        public void Randomize()
+        //public bool UpdateTask(TaskModel taskToUpdate)
+        //{
+        //    bool isUpdated = false;
+
+        //    foreach (TaskModel task in TasksList)
+        //    {
+        //        if (task.Id == taskToUpdate.Id)
+        //        {
+        //            task.Description = taskToUpdate.Description;
+        //            task.Date = taskToUpdate.Date;
+        //            task.IsCompleted = taskToUpdate.IsCompleted;
+        //            task.IsStarred = taskToUpdate.IsStarred;
+        //            task.SubTasks = taskToUpdate.SubTasks;
+        //            isUpdated = true;
+        //            break;
+        //        }
+        //    }
+
+        //    return isUpdated;
+        //}
+
+        public bool DeleteTask(string id)
         {
-            Debug.WriteLine("Randomizing");
-            Random random = new Random();
-            var index = random.Next(0, TasksList.Count);
-            TasksList[index].Description = random.Next().ToString();
-            TasksList[index].Date = random.Next().ToString();
-            TasksList[index].SubTasks.Add(new TaskModel() { Description = random.Next().ToString() });
-            LoadData();
+            bool isDeleted = false;
+            for (int i = 0; i < TasksList.Count; i++)
+            {
+                if (TasksList[i].Id == id)
+                {
+                    TasksList.RemoveAt(i);
+                    isDeleted = true;
+                    break;
+                }
+            }
+            return isDeleted;
         }
     }
 }

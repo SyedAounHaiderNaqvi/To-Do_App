@@ -114,13 +114,13 @@ namespace To_Do.Views
         //                for (int i = 0; i < loadedNames.Count; i++)
         //                {
         //                    CustomNavViewItem cat = new CustomNavViewItem { Name = loadedNames[i], Glyph = loadedGlyphs[i], Tag = loadedTags[i] };
-        //                    Categories.Add(cat);
+        //                    Categories.AddTask(cat);
         //                }
         //            }
         //        }
         //        else
         //        {
-        //            Categories.Add(new CustomNavViewItem { Name = "Pending Tasks", Glyph = "\uE823", Tag = "TaskPage" });
+        //            Categories.AddTask(new CustomNavViewItem { Name = "Pending Tasks", Glyph = "\uE823", Tag = "TaskPage" });
         //        }
         //    }
 
@@ -387,19 +387,19 @@ namespace To_Do.Views
         //                string temp = tODO.Description;
         //                string date = tODO.Date;
         //                bool importance = tODO.IsStarred;
-        //                savingDescriptions.Add(temp);
-        //                savingDates.Add(date);
-        //                savingImps.Add(importance);
+        //                savingDescriptions.AddTask(temp);
+        //                savingDates.AddTask(date);
+        //                savingImps.AddTask(importance);
 
         //                List<TaskModel> steps = tODO.SubTasks;
         //                List<string> tempList = new List<string>();
         //                for (int i = 0; i < steps.Count; i++)
         //                {
-        //                    tempList.Add(steps[i].Description);
+        //                    tempList.AddTask(steps[i].Description);
         //                }
         //                if (steps != null)
         //                {
-        //                    savingSteps.Add(tempList);
+        //                    savingSteps.AddTask(tempList);
         //                }
         //            }
         //            string jsonFile = JsonConvert.SerializeObject(savingDescriptions);
@@ -436,9 +436,9 @@ namespace To_Do.Views
 
         //        for (int i = 0; i < Categories.Count; i++)
         //        {
-        //            navListsTags.Add(Categories[i].Tag);
-        //            navListsNames.Add(Categories[i].Name);
-        //            navListsGlyphs.Add(Categories[i].Glyph);
+        //            navListsTags.AddTask(Categories[i].Tag);
+        //            navListsNames.AddTask(Categories[i].Name);
+        //            navListsGlyphs.AddTask(Categories[i].Glyph);
         //        }
         //        string tag_File = JsonConvert.SerializeObject(navListsTags);
         //        string name_File = JsonConvert.SerializeObject(navListsNames);
@@ -462,7 +462,7 @@ namespace To_Do.Views
         //            string title = "Tasks to do";
         //            for (int i = 0; i < TaskItems.Count; i++)
         //            {
-        //                tasks.Add(TaskItems[i].Description);
+        //                tasks.AddTask(TaskItems[i].Description);
         //            }
         //            int amountOfTasks = TaskItems.Count;
 
@@ -906,7 +906,7 @@ namespace To_Do.Views
         //        foreach (var item in matchingItems)
         //        {
         //            string glyph = item.IsCompleted ? "\uE73E" : "\uEA3A";
-        //            suggestions.Add(new QueryFormat(item.Description, currentPageName, glyph));
+        //            suggestions.AddTask(new QueryFormat(item.Description, currentPageName, glyph));
         //        }
 
         //        return suggestions.OrderByDescending(i => i.Title.StartsWith(query, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title).ToList();
@@ -1115,7 +1115,7 @@ namespace To_Do.Views
             //    string name = (string)localSettings.Values["NEWlistName"];
             //    string tag = ((string)localSettings.Values["NEWlistTag"]);
             //    string glyph = (string)localSettings.Values["NEWlistIcon"];
-            //    Categories.Add(new CustomNavViewItem { Tag = tag, Name = name, Glyph = glyph });
+            //    Categories.AddTask(new CustomNavViewItem { Tag = tag, Name = name, Glyph = glyph });
             //}
         }
 
