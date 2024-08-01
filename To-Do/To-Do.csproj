@@ -129,7 +129,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="CustomColorThemeContentDialog.xaml.cs">
       <DependentUpon>CustomColorThemeContentDialog.xaml</DependentUpon>
     </Compile>
@@ -274,6 +273,9 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="To-Do_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

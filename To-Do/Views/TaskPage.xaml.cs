@@ -18,6 +18,9 @@ using To_Do.Models;
 using System.Windows.Input;
 using To_Do.ViewModels;
 using System.Diagnostics;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Composition;
+using Windows.UI;
 
 namespace To_Do.Views
 {
@@ -42,7 +45,7 @@ namespace To_Do.Views
         public string _name = "Pending Tasks";
         public string _tag = "TaskPage";
         public string lastDataParseTag = "TaskPage";
-        bool loadedForFirstTime = true;
+        //bool loadedForFirstTime = true;
         public bool finallyLoaded = false;
 
         public TaskPage()
@@ -50,6 +53,7 @@ namespace To_Do.Views
             this.InitializeComponent();
             instance = this;
             viewModel = (TaskViewModel)this.DataContext;
+            
             //InitializeData();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
             //UpdateBadge();
@@ -179,7 +183,7 @@ namespace To_Do.Views
         //    }
         //}
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             finallyLoaded = false;
             //if (e != null)
@@ -233,7 +237,6 @@ namespace To_Do.Views
                 if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
                 {
                     string id = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
-                    Debug.WriteLine(id);
                     TaskModel newTask = new TaskModel() { Id = id, Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false };
                     newTask.SubTasks = new List<TaskModel>();
                     var vm = (TaskViewModel)this.DataContext;
@@ -253,17 +256,15 @@ namespace To_Do.Views
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = sender as CheckBox;
-            UserControl top = cb.DataContext as UserControl;
-            TaskModel task = top.DataContext as TaskModel;
-            var truth = (bool)cb.IsChecked;
-            cb.ClearValue(CheckBox.IsCheckedProperty);
-            task.IsCompleted = truth;
-            //Sort((string)SortingDropDown.Content);
-            return;
+            //UserControl top = cb.DataContext as UserControl;
+            //TaskModel task = top.DataContext as TaskModel;
+            //var truth = (bool)cb.IsChecked;
+            //cb.ClearValue(CheckBox.IsCheckedProperty);
+            //task.IsCompleted = truth;
+            Sort((string)SortingDropDown.Content);
         }
 
-        private async void StepCheckToggled(object sender, RoutedEventArgs e)
+        private void StepCheckToggled(object sender, RoutedEventArgs e)
         {
             //CheckBox checkbox = sender as CheckBox;
             ////step complete
@@ -301,7 +302,6 @@ namespace To_Do.Views
         {
             // Delete a task
             //moreOptionsSplitView.IsPaneOpen = false;
-
             //_tasks.Remove(selectedTask);
             //selectedTask = null;
             //UpdateBadge();
@@ -334,7 +334,7 @@ namespace To_Do.Views
             //Sort((string)SortingDropDown.Content);
         }
 
-        private async void AddStep(object sender, RoutedEventArgs e)
+        private void AddStep(object sender, RoutedEventArgs e)
         {
             //dialog = new EditDialogContent();
             //Grid.SetRowSpan(dialog, 2);
@@ -421,35 +421,35 @@ namespace To_Do.Views
         {
             if (e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse || e.Pointer.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
             {
-                //var c = sender as Control;
-                //var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-                //var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-                //panel.Translation = System.Numerics.Vector3.Zero;
-                //panel.Opacity = 1;
-                //block.Translation = System.Numerics.Vector3.Zero;
+                var c = sender as Control;
+                var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
+                var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+                panel.Translation = System.Numerics.Vector3.Zero;
+                panel.Opacity = 1;
+                block.Translation = System.Numerics.Vector3.Zero;
             }
         }
 
         private void UserControl_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            //var c = sender as Control;
-            //var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-            //var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-            //panel.Translation = new System.Numerics.Vector3(0, 20, 0);
-            //panel.Opacity = 0;
-            //block.Translation = new System.Numerics.Vector3(0, 12, 0);
+            var c = sender as Control;
+            var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
+            var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+            panel.Translation = new System.Numerics.Vector3(0, 20, 0);
+            panel.Opacity = 0;
+            block.Translation = new System.Numerics.Vector3(0, 12, 0);
         }
 
-        private void CheckBox_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
-        {
-            //CheckBox cb = sender as CheckBox;
-            //var c = cb.DataContext as Control;
-            //var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-            //var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-            //panel.Translation = new System.Numerics.Vector3(0, 20, 0);
-            //panel.Opacity = 0;
-            //block.Translation = new System.Numerics.Vector3(0, 12, 0);
-        }
+        //private void CheckBox_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
+        //{
+        //    //CheckBox cb = sender as CheckBox;
+        //    //var c = cb.DataContext as Control;
+        //    //var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
+        //    //var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+        //    //panel.Translation = new System.Numerics.Vector3(0, 20, 0);
+        //    //panel.Opacity = 0;
+        //    //block.Translation = new System.Numerics.Vector3(0, 12, 0);
+        //}
 
         private void SortingOptionClicked(object sender, RoutedEventArgs e)
         {
@@ -557,8 +557,6 @@ namespace To_Do.Views
 
         TaskModel selectedTask = null;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private void OpenSplitView(object sender, RoutedEventArgs e)
         {
             Button item = sender as Button;
@@ -598,16 +596,18 @@ namespace To_Do.Views
 
         private void TaskDesc_Loaded(object sender, RoutedEventArgs e)
         {
-            //var textBlock = sender as TextBlock;
-            //CheckBox cb = (CheckBox)textBlock.DataContext;
-            //if ((bool)cb.IsChecked)
-            //{
-            //    textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-            //}
-            //else
-            //{
-            //    textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
-            //}
+            var textBlock = sender as TextBlock;
+            TaskModel tm = (TaskModel)textBlock.DataContext;
+            if (tm.IsCompleted)
+            {
+                textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                textBlock.Opacity = 0.6f;
+            }
+            else
+            {
+                textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
+                textBlock.Opacity = 1;
+            }
         }
     }
 

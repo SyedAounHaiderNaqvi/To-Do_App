@@ -885,7 +885,7 @@
                                             <ColumnDefinition Width="70"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <CheckBox x:Name="completecheckbox" Translation="-10,0,0" IsChecked="{Binding Path=IsCompleted}" PointerCaptureLost="CheckBox_PointerCaptureLost" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" Click="CheckBox_Checked" Margin="25,0,10,0" Grid.Column="0" CornerRadius="10"/>
+                                        <CheckBox x:Name="completecheckbox" Translation="-10,0,0" IsChecked="{Binding Path=IsCompleted, Mode=TwoWay}" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" Click="CheckBox_Checked" Margin="25,0,10,0" Grid.Column="0" CornerRadius="10"/>
                                         <StackPanel Spacing="10" VerticalAlignment="Center" Margin="-5,0,150,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15">
                                             <TextBlock Loaded="TaskDesc_Loaded" Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding Path=Description, Mode=TwoWay}">
                                                 <TextBlock.TranslationTransition>
@@ -909,7 +909,7 @@
                                                     <FontIcon FontSize="14" Glyph="&#xE710;"/>
                                                 </Button.Content>
                                             </Button>
-                                            <CheckBox Margin="0,-2,0,0" CornerRadius="20" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{Binding Path=IsStarred, Mode=TwoWay}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important"/>
+                                            <CheckBox Margin="0,-2,0,0" CornerRadius="20" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{Binding Path=IsStarred, Mode=TwoWay}" ToolTipService.ToolTip="Mark as important"/>
                                             <Button DataContext="{Binding ElementName=UserControl}" Click="OpenSplitView" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE712;"/>

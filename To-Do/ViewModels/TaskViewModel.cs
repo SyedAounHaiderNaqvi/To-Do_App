@@ -1,11 +1,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Input;
 using To_Do.Models;
-using To_Do.Commands;
-using System;
-using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace To_Do.ViewModels
 {
