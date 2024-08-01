@@ -2,12 +2,16 @@
     x:Class="To_Do.Views.TaskPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:model="using:To_Do.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:controls="using:Microsoft.UI.Xaml.Controls" 
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:model="using:To_Do.Models"
+    xmlns:viewmodel="using:To_Do.ViewModels"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
+    <Page.DataContext>
+        <viewmodel:TaskViewModel/>
+    </Page.DataContext>
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
@@ -868,22 +872,22 @@
             <RowDefinition/>
             <RowDefinition MinHeight="80" Height="80"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" Margin="35,15,19,0" x:FieldModifier="public"  DragItemsCompleted="listOfTasks_DragItemsCompleted" CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{x:Bind Path=viewModel.Tasks, Mode=TwoWay}">
+        <ListView Grid.Row="0" Margin="35,15,19,0" x:FieldModifier="public" DragItemsCompleted="listOfTasks_DragItemsCompleted" CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{Binding Path=TasksList, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:TaskModel">
                     <UserControl PointerEntered="UserControl_PointerEntered" PointerExited="UserControl_PointerExited" x:Name="UserControl">
                         <controls:Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="False">
                             <controls:Expander.HeaderTemplate>
-                                <DataTemplate x:DataType="model:TaskModel">
+                                <DataTemplate>
                                     <Grid x:Name="rootGrid">
 
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="70"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <CheckBox x:Name="completecheckbox" Translation="-10,0,0" IsChecked="{x:Bind IsCompleted}" PointerCaptureLost="CheckBox_PointerCaptureLost" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" DataContext="{Binding ElementName=UserControl}" Click="CheckBox_Checked" Margin="25,0,10,0" Grid.Column="0" CornerRadius="10"/>
-                                        <StackPanel Spacing="10" VerticalAlignment="Center" Margin="-5,0,150,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15" DataContext="{Binding ElementName=UserControl}">
-                                            <TextBlock DataContext="{Binding ElementName=completecheckbox}" Loaded="TaskDesc_Loaded" Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind Description, Mode=TwoWay}">
+                                        <CheckBox x:Name="completecheckbox" Translation="-10,0,0" IsChecked="{Binding Path=IsCompleted}" PointerCaptureLost="CheckBox_PointerCaptureLost" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" Click="CheckBox_Checked" Margin="25,0,10,0" Grid.Column="0" CornerRadius="10"/>
+                                        <StackPanel Spacing="10" VerticalAlignment="Center" Margin="-5,0,150,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15">
+                                            <TextBlock Loaded="TaskDesc_Loaded" Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding Path=Description, Mode=TwoWay}">
                                                 <TextBlock.TranslationTransition>
                                                     <Vector3Transition Duration="0:0:0.2"/>
                                                 </TextBlock.TranslationTransition>
@@ -896,7 +900,7 @@
                                                     <ScalarTransition Duration="0:0:0.13"/>
                                                 </StackPanel.OpacityTransition>
                                                 <TextBlock Text="Created on:" Foreground="{ThemeResource SystemAccentColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                                <TextBlock x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}" Text="{x:Bind Date, Mode=OneWay}"/>
+                                                <TextBlock x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}" Text="{Binding Path=Date, Mode=TwoWay}"/>
                                             </StackPanel>
                                         </StackPanel>
                                         <StackPanel x:Name="BtnPanel" Spacing="10" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="5,10,0,10" Orientation="Horizontal">
@@ -905,7 +909,7 @@
                                                     <FontIcon FontSize="14" Glyph="&#xE710;"/>
                                                 </Button.Content>
                                             </Button>
-                                            <CheckBox Margin="0,-2,0,0" CornerRadius="20" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{x:Bind IsStarred}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important" DataContext="{Binding ElementName=UserControl}"/>
+                                            <CheckBox Margin="0,-2,0,0" CornerRadius="20" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{Binding Path=IsStarred, Mode=TwoWay}" PointerCaptureLost="CheckBox_PointerCaptureLost" ToolTipService.ToolTip="Mark as important"/>
                                             <Button DataContext="{Binding ElementName=UserControl}" Click="OpenSplitView" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE712;"/>
@@ -918,7 +922,7 @@
                                 </DataTemplate>
                             </controls:Expander.HeaderTemplate>
                             <controls:Expander.Content>
-                                <ListView Margin="20,0,0,0" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{x:Bind SubTasks}" SelectionMode="None" BorderThickness="0" MaxHeight="350">
+                                <ListView Margin="20,0,0,0" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=SubTasks, Mode=TwoWay}" SelectionMode="None" BorderThickness="0" MaxHeight="350">
                                     <ListView.ItemTemplate>
                                         <DataTemplate x:DataType="model:TaskModel">
                                             <UserControl x:Name="control" PointerEntered="SubTaskPointerEntered" PointerExited="SubTaskPointerExited">
@@ -945,7 +949,7 @@
                                                         <CheckBox PointerCaptureLost="SubTaskPointerCaptureLost" DataContext="{Binding ElementName=control}" Checked="StepCheckToggled" Margin="5,0,0,0" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark as complete" Grid.Column="1">
 
                                                         </CheckBox>
-                                                        <TextBlock Style="{ThemeResource BaseTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Text="{x:Bind Description}"/>
+                                                        <TextBlock Style="{ThemeResource BaseTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Text="{Binding Path=Description}"/>
                                                         <Button Opacity="0" Translation="50,0,0" PointerCaptureLost="BTN_SubTaskPointerCaptureLost" Click="DeleteSubTask" DataContext="{Binding ElementName=control}" Grid.Column="3" Width="42" Height="46" x:Name="delsubtask" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" CornerRadius="20" ToolTipService.ToolTip="Delete step">
                                                             <Button.Content>
                                                                 <FontIcon FontSize="14" Glyph="&#xE74D;"/>
@@ -1035,8 +1039,8 @@
 
         <StackPanel Orientation="Vertical" Spacing="20">
 
-            <Button Content="Add Task" Click="CreateNewTask"/>
-            <Button Content="Edit random Task" Click="EditTask"/>
+            <Button Content="Add Task" Command="{Binding Path=SaveCommand}"/>
+            <Button Content="Edit random Task" Command="{Binding Path=RandomCommand}"/>
         </StackPanel>
 
 

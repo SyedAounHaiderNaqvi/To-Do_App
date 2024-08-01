@@ -587,35 +587,13 @@
             </controls:NavigationView.PaneCustomContent>-->
 
             <controls:NavigationView.MenuItems>
-                <controls:NavigationViewItem ToolTipService.ToolTip="My Day" Tag="MyDay">
-                    <controls:NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE706;"/>
-                    </controls:NavigationViewItem.Icon>
-                    <controls:NavigationViewItem.InfoBadge>
-                        <controls:InfoBadge x:FieldModifier="public" x:Name="myDayinf"/>
-                    </controls:NavigationViewItem.InfoBadge>
-                    <controls:NavigationViewItem.Content>
-                        <TextBlock Text="My Day"/>
-                    </controls:NavigationViewItem.Content>
-                </controls:NavigationViewItem>
 
                 <controls:NavigationViewItem ToolTipService.ToolTip="Pending Tasks" Tag="PendingTasks" IsSelected="True">
                     <controls:NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE823;"/>
                     </controls:NavigationViewItem.Icon>
-                    <controls:NavigationViewItem.InfoBadge>
-                        <controls:InfoBadge x:FieldModifier="public" x:Name="inf"/>
-                    </controls:NavigationViewItem.InfoBadge>
                     <controls:NavigationViewItem.Content>
                         <TextBlock Text="Pending Tasks"/>
-                    </controls:NavigationViewItem.Content>
-                </controls:NavigationViewItem>
-                <controls:NavigationViewItem ToolTipService.ToolTip="Completed Tasks" Tag="CompletedTasks">
-                    <controls:NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE73E;"/>
-                    </controls:NavigationViewItem.Icon>
-                    <controls:NavigationViewItem.Content>
-                        <TextBlock Text="Completed Tasks"/>
                     </controls:NavigationViewItem.Content>
                 </controls:NavigationViewItem>
             </controls:NavigationView.MenuItems>

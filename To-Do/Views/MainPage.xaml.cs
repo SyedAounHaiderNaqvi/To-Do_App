@@ -25,12 +25,12 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using Windows.UI.Xaml.Navigation;
+using To_Do.ViewModels;
 
 namespace To_Do.Views
 {
     public sealed partial class MainPage : Page
     {
-        private TaskViewModel _taskViewModel;
         //public List<string> savingDescriptions = new List<string>();
         //public List<string> savingDates = new List<string>();
         //public List<bool> savingImps = new List<bool>();

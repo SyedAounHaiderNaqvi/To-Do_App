@@ -16,6 +16,8 @@ using Microsoft.UI.Xaml.Controls;
 using System.Linq;
 using To_Do.Models;
 using System.Windows.Input;
+using To_Do.ViewModels;
+using System.Diagnostics;
 
 namespace To_Do.Views
 {
@@ -33,7 +35,7 @@ namespace To_Do.Views
 
         //public string redate;
         public ContentDialog dialog;
-        public TaskViewModel viewModel;
+        //TaskViewModel viewModel;
 
 
         //for debug for now
@@ -45,9 +47,14 @@ namespace To_Do.Views
 
         public TaskPage()
         {
+            //viewModel = new TaskViewModel();
             this.InitializeComponent();
+            //this.DataContext = viewModel;
             instance = this;
-            this.viewModel = new TaskViewModel();
+            //this.listOfTasks.ItemsSource = viewModel.TasksList;
+            //ObservableCollection <TaskModel> sdsd = this.listOfTasks.ItemsSource as ObservableCollection<TaskModel>;
+            Debug.WriteLine(this.DataContext);
+            Debug.WriteLine(this.listOfTasks.ItemsSource);
             //InitializeData();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
             //listOfTasks.ItemsSource = _tasks;
@@ -134,7 +141,7 @@ namespace To_Do.Views
 
         private void listOfTasks_LayoutUpdated(object sender, object e)
         {
-            //AllDone.Visibility = _tasks.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            AllDone.Visibility = TaskService.ObjTasksList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         //public async Task LoadDataFromFile()
@@ -222,7 +229,7 @@ namespace To_Do.Views
 
             //base.OnNavigatedTo(e);
             finallyLoaded = true;
-            DataContext = e.Parameter as TaskViewModel;
+            //DataContext = e.Parameter as TaskViewModel;
             MainPage.ins.LoadingUI.Visibility = Visibility.Collapsed;
             MainPage.ins.Ring.IsActive = false;
         }
@@ -605,26 +612,27 @@ namespace To_Do.Views
 
         private void TaskDesc_Loaded(object sender, RoutedEventArgs e)
         {
-            var textBlock = sender as TextBlock;
-            CheckBox cb = (CheckBox)textBlock.DataContext;
-            if ((bool)cb.IsChecked)
-            {
-                textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-            }
-            else
-            {
-                textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
-            }
+            //var textBlock = sender as TextBlock;
+            //CheckBox cb = (CheckBox)textBlock.DataContext;
+            //if ((bool)cb.IsChecked)
+            //{
+            //    textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+            //}
+            //else
+            //{
+            //    textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
+            //}
         }
 
         private void CreateNewTask(object sender, RoutedEventArgs e)
         {
-            this.viewModel.AddTask();
+            
+            //this.viewModel.AddTask();
         }
 
         private void EditTask(object sender, RoutedEventArgs e)
         {
-            this.viewModel.EditTask();
+            //this.viewModel.EditTask();
         }
     }
 
@@ -694,66 +702,66 @@ namespace To_Do.Views
     //    }
     //}
 
-    public class TaskViewModel : INotifyPropertyChanged
-    {
-        private ObservableCollection<TaskModel> _tasks;
-        private TaskModel _selectedTask;
+    //public class TaskViewModel : INotifyPropertyChanged
+    //{
+    //    private ObservableCollection<TaskModel> _tasks;
+    //    private TaskModel _selectedTask;
 
-        public ObservableCollection<TaskModel> Tasks
-        {
-            get => _tasks;
-            set
-            {
-                _tasks = value;
-                OnPropertyChanged(nameof(Tasks));
-            }
-        }
+    //    public ObservableCollection<TaskModel> Tasks
+    //    {
+    //        get => _tasks;
+    //        set
+    //        {
+    //            _tasks = value;
+    //            OnPropertyChanged(nameof(Tasks));
+    //        }
+    //    }
 
-        public TaskModel SelectedTask
-        {
-            get => _selectedTask;
-            set
-            {
-                _selectedTask = value;
-                OnPropertyChanged(nameof(SelectedTask));
-            }
-        }
+    //    public TaskModel SelectedTask
+    //    {
+    //        get => _selectedTask;
+    //        set
+    //        {
+    //            _selectedTask = value;
+    //            OnPropertyChanged(nameof(SelectedTask));
+    //        }
+    //    }
 
-        public TaskViewModel()
-        {
-            _tasks = new ObservableCollection<TaskModel>();
-        }
+    //    public TaskViewModel()
+    //    {
+    //        _tasks = new ObservableCollection<TaskModel>();
+    //    }
 
-        public void AddTask()
-        {
-            // Logic to add a new task
-            Console.WriteLine("Ssdsdad");
-            TaskModel newTask = new TaskModel()
-            {
-                Description = System.DateTime.Now.ToShortTimeString(),
-                IsStarred = true
-            };
-            Tasks.Add(newTask);
-        }
+    //    public void AddTask()
+    //    {
+    //        // Logic to add a new task
+    //        Console.WriteLine("Ssdsdad");
+    //        TaskModel newTask = new TaskModel()
+    //        {
+    //            Description = System.DateTime.Now.ToShortTimeString(),
+    //            IsStarred = true
+    //        };
+    //        Tasks.Add(newTask);
+    //    }
 
-        public void RemoveTask()
-        {
-            // Logic to remove the selected task
-        }
+    //    public void RemoveTask()
+    //    {
+    //        // Logic to remove the selected task
+    //    }
 
-        public void EditTask()
-        {
-            // Logic to edit the selected task
-            Random rnd = new Random();
-            int index = rnd.Next(0, Tasks.Count);
-            Tasks[index].Description = rnd.Next().ToString();
-        }
+    //    public void EditTask()
+    //    {
+    //        // Logic to edit the selected task
+    //        Random rnd = new Random();
+    //        int index = rnd.Next(0, Tasks.Count);
+    //        Tasks[index].Description = rnd.Next().ToString();
+    //    }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+    //    public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
+    //    protected virtual void OnPropertyChanged(string propertyName)
+    //    {
+    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    //    }
+    //}
 }
