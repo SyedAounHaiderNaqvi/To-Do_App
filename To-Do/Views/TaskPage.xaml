@@ -872,7 +872,7 @@
             <RowDefinition/>
             <RowDefinition MinHeight="80" Height="80"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" Margin="35,15,19,0" x:FieldModifier="public" DragItemsCompleted="listOfTasks_DragItemsCompleted" CanDragItems="True" CanReorderItems="True" AllowDrop="True" SelectionMode="None" BorderThickness="0" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{Binding Path=TasksList, Mode=TwoWay}">
+        <ListView Grid.Row="0" Margin="35,15,19,0" x:FieldModifier="public" CanDragItems="False" CanReorderItems="False" AllowDrop="False" SelectionMode="None" BorderThickness="0" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{Binding Path=TasksList, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:TaskModel">
                     <UserControl PointerEntered="UserControl_PointerEntered" PointerExited="UserControl_PointerExited" x:Name="UserControl">
@@ -904,13 +904,13 @@
                                             </StackPanel>
                                         </StackPanel>
                                         <StackPanel x:Name="BtnPanel" Spacing="10" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="5,10,0,10" Orientation="Horizontal">
-                                            <Button Click="AddStep" Margin="0,0,-4,0" DataContext="{Binding ElementName=UserControl}" x:Name="addStep" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="Add step">
+                                            <Button Click="AddStep" Margin="0,0,-4,0" x:Name="addStep" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="Add step">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE710;"/>
                                                 </Button.Content>
                                             </Button>
-                                            <CheckBox Margin="0,-2,0,0" CornerRadius="20" Click="StarChecked" Style="{ThemeResource StarCheck}" IsChecked="{Binding Path=IsStarred, Mode=TwoWay}" ToolTipService.ToolTip="Mark as important"/>
-                                            <Button DataContext="{Binding ElementName=UserControl}" Click="OpenSplitView" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
+                                            <CheckBox Margin="0,-2,0,0" CornerRadius="20" Click="CheckBox_Checked" Style="{ThemeResource StarCheck}" IsChecked="{Binding Path=IsStarred, Mode=TwoWay}" ToolTipService.ToolTip="Mark as important"/>
+                                            <Button Click="OpenSplitView" x:Name="moreOptBtn" Style="{ThemeResource EllipsisButton}" BorderThickness="0" Background="Transparent" Height="46" Width="42" CornerRadius="20" ToolTipService.ToolTip="More options">
                                                 <Button.Content>
                                                     <FontIcon FontSize="14" Glyph="&#xE712;"/>
                                                 </Button.Content>
@@ -1012,9 +1012,9 @@
                 </Grid.ColumnDefinitions>
 
                 <!--DEBUGGGGGG-->
-                <Button Visibility="Collapsed" Style="{StaticResource MonetButton}" Grid.Column="0" Width="32" VerticalAlignment="Stretch" Padding="0" Tag="Ascending Order View" x:Name="OrderButton" ToolTipService.ToolTip="{x:Bind OrderButton.Tag, Mode=OneWay}">
+                <!--<Button Visibility="Collapsed" Style="{StaticResource MonetButton}" Grid.Column="0" Width="32" VerticalAlignment="Stretch" Padding="0" Tag="Ascending Order View" x:Name="OrderButton" ToolTipService.ToolTip="{x:Bind OrderButton.Tag, Mode=OneWay}">
                     <FontIcon FontSize="13" Glyph="&#xE74A;"/>
-                </Button>
+                </Button>-->
 
                 <controls:DropDownButton CornerRadius="{ThemeResource ControlCornerRadius}" Style="{StaticResource DropDownButtonStyle1}"  ToolTipService.ToolTip="Sort by" VerticalAlignment="Center" Grid.Column="2" x:Name="SortingDropDown" Content="Date Created" >
                     <controls:DropDownButton.Flyout>
@@ -1034,17 +1034,6 @@
 
 
         <TextBox Translation="0,0,32" Shadow="{StaticResource SharedShadow}" BorderThickness="0" Style="{ThemeResource TextBoxStyle1}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="50,15,10,10" Margin="35,5,35,20" GotFocus="NewTaskBox_GotFocus" LostFocus="NewTaskBox_LostFocus" KeyDown="NewTaskBox_KeyDown" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" VerticalContentAlignment="Center" PlaceholderText="Add a new task" Height="50"  x:Name="NewTaskBox"/>
-
-
-
-        <!--<StackPanel Orientation="Vertical" Spacing="20">
-
-            <Button Content="Add Task" Command="{Binding Path=AddCommand}"/>
-            <Button Content="Edit random Task" Command="{Binding Path=RandomCommand}"/>
-        </StackPanel>-->
-
-
-
 
         <FontIcon IsHitTestVisible="False" x:Name="boxIcon" Width="20" Height="20" Margin="55,0,0,15" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Glyph="&#xE710;">
             <FontIcon.OpacityTransition>
@@ -1098,7 +1087,7 @@
 
                         </Button>
                         <!--<TextBlock Text="Created 31 months ago" Foreground="{ThemeResource SystemBaseMediumHighColor}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>-->
-                        <Button Height="40" Width="40" Margin="5,0,10,10" HorizontalAlignment="Right" Click="DeleteTask" ToolTipService.ToolTip="Delete task" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="2">
+                        <Button Height="40" Width="40" Margin="5,0,10,10" HorizontalAlignment="Right" Click="DeleteTask" ToolTipService.ToolTip="Delete Task" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="2">
                             <FontIcon Foreground="{ThemeResource SystemControlErrorTextForegroundBrush}" FontSize="17" Glyph="&#xE74D;"/>
                         </Button>
                     </Grid>

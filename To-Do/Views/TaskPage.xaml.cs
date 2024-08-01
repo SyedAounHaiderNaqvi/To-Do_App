@@ -36,7 +36,8 @@ namespace To_Do.Views
 
         public static TaskPage instance;
 
-        TaskViewModel viewModel;
+        public TaskViewModel viewModel;
+        TaskModel selectedTask = null;
 
         //public string redate;
         public ContentDialog dialog;
@@ -53,20 +54,9 @@ namespace To_Do.Views
             this.InitializeComponent();
             instance = this;
             viewModel = (TaskViewModel)this.DataContext;
-            
-            //InitializeData();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
             //UpdateBadge();
         }
-        //public void AddATask(TaskModel newTask)
-        //{
-        //    _tasks.AddTask(newTask);
-        //    listOfTasks.ItemsSource = _tasks;
-
-        //    listOfTasks.UpdateLayout();
-        //    listOfTasks.ScrollIntoView(newTask);
-        //    //UpdateBadge();
-        //}
 
         //public async Task SaveDataToFile()
         //{
@@ -123,15 +113,6 @@ namespace To_Do.Views
         //    _savingDates.Clear();
         //    _savingImps.Clear();
         //    savingSteps.Clear();
-        //}
-
-        //private void InitializeData()
-        //{
-        //    if (_tasks == null)
-        //    {
-        //        _tasks = new ObservableCollection<TaskModel>();
-        //        listOfTasks.ItemsSource = _tasks;
-        //    }
         //}
 
         private void listOfTasks_LayoutUpdated(object sender, object e)
@@ -225,8 +206,6 @@ namespace To_Do.Views
             //base.OnNavigatedTo(e);
             finallyLoaded = true;
             //DataContext = e.Parameter as TaskViewModel;
-            MainPage.ins.LoadingUI.Visibility = Visibility.Collapsed;
-            MainPage.ins.Ring.IsActive = false;
         }
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -237,8 +216,7 @@ namespace To_Do.Views
                 if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
                 {
                     string id = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
-                    TaskModel newTask = new TaskModel() { Id = id, Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false };
-                    newTask.SubTasks = new List<TaskModel>();
+                    TaskModel newTask = new TaskModel() { Id = id, Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false, SubTasks = new List<TaskModel>() };
                     var vm = (TaskViewModel)this.DataContext;
                     vm.AddTask(newTask);
                     NewTaskBox.Text = string.Empty;
@@ -249,156 +227,119 @@ namespace To_Do.Views
             }
         }
 
-        private void StarChecked(object sender, RoutedEventArgs e)
-        {
-            Sort((string)SortingDropDown.Content);
-        }
-
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            //UserControl top = cb.DataContext as UserControl;
-            //TaskModel task = top.DataContext as TaskModel;
-            //var truth = (bool)cb.IsChecked;
-            //cb.ClearValue(CheckBox.IsCheckedProperty);
-            //task.IsCompleted = truth;
             Sort((string)SortingDropDown.Content);
         }
 
-        private void StepCheckToggled(object sender, RoutedEventArgs e)
+        private async void StepCheckToggled(object sender, RoutedEventArgs e)
         {
-            //CheckBox checkbox = sender as CheckBox;
-            ////step complete
-            //Grid g = checkbox.Parent as Grid;
-            //TextBlock block = VisualTreeHelper.GetChild(g, 3) as TextBlock;
-            //block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-            //await Task.Delay(100);
-            //checkbox.IsChecked = false;
-            //block.TextDecorations = Windows.UI.Text.TextDecorations.None;
-            //UserControl top = checkbox.DataContext as UserControl;
-            //TaskModel step = top.DataContext as TaskModel;
+            CheckBox checkbox = sender as CheckBox;
+            Grid g = checkbox.Parent as Grid;
+            TextBlock block = VisualTreeHelper.GetChild(g, 3) as TextBlock;
+            block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+            block.Opacity = 0.6f;
+            await Task.Delay(100);
+            checkbox.IsChecked = false;
+            block.TextDecorations = Windows.UI.Text.TextDecorations.None;
+            block.Opacity = 1;
+            UserControl top = checkbox.DataContext as UserControl;
+            TaskModel step = top.DataContext as TaskModel;
 
-            //UserControl root = UtilityFunctions.FindParent<UserControl>(top, "UserControl");
-            //Expander expander = VisualTreeHelper.GetChild(root, 0) as Expander;
-            //TaskModel context = root.DataContext as TaskModel;
+            UserControl root = UtilityFunctions.FindParent<UserControl>(top, "UserControl");
+            TaskModel context = root.DataContext as TaskModel;
 
-            //int index = 0;
-            //for (int i = 0; i < _tasks.Count; i++)
-            //{
-            //    if (_tasks[i].Equals(context))
-            //    {
-            //        //store index
-            //        index = i;
-            //    }
-            //}
+            int index = 0;
+            for (int i = 0; i < viewModel.TasksList.Count; i++)
+            {
+                if (viewModel.TasksList[i].Equals(context))
+                {
+                    //store index
+                    index = i;
+                }
+            }
 
-            //var list = new List<TaskModel>(_tasks[index].SubTasks);
-            //list.Remove(step);
-            //_tasks[index].SubTasks = new List<TaskModel>(list);
-            //ListView rootList = expander.Content as ListView;
-            //rootList.ItemsSource = _tasks[index].SubTasks;
+            var list = new List<TaskModel>(viewModel.TasksList[index].SubTasks);
+            list.Remove(step);
+            viewModel.TasksList[index].SubTasks = new List<TaskModel>(list);
+            Sort((string)SortingDropDown.Content);
         }
 
         private void DeleteTask(object sender, RoutedEventArgs e)
         {
-            // Delete a task
-            //moreOptionsSplitView.IsPaneOpen = false;
-            //_tasks.Remove(selectedTask);
-            //selectedTask = null;
-            //UpdateBadge();
+            moreOptionsSplitView.IsPaneOpen = false;
+            if (selectedTask != null)
+            {
+                viewModel.DeleteTask(selectedTask.Id);
+            }
+            selectedTask = null;
         }
 
         private void DeleteSubTask(object sender, RoutedEventArgs e)
         {
-            //Button item = sender as Button;
-            //UserControl top = item.DataContext as UserControl;
-            //TaskModel step = top.DataContext as TaskModel;
+            Button item = sender as Button;
+            UserControl top = item.DataContext as UserControl;
+            TaskModel step = top.DataContext as TaskModel;
 
-            //UserControl root = UtilityFunctions.FindParent<UserControl>(top, "UserControl");
-            //Expander expander = VisualTreeHelper.GetChild(root, 0) as Expander;
-            //TaskModel context = root.DataContext as TaskModel;
-            //int index = 0;
-            //for (int i = 0; i < _tasks.Count; i++)
-            //{
-            //    if (_tasks[i].Equals(context))
-            //    {
-            //        //store index
-            //        index = i;
-            //    }
-            //}
+            UserControl root = UtilityFunctions.FindParent<UserControl>(top, "UserControl");
+            TaskModel context = root.DataContext as TaskModel;
+            int index = 0;
+            for (int i = 0; i < viewModel.TasksList.Count; i++)
+            {
+                if (viewModel.TasksList[i].Equals(context))
+                {
+                    //store index
+                    index = i;
+                }
+            }
 
-            //var list = new List<TaskModel>(_tasks[index].SubTasks);
-            //list.Remove(step);
-            //_tasks[index].SubTasks = new List<TaskModel>(list);
-            //ListView rootList = expander.Content as ListView;
-            //rootList.ItemsSource = _tasks[index].SubTasks;
-            //Sort((string)SortingDropDown.Content);
+            var list = new List<TaskModel>(viewModel.TasksList[index].SubTasks);
+            list.Remove(step);
+            viewModel.TasksList[index].SubTasks = new List<TaskModel>(list);
+            Sort((string)SortingDropDown.Content);
         }
 
-        private void AddStep(object sender, RoutedEventArgs e)
+        private async void AddStep(object sender, RoutedEventArgs e)
         {
-            //dialog = new EditDialogContent();
-            //Grid.SetRowSpan(dialog, 2);
-            //dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
-            //dialog.Title = "AddTask Step";
-            //int index = 0;
-            //Button item = sender as Button;
-            //UserControl top = item.DataContext as UserControl;
-            //TaskModel context = top.DataContext as TaskModel;
-            //for (int i = 0; i < _tasks.Count; i++)
-            //{
-            //    if (_tasks[i].Equals(context))
-            //    {
-            //        //store index
-            //        index = i;
-            //    }
-            //}
+            dialog = new EditDialogContent();
+            Grid.SetRowSpan(dialog, 2);
+            dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
+            dialog.Title = "Add Step";
+            int index = 0;
+            Button btn = sender as Button;
+            TaskModel task = btn.DataContext as TaskModel;
 
-            //Grid grid = (Grid)dialog.Content;
-            //TextBox EditTextBox = (TextBox)VisualTreeHelper.GetChild(grid, 0);
-            //dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
-            //TextChanged(EditTextBox);
-            //ContentDialogResult result = await dialog.ShowAsync();
-            //if (result == ContentDialogResult.Primary)
-            //{
-            //    //do create new task
-            //    TaskModel newStep = new TaskModel() { Description = EditTextBox.Text };
-            //    var list = new List<TaskModel>(_tasks[index].SubTasks)
-            //    {
-            //        newStep
-            //    };
-            //    _tasks[index].SubTasks = new List<TaskModel>(list);
-            //    Expander expander = VisualTreeHelper.GetChild(top, 0) as Expander;
-            //    ListView rootList = expander.Content as ListView;
+            for (int i = 0; i < viewModel.TasksList.Count; i++)
+            {
+                if (viewModel.TasksList[i].Equals(task))
+                {
+                    //store index
+                    index = i;
+                }
+            }
 
-            //    rootList.ItemsSource = _tasks[index].SubTasks;
-            //    EditTextBox.Text = string.Empty;
-            //    Sort((string)SortingDropDown.Content);
-            //}
+            Grid grid = (Grid)dialog.Content;
+            TextBox EditTextBox = (TextBox)VisualTreeHelper.GetChild(grid, 0);
+            dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
+            TextChanged(EditTextBox);
+            ContentDialogResult result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                //do create new task
+                TaskModel newStep = new TaskModel() { Description = EditTextBox.Text };
+                var list = new List<TaskModel>(viewModel.TasksList[index].SubTasks)
+                {
+                    newStep
+                };
+                viewModel.TasksList[index].SubTasks = new List<TaskModel>(list);
+                EditTextBox.Text = string.Empty;
+                Sort((string)SortingDropDown.Content);
+            }
         }
 
         public void TextChanged(TextBox b)
         {
-            //dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(b.Text) && !string.IsNullOrWhiteSpace(b.Text);
-        }
-
-        public void UpdateBadge()
-        {
-            //for (int i = 0; i < MainPage.ins.Categories.Count; i++)
-            //{
-            //    if (MainPage.ins.Categories[i].Tag == (string)this.Tag)
-            //    {
-            //        MainPage.ins.Categories[i].badgeNum = _tasks.Count;
-            //        if (_tasks.Count > 0)
-            //        {
-            //            MainPage.ins.Categories[i].opacity = 1f;
-            //        }
-            //        else
-            //        {
-            //            MainPage.ins.Categories[i].opacity = 0f;
-            //        }
-            //    }
-            //}
-
+            dialog.IsPrimaryButtonEnabled = !(string.IsNullOrEmpty(b.Text) || !string.IsNullOrWhiteSpace(b.Text));
         }
 
         private async void NewTaskBox_GotFocus(object sender, RoutedEventArgs e)
@@ -440,17 +381,6 @@ namespace To_Do.Views
             block.Translation = new System.Numerics.Vector3(0, 12, 0);
         }
 
-        //private void CheckBox_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
-        //{
-        //    //CheckBox cb = sender as CheckBox;
-        //    //var c = cb.DataContext as Control;
-        //    //var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
-        //    //var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
-        //    //panel.Translation = new System.Numerics.Vector3(0, 20, 0);
-        //    //panel.Opacity = 0;
-        //    //block.Translation = new System.Numerics.Vector3(0, 12, 0);
-        //}
-
         private void SortingOptionClicked(object sender, RoutedEventArgs e)
         {
             MenuFlyoutItem item = sender as MenuFlyoutItem;
@@ -460,50 +390,34 @@ namespace To_Do.Views
 
         void Sort(string typeOfSort)
         {
-            if (typeOfSort != "Custom")
+            var list = new List<TaskModel>(viewModel.TasksList);
+            switch (typeOfSort)
             {
-                var list = new List<TaskModel>(viewModel.TasksList);
-                switch (typeOfSort)
-                {
-                    case "Date Created":
-                        list.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
-                        break;
-                    case "Text":
-                        list.Sort((x, y) => string.Compare(x.Description, y.Description));
-                        break;
-                    case "Steps":
-                        list = list.OrderBy(x => x.SubTasks.Count).Reverse().ToList();
-                        break;
-                    case "Importance":
-                        var query = from task in list
-                                    orderby !task.IsStarred
-                                    select task;
-                        list = query.ToList();
-                        break;
-                    case "Completed":
-                        var q = from task in list
-                                orderby !task.IsCompleted
+                case "Date Created":
+                    list.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                    break;
+                case "Text":
+                    list.Sort((x, y) => string.Compare(x.Description, y.Description));
+                    break;
+                case "Steps":
+                    list = list.OrderBy(x => x.SubTasks.Count).Reverse().ToList();
+                    break;
+                case "Importance":
+                    var query = from task in list
+                                orderby !task.IsStarred
                                 select task;
-                        list = q.ToList();
-                        break;
-                    default:
-                        break;
-                }
-                viewModel.TasksList = new ObservableCollection<TaskModel>(list);
+                    list = query.ToList();
+                    break;
+                case "Completed":
+                    var q = from task in list
+                            orderby !task.IsCompleted
+                            select task;
+                    list = q.ToList();
+                    break;
+                default:
+                    break;
             }
-        }
-
-        private void listOfTasks_DragItemsCompleted(ListViewBase sender, DragItemsCompletedEventArgs args)
-        {
-            if (args != null)
-            {
-                SortingDropDown.Content = "Custom";
-                opt1.IsChecked = false;
-                opt2.IsChecked = false;
-                opt3.IsChecked = false;
-                opt4.IsChecked = false;
-                opt5.IsChecked = false;
-            }
+            viewModel.TasksList = new ObservableCollection<TaskModel>(list);
         }
 
         private void SubTaskPointerCaptureLost(object sender, PointerRoutedEventArgs e)
@@ -548,20 +462,17 @@ namespace To_Do.Views
             Button delbtn = sender as Button;
             var c = delbtn.DataContext as Control;
             var strip = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "rect");
+            strip.Translation = new System.Numerics.Vector3(0, 10, 0);
             delbtn.Translation = new System.Numerics.Vector3(50, 0, 0);
             delbtn.Opacity = 0;
-            strip.Translation = new System.Numerics.Vector3(0, 10, 0);
             var back = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "backplate");
             back.Opacity = 0;
         }
 
-        TaskModel selectedTask = null;
-
         private void OpenSplitView(object sender, RoutedEventArgs e)
         {
-            Button item = sender as Button;
-            UserControl top = item.DataContext as UserControl;
-            selectedTask = top.DataContext as TaskModel;
+            Button btn = sender as Button;
+            selectedTask = btn.DataContext as TaskModel;
             edittasktextbox.Text = selectedTask.Description;
             edittasktextbox.SelectionStart = edittasktextbox.Text.Length;
             moreOptionsSplitView.IsPaneOpen = true;
@@ -579,101 +490,39 @@ namespace To_Do.Views
 
         private void SaveChanges(object sender, RoutedEventArgs e)
         {
-            //int index = 0;
-            //for (int i = 0; i < _tasks.Count; i++)
-            //{
-            //    if (_tasks[i].Equals(selectedTask))
-            //    {
-            //        //store index
-            //        index = i;
-            //    }
-            //}
-            //_tasks[index].Description = edittasktextbox.Text;
-            //moreOptionsSplitView.IsPaneOpen = false;
-            //edittasktextbox.Text = string.Empty;
-            //Sort((string)SortingDropDown.Content);
+            int index = 0;
+            for (int i = 0; i < viewModel.TasksList.Count; i++)
+            {
+                if (viewModel.TasksList[i].Equals(selectedTask))
+                {
+                    //store index
+                    index = i;
+                }
+            }
+            viewModel.TasksList[index].Description = edittasktextbox.Text;
+            moreOptionsSplitView.IsPaneOpen = false;
+            edittasktextbox.Text = string.Empty;
+            Sort((string)SortingDropDown.Content);
         }
 
         private void TaskDesc_Loaded(object sender, RoutedEventArgs e)
         {
             var textBlock = sender as TextBlock;
             TaskModel tm = (TaskModel)textBlock.DataContext;
-            if (tm.IsCompleted)
+            if (tm!=null)
             {
-                textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-                textBlock.Opacity = 0.6f;
+                if (tm.IsCompleted)
+                {
+                    textBlock.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+                    textBlock.Opacity = 0.6f;
+                }
+                else
+                {
+                    textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
+                    textBlock.Opacity = 1;
+                }
             }
-            else
-            {
-                textBlock.TextDecorations = Windows.UI.Text.TextDecorations.None;
-                textBlock.Opacity = 1;
-            }
+            
         }
     }
-
-    //public class TaskModel : INotifyPropertyChanged
-    //{
-    //    private string description { get; set; }
-    //    private string date { get; set; }
-    //    private bool isStarred = false;
-    //    private bool isCompleted = false;
-    //    private List<TaskModel> subTasks;
-
-    //    public string Date
-    //    {
-    //        get => date;
-    //        set
-    //        {
-    //            date = value;
-    //            OnPropertyChanged("Date");
-    //        }
-    //    }
-
-    //    public List<TaskModel> SubTasks
-    //    {
-    //        get => subTasks;
-    //        set
-    //        {
-    //            subTasks = value;
-    //            OnPropertyChanged("SubTasks");
-    //        }
-    //    }
-
-    //    public bool IsStarred
-    //    {
-    //        get => isStarred;
-    //        set
-    //        {
-    //            isStarred = value;
-    //            OnPropertyChanged("IsStarred");
-    //        }
-    //    }
-
-    //    public bool IsCompleted
-    //    {
-    //        get => isCompleted;
-    //        set
-    //        {
-    //            isCompleted = value;
-    //            OnPropertyChanged("IsCompleted");
-    //        }
-    //    }
-
-    //    public string Description
-    //    {
-    //        get => description;
-    //        set
-    //        {
-    //            description = value;
-    //            OnPropertyChanged("Description");
-    //        }
-    //    }
-
-    //    public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-    //    public void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    //    {
-    //        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-    //    }
-    //}
 }

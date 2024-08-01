@@ -40,28 +40,28 @@ namespace To_Do.Views
         //public List<string> navListsTags = new List<string>();
         //public List<string> navListsGlyphs = new List<string>();
 
-        //private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public static MainPage ins;
         //public List<List<string>> tasksToParse = new List<List<string>>();
         //public int TaskPageCount = 0;
-        //bool canSearch = true;
-        //public NavigationTransitionInfo info = new SuppressNavigationTransitionInfo();
+        bool canSearch = true;
+        public NavigationTransitionInfo info = new SuppressNavigationTransitionInfo();
 
         //public ObservableCollection<CustomNavViewItem> Categories { get; }
         //public ContentDialog dialog;
-        //StorageFolder folder;
+        StorageFolder folder;
 
         public MainPage()
         {
 
             this.InitializeComponent();
             ins = this;
-            ContentFrame.Navigate(typeof(TaskPage));
+            //ContentFrame.Navigate(typeof(TaskPage));
             //LoadingUI.Visibility = Visibility.Collapsed;
-            //folder = ApplicationData.Current.LocalFolder;
+            folder = ApplicationData.Current.LocalFolder;
             //Categories = new ObservableCollection<CustomNavViewItem>();
-            //SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
-            //TileUpdateManager.CreateTileUpdaterForApplication().Clear();
+            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
+            TileUpdateManager.CreateTileUpdaterForApplication().Clear();
             //Debug.WriteLine("xzxzx");
         }
 
@@ -124,246 +124,246 @@ namespace To_Do.Views
         //        }
         //    }
 
-        //    public void ImageInitialize()
-        //    {
-        //        if (localSettings.Values["useimg"] != null)
-        //        {
-        //            switch ((int)localSettings.Values["useimg"])
-        //            {
-        //                case 0:
-        //                    bgIMG.Visibility = Visibility.Collapsed;
-        //                    break;
-        //                case 1:
-        //                    LoadIMG();
-        //                    break;
-        //                default:
-        //                    break;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            bgIMG.Visibility = Visibility.Collapsed;
-        //        }
-        //    }
+        public void ImageInitialize()
+        {
+            if (localSettings.Values["useimg"] != null)
+            {
+                switch ((int)localSettings.Values["useimg"])
+                {
+                    case 0:
+                        bgIMG.Visibility = Visibility.Collapsed;
+                        break;
+                    case 1:
+                        LoadIMG();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                bgIMG.Visibility = Visibility.Collapsed;
+            }
+        }
 
-        //    public void RoundCornerInitialize()
-        //    {
-        //        if (localSettings.Values["useround"] != null)
-        //        {
-        //            switch ((int)localSettings.Values["useround"])
-        //            {
-        //                case 0:
-        //                    Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
-        //                    Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
-        //                    Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(1);
-        //                    Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0);
-        //                    break;
-        //                case 1:
-        //                    Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
-        //                    Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
-        //                    Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
-        //                    Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
-        //                    break;
-        //                default:
-        //                    break;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            localSettings.Values["useround"] = 1;
-        //            Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
-        //            Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
-        //            Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
-        //            Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
-        //        }
-        //    }
+        public void RoundCornerInitialize()
+        {
+            if (localSettings.Values["useround"] != null)
+            {
+                switch ((int)localSettings.Values["useround"])
+                {
+                    case 0:
+                        Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(0);
+                        Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(0);
+                        Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(1);
+                        Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0);
+                        break;
+                    case 1:
+                        Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
+                        Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
+                        Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
+                        Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                localSettings.Values["useround"] = 1;
+                Application.Current.Resources["ControlCornerRadius"] = new CornerRadius(4);
+                Application.Current.Resources["OverlayCornerRadius"] = new CornerRadius(8);
+                Application.Current.Resources["ListViewItemCornerRadius"] = new CornerRadius(4);
+                Application.Current.Resources["NavViewSplitViewCorners"] = new CornerRadius(0, 8, 8, 0);
+            }
+        }
 
-        //    public void LoadTheme()
-        //    {
-        //        var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-        //        Color fallBackPurple = new Color() { A = 255, R = 103, G = 123, B = 202 };
+        public void LoadTheme()
+        {
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            Color fallBackPurple = new Color() { A = 255, R = 103, G = 123, B = 202 };
 
-        //        if (localSettings.Values["ACCENT1_R"] != null && localSettings.Values["ACCENT2_R"] != null && localSettings.Values["BG_R"] != null)
-        //        {
-        //            byte a1R = (byte)localSettings.Values["ACCENT1_R"];
-        //            byte a1G = (byte)localSettings.Values["ACCENT1_G"];
-        //            byte a1B = (byte)localSettings.Values["ACCENT1_B"];
+            if (localSettings.Values["ACCENT1_R"] != null && localSettings.Values["ACCENT2_R"] != null && localSettings.Values["BG_R"] != null)
+            {
+                byte a1R = (byte)localSettings.Values["ACCENT1_R"];
+                byte a1G = (byte)localSettings.Values["ACCENT1_G"];
+                byte a1B = (byte)localSettings.Values["ACCENT1_B"];
 
-        //            byte a2R = (byte)localSettings.Values["ACCENT2_R"];
-        //            byte a2G = (byte)localSettings.Values["ACCENT2_G"];
-        //            byte a2B = (byte)localSettings.Values["ACCENT2_B"];
+                byte a2R = (byte)localSettings.Values["ACCENT2_R"];
+                byte a2G = (byte)localSettings.Values["ACCENT2_G"];
+                byte a2B = (byte)localSettings.Values["ACCENT2_B"];
 
-        //            byte bgR = (byte)localSettings.Values["BG_R"];
-        //            byte bgG = (byte)localSettings.Values["BG_G"];
-        //            byte bgB = (byte)localSettings.Values["BG_B"];
-        //            byte bgA = (byte)localSettings.Values["BG_A"];
-        //            int canUseMonet = (int)localSettings.Values["usemonet"];
+                byte bgR = (byte)localSettings.Values["BG_R"];
+                byte bgG = (byte)localSettings.Values["BG_G"];
+                byte bgB = (byte)localSettings.Values["BG_B"];
+                byte bgA = (byte)localSettings.Values["BG_A"];
+                int canUseMonet = (int)localSettings.Values["usemonet"];
 
-        //            Color bgColorThatIsOpaque = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
-        //            Application.Current.Resources["SystemAccentColorDark1"] = new Color() { A = 255, R = a1R, G = a1G, B = a1B };
-        //            Application.Current.Resources["SystemAccentColorDark2"] = new Color() { A = 255, R = a2R, G = a2G, B = a2B };
-        //            Application.Current.Resources["SystemAccentColorLight2"] = (Color)Application.Current.Resources["SystemAccentColorDark2"] == Colors.White ? Application.Current.Resources["SystemAccentColorDark1"] : Application.Current.Resources["SystemAccentColorDark2"];
-        //            Application.Current.Resources["SystemAccentColor"] = ThemeHelper.IsDarkTheme() ? (Color)Application.Current.Resources["SystemAccentColorLight2"] : (Color)Application.Current.Resources["SystemAccentColorDark1"];
+                Color bgColorThatIsOpaque = new Color() { A = 255, R = bgR, G = bgG, B = bgB };
+                Application.Current.Resources["SystemAccentColorDark1"] = new Color() { A = 255, R = a1R, G = a1G, B = a1B };
+                Application.Current.Resources["SystemAccentColorDark2"] = new Color() { A = 255, R = a2R, G = a2G, B = a2B };
+                Application.Current.Resources["SystemAccentColorLight2"] = (Color)Application.Current.Resources["SystemAccentColorDark2"] == Colors.White ? Application.Current.Resources["SystemAccentColorDark1"] : Application.Current.Resources["SystemAccentColorDark2"];
+                Application.Current.Resources["SystemAccentColor"] = ThemeHelper.IsDarkTheme() ? (Color)Application.Current.Resources["SystemAccentColorLight2"] : (Color)Application.Current.Resources["SystemAccentColorDark1"];
 
-        //            if (ThemeHelper.IsDarkTheme())
-        //            {
-        //                SolidColorBrush darkbrush = new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColorLight2"]);
-        //                Application.Current.Resources["NavigationViewItemForegroundSelected"] = darkbrush;
-        //                Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = darkbrush;
-        //                Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = darkbrush;
-        //            }
+                if (ThemeHelper.IsDarkTheme())
+                {
+                    SolidColorBrush darkbrush = new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColorLight2"]);
+                    Application.Current.Resources["NavigationViewItemForegroundSelected"] = darkbrush;
+                    Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = darkbrush;
+                    Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = darkbrush;
+                }
 
-        //            switch (canUseMonet)
-        //            {
-        //                case 0:
-        //                    if (ThemeHelper.IsDarkTheme())
-        //                    {
-        //                        Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 33, G = 33, B = 33 });
-        //                        Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
-        //                        {
-        //                            BlurAmount = 8,
-        //                            TintOpacity = 0.95,
-        //                            BackgroundSource = AcrylicBackgroundSource.Backdrop,
-        //                            TintColor = Color.FromArgb(255, 32, 32, 32)
-        //                        };
+                switch (canUseMonet)
+                {
+                    case 0:
+                        if (ThemeHelper.IsDarkTheme())
+                        {
+                            Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 33, G = 33, B = 33 });
+                            Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                            {
+                                BlurAmount = 8,
+                                TintOpacity = 0.95,
+                                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                                TintColor = Color.FromArgb(255, 32, 32, 32)
+                            };
 
-        //                        Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
-        //                        {
-        //                            BlurAmount = 8,
-        //                            TintOpacity = 0.95,
-        //                            BackgroundSource = AcrylicBackgroundSource.Backdrop,
-        //                            TintColor = Color.FromArgb(255, 33, 33, 33)
-        //                        };
-        //                    }
-        //                    else
-        //                    {
-        //                        Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 245, G = 245, B = 245 });
-        //                        Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
-        //                        {
-        //                            BlurAmount = 8,
-        //                            TintOpacity = 0.95,
-        //                            BackgroundSource = AcrylicBackgroundSource.Backdrop,
-        //                            TintColor = Colors.White
-        //                        };
+                            Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                            {
+                                BlurAmount = 8,
+                                TintOpacity = 0.95,
+                                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                                TintColor = Color.FromArgb(255, 33, 33, 33)
+                            };
+                        }
+                        else
+                        {
+                            Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 245, G = 245, B = 245 });
+                            Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                            {
+                                BlurAmount = 8,
+                                TintOpacity = 0.95,
+                                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                                TintColor = Colors.White
+                            };
 
-        //                        Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
-        //                        {
-        //                            BlurAmount = 8,
-        //                            TintOpacity = 0.9,
-        //                            BackgroundSource = AcrylicBackgroundSource.Backdrop,
-        //                            TintColor = Color.FromArgb(255, 245, 245, 245)
-        //                        };
-        //                    }
-        //                    break;
-        //                case 1:
-        //                    Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = bgR, G = bgG, B = bgB });
-        //                    Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
-        //                    {
-        //                        BlurAmount = 8,
-        //                        TintOpacity = 0.95,
-        //                        BackgroundSource = AcrylicBackgroundSource.Backdrop,
-        //                        TintColor = UtilityFunctions.ChangeColorBrightness(bgColorThatIsOpaque, false),
-        //                    };
+                            Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                            {
+                                BlurAmount = 8,
+                                TintOpacity = 0.9,
+                                BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                                TintColor = Color.FromArgb(255, 245, 245, 245)
+                            };
+                        }
+                        break;
+                    case 1:
+                        Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = bgR, G = bgG, B = bgB });
+                        Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                        {
+                            BlurAmount = 8,
+                            TintOpacity = 0.95,
+                            BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                            TintColor = UtilityFunctions.ChangeColorBrightness(bgColorThatIsOpaque, false),
+                        };
 
-        //                    Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
-        //                    {
-        //                        BlurAmount = 8,
-        //                        TintOpacity = 0.9,
-        //                        BackgroundSource = AcrylicBackgroundSource.Backdrop,
-        //                        TintColor = UtilityFunctions.ChangeColorBrightness(bgColorThatIsOpaque, true),
-        //                    };
-        //                    break;
-        //                default:
-        //                    break;
-        //            }
-        //            Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
-        //            Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
-        //            Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+                        Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                        {
+                            BlurAmount = 8,
+                            TintOpacity = 0.9,
+                            BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                            TintColor = UtilityFunctions.ChangeColorBrightness(bgColorThatIsOpaque, true),
+                        };
+                        break;
+                    default:
+                        break;
+                }
+                Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+                Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
+                Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
 
-        //            //a is 150
-        //            Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = bgA, R = bgR, G = bgG, B = bgB });
+                //a is 150
+                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(new Color() { A = bgA, R = bgR, G = bgG, B = bgB });
 
-        //            titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColorDark2"];
-        //            titleBar.ForegroundColor = titleBar.ButtonHoverBackgroundColor;
+                titleBar.ButtonHoverBackgroundColor = (Color)Application.Current.Resources["SystemAccentColorDark2"];
+                titleBar.ForegroundColor = titleBar.ButtonHoverBackgroundColor;
 
-        //            titleBar.ButtonHoverForegroundColor = Colors.White;
+                titleBar.ButtonHoverForegroundColor = Colors.White;
 
-        //            titleBar.ButtonPressedBackgroundColor = ((SolidColorBrush)Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"]).Color;
-        //        }
-        //        else
-        //        {
-        //            ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
-        //            Application.Current.Resources["SystemAccentColorDark1"] = fallBackPurple;
-        //            Application.Current.Resources["SystemAccentColorDark2"] = Colors.White;
-        //            Application.Current.Resources["SystemAccentColorLight2"] = Application.Current.Resources["SystemAccentColorDark1"];
-        //            Application.Current.Resources["SystemAccentColor"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
+                titleBar.ButtonPressedBackgroundColor = ((SolidColorBrush)Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"]).Color;
+            }
+            else
+            {
+                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+                Application.Current.Resources["SystemAccentColorDark1"] = fallBackPurple;
+                Application.Current.Resources["SystemAccentColorDark2"] = Colors.White;
+                Application.Current.Resources["SystemAccentColorLight2"] = Application.Current.Resources["SystemAccentColorDark1"];
+                Application.Current.Resources["SystemAccentColor"] = (Color)Application.Current.Resources["SystemAccentColorDark1"];
 
-        //            Application.Current.Resources["NavigationViewItemForegroundSelected"] = Application.Current.Resources["SystemAccentColor"];
-        //            Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = Application.Current.Resources["SystemAccentColor"];
-        //            Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = Application.Current.Resources["SystemAccentColor"];
+                Application.Current.Resources["NavigationViewItemForegroundSelected"] = Application.Current.Resources["SystemAccentColor"];
+                Application.Current.Resources["NavigationViewItemForegroundSelectedPointerOver"] = Application.Current.Resources["SystemAccentColor"];
+                Application.Current.Resources["NavigationViewItemForegroundSelectedPressed"] = Application.Current.Resources["SystemAccentColor"];
 
-        //            Color bgColor = fallBackPurple;
-        //            Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(fallBackPurple);
-        //            Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = fallBackPurple.R, G = fallBackPurple.G, B = fallBackPurple.B });
-        //            titleBar.ForegroundColor = bgColor;
-        //            titleBar.ButtonHoverBackgroundColor = bgColor;
-        //            titleBar.ButtonHoverForegroundColor = Colors.White;
-        //            titleBar.ButtonPressedBackgroundColor = fallBackPurple;
+                Color bgColor = fallBackPurple;
+                Application.Current.Resources["NavigationViewContentBackground"] = new SolidColorBrush(fallBackPurple);
+                Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = fallBackPurple.R, G = fallBackPurple.G, B = fallBackPurple.B });
+                titleBar.ForegroundColor = bgColor;
+                titleBar.ButtonHoverBackgroundColor = bgColor;
+                titleBar.ButtonHoverForegroundColor = Colors.White;
+                titleBar.ButtonPressedBackgroundColor = fallBackPurple;
 
-        //            Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
-        //            {
-        //                BlurAmount = 8,
-        //                TintOpacity = 0.95,
-        //                BackgroundSource = AcrylicBackgroundSource.Backdrop,
-        //                TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, false),
-        //            };
+                Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                {
+                    BlurAmount = 8,
+                    TintOpacity = 0.95,
+                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                    TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, false),
+                };
 
-        //            Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
-        //            {
-        //                BlurAmount = 8,
-        //                TintOpacity = 0.9,
-        //                BackgroundSource = AcrylicBackgroundSource.Backdrop,
-        //                TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, true),
-        //            };
+                Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                {
+                    BlurAmount = 8,
+                    TintOpacity = 0.9,
+                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                    TintColor = UtilityFunctions.ChangeColorBrightness(bgColor, true),
+                };
 
-        //            localSettings.Values["usemonet"] = 1;
+                localSettings.Values["usemonet"] = 1;
 
-        //            Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
-        //            Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
-        //            Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
-        //        }
-        //    }
+                Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+                Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
+                Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+            }
+        }
 
-        //    async void LoadIMG()
-        //    {
-        //        string token = (string)localSettings.Values["token"];
-        //        if (token != null)
-        //        {
-        //            if (StorageApplicationPermissions.FutureAccessList.ContainsItem(token))
-        //            {
-        //                var file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(token);
-        //                if (file != null)
-        //                {
-        //                    bgIMG.Visibility = Visibility.Visible;
-        //                    using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
-        //                    {
-        //                        BitmapImage bitmapImage = new BitmapImage();
+        async void LoadIMG()
+        {
+            string token = (string)localSettings.Values["token"];
+            if (token != null)
+            {
+                if (StorageApplicationPermissions.FutureAccessList.ContainsItem(token))
+                {
+                    var file = await StorageApplicationPermissions.FutureAccessList.GetFileAsync(token);
+                    if (file != null)
+                    {
+                        bgIMG.Visibility = Visibility.Visible;
+                        using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
+                        {
+                            BitmapImage bitmapImage = new BitmapImage();
 
-        //                        await bitmapImage.SetSourceAsync(fileStream);
-        //                        bgIMG.Source = bitmapImage;
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    bgIMG.Visibility = Visibility.Collapsed;
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            bgIMG.Visibility = Visibility.Collapsed;
-        //        }
-        //    }
+                            await bitmapImage.SetSourceAsync(fileStream);
+                            bgIMG.Source = bitmapImage;
+                        }
+                    }
+                    else
+                    {
+                        bgIMG.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+            else
+            {
+                bgIMG.Visibility = Visibility.Collapsed;
+            }
+        }
 
         private void CoreTitlebar_IsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
         {
@@ -453,336 +453,336 @@ namespace To_Do.Views
 
         //    }
 
-        //    public void CreateThreeTileNotifications()
-        //    {
-        //        var TaskItems = TaskPage.instance._tasks;
-        //        if (TaskItems.Count > 0)
-        //        {
-        //            List<string> tasks = new List<string>();
-        //            string title = "Tasks to do";
-        //            for (int i = 0; i < TaskItems.Count; i++)
-        //            {
-        //                tasks.AddTask(TaskItems[i].Description);
-        //            }
-        //            int amountOfTasks = TaskItems.Count;
+        public void CreateThreeTileNotifications()
+        {
+            var TaskItems = TaskPage.instance.viewModel.TasksList;
+            if (TaskItems.Count > 0)
+            {
+                List<string> tasks = new List<string>();
+                string title = "Tasks to do";
+                for (int i = 0; i < TaskItems.Count; i++)
+                {
+                    tasks.Add(TaskItems[i].Description);
+                }
+                int amountOfTasks = TaskItems.Count;
 
-        //            TileContent content = new TileContent()
-        //            {
-        //                Visual = new TileVisual()
-        //                {
-        //                    Branding = TileBranding.None,
-        //                    TileSmall = new TileBinding()
-        //                    {
-        //                        Content = new TileBindingContentAdaptive()
-        //                        {
-        //                            TextStacking = TileTextStacking.Center,
-        //                            Children =
-        //                            {
-        //                                new AdaptiveText()
-        //                                {
-        //                                    Text = TaskItems.Count.ToString(),
-        //                                    HintAlign = AdaptiveTextAlign.Center,
-        //                                    HintWrap = true,
-        //                                    HintStyle = AdaptiveTextStyle.Caption
-        //                                },
-        //                                new AdaptiveText()
-        //                                {
-        //                                    Text = "Tasks",
-        //                                    HintAlign = AdaptiveTextAlign.Center,
-        //                                    HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                                }
-        //                            }
-        //                        }
-        //                    },
-        //                    TileMedium = new TileBinding()
-        //                    {
-        //                        Content = new TileBindingContentAdaptive()
-        //                        {
-        //                            Children = {
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = title,
-        //                                HintStyle = AdaptiveTextStyle.Base,
-        //                            },
+                TileContent content = new TileContent()
+                {
+                    Visual = new TileVisual()
+                    {
+                        Branding = TileBranding.None,
+                        TileSmall = new TileBinding()
+                        {
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                TextStacking = TileTextStacking.Center,
+                                Children =
+                                    {
+                                        new AdaptiveText()
+                                        {
+                                            Text = TaskItems.Count.ToString(),
+                                            HintAlign = AdaptiveTextAlign.Center,
+                                            HintWrap = true,
+                                            HintStyle = AdaptiveTextStyle.Caption
+                                        },
+                                        new AdaptiveText()
+                                        {
+                                            Text = "Tasks",
+                                            HintAlign = AdaptiveTextAlign.Center,
+                                            HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                        }
+                                    }
+                            }
+                        },
+                        TileMedium = new TileBinding()
+                        {
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                Children = {
+                                    new AdaptiveText()
+                                    {
+                                        Text = title,
+                                        HintStyle = AdaptiveTextStyle.Base,
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = "1) " + tasks[0],
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
+                                    new AdaptiveText()
+                                    {
+                                        Text = "1) " + tasks[0],
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
+                                    new AdaptiveText()
+                                    {
 
-        //                                Text = tasks.Count > 1 ? "2) " + tasks[1] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
+                                        Text = tasks.Count > 1 ? "2) " + tasks[1] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
+                                    new AdaptiveText()
+                                    {
 
-        //                                Text = tasks.Count > 2 ? "3) " + tasks[2] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
+                                        Text = tasks.Count > 2 ? "3) " + tasks[2] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 3 ? $"+{amountOfTasks - 3} task(s)" : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
-        //                        }
-        //                        }
-        //                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 3 ? $"+{amountOfTasks - 3} task(s)" : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
+                                }
+                            }
+                        },
 
-        //                    TileWide = new TileBinding()
-        //                    {
-        //                        Content = new TileBindingContentAdaptive()
-        //                        {
-        //                            Children = {
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = title,
-        //                                HintStyle = AdaptiveTextStyle.Base
-        //                            },
+                        TileWide = new TileBinding()
+                        {
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                Children = {
+                                    new AdaptiveText()
+                                    {
+                                        Text = title,
+                                        HintStyle = AdaptiveTextStyle.Base
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = "1) " + tasks[0],
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
+                                    new AdaptiveText()
+                                    {
+                                        Text = "1) " + tasks[0],
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 1 ? "2) " + tasks[1] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 1 ? "2) " + tasks[1] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 2 ? "3) " + tasks[2] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 3 ? $"+{amountOfTasks - 3} task(s)" : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            }
-        //                        }
-        //                        }
-        //                    },
-        //                    TileLarge = new TileBinding()
-        //                    {
-        //                        Content = new TileBindingContentAdaptive()
-        //                        {
-        //                            Children = {
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = title,
-        //                                HintStyle = AdaptiveTextStyle.Base
-        //                            },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 2 ? "3) " + tasks[2] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 3 ? $"+{amountOfTasks - 3} task(s)" : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    }
+                                }
+                            }
+                        },
+                        TileLarge = new TileBinding()
+                        {
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                Children = {
+                                    new AdaptiveText()
+                                    {
+                                        Text = title,
+                                        HintStyle = AdaptiveTextStyle.Base
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = "1) " + tasks[0],
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
+                                    new AdaptiveText()
+                                    {
+                                        Text = "1) " + tasks[0],
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 1 ? "2) " + tasks[1] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 2 ? "3) " + tasks[2] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 3 ? "4) " + tasks[3] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 4 ? "5) " + tasks[4] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 5 ? "6) " + tasks[5] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 6 ? "7) " + tasks[6] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 7 ? "8) " + tasks[7] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 1 ? "2) " + tasks[1] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 2 ? "3) " + tasks[2] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 3 ? "4) " + tasks[3] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 4 ? "5) " + tasks[4] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 5 ? "6) " + tasks[5] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 6 ? "7) " + tasks[6] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 7 ? "8) " + tasks[7] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 8 ? "9) " + tasks[8] : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 8 ? "9) " + tasks[8] : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
 
-        //                            new AdaptiveText()
-        //                            {
-        //                                Text = tasks.Count > 9 ? $"+{amountOfTasks - 9} task(s)" : "",
-        //                                HintStyle = AdaptiveTextStyle.CaptionSubtle
-        //                            },
-        //                        }
-        //                        }
-        //                    }
-        //                }
-        //            };
-        //            var notif = new TileNotification(content.GetXml());
-        //            TileUpdateManager.CreateTileUpdaterForApplication().Update(notif);
-        //        }
-        //        else
-        //        {
-        //            //all tasks complete
-        //            TileContent content = new TileContent()
-        //            {
-        //                Visual = new TileVisual()
-        //                {
-        //                    Branding = TileBranding.None,
-        //                    TileSmall = new TileBinding()
-        //                    {
-        //                        Content = new TileBindingContentAdaptive()
-        //                        {
-        //                            TextStacking = TileTextStacking.Center,
-        //                            Children =
-        //                            {
-        //                                new AdaptiveGroup()
-        //                                {
-        //                                    Children =
-        //                                    {
-        //                                        new AdaptiveSubgroup()
-        //                                        {
-        //                                            Children =
-        //                                            {
-        //                                                new AdaptiveImage()
-        //                                                {
-        //                                                    Source = "Images/tileIcon.png",
-        //                                                    HintAlign = AdaptiveImageAlign.Center
-        //                                                },
-        //                                            }
-        //                                        },
-        //                                    }
-        //                                },
-        //                                new AdaptiveGroup()
-        //                                {
-        //                                    Children =
-        //                                    {
-        //                                        new AdaptiveSubgroup()
-        //                                        {
-        //                                            Children =
-        //                                            {
-        //                                                new AdaptiveText()
-        //                                                {
-        //                                                    Text = "Done!",
-        //                                                    HintAlign = AdaptiveTextAlign.Center,
-        //                                                    HintWrap = true,
-        //                                                    HintMaxLines = 2,
-        //                                                    HintStyle = AdaptiveTextStyle.Base
-        //                                                }
-        //                                            }
-        //                                        },
-        //                                    }
-        //                                },
-        //                            }
-        //                        }
-        //                    },
-        //                    TileMedium = new TileBinding()
-        //                    {
-        //                        Content = new TileBindingContentAdaptive()
-        //                        {
-        //                            TextStacking = TileTextStacking.Center,
-        //                            Children = {
-        //                                new AdaptiveImage()
-        //                                {
-        //                                    Source = "Images/tileIcon.png",
-        //                                    HintAlign = AdaptiveImageAlign.Center
-        //                                },
+                                    new AdaptiveText()
+                                    {
+                                        Text = tasks.Count > 9 ? $"+{amountOfTasks - 9} task(s)" : "",
+                                        HintStyle = AdaptiveTextStyle.CaptionSubtle
+                                    },
+                                }
+                            }
+                        }
+                    }
+                };
+                var notif = new TileNotification(content.GetXml());
+                TileUpdateManager.CreateTileUpdaterForApplication().Update(notif);
+            }
+            else
+            {
+                //all tasks complete
+                TileContent content = new TileContent()
+                {
+                    Visual = new TileVisual()
+                    {
+                        Branding = TileBranding.None,
+                        TileSmall = new TileBinding()
+                        {
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                TextStacking = TileTextStacking.Center,
+                                Children =
+                                    {
+                                        new AdaptiveGroup()
+                                        {
+                                            Children =
+                                            {
+                                                new AdaptiveSubgroup()
+                                                {
+                                                    Children =
+                                                    {
+                                                        new AdaptiveImage()
+                                                        {
+                                                            Source = "Images/tileIcon.png",
+                                                            HintAlign = AdaptiveImageAlign.Center
+                                                        },
+                                                    }
+                                                },
+                                            }
+                                        },
+                                        new AdaptiveGroup()
+                                        {
+                                            Children =
+                                            {
+                                                new AdaptiveSubgroup()
+                                                {
+                                                    Children =
+                                                    {
+                                                        new AdaptiveText()
+                                                        {
+                                                            Text = "Done!",
+                                                            HintAlign = AdaptiveTextAlign.Center,
+                                                            HintWrap = true,
+                                                            HintMaxLines = 2,
+                                                            HintStyle = AdaptiveTextStyle.Base
+                                                        }
+                                                    }
+                                                },
+                                            }
+                                        },
+                                    }
+                            }
+                        },
+                        TileMedium = new TileBinding()
+                        {
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                TextStacking = TileTextStacking.Center,
+                                Children = {
+                                        new AdaptiveImage()
+                                        {
+                                            Source = "Images/tileIcon.png",
+                                            HintAlign = AdaptiveImageAlign.Center
+                                        },
 
-        //                                new AdaptiveText()
-        //                                {
-        //                                    Text = "All Done!",
-        //                                    HintAlign = AdaptiveTextAlign.Center,
-        //                                    HintWrap = true,
-        //                                    HintMaxLines = 2,
-        //                                    HintStyle = AdaptiveTextStyle.Base
-        //                                }
-        //                            }
-        //                        }
-        //                    },
+                                        new AdaptiveText()
+                                        {
+                                            Text = "All Done!",
+                                            HintAlign = AdaptiveTextAlign.Center,
+                                            HintWrap = true,
+                                            HintMaxLines = 2,
+                                            HintStyle = AdaptiveTextStyle.Base
+                                        }
+                                    }
+                            }
+                        },
 
-        //                    TileWide = new TileBinding()
-        //                    {
-        //                        Content = new TileBindingContentAdaptive()
-        //                        {
-        //                            TextStacking = TileTextStacking.Center,
-        //                            Children = {
+                        TileWide = new TileBinding()
+                        {
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                TextStacking = TileTextStacking.Center,
+                                Children = {
 
-        //                                new AdaptiveImage()
-        //                                {
-        //                                    Source = "Images/tileIcon.png",
-        //                                    HintAlign = AdaptiveImageAlign.Center
-        //                                },
-        //                                new AdaptiveText()
-        //                                {
-        //                                    Text = "All Tasks Completed!",
-        //                                    HintAlign = AdaptiveTextAlign.Center,
-        //                                    HintWrap = true,
-        //                                    HintStyle = AdaptiveTextStyle.Base
-        //                                }
-        //                            }
-        //                        }
-        //                    },
-        //                    TileLarge = new TileBinding()
-        //                    {
-        //                        Content = new TileBindingContentAdaptive()
-        //                        {
-        //                            TextStacking = TileTextStacking.Center,
-        //                            Children = {
-        //                                new AdaptiveImage()
-        //                                {
-        //                                    Source = "Images/tileIcon.png",
-        //                                    HintAlign = AdaptiveImageAlign.Center
-        //                                },
-        //                                new AdaptiveText()
-        //                                {
-        //                                    Text = "All Tasks Completed!",
-        //                                    HintAlign = AdaptiveTextAlign.Center,
-        //                                    HintWrap = true,
-        //                                    HintStyle = AdaptiveTextStyle.Base
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            };
-        //            var notif = new TileNotification(content.GetXml())
-        //            {
-        //                ExpirationTime = DateTimeOffset.UtcNow.AddMinutes(1)
-        //            };
-        //            TileUpdateManager.CreateTileUpdaterForApplication().Update(notif);
-        //        }
-        //    }
+                                        new AdaptiveImage()
+                                        {
+                                            Source = "Images/tileIcon.png",
+                                            HintAlign = AdaptiveImageAlign.Center
+                                        },
+                                        new AdaptiveText()
+                                        {
+                                            Text = "All Tasks Completed!",
+                                            HintAlign = AdaptiveTextAlign.Center,
+                                            HintWrap = true,
+                                            HintStyle = AdaptiveTextStyle.Base
+                                        }
+                                    }
+                            }
+                        },
+                        TileLarge = new TileBinding()
+                        {
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                TextStacking = TileTextStacking.Center,
+                                Children = {
+                                        new AdaptiveImage()
+                                        {
+                                            Source = "Images/tileIcon.png",
+                                            HintAlign = AdaptiveImageAlign.Center
+                                        },
+                                        new AdaptiveText()
+                                        {
+                                            Text = "All Tasks Completed!",
+                                            HintAlign = AdaptiveTextAlign.Center,
+                                            HintWrap = true,
+                                            HintStyle = AdaptiveTextStyle.Base
+                                        }
+                                    }
+                            }
+                        }
+                    }
+                };
+                var notif = new TileNotification(content.GetXml())
+                {
+                    ExpirationTime = DateTimeOffset.UtcNow.AddMinutes(1)
+                };
+                TileUpdateManager.CreateTileUpdaterForApplication().Update(notif);
+            }
+        }
 
-        //    public async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
-        //    {
-        //        var def = e.GetDeferral();
-        //        LoadingUI.Visibility = Visibility.Visible;
-        //        CreateThreeTileNotifications();
-        //        await SaveCurrentPageData();
-        //        await SaveNavigationPageItems();
-        //        def.Complete();
-        //    }
+        public void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
+        {
+            var def = e.GetDeferral();
+            LoadingUI.Visibility = Visibility.Visible;
+            CreateThreeTileNotifications();
+            //await SaveCurrentPageData();
+            //await SaveNavigationPageItems();
+            def.Complete();
+        }
 
         //    async Task DeletionOfUnnecessaryLists()
         //    {
@@ -826,36 +826,37 @@ namespace To_Do.Views
 
         private async void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
-            //Ring.IsActive = true;
-            //LoadingUI.Visibility = Visibility.Visible;
+            Ring.IsActive = true;
+            LoadingUI.Visibility = Visibility.Visible;
 
             //Type pageType;
 
-            //if (args.IsSettingsSelected)
-            //{
-            //    await SaveCurrentPageData();
-            //    pageType = Type.GetType("To_Do.Settings");
-            //    ContentFrame.Navigate(pageType, null, info);
-            //    searchBoxGrid.Visibility = Visibility.Collapsed;
-            //    LoadingUI.Visibility = Visibility.Collapsed;
-            //    Ring.IsActive = false;
-            //}
-            //else
-            //{
-            //    searchBoxGrid.Visibility = Visibility.Visible;
-            //    var selectedItem = (CustomNavViewItem)args.SelectedItem;
-            //    if (selectedItem != null)
-            //    {
-            //        pageType = Type.GetType("To_Do.TaskPage");
-            //        List<string> dataToParse = new List<string>
-            //            {
-            //                selectedItem.Name,
-            //                selectedItem.Tag
-            //            };
-            //        ContentFrame.Navigate(pageType, dataToParse, info);
-            //    }
-            //}
-
+            if (args.IsSettingsSelected)
+            {
+                //await SaveCurrentPageData();
+                //pageType = Type.GetType("To_Do.Settings");
+                //ContentFrame.Navigate(pageType, null, info);
+                searchBoxGrid.Visibility = Visibility.Collapsed;
+                ContentFrame.Navigate(typeof(Settings), null, info);
+            }
+            else
+            {
+                searchBoxGrid.Visibility = Visibility.Visible;
+                //var selectedItem = (CustomNavViewItem)args.SelectedItem;
+                //if (selectedItem != null)
+                //{
+                //    pageType = Type.GetType("To_Do.TaskPage");
+                //    List<string> dataToParse = new List<string>
+                //        {
+                //            selectedItem.Name,
+                //            selectedItem.Tag
+                //        };
+                //    ContentFrame.Navigate(pageType, dataToParse, info);
+                //}
+                ContentFrame.Navigate(typeof(TaskPage), null, info);
+            }
+            LoadingUI.Visibility = Visibility.Collapsed;
+            Ring.IsActive = false;
         }
 
         private void nview_DisplayModeChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewDisplayModeChangedEventArgs args)
@@ -881,76 +882,76 @@ namespace To_Do.Views
             }
         }
 
-        //    private List<QueryFormat> SearchControls(string query)
-        //    {
-        //        var suggestions = new List<QueryFormat>();
-        //        var querySplit = query.Split(" ");
-        //        string currentPageTag = TaskPage.instance._tag;
-        //        string currentPageName = TaskPage.instance._name;
+        private List<QueryFormat> SearchControls(string query)
+        {
+            var suggestions = new List<QueryFormat>();
+            var querySplit = query.Split(" ");
+            string currentPageTag = TaskPage.instance._tag;
+            string currentPageName = TaskPage.instance._name;
 
-        //        var matchingItems = TaskPage.instance._tasks.ToList().Where(
-        //            item =>
-        //            {
-        //                bool flag = true;
-        //                foreach (string queryToken in querySplit)
-        //                {
-        //                    // Check if token is not in string 
-        //                    if (item.Description.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
-        //                    {
-        //                        // Token is not in string, so we ignore this item. 
-        //                        flag = false;
-        //                    }
-        //                }
-        //                return flag;
-        //            });
-        //        foreach (var item in matchingItems)
-        //        {
-        //            string glyph = item.IsCompleted ? "\uE73E" : "\uEA3A";
-        //            suggestions.AddTask(new QueryFormat(item.Description, currentPageName, glyph));
-        //        }
+            var matchingItems = TaskPage.instance.viewModel.TasksList.ToList().Where(
+                item =>
+                {
+                    bool flag = true;
+                    foreach (string queryToken in querySplit)
+                    {
+                        // Check if token is not in string 
+                        if (item.Description.IndexOf(queryToken, StringComparison.CurrentCultureIgnoreCase) < 0)
+                        {
+                            // Token is not in string, so we ignore this item. 
+                            flag = false;
+                        }
+                    }
+                    return flag;
+                });
+            foreach (var item in matchingItems)
+            {
+                string glyph = item.IsCompleted ? "\uE73E" : "\uEA3A";
+                suggestions.Add(new QueryFormat(item.Description, currentPageName, glyph));
+            }
 
-        //        return suggestions.OrderByDescending(i => i.Title.StartsWith(query, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title).ToList();
-        //    }
+            return suggestions.OrderByDescending(i => i.Title.StartsWith(query, StringComparison.CurrentCultureIgnoreCase)).ThenBy(i => i.Title).ToList();
+        }
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            //if (canSearch)
-            //{
-            //    if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-            //    {
-            //        var suggestions = SearchControls(sender.Text);
+            if (canSearch)
+            {
+                if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+                {
+                    var suggestions = SearchControls(sender.Text);
 
-            //        if (suggestions.Count > 0)
-            //        {
-            //            sender.ItemsSource = suggestions;
-            //        }
-            //        else
-            //        {
-            //            sender.ItemsSource = new List<QueryFormat> { new QueryFormat("No results found", "Everywhere", "\uE711") };
-            //        }
-            //    }
-            //}
+                    if (suggestions.Count > 0)
+                    {
+                        sender.ItemsSource = suggestions;
+                    }
+                    else
+                    {
+                        sender.ItemsSource = new List<QueryFormat> { new QueryFormat("No results found", "Everywhere", "\uE711") };
+                    }
+                }
+            }
         }
 
         private async void SelectControl(QueryFormat desc)
         {
-            //if (desc != null && desc.location != "Everywhere")
-            //{
-            //    if (ContentFrame.CurrentSourcePageType == typeof(TaskPage))
-            //    {
-            //        var list = TaskPage.instance._tasks;
-            //        for (int j = 0; j < list.Count; j++)
-            //        {
-            //            if (desc.Title.Equals(list[j].Description))
-            //            {
-            //                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-            //                    () => calc(j, TaskPage.instance.listOfTasks));
-            //                break;
-            //            }
-            //        }
-            //    }
-            //}
-            //LoseFocus(searchbox);
+            if (desc != null && desc.location != "Everywhere")
+            {
+                if (ContentFrame.CurrentSourcePageType == typeof(TaskPage))
+                {
+                    var list = TaskPage.instance.viewModel.TasksList;
+                    for (int j = 0; j < list.Count; j++)
+                    {
+                        if (desc.Title.Equals(list[j].Description))
+                        {
+                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                                () => calc(j, TaskPage.instance.listOfTasks));
+                            break;
+                        }
+                    }
+                }
+            }
+            LoseFocus(searchbox);
         }
 
         public async void calc(int index, ListView choice)
@@ -962,12 +963,12 @@ namespace To_Do.Views
 
         private void LoseFocus(object sender)
         {
-            //var control = sender as Control;
-            //var isTabStop = control.IsTabStop;
-            //control.IsTabStop = false;
-            //control.IsEnabled = false;
-            //control.IsEnabled = true;
-            //control.IsTabStop = isTabStop;
+            var control = sender as Control;
+            var isTabStop = control.IsTabStop;
+            control.IsTabStop = false;
+            control.IsEnabled = false;
+            control.IsEnabled = true;
+            control.IsTabStop = isTabStop;
         }
 
         public ScrollViewer GetScrollViewer(DependencyObject element)
@@ -1058,81 +1059,81 @@ namespace To_Do.Views
 
         public async Task ChangeViewAsync(ScrollViewer scrollViewer, double? horizontalOffset, double? verticalOffset, bool disableAnimation)
         {
-            //var tcs = new TaskCompletionSource<object>();
+            var tcs = new TaskCompletionSource<object>();
 
-            //EventHandler<ScrollViewerViewChangedEventArgs> viewChanged = (s, e) => tcs.TrySetResult(null);
-            //try
-            //{
-            //    scrollViewer.ViewChanged += viewChanged;
-            //    scrollViewer.ChangeView(horizontalOffset, verticalOffset, null, disableAnimation);
-            //    await tcs.Task;
-            //}
-            //finally
-            //{
-            //    scrollViewer.ViewChanged -= viewChanged;
-            //}
+            EventHandler<ScrollViewerViewChangedEventArgs> viewChanged = (s, e) => tcs.TrySetResult(null);
+            try
+            {
+                scrollViewer.ViewChanged += viewChanged;
+                scrollViewer.ChangeView(horizontalOffset, verticalOffset, null, disableAnimation);
+                await tcs.Task;
+            }
+            finally
+            {
+                scrollViewer.ViewChanged -= viewChanged;
+            }
         }
 
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            //if (args.ChosenSuggestion != null && args.ChosenSuggestion is QueryFormat)
-            //{
-            //    //User selected an item, take an action
-            //    SelectControl(args.ChosenSuggestion as QueryFormat);
-            //}
-            //else if (!string.IsNullOrEmpty(args.QueryText))
-            //{
-            //    //Do a fuzzy search based on the text
-            //    var suggestions = SearchControls(sender.Text);
-            //    if (suggestions.Count > 0)
-            //    {
-            //        SelectControl(suggestions.FirstOrDefault());
-            //    }
-            //}
+            if (args.ChosenSuggestion != null && args.ChosenSuggestion is QueryFormat)
+            {
+                //User selected an item, take an action
+                SelectControl(args.ChosenSuggestion as QueryFormat);
+            }
+            else if (!string.IsNullOrEmpty(args.QueryText))
+            {
+                //Do a fuzzy search based on the text
+                var suggestions = SearchControls(sender.Text);
+                if (suggestions.Count > 0)
+                {
+                    SelectControl(suggestions.FirstOrDefault());
+                }
+            }
         }
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            //if (args.SelectedItem is QueryFormat control)
-            //{
-            //    if (control.Title != "To_Do.QueryFormat")
-            //    {
-            //        sender.Text = control.Title;
+            if (args.SelectedItem is QueryFormat control)
+            {
+                if (control.Title != "To_Do.QueryFormat")
+                {
+                    sender.Text = control.Title;
 
-            //    }
-            //}
+                }
+            }
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //dialog = new NewNavigationViewItemDialog();
-            //Grid.SetRowSpan(dialog, 2);
-            //dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
-            //ContentDialogResult result = await dialog.ShowAsync();
-            //if (result == ContentDialogResult.Primary)
-            //{
-            //    // create list here
-            //    string name = (string)localSettings.Values["NEWlistName"];
-            //    string tag = ((string)localSettings.Values["NEWlistTag"]);
-            //    string glyph = (string)localSettings.Values["NEWlistIcon"];
-            //    Categories.AddTask(new CustomNavViewItem { Tag = tag, Name = name, Glyph = glyph });
-            //}
-        }
+        //private async void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //dialog = new NewNavigationViewItemDialog();
+        //    //Grid.SetRowSpan(dialog, 2);
+        //    //dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
+        //    //ContentDialogResult result = await dialog.ShowAsync();
+        //    //if (result == ContentDialogResult.Primary)
+        //    //{
+        //    //    // create list here
+        //    //    string name = (string)localSettings.Values["NEWlistName"];
+        //    //    string tag = ((string)localSettings.Values["NEWlistTag"]);
+        //    //    string glyph = (string)localSettings.Values["NEWlistIcon"];
+        //    //    Categories.AddTask(new CustomNavViewItem { Tag = tag, Name = name, Glyph = glyph });
+        //    //}
+        //}
 
         private void searchbox_GotFocus(object sender, RoutedEventArgs e)
         {
-            //if (canSearch)
-            //{
-            //    var suggestions = SearchControls(((AutoSuggestBox)sender).Text);
-            //    if (suggestions.Count > 0)
-            //    {
-            //        ((AutoSuggestBox)sender).ItemsSource = suggestions;
-            //    }
-            //    else
-            //    {
-            //        ((AutoSuggestBox)sender).ItemsSource = new List<QueryFormat> { new QueryFormat("No results found", "Everywhere", "\uE711") };
-            //    }
-            //}
+            if (canSearch)
+            {
+                var suggestions = SearchControls(((AutoSuggestBox)sender).Text);
+                if (suggestions.Count > 0)
+                {
+                    ((AutoSuggestBox)sender).ItemsSource = suggestions;
+                }
+                else
+                {
+                    ((AutoSuggestBox)sender).ItemsSource = new List<QueryFormat> { new QueryFormat("No results found", "Everywhere", "\uE711") };
+                }
+            }
         }
 
         private void NavigationViewItem_PointerCaptureLost(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
@@ -1231,22 +1232,22 @@ namespace To_Do.Views
         {
             //Debug.WriteLine("123");
             //await LoadNavViewLists();
-            //LoadTheme();
-            //LoadingUI.Visibility = Visibility.Visible;
-            //Ring.IsActive = true;
-            ////var currentTheme = ThemeHelper.RootTheme.ToString();
-            //var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            //titleBar.ButtonBackgroundColor = Colors.Transparent;
-            //titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            //var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            //coreTitleBar.ExtendViewIntoTitleBar = true;
-            //UpdateTitleBarLayout(coreTitleBar);
-            //Window.Current.SetTitleBar(AppTitleBar);
-            //coreTitleBar.LayoutMetricsChanged += (s, a) => UpdateTitleBarLayout(s);
-            //coreTitleBar.IsVisibleChanged += CoreTitlebar_IsVisibleChanged;
+            LoadTheme();
+            LoadingUI.Visibility = Visibility.Visible;
+            Ring.IsActive = true;
+            //var currentTheme = ThemeHelper.RootTheme.ToString();
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+            UpdateTitleBarLayout(coreTitleBar);
+            Window.Current.SetTitleBar(AppTitleBar);
+            coreTitleBar.LayoutMetricsChanged += (s, a) => UpdateTitleBarLayout(s);
+            coreTitleBar.IsVisibleChanged += CoreTitlebar_IsVisibleChanged;
 
-            //ImageInitialize();
-            //RoundCornerInitialize();
+            ImageInitialize();
+            RoundCornerInitialize();
 
             //ContentFrame.Navigate(typeof(TaskPage), null, info);
             //List<string> dataToParse = new List<string>
@@ -1256,17 +1257,19 @@ namespace To_Do.Views
             //    };
 
 
-            //ContentFrame.Navigate(typeof(TaskPage), dataToParse, info);
+            //ContentFrame.Navigate(typeof(TaskPage), null, info);
             //await Task.Delay(10);
-            //ContentFrame.Navigate(typeof(Settings), null, info);
-            //await Task.Delay(10);
-            //ContentFrame.Navigate(typeof(TaskPage), dataToParse, info);
+            ContentFrame.Navigate(typeof(Settings), null, info);
+            await Task.Delay(10);
+            ContentFrame.Navigate(typeof(TaskPage), null, info);
             //nview.SelectedItem = Categories[0];
-            //LoadingUI.Visibility = Visibility.Collapsed;
 
-            //Ring.IsActive = false;
-            //parallax.Source = TaskPage.instance.listOfTasks;
-            //LoseFocus(searchbox);
+            await Task.Delay(10);
+            LoadingUI.Visibility = Visibility.Collapsed;
+
+            Ring.IsActive = false;
+            parallax.Source = TaskPage.instance.listOfTasks;
+            LoseFocus(searchbox);
         }
 
 
