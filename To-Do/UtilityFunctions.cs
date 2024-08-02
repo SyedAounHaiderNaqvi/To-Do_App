@@ -108,5 +108,21 @@ namespace To_Do
         {
             return (float)((a * (1.0 - f)) + (b * f));
         }
+
+        public static void SaveListDataToStorage()
+        {
+            // Gather list data
+            // Save to appfolder
+            // Use custom converter for JSON or binary
+            // return either void or some other useful debug message
+        }
+
+        public static void LoadListDataFromStorage()
+        {
+            // Access the appfolder
+            // Gather list data
+            // Use custom converter for JSON or binary
+            // return either void or some other useful debug message
+        }
     }
 }

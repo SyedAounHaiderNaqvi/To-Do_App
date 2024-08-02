@@ -36,27 +36,6 @@ namespace To_Do.ViewModels
             TasksList.Add(task);
         }
 
-        //public bool UpdateTask(TaskModel taskToUpdate)
-        //{
-        //    bool isUpdated = false;
-
-        //    foreach (TaskModel task in TasksList)
-        //    {
-        //        if (task.Id == taskToUpdate.Id)
-        //        {
-        //            task.Description = taskToUpdate.Description;
-        //            task.Date = taskToUpdate.Date;
-        //            task.IsCompleted = taskToUpdate.IsCompleted;
-        //            task.IsStarred = taskToUpdate.IsStarred;
-        //            task.SubTasks = taskToUpdate.SubTasks;
-        //            isUpdated = true;
-        //            break;
-        //        }
-        //    }
-
-        //    return isUpdated;
-        //}
-
         public bool DeleteTask(string id)
         {
             bool isDeleted = false;

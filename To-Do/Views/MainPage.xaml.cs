@@ -26,15 +26,16 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using Windows.UI.Xaml.Navigation;
 using To_Do.ViewModels;
+using To_Do.Models;
 
 namespace To_Do.Views
 {
     public sealed partial class MainPage : Page
     {
-        //public List<string> savingDescriptions = new List<string>();
-        //public List<string> savingDates = new List<string>();
-        //public List<bool> savingImps = new List<bool>();
-        //public List<List<string>> savingSteps = new List<List<string>>();
+        public List<string> savingDescriptions = new List<string>();
+        public List<string> savingDates = new List<string>();
+        public List<bool> savingImps = new List<bool>();
+        public List<List<string>> savingSteps = new List<List<string>>();
 
         //public List<string> navListsNames = new List<string>();
         //public List<string> navListsTags = new List<string>();
@@ -56,40 +57,37 @@ namespace To_Do.Views
 
             this.InitializeComponent();
             ins = this;
-            //ContentFrame.Navigate(typeof(TaskPage));
-            //LoadingUI.Visibility = Visibility.Collapsed;
             folder = ApplicationData.Current.LocalFolder;
             //Categories = new ObservableCollection<CustomNavViewItem>();
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
             TileUpdateManager.CreateTileUpdaterForApplication().Clear();
-            //Debug.WriteLine("xzxzx");
         }
 
-        //protected async override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    base.OnNavigatedTo(e);
-        //    string argument = e.Parameter.ToString();
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            string argument = e.Parameter.ToString();
 
-        //    switch (argument)
-        //    {
-        //        case "GoToPending":
-        //            ContentFrame.Navigate(typeof(TaskPage), null, info);
-        //            await Task.Delay(10);
-        //            ContentFrame.Navigate(typeof(TaskPage));
-        //            nview.SelectedItem = Categories[0];
-        //            parallax.Source = TaskPage.instance.listOfTasks;
-        //            break;
-        //        case "GoToSettings":
-        //            ContentFrame.Navigate(typeof(TaskPage), null, info);
-        //            await Task.Delay(10);
-        //            ContentFrame.Navigate(typeof(Settings), null, info);
-        //            nview.SelectedItem = nview.SettingsItem;
-        //            parallax.Source = Settings.ins.scroller;
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
+            switch (argument)
+            {
+                case "GoToPending":
+                    ContentFrame.Navigate(typeof(TaskPage), null, info);
+                    //await Task.Delay(10);
+                    //ContentFrame.Navigate(typeof(TaskPage));
+                    //nview.SelectedItem = Categories[0];
+                    parallax.Source = TaskPage.instance.listOfTasks;
+                    break;
+                case "GoToSettings":
+                    ContentFrame.Navigate(typeof(TaskPage), null, info);
+                    await Task.Delay(10);
+                    ContentFrame.Navigate(typeof(Settings), null, info);
+                    nview.SelectedItem = nview.SettingsItem;
+                    parallax.Source = Settings.ins.scroller;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         //    async Task LoadNavViewLists()
         //    {
@@ -370,62 +368,62 @@ namespace To_Do.Views
             AppTitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        //    async Task SaveCurrentPageData()
+        //async Task SaveCurrentPageData()
+        //{
+        //    savingDescriptions.Clear();
+        //    savingDates.Clear();
+        //    savingImps.Clear();
+        //    savingSteps.Clear();
+
+        //    StorageFolder rootFolder;
+        //    TaskPage ins = TaskPage.instance;
+        //    string t = "PendingTasks";
+        //    if (ins.viewModel.TasksList.Count > 0)
         //    {
-        //        savingDescriptions.Clear();
-        //        savingDates.Clear();
-        //        savingImps.Clear();
-        //        savingSteps.Clear();
-
-        //        StorageFolder rootFolder;
-        //        TaskPage ins = TaskPage.instance;
-        //        string t = ins._tag;
-        //        if (ins._tasks.Count > 0)
+        //        foreach (TaskModel tODO in ins.viewModel.TasksList)
         //        {
-        //            foreach (TaskModel tODO in ins._tasks)
+        //            string temp = tODO.Description;
+        //            string date = tODO.Date;
+        //            bool importance = tODO.IsStarred;
+        //            savingDescriptions.Add(temp);
+        //            savingDates.Add(date);
+        //            savingImps.Add(importance);
+
+        //            List<TaskModel> steps = tODO.SubTasks;
+        //            List<string> tempList = new List<string>();
+        //            for (int i = 0; i < steps.Count; i++)
         //            {
-        //                string temp = tODO.Description;
-        //                string date = tODO.Date;
-        //                bool importance = tODO.IsStarred;
-        //                savingDescriptions.AddTask(temp);
-        //                savingDates.AddTask(date);
-        //                savingImps.AddTask(importance);
-
-        //                List<TaskModel> steps = tODO.SubTasks;
-        //                List<string> tempList = new List<string>();
-        //                for (int i = 0; i < steps.Count; i++)
-        //                {
-        //                    tempList.AddTask(steps[i].Description);
-        //                }
-        //                if (steps != null)
-        //                {
-        //                    savingSteps.AddTask(tempList);
-        //                }
+        //                tempList.Add(steps[i].Description);
         //            }
-        //            string jsonFile = JsonConvert.SerializeObject(savingDescriptions);
-        //            string dateJsonFile = JsonConvert.SerializeObject(savingDates);
-        //            string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
-        //            string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
-
-        //            rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
-        //            StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
-        //            await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
-        //            StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{t}_dates.json", CreationCollisionOption.ReplaceExisting);
-        //            await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
-        //            StorageFile impdescjson = await rootFolder.CreateFileAsync($"{t}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
-        //            await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
-        //            StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
-        //            await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
+        //            if (steps != null)
+        //            {
+        //                savingSteps.Add(tempList);
+        //            }
         //        }
-        //        else
+        //        string jsonFile = JsonConvert.SerializeObject(savingDescriptions);
+        //        string dateJsonFile = JsonConvert.SerializeObject(savingDates);
+        //        string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
+        //        string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
+
+        //        rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
+        //        StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
+        //        await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
+        //        StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{t}_dates.json", CreationCollisionOption.ReplaceExisting);
+        //        await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
+        //        StorageFile impdescjson = await rootFolder.CreateFileAsync($"{t}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
+        //        await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
+        //        StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
+        //        await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
+        //    }
+        //    else
+        //    {
+        //        rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
+        //        if (rootFolder != null)
         //        {
-        //            rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
-        //            if (rootFolder != null)
-        //            {
-        //                await rootFolder.DeleteAsync();
-        //            }
+        //            await rootFolder.DeleteAsync();
         //        }
         //    }
+        //}
 
         //    async Task SaveNavigationPageItems()
         //    {
@@ -774,7 +772,7 @@ namespace To_Do.Views
             }
         }
 
-        public void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
+        public async void OnCloseRequest(object sender, SystemNavigationCloseRequestedPreviewEventArgs e)
         {
             var def = e.GetDeferral();
             LoadingUI.Visibility = Visibility.Visible;
@@ -886,7 +884,8 @@ namespace To_Do.Views
         {
             var suggestions = new List<QueryFormat>();
             var querySplit = query.Split(" ");
-            string currentPageTag = TaskPage.instance._tag;
+            //string currentPageTag = "PendingTasks";
+            //string currentPageTag = TaskPage.instance._tag;
             string currentPageName = TaskPage.instance._name;
 
             var matchingItems = TaskPage.instance.viewModel.TasksList.ToList().Where(

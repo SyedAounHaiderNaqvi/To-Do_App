@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace To_Do.Models
 {
@@ -71,7 +70,6 @@ namespace To_Do.Models
                 OnPropertyChanged("SubTasks");
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

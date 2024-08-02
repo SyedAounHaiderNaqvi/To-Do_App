@@ -44,9 +44,8 @@ namespace To_Do.Views
 
         //for debug for now
         public string _name = "Pending Tasks";
-        public string _tag = "TaskPage";
-        public string lastDataParseTag = "TaskPage";
-        //bool loadedForFirstTime = true;
+        //public string lastDataParseTag = "TaskPage";
+        bool loadedForFirstTime = true;
         public bool finallyLoaded = false;
 
         public TaskPage()
@@ -58,9 +57,16 @@ namespace To_Do.Views
             //UpdateBadge();
         }
 
+        protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            //await SaveDataToFile();
+            base.OnNavigatingFrom(e);
+        }
+
         //public async Task SaveDataToFile()
         //{
-        //    var t = _tag;
+        //    var t = "PendingTasks";
+        //    var _tasks = viewModel.TasksList;
         //    if (_tasks.Count > 0)
         //    {
         //        foreach (TaskModel tODO in _tasks)
@@ -68,19 +74,19 @@ namespace To_Do.Views
         //            string temp = tODO.Description;
         //            string date = tODO.Date;
         //            bool importance = tODO.IsStarred;
-        //            _savingDescriptions.AddTask(temp);
-        //            _savingDates.AddTask(date);
-        //            _savingImps.AddTask(importance);
+        //            _savingDescriptions.Add(temp);
+        //            _savingDates.Add(date);
+        //            _savingImps.Add(importance);
 
         //            List<TaskModel> steps = tODO.SubTasks;
         //            List<string> tempList = new List<string>();
         //            for (int i = 0; i < steps.Count; i++)
         //            {
-        //                tempList.AddTask(steps[i].Description);
+        //                tempList.Add(steps[i].Description);
         //            }
         //            if (steps != null)
         //            {
-        //                savingSteps.AddTask(tempList);
+        //                savingSteps.Add(tempList);
         //            }
         //        }
         //        string jsonFile = JsonConvert.SerializeObject(_savingDescriptions);
@@ -120,51 +126,51 @@ namespace To_Do.Views
             AllDone.Visibility = viewModel.TasksList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        //public async Task LoadDataFromFile()
-        //{
-        //    var t = _tag;
-        //    StorageFolder folder = ApplicationData.Current.LocalFolder;
-        //    StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
+        public async Task LoadDataFromFile()
+        {
+            var t = "PendingTasks";
+            var _tasks = viewModel.TasksList;
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
 
-        //    if (rootFolder != null && _tasks.Count <= 0)
-        //    {
-        //        StorageFile descriptionFile = await rootFolder.GetFileAsync($"{t}_desc.json");
-        //        StorageFile datesFile = await rootFolder.GetFileAsync($"{t}_dates.json");
-        //        StorageFile importanceFile = await rootFolder.GetFileAsync($"{t}_imp_desc.json");
-        //        StorageFile stepsFile = await rootFolder.GetFileAsync($"{t}_steps.json");
+            if (rootFolder != null && _tasks.Count <= 0)
+            {
+                StorageFile descriptionFile = await rootFolder.GetFileAsync($"{t}_desc.json");
+                StorageFile datesFile = await rootFolder.GetFileAsync($"{t}_dates.json");
+                StorageFile importanceFile = await rootFolder.GetFileAsync($"{t}_imp_desc.json");
+                StorageFile stepsFile = await rootFolder.GetFileAsync($"{t}_steps.json");
 
-        //        string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
-        //        string jsonOfDatesLoaded = await FileIO.ReadTextAsync(datesFile);
-        //        string jsonOfImpLoaded = await FileIO.ReadTextAsync(importanceFile);
-        //        string jsonOfStepsLoaded = await FileIO.ReadTextAsync(stepsFile);
+                string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
+                string jsonOfDatesLoaded = await FileIO.ReadTextAsync(datesFile);
+                string jsonOfImpLoaded = await FileIO.ReadTextAsync(importanceFile);
+                string jsonOfStepsLoaded = await FileIO.ReadTextAsync(stepsFile);
 
-        //        List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
-        //        List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDatesLoaded);
-        //        List<bool> loadedImportance = JsonConvert.DeserializeObject<List<bool>>(jsonOfImpLoaded);
-        //        List<List<string>> loadedSteps = JsonConvert.DeserializeObject<List<List<string>>>(jsonOfStepsLoaded);
-        //        if (loadedDescriptions != null)
-        //        {
-        //            _tasks.Clear();
-        //            for (int i = 0; i < loadedDescriptions.Count; i++)
-        //            {
-        //                TaskModel newTask = new TaskModel() { Description = loadedDescriptions[i], Date = loadedDates[i], IsStarred = loadedImportance[i] };
-        //                newTask.SubTasks = new List<TaskModel>();
-        //                for (int x = 0; x < loadedSteps[i].Count; x++)
-        //                {
-        //                    string descOfStep = loadedSteps[i][x];
-        //                    newTask.SubTasks.AddTask(new TaskModel() { Description = descOfStep });
-        //                }
-        //                AddATask(newTask);
-        //            }
-        //        }
-        //        List<TaskModel> newList = new List<TaskModel>(_tasks);
-        //        newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
-        //        _tasks = new ObservableCollection<TaskModel>(newList);
-        //        listOfTasks.ItemsSource = _tasks;
-        //    }
-        //}
+                List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
+                List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDatesLoaded);
+                List<bool> loadedImportance = JsonConvert.DeserializeObject<List<bool>>(jsonOfImpLoaded);
+                List<List<string>> loadedSteps = JsonConvert.DeserializeObject<List<List<string>>>(jsonOfStepsLoaded);
+                if (loadedDescriptions != null)
+                {
+                    _tasks.Clear();
+                    for (int i = 0; i < loadedDescriptions.Count; i++)
+                    {
+                        TaskModel newTask = new TaskModel() { Description = loadedDescriptions[i], Date = loadedDates[i], IsStarred = loadedImportance[i] };
+                        newTask.SubTasks = new List<TaskModel>();
+                        for (int x = 0; x < loadedSteps[i].Count; x++)
+                        {
+                            string descOfStep = loadedSteps[i][x];
+                            newTask.SubTasks.Add(new TaskModel() { Description = descOfStep });
+                        }
+                        viewModel.AddTask(newTask);
+                    }
+                }
+                List<TaskModel> newList = new List<TaskModel>(_tasks);
+                newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
+                viewModel.TasksList = new ObservableCollection<TaskModel>(newList);
+            }
+        }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             finallyLoaded = false;
             //if (e != null)
@@ -177,7 +183,7 @@ namespace To_Do.Views
             //        if (!loadedForFirstTime)
             //        {
             //            await SaveDataToFile();
-            //            _tasks.Clear();
+            //            viewModel.TasksList.Clear();
             //        }
             //        if (loadedForFirstTime)
             //        {
@@ -194,18 +200,18 @@ namespace To_Do.Views
             //        }
             //        _name = parsed[0];
             //        this.Name = _name;
-            //        this.Tag = _tag;
+            //        this.Tag = "PendingTasks";
             //        pageTitle.Text = _name;
             //    }
             //}
-            //MainPage.ins.parallax.Source = listOfTasks;
-            //SortingDropDown.Content = "Date Created";
-            //opt1.IsChecked = true;
-            //Sort("Date Created");
+            await LoadDataFromFile();
+            MainPage.ins.parallax.Source = listOfTasks;
+            SortingDropDown.Content = "Date Created";
+            opt1.IsChecked = true;
+            Sort("Date Created");
 
-            //base.OnNavigatedTo(e);
+            base.OnNavigatedTo(e);
             finallyLoaded = true;
-            //DataContext = e.Parameter as TaskViewModel;
         }
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)

@@ -38,7 +38,7 @@ namespace To_Do
         {
             base.OnNavigatedTo(e);
             MainPage.ins.parallax.Source = scroller;
-            TaskPage.instance.lastDataParseTag = "settings";
+            //TaskPage.instance.lastDataParseTag = "settings";
 
         }
 
@@ -682,7 +682,7 @@ namespace To_Do
             }
         }
 
-        private async void OpenBackupDialog(object sender, RoutedEventArgs e)
+        private void OpenBackupDialog(object sender, RoutedEventArgs e)
         {
             //dialog = new BackupContentDialog();
             //Grid.SetRowSpan(dialog, 2);
