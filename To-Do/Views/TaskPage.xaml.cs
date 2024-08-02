@@ -40,7 +40,7 @@ namespace To_Do.Views
         TaskModel selectedTask = null;
 
         //public string redate;
-        public ContentDialog dialog;
+        public EditDialogContent dialog;
 
         //for debug for now
         public string _name = "Pending Tasks";
@@ -301,9 +301,9 @@ namespace To_Do.Views
 
         private async void AddStep(object sender, RoutedEventArgs e)
         {
-            dialog = new EditDialogContent();
+            EditDialogContent dialog = new EditDialogContent();
             Grid.SetRowSpan(dialog, 2);
-            dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
+            dialog.CancelButton.Style = (Style)Application.Current.Resources["ButtonStyle1"];
             dialog.Title = "Add Step";
             int index = 0;
             Button btn = sender as Button;
@@ -320,10 +320,10 @@ namespace To_Do.Views
 
             Grid grid = (Grid)dialog.Content;
             TextBox EditTextBox = (TextBox)VisualTreeHelper.GetChild(grid, 0);
-            dialog.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
+            dialog.OKButton.IsEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
             TextChanged(EditTextBox);
-            ContentDialogResult result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
+            await dialog.ShowAsync();
+            if (dialog._CustomResult == CustomResult.OK)
             {
                 //do create new task
                 TaskModel newStep = new TaskModel() { Description = EditTextBox.Text };
@@ -339,7 +339,8 @@ namespace To_Do.Views
 
         public void TextChanged(TextBox b)
         {
-            dialog.IsPrimaryButtonEnabled = !(string.IsNullOrEmpty(b.Text) || !string.IsNullOrWhiteSpace(b.Text));
+            if (dialog != null)
+                dialog.OKButton.IsEnabled = !(string.IsNullOrEmpty(b.Text) || !string.IsNullOrWhiteSpace(b.Text));
         }
 
         private async void NewTaskBox_GotFocus(object sender, RoutedEventArgs e)

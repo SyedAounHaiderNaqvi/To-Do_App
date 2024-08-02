@@ -7,13 +7,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:To_Do"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:navigationpages="using:To_Do.NavigationPages" d:DataContext="{d:DesignInstance Type=navigationpages:TODOTask}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Edit Task"
-    PrimaryButtonText="Done"
-    PrimaryButtonStyle="{ThemeResource AccentButtonStyle}"
-    CloseButtonText="Cancel">
+    IsPrimaryButtonEnabled="False"
+    IsSecondaryButtonEnabled="False">
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <TextBox VerticalContentAlignment="Center" Padding="12,8,0,0" x:FieldModifier="public" TextChanged="EditBoxTextChanged" x:Name="EditTextBox" AcceptsReturn="True" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write description"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.ColumnSpan="2" VerticalContentAlignment="Center" KeyUp="EditTextBox_KeyUp" Padding="12,8,0,0" x:FieldModifier="public" TextChanged="EditBoxTextChanged" x:Name="EditTextBox" AcceptsReturn="False" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write description"/>
+        <Button Style="{ThemeResource AccentButtonStyle}" Grid.Row="1" VerticalAlignment="Center" x:FieldModifier="public" HorizontalAlignment="Stretch" Content="Add" x:Name="OKButton" Click="OKButton_Click" Margin="5,0"/>
+        <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" x:FieldModifier="public" Content="Cancel" x:Name="CancelButton" Click="CancelButton_Click"  Margin="5,0"/>
     </Grid>
 </ContentDialog>

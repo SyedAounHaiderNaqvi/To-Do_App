@@ -459,7 +459,7 @@ namespace To_Do.Views
             if (TaskItems.Count > 0)
             {
                 List<string> tasks = new List<string>();
-                string title = "Tasks to do";
+                string title = "Tasks";
                 for (int i = 0; i < TaskItems.Count; i++)
                 {
                     tasks.Add(TaskItems[i].Description);
