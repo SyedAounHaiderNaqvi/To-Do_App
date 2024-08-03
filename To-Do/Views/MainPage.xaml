@@ -544,7 +544,7 @@
         <Border IsHitTestVisible="True" Background="Transparent" Margin="48,0,0,0" Height="48" VerticalAlignment="Top" x:Name="AppTitleBar">
         </Border>
         <!--MenuItemsSource="{x:Bind Categories, Mode=OneWay}"-->
-        <controls:NavigationView  PaneTitle="To-Do PREVIEW" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
+        <controls:NavigationView  PaneTitle="To-Do" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
             <!--<controls:NavigationView.MenuItemTemplate>
                 <DataTemplate x:DataType="local:CustomNavViewItem">
                     <controls:NavigationViewItem Canvas.ZIndex="1" x:Name="parent" PointerCaptureLost="NavigationViewItem_PointerCaptureLost" PointerEntered="NavigationViewItem_PointerEntered" PointerExited="NavigationViewItem_PointerExited" ToolTipService.ToolTip="{x:Bind Name}" Tag="{x:Bind Tag}">

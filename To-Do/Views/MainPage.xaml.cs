@@ -275,7 +275,17 @@ namespace To_Do.Views
             }
             else
             {
-                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+                if (ThemeHelper.IsDarkTheme())
+                {
+                    ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+                    ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
+
+                }
+                else
+                {
+                    ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
+                    ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
+                }
                 Application.Current.Resources["SystemAccentColorDark1"] = fallBackPurple;
                 Application.Current.Resources["SystemAccentColorDark2"] = Colors.White;
                 Application.Current.Resources["SystemAccentColorLight2"] = Application.Current.Resources["SystemAccentColorDark1"];
@@ -1142,7 +1152,6 @@ namespace To_Do.Views
             LoadTheme();
             LoadingUI.Visibility = Visibility.Visible;
             Ring.IsActive = true;
-            //var currentTheme = ThemeHelper.RootTheme.ToString();
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
             titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
