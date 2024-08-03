@@ -681,6 +681,10 @@ namespace To_Do.Views
             if (TaskPage.instance.viewModel.TasksList.Count > 0)
                 await UtilityFunctions.SaveListDataToStorage(TaskPage.instance.viewModel.TasksList);
 
+            //if (Environment.OSVersion.Version.Build < 22000)
+            //{
+            //    CreateThreeTileNotifications();
+            //}
             CreateThreeTileNotifications();
             //await SaveNavigationPageItems();
             def.Complete();

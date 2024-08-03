@@ -53,13 +53,11 @@ namespace To_Do.Views
             var newList = await UtilityFunctions.LoadListDataFromStorage();
             if (newList != null)
             {
-                Debug.WriteLine("Loaded successfully");
                 newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
                 viewModel.TasksList = new ObservableCollection<TaskModel>(newList);
             }
             else
             {
-                Debug.WriteLine("Could not load successfully");
                 viewModel.TasksList = new ObservableCollection<TaskModel>();
             }
             
