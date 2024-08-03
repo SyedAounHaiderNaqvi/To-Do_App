@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
+using Newtonsoft.Json;
+using Windows.Storage;
+using To_Do.Models;
 
 namespace To_Do
 {
@@ -109,20 +110,37 @@ namespace To_Do
             return (float)((a * (1.0 - f)) + (b * f));
         }
 
-        public static void SaveListDataToStorage()
+        public static async Task<bool> SaveListDataToStorage(object saveData)
         {
-            // Gather list data
-            // Save to appfolder
-            // Use custom converter for JSON or binary
-            // return either void or some other useful debug message
+            string output = JsonConvert.SerializeObject(saveData);
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFile file = await folder.CreateFileAsync($"PendingTasks.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(file, output);
+            return true;
         }
 
-        public static void LoadListDataFromStorage()
+        public static async Task<List<TaskModel>> LoadListDataFromStorage()
         {
             // Access the appfolder
-            // Gather list data
-            // Use custom converter for JSON or binary
-            // return either void or some other useful debug message
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFile tasksFile = (StorageFile)await folder.TryGetItemAsync($"PendingTasks.json");
+            if (tasksFile == null)
+            {
+                return null;
+            }
+            else
+            {
+                string loadedJson = await FileIO.ReadTextAsync(tasksFile);
+                List<TaskModel> loadedList = JsonConvert.DeserializeObject<List<TaskModel>>(loadedJson);
+                if (loadedList != null)
+                {
+                    return loadedList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
     }
 }

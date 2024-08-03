@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-//poop
+﻿using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
@@ -20,23 +18,12 @@ using System.Linq;
 using Windows.UI.Core;
 using Windows.Foundation;
 using Windows.Storage.AccessCache;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Diagnostics;
 using Windows.UI.Xaml.Navigation;
-using To_Do.ViewModels;
-using To_Do.Models;
 
 namespace To_Do.Views
 {
     public sealed partial class MainPage : Page
     {
-        public List<string> savingDescriptions = new List<string>();
-        public List<string> savingDates = new List<string>();
-        public List<bool> savingImps = new List<bool>();
-        public List<List<string>> savingSteps = new List<List<string>>();
-
         //public List<string> navListsNames = new List<string>();
         //public List<string> navListsTags = new List<string>();
         //public List<string> navListsGlyphs = new List<string>();
@@ -50,14 +37,12 @@ namespace To_Do.Views
 
         //public ObservableCollection<CustomNavViewItem> Categories { get; }
         //public ContentDialog dialog;
-        StorageFolder folder;
 
         public MainPage()
         {
 
             this.InitializeComponent();
             ins = this;
-            folder = ApplicationData.Current.LocalFolder;
             //Categories = new ObservableCollection<CustomNavViewItem>();
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
             TileUpdateManager.CreateTileUpdaterForApplication().Clear();
@@ -367,89 +352,6 @@ namespace To_Do.Views
         {
             AppTitleBar.Visibility = sender.IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
-
-        //async Task SaveCurrentPageData()
-        //{
-        //    savingDescriptions.Clear();
-        //    savingDates.Clear();
-        //    savingImps.Clear();
-        //    savingSteps.Clear();
-
-        //    StorageFolder rootFolder;
-        //    TaskPage ins = TaskPage.instance;
-        //    string t = "PendingTasks";
-        //    if (ins.viewModel.TasksList.Count > 0)
-        //    {
-        //        foreach (TaskModel tODO in ins.viewModel.TasksList)
-        //        {
-        //            string temp = tODO.Description;
-        //            string date = tODO.Date;
-        //            bool importance = tODO.IsStarred;
-        //            savingDescriptions.Add(temp);
-        //            savingDates.Add(date);
-        //            savingImps.Add(importance);
-
-        //            List<TaskModel> steps = tODO.SubTasks;
-        //            List<string> tempList = new List<string>();
-        //            for (int i = 0; i < steps.Count; i++)
-        //            {
-        //                tempList.Add(steps[i].Description);
-        //            }
-        //            if (steps != null)
-        //            {
-        //                savingSteps.Add(tempList);
-        //            }
-        //        }
-        //        string jsonFile = JsonConvert.SerializeObject(savingDescriptions);
-        //        string dateJsonFile = JsonConvert.SerializeObject(savingDates);
-        //        string importanceJsonFile = JsonConvert.SerializeObject(savingImps);
-        //        string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
-
-        //        rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
-        //        StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
-        //        StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{t}_dates.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
-        //        StorageFile impdescjson = await rootFolder.CreateFileAsync($"{t}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
-        //        StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
-        //    }
-        //    else
-        //    {
-        //        rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
-        //        if (rootFolder != null)
-        //        {
-        //            await rootFolder.DeleteAsync();
-        //        }
-        //    }
-        //}
-
-        //    async Task SaveNavigationPageItems()
-        //    {
-        //        navListsGlyphs.Clear();
-        //        navListsNames.Clear();
-        //        navListsTags.Clear();
-        //        StorageFolder rootFolder = await folder.CreateFolderAsync($"navlists", CreationCollisionOption.ReplaceExisting);
-
-        //        for (int i = 0; i < Categories.Count; i++)
-        //        {
-        //            navListsTags.AddTask(Categories[i].Tag);
-        //            navListsNames.AddTask(Categories[i].Name);
-        //            navListsGlyphs.AddTask(Categories[i].Glyph);
-        //        }
-        //        string tag_File = JsonConvert.SerializeObject(navListsTags);
-        //        string name_File = JsonConvert.SerializeObject(navListsNames);
-        //        string glyph_File = JsonConvert.SerializeObject(navListsGlyphs);
-
-        //        StorageFile name_json = await rootFolder.CreateFileAsync($"list_names.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(name_json, name_File);
-        //        StorageFile tag_json = await rootFolder.CreateFileAsync($"list_tags.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(tag_json, tag_File);
-        //        StorageFile glyph_json = await rootFolder.CreateFileAsync($"list_glyphs.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(glyph_json, glyph_File);
-
-        //    }
 
         public void CreateThreeTileNotifications()
         {
@@ -776,8 +678,10 @@ namespace To_Do.Views
         {
             var def = e.GetDeferral();
             LoadingUI.Visibility = Visibility.Visible;
+            if (TaskPage.instance.viewModel.TasksList.Count > 0)
+                await UtilityFunctions.SaveListDataToStorage(TaskPage.instance.viewModel.TasksList);
+
             CreateThreeTileNotifications();
-            //await SaveCurrentPageData();
             //await SaveNavigationPageItems();
             def.Complete();
         }
@@ -822,7 +726,7 @@ namespace To_Do.Views
             AppTitleBar.Margin = new Thickness(currMargin.Left, currMargin.Top, coreTitleBar.SystemOverlayRightInset, currMargin.Bottom);
         }
 
-        private async void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
+        private void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
             Ring.IsActive = true;
             LoadingUI.Visibility = Visibility.Visible;
@@ -1165,7 +1069,7 @@ namespace To_Do.Views
         }
 
 
-        private async void DeleteList(object sender, RoutedEventArgs e)
+        private void DeleteList(object sender, RoutedEventArgs e)
         {
             //hasNavigated = false;
             //nview.IsEnabled = false;

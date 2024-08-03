@@ -1,48 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using Microsoft.UI.Xaml.Controls;
 using System.Linq;
 using To_Do.Models;
-using System.Windows.Input;
 using To_Do.ViewModels;
 using System.Diagnostics;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Composition;
-using Windows.UI;
 
 namespace To_Do.Views
 {
     public sealed partial class TaskPage : Page
     {
-        public List<string> _savingDescriptions = new List<string>();
-        public List<string> _savingDates = new List<string>();
-        public List<bool> _savingImps = new List<bool>();
-        public List<bool> _savingCompletedState = new List<bool>();
-        public List<List<string>> savingSteps = new List<List<string>>();
-
-        public List<string> savingDescriptions;
-
         public static TaskPage instance;
-
         public TaskViewModel viewModel;
         TaskModel selectedTask = null;
-
-        //public string redate;
         public EditDialogContent dialog;
 
-        //for debug for now
         public string _name = "Pending Tasks";
         //public string lastDataParseTag = "TaskPage";
         bool loadedForFirstTime = true;
@@ -59,67 +37,11 @@ namespace To_Do.Views
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            //await SaveDataToFile();
+            if (viewModel.TasksList.Count > 0)
+                await UtilityFunctions.SaveListDataToStorage(viewModel.TasksList);
+
             base.OnNavigatingFrom(e);
         }
-
-        //public async Task SaveDataToFile()
-        //{
-        //    var t = "PendingTasks";
-        //    var _tasks = viewModel.TasksList;
-        //    if (_tasks.Count > 0)
-        //    {
-        //        foreach (TaskModel tODO in _tasks)
-        //        {
-        //            string temp = tODO.Description;
-        //            string date = tODO.Date;
-        //            bool importance = tODO.IsStarred;
-        //            _savingDescriptions.Add(temp);
-        //            _savingDates.Add(date);
-        //            _savingImps.Add(importance);
-
-        //            List<TaskModel> steps = tODO.SubTasks;
-        //            List<string> tempList = new List<string>();
-        //            for (int i = 0; i < steps.Count; i++)
-        //            {
-        //                tempList.Add(steps[i].Description);
-        //            }
-        //            if (steps != null)
-        //            {
-        //                savingSteps.Add(tempList);
-        //            }
-        //        }
-        //        string jsonFile = JsonConvert.SerializeObject(_savingDescriptions);
-        //        string dateJsonFile = JsonConvert.SerializeObject(_savingDates);
-        //        string importanceJsonFile = JsonConvert.SerializeObject(_savingImps);
-        //        string stepsJsonFile = JsonConvert.SerializeObject(savingSteps);
-
-        //        StorageFolder folder = ApplicationData.Current.LocalFolder;
-        //        StorageFolder rootFolder = await folder.CreateFolderAsync($"{t}", CreationCollisionOption.ReplaceExisting);
-        //        StorageFile pendingdescjson = await rootFolder.CreateFileAsync($"{t}_desc.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(pendingdescjson, jsonFile);
-        //        StorageFile pendingdatesjson = await rootFolder.CreateFileAsync($"{t}_dates.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(pendingdatesjson, dateJsonFile);
-        //        StorageFile impdescjson = await rootFolder.CreateFileAsync($"{t}_imp_desc.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(impdescjson, importanceJsonFile);
-        //        StorageFile pendingstepsjson = await rootFolder.CreateFileAsync($"{t}_steps.json", CreationCollisionOption.ReplaceExisting);
-        //        await FileIO.WriteTextAsync(pendingstepsjson, stepsJsonFile);
-        //    }
-        //    else
-        //    {
-        //        StorageFolder folder = ApplicationData.Current.LocalFolder;
-        //        StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
-        //        if (rootFolder != null)
-        //        {
-        //            await rootFolder.DeleteAsync();
-        //        }
-        //    }
-
-        //    _savingDescriptions.Clear();
-        //    _savingDates.Clear();
-        //    _savingImps.Clear();
-        //    savingSteps.Clear();
-        //}
 
         private void listOfTasks_LayoutUpdated(object sender, object e)
         {
@@ -128,46 +50,19 @@ namespace To_Do.Views
 
         public async Task LoadDataFromFile()
         {
-            var t = "PendingTasks";
-            var _tasks = viewModel.TasksList;
-            StorageFolder folder = ApplicationData.Current.LocalFolder;
-            StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{t}");
-
-            if (rootFolder != null && _tasks.Count <= 0)
+            var newList = await UtilityFunctions.LoadListDataFromStorage();
+            if (newList != null)
             {
-                StorageFile descriptionFile = await rootFolder.GetFileAsync($"{t}_desc.json");
-                StorageFile datesFile = await rootFolder.GetFileAsync($"{t}_dates.json");
-                StorageFile importanceFile = await rootFolder.GetFileAsync($"{t}_imp_desc.json");
-                StorageFile stepsFile = await rootFolder.GetFileAsync($"{t}_steps.json");
-
-                string jsonLoaded = await FileIO.ReadTextAsync(descriptionFile);
-                string jsonOfDatesLoaded = await FileIO.ReadTextAsync(datesFile);
-                string jsonOfImpLoaded = await FileIO.ReadTextAsync(importanceFile);
-                string jsonOfStepsLoaded = await FileIO.ReadTextAsync(stepsFile);
-
-                List<string> loadedDescriptions = JsonConvert.DeserializeObject<List<string>>(jsonLoaded);
-                List<string> loadedDates = JsonConvert.DeserializeObject<List<string>>(jsonOfDatesLoaded);
-                List<bool> loadedImportance = JsonConvert.DeserializeObject<List<bool>>(jsonOfImpLoaded);
-                List<List<string>> loadedSteps = JsonConvert.DeserializeObject<List<List<string>>>(jsonOfStepsLoaded);
-                if (loadedDescriptions != null)
-                {
-                    _tasks.Clear();
-                    for (int i = 0; i < loadedDescriptions.Count; i++)
-                    {
-                        TaskModel newTask = new TaskModel() { Description = loadedDescriptions[i], Date = loadedDates[i], IsStarred = loadedImportance[i] };
-                        newTask.SubTasks = new List<TaskModel>();
-                        for (int x = 0; x < loadedSteps[i].Count; x++)
-                        {
-                            string descOfStep = loadedSteps[i][x];
-                            newTask.SubTasks.Add(new TaskModel() { Description = descOfStep });
-                        }
-                        viewModel.AddTask(newTask);
-                    }
-                }
-                List<TaskModel> newList = new List<TaskModel>(_tasks);
+                Debug.WriteLine("Loaded successfully");
                 newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
                 viewModel.TasksList = new ObservableCollection<TaskModel>(newList);
             }
+            else
+            {
+                Debug.WriteLine("Could not load successfully");
+                viewModel.TasksList = new ObservableCollection<TaskModel>();
+            }
+            
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
