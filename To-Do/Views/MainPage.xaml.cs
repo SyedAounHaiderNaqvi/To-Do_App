@@ -739,7 +739,7 @@ namespace To_Do.Views
                 //pageType = Type.GetType("To_Do.Settings");
                 //ContentFrame.Navigate(pageType, null, info);
                 searchBoxGrid.Visibility = Visibility.Collapsed;
-                ContentFrame.Navigate(typeof(Settings), null, info);
+                ContentFrame.Navigate(typeof(Settings), null, new EntranceNavigationTransitionInfo());
             }
             else
             {
@@ -755,7 +755,7 @@ namespace To_Do.Views
                 //        };
                 //    ContentFrame.Navigate(pageType, dataToParse, info);
                 //}
-                ContentFrame.Navigate(typeof(TaskPage), null, info);
+                ContentFrame.Navigate(typeof(TaskPage), null, new EntranceNavigationTransitionInfo());
             }
             LoadingUI.Visibility = Visibility.Collapsed;
             Ring.IsActive = false;

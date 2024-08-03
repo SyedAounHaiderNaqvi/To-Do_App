@@ -374,7 +374,7 @@
                     <Border Margin="0,20,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
                         <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" FontSize="18" Text="Miscellaneous"/>
                     </Border>
-                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                    <!--<Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="170" Width="*"/>
@@ -388,7 +388,7 @@
 
                             </Button>
                         </Grid>
-                    </Border>
+                    </Border>-->
                     <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
