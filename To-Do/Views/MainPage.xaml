@@ -5,12 +5,17 @@
     xmlns:local="using:To_Do.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     Loaded="Page_Loaded"
+    xmlns:model="using:To_Do.Models"
+    xmlns:viewmodel="using:To_Do.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
+    <Page.DataContext>
+        <viewmodel:CustomNavigationViewItemViewModel/>
+    </Page.DataContext>
     <Page.Resources>
 
         <DataTemplate x:Key="suggestionTemplate" x:DataType="local:QueryFormat">
@@ -541,20 +546,19 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Border IsHitTestVisible="True" Background="Transparent" Margin="48,0,0,0" Height="48" VerticalAlignment="Top" x:Name="AppTitleBar">
-        </Border>
-        <!--MenuItemsSource="{x:Bind Categories, Mode=OneWay}"-->
-        <controls:NavigationView  PaneTitle="To-Do" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
-            <!--<controls:NavigationView.MenuItemTemplate>
-                <DataTemplate x:DataType="local:CustomNavViewItem">
-                    <controls:NavigationViewItem Canvas.ZIndex="1" x:Name="parent" PointerCaptureLost="NavigationViewItem_PointerCaptureLost" PointerEntered="NavigationViewItem_PointerEntered" PointerExited="NavigationViewItem_PointerExited" ToolTipService.ToolTip="{x:Bind Name}" Tag="{x:Bind Tag}">
+        <!--<Border IsHitTestVisible="True" Background="Red" Margin="48,0,0,0" Height="48" VerticalAlignment="Top" x:Name="AppTitleBar">
+        </Border>-->
+        <controls:NavigationView Loaded="nview_Loaded" MenuItemsSource="{Binding Path=NavViewItemsList, Mode=TwoWay}" PaneTitle="To-Do" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
+            <controls:NavigationView.MenuItemTemplate>
+                <DataTemplate x:DataType="model:CustomNavigationViewItemModel">
+                    <controls:NavigationViewItem Canvas.ZIndex="1" x:Name="parent" PointerCaptureLost="NavigationViewItem_PointerCaptureLost" PointerEntered="NavigationViewItem_PointerEntered" PointerExited="NavigationViewItem_PointerExited" ToolTipService.ToolTip="{Binding Path=Name, Mode=TwoWay}">
                         <controls:NavigationViewItem.Content>
                             <Grid Margin="0,0,-12,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="30"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock TextTrimming="CharacterEllipsis" Grid.Column="0" Text="{x:Bind Name}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBlock TextTrimming="CharacterEllipsis" Grid.Column="0" Text="{Binding Path=Name, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                 <Button Padding="0" DataContext="{Binding ElementName=parent}" Grid.Column="1" Click="DeleteList" Visibility="Collapsed" x:Name="deleteListButton" ToolTipService.ToolTip="Delete List" Height="20" Width="20" CornerRadius="16" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                     <Button.Content>
                                         <FontIcon Glyph="&#xE711;" FontSize="8"/>
@@ -563,18 +567,22 @@
                             </Grid>
                         </controls:NavigationViewItem.Content>
                         <controls:NavigationViewItem.Icon>
-                            <FontIcon Glyph="{x:Bind Glyph}" />
+                            <FontIcon Glyph="{Binding Path=Glyph, Mode=TwoWay}" />
                         </controls:NavigationViewItem.Icon>
-                        <controls:NavigationViewItem.InfoBadge>
+                        <!--<controls:NavigationViewItem.InfoBadge>
                             <controls:InfoBadge Opacity="{x:Bind opacity, Mode=OneWay}" Value="{x:Bind badgeNum, Mode=OneWay}"/>
-                        </controls:NavigationViewItem.InfoBadge>
+                        </controls:NavigationViewItem.InfoBadge>-->
                     </controls:NavigationViewItem>
                 </DataTemplate>
-            </controls:NavigationView.MenuItemTemplate>-->
+            </controls:NavigationView.MenuItemTemplate>
+
+            <controls:NavigationView.AutoSuggestBox>
+                <AutoSuggestBox GotFocus="searchbox_GotFocus" x:Name="searchbox" HorizontalContentAlignment="Left" UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Search current list" AutomationProperties.Name="Search"/>
+            </controls:NavigationView.AutoSuggestBox>
             
-            <!--<controls:NavigationView.PaneCustomContent>
+            <controls:NavigationView.PaneCustomContent>
                 <StackPanel Orientation="Vertical">
-                    <Button ToolTipService.ToolTip="Create New List" CornerRadius="{ThemeResource ControlCornerRadius}" Click="Button_Click" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Height="36" HorizontalAlignment="Stretch" Margin="4,2,4,2">
+                    <Button ToolTipService.ToolTip="Create New List" CornerRadius="{ThemeResource ControlCornerRadius}" Click="AddNewListToNavView" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Height="36" HorizontalAlignment="Stretch" Margin="4,2,4,2">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" Spacing="16">
                                 <FontIcon FontSize="16" Glyph="&#xE710;"/>
@@ -584,9 +592,9 @@
                     </Button>
                     <controls:NavigationViewItemSeparator/>
                 </StackPanel>
-            </controls:NavigationView.PaneCustomContent>-->
+            </controls:NavigationView.PaneCustomContent>
 
-            <controls:NavigationView.MenuItems>
+            <!--<controls:NavigationView.MenuItems>
 
                 <controls:NavigationViewItem ToolTipService.ToolTip="Pending Tasks" Tag="PendingTasks" IsSelected="True">
                     <controls:NavigationViewItem.Icon>
@@ -596,7 +604,7 @@
                         <TextBlock Text="Pending Tasks"/>
                     </controls:NavigationViewItem.Content>
                 </controls:NavigationViewItem>
-            </controls:NavigationView.MenuItems>
+            </controls:NavigationView.MenuItems>-->
 
             <Grid Background="{ThemeResource NavigationViewContentBackground}">
                 <Rectangle Fill="{ThemeResource NavigationViewContentBackground}" IsHitTestVisible="False" VerticalAlignment="top" Height="85" HorizontalAlignment="Stretch" Margin="0,-85,0,0">
@@ -607,12 +615,12 @@
 
                 </controls:ParallaxView>
 
-                <Grid x:Name="searchBoxGrid" Margin="35,-77,150,0" Height="40" HorizontalAlignment="Stretch" MaxWidth="440" VerticalAlignment="Top">
+                <!--<Grid x:Name="searchBoxGrid" Margin="35,-77,150,0" Height="40" HorizontalAlignment="Stretch" MaxWidth="440" VerticalAlignment="Top">
                     <Grid.RenderTransform>
                         <TranslateTransform x:Name="serchgrid"/>
                     </Grid.RenderTransform>
                     <AutoSuggestBox GotFocus="searchbox_GotFocus" x:Name="searchbox" BorderThickness="0,1,0,0" Translation="0,0,16" Shadow="{StaticResource SharedShadow}" HorizontalContentAlignment="Left" VerticalAlignment="Center" Height="35" UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Search current list" AutomationProperties.Name="Search"/>
-                </Grid>
+                </Grid>-->
                 <Frame x:FieldModifier="public" x:Name="ContentFrame"/>
                 <Grid MinWidth="200" Margin="-4,-84,0,0" x:FieldModifier="public" x:Name="LoadingUI" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{ThemeResource ExpanderHeaderBackground}">
@@ -621,7 +629,8 @@
                 </Grid>
             </Grid>
         </controls:NavigationView>
-
+        <Border IsHitTestVisible="True" Background="Transparent" Margin="48,0,0,0" Height="48" VerticalAlignment="Top" x:Name="AppTitleBar">
+        </Border>
         <!--Titlebar blur-->
         <Grid Canvas.ZIndex="25" VerticalAlignment="Top" HorizontalAlignment="Right" Width="138" IsHitTestVisible="False" Height="32">
             <Grid.Background>

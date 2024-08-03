@@ -1002,7 +1002,7 @@
         </StackPanel>
         <Grid Padding="35,25,35,15" Background="Transparent" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,-84,0,10">
             <Border MaxWidth="700" Margin="0,5,200,0" VerticalAlignment="Center" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
-                <TextBlock MaxLines="2" x:Name="pageTitle" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="{x:Bind _name}"/>
+                <TextBlock MaxLines="2" x:Name="pageTitle" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource SubtitleTextBlockStyle}" FontSize="18" Text="{x:Bind nameOfThisPage, Mode=OneWay}"/>
             </Border>
             <Grid HorizontalAlignment="Right" Margin="0,5,0,0" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>

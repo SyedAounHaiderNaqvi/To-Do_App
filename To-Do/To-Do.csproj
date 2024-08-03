@@ -135,6 +135,8 @@
     <Compile Include="EditDialogContent.xaml.cs">
       <DependentUpon>EditDialogContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomNavigationViewItemModel.cs" />
+    <Compile Include="ViewModels\CustomNavigationViewItemViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

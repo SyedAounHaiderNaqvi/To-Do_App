@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Media;
 using Newtonsoft.Json;
 using Windows.Storage;
 using To_Do.Models;
+using System.Diagnostics;
 
 namespace To_Do
 {
@@ -110,20 +111,20 @@ namespace To_Do
             return (float)((a * (1.0 - f)) + (b * f));
         }
 
-        public static async Task<bool> SaveListDataToStorage(object saveData)
+        public static async Task<bool> SaveListDataToStorage(string fileTag, object saveData)
         {
             string output = JsonConvert.SerializeObject(saveData);
             StorageFolder folder = ApplicationData.Current.LocalFolder;
-            StorageFile file = await folder.CreateFileAsync($"PendingTasks.json", CreationCollisionOption.ReplaceExisting);
+            StorageFile file = await folder.CreateFileAsync($"{fileTag}.json", CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(file, output);
             return true;
         }
 
-        public static async Task<List<TaskModel>> LoadListDataFromStorage()
+        public static async Task<List<TaskModel>> LoadListDataFromStorage(string fileTag)
         {
             // Access the appfolder
             StorageFolder folder = ApplicationData.Current.LocalFolder;
-            StorageFile tasksFile = (StorageFile)await folder.TryGetItemAsync($"PendingTasks.json");
+            StorageFile tasksFile = (StorageFile)await folder.TryGetItemAsync($"{fileTag}.json");
             if (tasksFile == null)
             {
                 return null;
@@ -141,6 +142,52 @@ namespace To_Do
                     return null;
                 }
             }
+        }
+
+        public static string GetTimeStamp()
+        {
+            return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
+        }
+
+        public static async Task<List<CustomNavigationViewItemModel>> LoadCustomNavigationViewItemsFromStorage(string fileTag)
+        {
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFolder specialFolder = (StorageFolder)await folder.TryGetItemAsync($"{fileTag}");
+            if (specialFolder == null)
+            {
+                return null;
+            }
+            else
+            {
+                StorageFile itemsFile = (StorageFile)await specialFolder.TryGetItemAsync($"{fileTag}.json");
+                if (itemsFile == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    string loadedJson = await FileIO.ReadTextAsync(itemsFile);
+                    List<CustomNavigationViewItemModel> loadedList = JsonConvert.DeserializeObject<List<CustomNavigationViewItemModel>>(loadedJson);
+                    if (loadedList != null)
+                    {
+                        return loadedList;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            
+        }
+
+        public static async Task SaveCustomNavigationViewItemsToStorage(string fileTag, object saveData)
+        {
+            string output = JsonConvert.SerializeObject(saveData);
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFolder specialFolder = await folder.CreateFolderAsync($"{fileTag}", CreationCollisionOption.ReplaceExisting);
+            StorageFile file = await specialFolder.CreateFileAsync($"{fileTag}.json", CreationCollisionOption.ReplaceExisting);
+            await FileIO.WriteTextAsync(file, output);
         }
     }
 }

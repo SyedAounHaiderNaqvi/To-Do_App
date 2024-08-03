@@ -21,7 +21,8 @@ namespace To_Do.Views
         TaskModel selectedTask = null;
         public EditDialogContent dialog;
 
-        public string _name = "Pending Tasks";
+        public string nameOfThisPage;
+        public string idTagOfThisPage;
         //public string lastDataParseTag = "TaskPage";
         bool loadedForFirstTime = true;
         public bool finallyLoaded = false;
@@ -31,14 +32,14 @@ namespace To_Do.Views
             this.InitializeComponent();
             instance = this;
             viewModel = (TaskViewModel)this.DataContext;
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            this.NavigationCacheMode = NavigationCacheMode.Disabled;
             //UpdateBadge();
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            if (viewModel.TasksList.Count > 0)
-                await UtilityFunctions.SaveListDataToStorage(viewModel.TasksList);
+            Debug.WriteLine(nameOfThisPage + "says bye bye :(");
+            await UtilityFunctions.SaveListDataToStorage(idTagOfThisPage, viewModel.TasksList);
 
             base.OnNavigatingFrom(e);
         }
@@ -48,9 +49,9 @@ namespace To_Do.Views
             AllDone.Visibility = viewModel.TasksList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public async Task LoadDataFromFile()
+        public async Task LoadDataFromFile(string fileTag)
         {
-            var newList = await UtilityFunctions.LoadListDataFromStorage();
+            var newList = await UtilityFunctions.LoadListDataFromStorage(fileTag);
             if (newList != null)
             {
                 newList.Sort((x, y) => DateTime.Compare(Convert.ToDateTime(x.Date), Convert.ToDateTime(y.Date)));
@@ -65,46 +66,52 @@ namespace To_Do.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            finallyLoaded = false;
-            //if (e != null)
-            //{
-            //    List<string> parsed = e.Parameter as List<string>;
+            if (e != null)
+            {
+                CustomNavigationViewItemModel parsed = e.Parameter as CustomNavigationViewItemModel;
+                Debug.WriteLine("Hey, TaskPage said " + parsed.Name);
+                if (parsed != null)
+                {
 
-            //    if (parsed != null && parsed.Count > 0)
-            //    {
+                    //if (!loadedForFirstTime)
+                    //{
+                    //    await SaveDataToFile();
+                    //    viewModel.TasksList.Clear();
+                    //}
+                    //if (loadedForFirstTime)
+                    //{
+                    //    _tag = parsed[1];
+                    //    await LoadDataFromFile();
+                    //}
+                    //loadedForFirstTime = false;
 
-            //        if (!loadedForFirstTime)
-            //        {
-            //            await SaveDataToFile();
-            //            viewModel.TasksList.Clear();
-            //        }
-            //        if (loadedForFirstTime)
-            //        {
-            //            _tag = parsed[1];
-            //            await LoadDataFromFile();
-            //        }
-            //        loadedForFirstTime = false;
+                    //_tag = parsed[1];
+                    //if (lastDataParseTag != _tag)
+                    //{
+                    //    await LoadDataFromFile();
+                    //    lastDataParseTag = _tag;
+                    //}
+                    //_name = parsed[0];
 
-            //        _tag = parsed[1];
-            //        if (lastDataParseTag != _tag)
-            //        {
-            //            await LoadDataFromFile();
-            //            lastDataParseTag = _tag;
-            //        }
-            //        _name = parsed[0];
-            //        this.Name = _name;
-            //        this.Tag = "PendingTasks";
-            //        pageTitle.Text = _name;
-            //    }
-            //}
-            await LoadDataFromFile();
-            MainPage.ins.parallax.Source = listOfTasks;
-            SortingDropDown.Content = "Date Created";
-            opt1.IsChecked = true;
+                    //this.Name = parsed.Name;
+                    nameOfThisPage = parsed.Name;
+
+                    //this.Tag = parsed.IdTag;
+                    idTagOfThisPage = parsed.IdTag;
+
+                    pageTitle.Text = nameOfThisPage;
+
+                    await LoadDataFromFile(parsed.IdTag);
+                    MainPage.ins.parallax.Source = listOfTasks;
+                    SortingDropDown.Content = "Date Created";
+                    opt1.IsChecked = true;
+                }
+            }
+            
             Sort("Date Created");
 
             base.OnNavigatedTo(e);
-            finallyLoaded = true;
+            //finallyLoaded = true;
         }
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)
