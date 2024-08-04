@@ -12,7 +12,7 @@
 ## Purpose
 To-Do is an open-source task management app written in C# and XAML and released as a UWP app. It retains some of the nostalgic Microsoft To-Do UI. Still, it has a delightful visual overhaul for both Windows 10 and 11 users, providing a plethora of themes and options to tweak your experience.
 
-Right now, the repo owner is the caracal who is actively improving the app, and there's still lots of stuff to finish. Therefore I always welcome new issues and discussions related to the app.
+Right now there's still lots of stuff to finish. Therefore I always welcome new issues and discussions related to the app.
 
 ## Installation
 ### For normal users
@@ -23,7 +23,6 @@ Right now, the repo owner is the caracal who is actively improving the app, and 
 - Unzip the downloaded file, and run the msixbundle file to install it.
 
 ## Roadmap
-- [ ] \(Pre-release) Complete the dynamic page content algorithm
 - [ ] \(Pre-release) Fix backup algorithm
 <!---- [ ] \(Pre-release) Polish the loading experience for pages-->
 - [ ] Reduce unnecessary modules and XAML controls
@@ -33,20 +32,17 @@ Right now, the repo owner is the caracal who is actively improving the app, and 
 I look forward to fixing issues pointed out by valuable users. Feel free to fork and experiment with this repository, or star it and be notified of new features. There is a [Discord server](https://discord.com/invite/PsUS2rjCtu) where I have my channel dedicated to this app, and that is where I am active almost all the time. Please feel free to chat and ask for features either there or here.
 
 ## Screenshots
-<h3 align="center">WIP</h3>
-<!---<h3 align="center">Pending Tasks</h3>
+<h3 align="center">Pending Tasks</h3>
 <p align="center" width="100%">
     <img src="To-Do/Images/Screenshots/ss1.png" alt="Pending Tasks page of app">
 </p>
-<h3 align="center">Completed Tasks</h3>
-<p align="center" width="100%">
-    <img src="To-Do/Images/Screenshots/ss2.png" alt="Completed Tasks page of app">
-</p>
+
 <h3 align="center">Custom Page & Background</h3>
 <p align="center" width="100%">
-    <img src="To-Do/Images/Screenshots/ss3.png" alt="Custom page & image as chosen by users">
+    <img src="To-Do/Images/Screenshots/ss2.png" alt="Custom page & image as chosen by users">
 </p>
+
 <h3 align="center">Settings</h3>
 <p align="center" width="100%">
-    <img src="To-Do/Images/Screenshots/ss4.png" alt="Settings page of app">
-</p> -->
+    <img src="To-Do/Images/Screenshots/ss3.png" alt="Settings page of app">
+</p>
