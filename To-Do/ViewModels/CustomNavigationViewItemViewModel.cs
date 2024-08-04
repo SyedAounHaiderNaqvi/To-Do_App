@@ -41,7 +41,7 @@ namespace To_Do.ViewModels
             NavViewItemsList.Add(item);
         }
 
-        public bool DeleteTask(string idTag)
+        public bool DeleteNavViewItem(string idTag)
         {
             bool isDeleted = false;
             for (int i = 0; i < NavViewItemsList.Count; i++)

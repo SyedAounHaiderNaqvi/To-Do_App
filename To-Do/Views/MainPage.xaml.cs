@@ -692,14 +692,17 @@ namespace To_Do.Views
             var def = e.GetDeferral();
             LoadingUI.Visibility = Visibility.Visible;
             //if (TaskPage.instance.viewModel.TasksList.Count > 0)
-                //await UtilityFunctions.SaveListDataToStorage(TaskPage.instance.viewModel.TasksList);
+            //await UtilityFunctions.SaveListDataToStorage(TaskPage.instance.viewModel.TasksList);
 
-                //if (Environment.OSVersion.Version.Build < 22000)
-                //{
-                //    CreateThreeTileNotifications();
-                //}
-                //CreateThreeTileNotifications();
-                //await SaveNavigationPageItems();
+            //if (Environment.OSVersion.Version.Build < 22000)
+            //{
+            //    CreateThreeTileNotifications();
+            //}
+            //CreateThreeTileNotifications();
+            //await SaveNavigationPageItems();
+            // Save currently open list
+            await ((TaskPage)ContentFrame.Content).ManualSave();
+            //await TaskPage.instance.ManualSave();
             await UtilityFunctions.SaveCustomNavigationViewItemsToStorage("NavigationViewItems", viewModel.NavViewItemsList);
             def.Complete();
         }
@@ -1047,94 +1050,63 @@ namespace To_Do.Views
 
         private void NavigationViewItem_PointerCaptureLost(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            //var parentControl = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
-            //Button btn = UtilityFunctions.FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
-            //btn.Visibility = Visibility.Collapsed;
+            var parentControl = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
+            Button btn = UtilityFunctions.FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
+            btn.Visibility = Visibility.Collapsed;
         }
 
         private void NavigationViewItem_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            //var parentControl = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
-            //Button btn = UtilityFunctions.FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
-            //if ((string)parentControl.Tag == "TaskPage")
-            //{
-            //    btn.Visibility = Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    btn.Visibility = Visibility.Visible;
-            //}
+            var item = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
+            Button btn = UtilityFunctions.FindControl<Button>(item, typeof(Button), "deleteListButton");
+            TextBlock itemName = UtilityFunctions.FindControl<TextBlock>(item, typeof(TextBlock), "itemName");
+
+            if (itemName.Text == viewModel.NavViewItemsList[0].Name)
+            {
+                // this is first so hide button
+                btn.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                btn.Visibility = Visibility.Visible;
+            }
 
         }
 
         private void NavigationViewItem_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
-            //var parentControl = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
-            //Button btn = UtilityFunctions.FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
-            //btn.Visibility = Visibility.Collapsed;
+            var parentControl = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
+            Button btn = UtilityFunctions.FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
+            btn.Visibility = Visibility.Collapsed;
         }
 
 
-        private void DeleteList(object sender, RoutedEventArgs e)
+        private async void DeleteList(object sender, RoutedEventArgs e)
         {
-            //hasNavigated = false;
-            //nview.IsEnabled = false;
-            //nview.IsEnabled = true;
-            //get the current index
-            //load the previous list in array Categories, then delete this item after deleting the folder.
-            //Microsoft.UI.Xaml.Controls.NavigationViewItem parent = (Microsoft.UI.Xaml.Controls.NavigationViewItem)(sender as Button).DataContext;
-            //for (int i = 0; i < Categories.Count; i++)
-            //{
-            //    if ((string)parent.Tag == Categories[i].Tag)
-            //    {
-            //        //found the match, load previous one
-            //        //hasNavigated = true;
-            //        var selectedItem = Categories[i - 1];
-            //        Debug.WriteLine(selectedItem.Tag);
-            //        //if (selectedItem != null)
-            //        //{
-            //        //    string selectedItemTag = selectedItem.Tag;
-            //        //    string pageName;
-            //        //    if (selectedItemTag.Equals("completedtasks"))
-            //        //    {
-            //        //        pageName = "To_Do." + selectedItemTag;
-            //        //    }
-            //        //    else
-            //        //    {
-            //        //        pageName = "To_Do.TaskPage";
-            //        //    }
-            //        //    Type pageType = Type.GetType(pageName);
-            //        //    List<string> dataToParse = new List<string>
-            //        //    {
-            //        //        selectedItem.Name,
-            //        //        selectedItem.Tag
-            //        //    };
-            //        //    switch (selectedItemTag)
-            //        //    {
-            //        //        case "completedtasks":
-            //        //            TaskPage.instance.lastDataParseTag = "completedtasks";
-            //        //            ContentFrame.Navigate(pageType, tasksToParse, info);
-            //        //            tasksToParse.Clear();
-            //        //            break;
-            //        //        default:
-            //        //            ContentFrame.Navigate(pageType, dataToParse, info);
-            //        //            break;
-            //        //    }
-            //        //    await Task.Delay(100);
-            //        //    //now delete the previous one's files                        
-            //        //    //StorageFolder rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{Categories[i].Tag}");
-            //        //    //while (rootFolder != null)
-            //        //    //{
-            //        //    //    await rootFolder.DeleteAsync();
-            //        //    //    rootFolder = (StorageFolder)await folder.TryGetItemAsync($"{Categories[i].Tag}");
-            //        //    //}
-            //        //    Categories.RemoveAt(i);
-            //        //    nview.SelectedItem = selectedItem;
-            //        //    break;
-            //        //}
-            //    }
-            //}
-            //CustomNavViewItem rootCat = parent.DataContext as CustomNavViewItem;
+            Ring.IsActive = true;
+            LoadingUI.Visibility = Visibility.Visible;
+            
+            var itemModel = (CustomNavigationViewItemModel)((sender as Button).DataContext);
+
+            nview.AutoSuggestBox.IsEnabled = true;
+            await Task.Delay(20);
+            CustomNavigationViewItemModel MyItem = ((ObservableCollection<CustomNavigationViewItemModel>)nview.MenuItemsSource).ElementAt(0);
+            nview.SelectedItem = MyItem;
+            selectedItem = MyItem;
+
+            //delete the task we just had right now
+            viewModel.DeleteNavViewItem(itemModel.IdTag);
+            for (int i = 0; i < viewModel.NavViewItemsList.Count; i++)
+            {
+                Debug.WriteLine(viewModel.NavViewItemsList[i].IdTag + "   " + viewModel.NavViewItemsList[i].Name);
+            }
+
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFile file = (StorageFile)await folder.TryGetItemAsync($"{itemModel.IdTag}.json");
+            await file.DeleteAsync(StorageDeleteOption.PermanentDelete);
+
+            LoadingUI.Visibility = Visibility.Collapsed;
+            Ring.IsActive = false;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

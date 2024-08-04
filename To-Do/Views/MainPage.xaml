@@ -558,8 +558,8 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="30"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock TextTrimming="CharacterEllipsis" Grid.Column="0" Text="{Binding Path=Name, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <Button Padding="0" DataContext="{Binding ElementName=parent}" Grid.Column="1" Click="DeleteList" Visibility="Collapsed" x:Name="deleteListButton" ToolTipService.ToolTip="Delete List" Height="20" Width="20" CornerRadius="16" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <TextBlock x:Name="itemName" TextTrimming="CharacterEllipsis" Grid.Column="0" Text="{Binding Path=Name, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <Button Padding="0" Grid.Column="1" Click="DeleteList" Visibility="Collapsed" x:Name="deleteListButton" ToolTipService.ToolTip="Delete List" Height="20" Width="20" CornerRadius="16" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                     <Button.Content>
                                         <FontIcon Glyph="&#xE711;" FontSize="8"/>
                                     </Button.Content>

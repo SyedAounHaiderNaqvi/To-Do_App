@@ -38,10 +38,15 @@ namespace To_Do.Views
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            Debug.WriteLine(nameOfThisPage + "says bye bye :(");
             await UtilityFunctions.SaveListDataToStorage(idTagOfThisPage, viewModel.TasksList);
 
             base.OnNavigatingFrom(e);
+        }
+
+        public async Task ManualSave()
+        {
+            Debug.WriteLine("Manual save...");
+            await UtilityFunctions.SaveListDataToStorage(idTagOfThisPage, viewModel.TasksList);
         }
 
         private void listOfTasks_LayoutUpdated(object sender, object e)
