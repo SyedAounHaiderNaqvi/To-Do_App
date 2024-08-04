@@ -184,7 +184,7 @@ namespace To_Do
         {
             string output = JsonConvert.SerializeObject(saveData);
             StorageFolder folder = ApplicationData.Current.LocalFolder;
-            StorageFolder specialFolder = await folder.CreateFolderAsync($"{fileTag}", CreationCollisionOption.ReplaceExisting);
+            StorageFolder specialFolder = await folder.CreateFolderAsync($"{fileTag}", CreationCollisionOption.OpenIfExists);
             StorageFile file = await specialFolder.CreateFileAsync($"{fileTag}.json", CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(file, output);
         }
