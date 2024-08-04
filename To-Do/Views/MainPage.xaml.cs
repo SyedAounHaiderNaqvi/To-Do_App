@@ -696,7 +696,10 @@ namespace To_Do.Views
             //CreateThreeTileNotifications();
             
             // Save currently open list
-            await ((TaskPage)ContentFrame.Content).ManualSave();
+            if (ContentFrame.Content.GetType() != typeof(Settings))
+            {
+                await ((TaskPage)ContentFrame.Content).ManualSave();
+            }
             await UtilityFunctions.SaveCustomNavigationViewItemsToStorage("NavigationViewItems", viewModel.NavViewItemsList);
             def.Complete();
         }
