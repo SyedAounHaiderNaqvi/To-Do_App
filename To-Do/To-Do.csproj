@@ -136,6 +136,9 @@
       <DependentUpon>EditDialogContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomNavigationViewItemModel.cs" />
+    <Compile Include="NewNavigationViewItemDialog.xaml.cs">
+      <DependentUpon>NewNavigationViewItemDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CustomNavigationViewItemViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -235,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditDialogContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NewNavigationViewItemDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

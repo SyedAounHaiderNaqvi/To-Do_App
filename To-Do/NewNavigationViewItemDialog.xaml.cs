@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using To_Do.Views;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage;
+﻿using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace To_Do
 {
     public sealed partial class NewNavigationViewItemDialog : ContentDialog
     {
+        public CustomResult _CustomResult { get; set; }
         public ElementTheme THEME;
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public string defaultIconGlyph = "\uEA37";
@@ -28,64 +16,12 @@ namespace To_Do
         {
             this.InitializeComponent();
             THEME = ThemeHelper.ActualTheme;
-            this.IsPrimaryButtonEnabled = !string.IsNullOrEmpty(ListNameTextBox.Text) && !string.IsNullOrWhiteSpace(ListNameTextBox.Text);
-        }
-
-        public string RemoveWhitespace(string input)
-        {
-            string res = new string(input.ToCharArray()
-                .Where(c => !Char.IsWhiteSpace(c))
-                .ToArray());
-            res.Replace(Environment.NewLine, " ");
-            return res;
-        }
-
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            //parse values back to MainPage
-            string extractTag = RemoveWhitespace(ListNameTextBox.Text);
-            error.Visibility = Visibility.Collapsed;
-            localSettings.Values["NEWlistName"] = ListNameTextBox.Text;
-            localSettings.Values["NEWlistTag"] = extractTag;
-            localSettings.Values["NEWlistIcon"] = defaultIconGlyph;
-
-            ListNameTextBox.Text = string.Empty;
+            _CustomResult = CustomResult.Nothing;
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)
         {
-            bool isUniqueTag = true;
-            if (!string.IsNullOrEmpty(ListNameTextBox.Text) && !string.IsNullOrWhiteSpace(ListNameTextBox.Text))
-            {
-                string extractTag = RemoveWhitespace(ListNameTextBox.Text).ToLower();
-                foreach (MainPage.CustomNavViewItem item in MainPage.ins.Categories)
-                {
-                    if (extractTag.Equals(item.Tag))
-                    {
-                        isUniqueTag = false;
-                    }
-                    if (extractTag == "navlists")
-                    {
-                        isUniqueTag = false;
-                    }
-                }
-                if (isUniqueTag)
-                {
-                    //proceed
-                    error.Visibility = Visibility.Collapsed;
-                    this.IsPrimaryButtonEnabled = true;
-                }
-                else
-                {
-                    // error
-                    error.Visibility = Visibility.Visible;
-                    this.IsPrimaryButtonEnabled = false;
-                }
-            }
-            else
-            {
-                this.IsPrimaryButtonEnabled = false;
-            }
+            this.OKButton.IsEnabled = !string.IsNullOrEmpty(ListNameTextBox.Text) && !string.IsNullOrWhiteSpace(ListNameTextBox.Text);
         }
 
         private void Chooseicon(object sender, RoutedEventArgs e)
@@ -93,46 +29,39 @@ namespace To_Do
 
         }
 
-        private void ListNameTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        private void NewListTextBox_KeyUp(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter)
+            switch (e.Key)
             {
-                bool isUniqueTag = true;
-                if (!string.IsNullOrEmpty(ListNameTextBox.Text) && !string.IsNullOrWhiteSpace(ListNameTextBox.Text))
-                {
-                    string extractTag = RemoveWhitespace(ListNameTextBox.Text).ToLower();
-                    foreach (MainPage.CustomNavViewItem item in MainPage.ins.Categories)
+                case Windows.System.VirtualKey.Enter:
+                    if (this.OKButton.IsEnabled)
                     {
-                        if (extractTag.Equals(item.Tag))
-                        {
-                            isUniqueTag = false;
-                        }
-                    }
-                    if (isUniqueTag)
-                    {
-                        //proceed
-                        error.Visibility = Visibility.Collapsed;
-                        this.IsPrimaryButtonEnabled = true;
-                        string extTag = RemoveWhitespace(ListNameTextBox.Text);
-                        error.Visibility = Visibility.Collapsed;
+                        //store values
                         localSettings.Values["NEWlistName"] = ListNameTextBox.Text;
-                        localSettings.Values["NEWlistTag"] = extTag;
                         localSettings.Values["NEWlistIcon"] = defaultIconGlyph;
 
                         ListNameTextBox.Text = string.Empty;
+                        _CustomResult = CustomResult.OK;
+                        this.Hide();
                     }
-                    else
-                    {
-                        // error
-                        error.Visibility = Visibility.Visible;
-                        this.IsPrimaryButtonEnabled = false;
-                    }
-                }
-                else
-                {
-                    this.IsPrimaryButtonEnabled = false;
-                }
+                    break;
             }
+        }
+
+        private void OKButton_Click(object sender, RoutedEventArgs e)
+        {
+            localSettings.Values["NEWlistName"] = ListNameTextBox.Text;
+            localSettings.Values["NEWlistIcon"] = defaultIconGlyph;
+
+            ListNameTextBox.Text = string.Empty;
+            _CustomResult = CustomResult.OK;
+            this.Hide();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            _CustomResult = CustomResult.Cancel;
+            this.Hide();
         }
     }
 }

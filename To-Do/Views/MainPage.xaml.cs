@@ -7,7 +7,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Notifications;
-using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
@@ -22,7 +21,6 @@ using Windows.UI.Xaml.Navigation;
 using To_Do.ViewModels;
 using System.Collections.ObjectModel;
 using To_Do.Models;
-using System.Diagnostics;
 
 namespace To_Do.Views
 {
@@ -35,7 +33,7 @@ namespace To_Do.Views
         bool canSearch = true;
         public NavigationTransitionInfo info = new SuppressNavigationTransitionInfo();
 
-        //public ContentDialog dialog;
+        public NewNavigationViewItemDialog dialog;
 
         public MainPage()
         {
@@ -691,53 +689,17 @@ namespace To_Do.Views
         {
             var def = e.GetDeferral();
             LoadingUI.Visibility = Visibility.Visible;
-            //if (TaskPage.instance.viewModel.TasksList.Count > 0)
-            //await UtilityFunctions.SaveListDataToStorage(TaskPage.instance.viewModel.TasksList);
-
             //if (Environment.OSVersion.Version.Build < 22000)
             //{
             //    CreateThreeTileNotifications();
             //}
             //CreateThreeTileNotifications();
-            //await SaveNavigationPageItems();
+            
             // Save currently open list
             await ((TaskPage)ContentFrame.Content).ManualSave();
-            //await TaskPage.instance.ManualSave();
             await UtilityFunctions.SaveCustomNavigationViewItemsToStorage("NavigationViewItems", viewModel.NavViewItemsList);
             def.Complete();
         }
-
-        //    async Task DeletionOfUnnecessaryLists()
-        //    {
-        //        var allFolders = await folder.GetFoldersAsync();
-
-        //        for (int i = 0; i < allFolders.Count; i++)
-        //        {
-        //            if (allFolders[i].Name != "navlists")
-        //            {
-        //                //check if each subholder has a match in Categories, if not delete that folder.
-        //                bool matchFound = false;
-        //                for (int j = 0; j < Categories.Count; j++)
-        //                {
-        //                    if (allFolders[i].Name.Equals(Categories[j].Tag))
-        //                    {
-        //                        matchFound = true;
-        //                        Debug.WriteLine("match found for " + Categories[j].Tag);
-        //                    }
-        //                }
-        //                if (!matchFound)
-        //                {
-        //                    if (allFolders[i] != null)
-        //                    {
-        //                        Debug.WriteLine(allFolders[i].Name);
-        //                        await allFolders[i].DeleteAsync();
-        //                    }
-        //                }
-        //            }
-
-        //        }
-
-        //    }
 
         private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
         {
@@ -1016,20 +978,31 @@ namespace To_Do.Views
             }
         }
 
-        private void AddNewListToNavView(object sender, RoutedEventArgs e)
+        private async void AddNewListToNavView(object sender, RoutedEventArgs e)
         {
-            //dialog = new NewNavigationViewItemDialog();
-            //Grid.SetRowSpan(dialog, 2);
-            //dialog.CloseButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
-            //ContentDialogResult result = await dialog.ShowAsync();
-            //if (result == ContentDialogResult.Primary)
-            //{
-            //    // create list here
-            //    string name = (string)localSettings.Values["NEWlistName"];
-            //    string tag = ((string)localSettings.Values["NEWlistTag"]);
-            //    string glyph = (string)localSettings.Values["NEWlistIcon"];
-            //    Categories.AddTask(new CustomNavViewItem { Tag = tag, Name = name, Glyph = glyph });
-            //}
+            dialog = new NewNavigationViewItemDialog();
+            Grid.SetRowSpan(dialog, 2);
+            dialog.CancelButton.Style = (Style)Application.Current.Resources["ButtonStyle1"];
+
+            Grid grid = (Grid)dialog.Content;
+            TextBox EditTextBox = (TextBox)VisualTreeHelper.GetChild(grid, 0);
+            dialog.OKButton.IsEnabled = !string.IsNullOrEmpty(EditTextBox.Text) && !string.IsNullOrWhiteSpace(EditTextBox.Text);
+            TextChanged(EditTextBox);
+            await dialog.ShowAsync();
+            if (dialog._CustomResult == CustomResult.OK)
+            {
+                //do create new list
+                string name = (string)localSettings.Values["NEWlistName"];
+                string glyph = (string)localSettings.Values["NEWlistIcon"];
+                var item = await GenerateNewNavViewItem(name, glyph);
+                viewModel.AddNavViewItem(item);
+            }
+        }
+
+        public void TextChanged(TextBox b)
+        {
+            if (dialog != null)
+                dialog.OKButton.IsEnabled = !(string.IsNullOrEmpty(b.Text) || !string.IsNullOrWhiteSpace(b.Text));
         }
 
         private void searchbox_GotFocus(object sender, RoutedEventArgs e)
@@ -1058,10 +1031,10 @@ namespace To_Do.Views
         private void NavigationViewItem_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
         {
             var item = (Microsoft.UI.Xaml.Controls.NavigationViewItem)sender;
+            var model = (CustomNavigationViewItemModel)item.DataContext;
             Button btn = UtilityFunctions.FindControl<Button>(item, typeof(Button), "deleteListButton");
-            TextBlock itemName = UtilityFunctions.FindControl<TextBlock>(item, typeof(TextBlock), "itemName");
 
-            if (itemName.Text == viewModel.NavViewItemsList[0].Name)
+            if (model.IdTag == viewModel.NavViewItemsList[0].IdTag)
             {
                 // this is first so hide button
                 btn.Visibility = Visibility.Collapsed;
@@ -1096,11 +1069,6 @@ namespace To_Do.Views
 
             //delete the task we just had right now
             viewModel.DeleteNavViewItem(itemModel.IdTag);
-            for (int i = 0; i < viewModel.NavViewItemsList.Count; i++)
-            {
-                Debug.WriteLine(viewModel.NavViewItemsList[i].IdTag + "   " + viewModel.NavViewItemsList[i].Name);
-            }
-
             StorageFolder folder = ApplicationData.Current.LocalFolder;
             StorageFile file = (StorageFile)await folder.TryGetItemAsync($"{itemModel.IdTag}.json");
             await file.DeleteAsync(StorageDeleteOption.PermanentDelete);
@@ -1126,11 +1094,6 @@ namespace To_Do.Views
             ContentFrame.Navigate(typeof(Settings), null, info);
             //parallax.Source = TaskPage.instance.listOfTasks;
             LoseFocus(searchbox);
-        }
-
-        private void nview_Loaded(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 

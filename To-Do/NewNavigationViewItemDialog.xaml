@@ -11,16 +11,23 @@
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Title="New List"
-    PrimaryButtonText="Create"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    PrimaryButtonStyle="{ThemeResource AccentButtonStyle}"
-    CloseButtonText="Cancel">
+    IsPrimaryButtonEnabled="False"
+    IsSecondaryButtonEnabled="False">
 
-    <Grid>
-        <StackPanel Orientation="Vertical" Spacing="10">
-            <TextBlock Text="Name"/>
-            <TextBox VerticalContentAlignment="Center" Padding="12,4,0,0" x:FieldModifier="public" TextChanged="TextChanged" x:Name="ListNameTextBox" KeyDown="ListNameTextBox_KeyDown" AcceptsReturn="False" TextWrapping="Wrap" MaxWidth="400" MaxHeight="300" PlaceholderText="Write list name"/>
-            <TextBlock x:Name="error" TextWrapping="Wrap" Visibility="Collapsed" Text="*Cannot use this name. The tag is not unique." Foreground="{ThemeResource SystemErrorTextColor}"/>
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.ColumnSpan="2" KeyUp="NewListTextBox_KeyUp" VerticalContentAlignment="Center" Padding="12,8,0,0" x:FieldModifier="public" TextChanged="TextChanged" x:Name="ListNameTextBox" AcceptsReturn="False" TextWrapping="Wrap" MaxWidth="400" PlaceholderText="Enter new list name"/>
+        <Button Style="{ThemeResource AccentButtonStyle}" Grid.Row="1" VerticalAlignment="Center" x:FieldModifier="public" HorizontalAlignment="Stretch" Content="Create" x:Name="OKButton" Click="OKButton_Click" Margin="0,0,5,0"/>
+        <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" x:FieldModifier="public" Content="Cancel" x:Name="CancelButton" Click="CancelButton_Click"  Margin="5,0,0,0"/>
+        <!--<StackPanel Orientation="Vertical" Spacing="10">
+            
             <Border Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -43,6 +50,6 @@
                     </StackPanel>
                 </Grid>
             </Border>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
 </ContentDialog>

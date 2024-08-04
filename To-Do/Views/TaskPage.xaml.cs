@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using To_Do.Models;
 using To_Do.ViewModels;
-using System.Diagnostics;
 
 namespace To_Do.Views
 {
@@ -23,9 +22,6 @@ namespace To_Do.Views
 
         public string nameOfThisPage;
         public string idTagOfThisPage;
-        //public string lastDataParseTag = "TaskPage";
-        bool loadedForFirstTime = true;
-        public bool finallyLoaded = false;
 
         public TaskPage()
         {
@@ -33,7 +29,6 @@ namespace To_Do.Views
             instance = this;
             viewModel = (TaskViewModel)this.DataContext;
             this.NavigationCacheMode = NavigationCacheMode.Disabled;
-            //UpdateBadge();
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -45,7 +40,6 @@ namespace To_Do.Views
 
         public async Task ManualSave()
         {
-            Debug.WriteLine("Manual save...");
             await UtilityFunctions.SaveListDataToStorage(idTagOfThisPage, viewModel.TasksList);
         }
 
@@ -74,34 +68,10 @@ namespace To_Do.Views
             if (e != null)
             {
                 CustomNavigationViewItemModel parsed = e.Parameter as CustomNavigationViewItemModel;
-                Debug.WriteLine("Hey, TaskPage said " + parsed.Name);
                 if (parsed != null)
                 {
-
-                    //if (!loadedForFirstTime)
-                    //{
-                    //    await SaveDataToFile();
-                    //    viewModel.TasksList.Clear();
-                    //}
-                    //if (loadedForFirstTime)
-                    //{
-                    //    _tag = parsed[1];
-                    //    await LoadDataFromFile();
-                    //}
-                    //loadedForFirstTime = false;
-
-                    //_tag = parsed[1];
-                    //if (lastDataParseTag != _tag)
-                    //{
-                    //    await LoadDataFromFile();
-                    //    lastDataParseTag = _tag;
-                    //}
-                    //_name = parsed[0];
-
-                    //this.Name = parsed.Name;
                     nameOfThisPage = parsed.Name;
 
-                    //this.Tag = parsed.IdTag;
                     idTagOfThisPage = parsed.IdTag;
 
                     pageTitle.Text = nameOfThisPage;
@@ -116,7 +86,6 @@ namespace To_Do.Views
             Sort("Date Created");
 
             base.OnNavigatedTo(e);
-            //finallyLoaded = true;
         }
 
         private void NewTaskBox_KeyDown(object sender, KeyRoutedEventArgs e)

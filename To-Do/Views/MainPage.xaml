@@ -548,7 +548,7 @@
         </VisualStateManager.VisualStateGroups>
         <!--<Border IsHitTestVisible="True" Background="Red" Margin="48,0,0,0" Height="48" VerticalAlignment="Top" x:Name="AppTitleBar">
         </Border>-->
-        <controls:NavigationView Loaded="nview_Loaded" MenuItemsSource="{Binding Path=NavViewItemsList, Mode=TwoWay}" PaneTitle="To-Do" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
+        <controls:NavigationView MenuItemsSource="{Binding Path=NavViewItemsList, Mode=TwoWay}" PaneTitle="To-Do" x:FieldModifier="public" Header="" Style="{StaticResource NavigationViewStyle1}" IsBackButtonVisible="Collapsed" IsBackEnabled="False" DisplayModeChanged="nview_DisplayModeChanged" x:Name="nview" IsTitleBarAutoPaddingEnabled="False" OpenPaneLength="270" ExpandedModeThresholdWidth="1080" CompactModeThresholdWidth="0" PaneDisplayMode="Auto" SelectionChanged="NavigationView_SelectionChanged">
             <controls:NavigationView.MenuItemTemplate>
                 <DataTemplate x:DataType="model:CustomNavigationViewItemModel">
                     <controls:NavigationViewItem Canvas.ZIndex="1" x:Name="parent" PointerCaptureLost="NavigationViewItem_PointerCaptureLost" PointerEntered="NavigationViewItem_PointerEntered" PointerExited="NavigationViewItem_PointerExited" ToolTipService.ToolTip="{Binding Path=Name, Mode=TwoWay}">
@@ -614,13 +614,6 @@
                     <Image x:FieldModifier="public" IsHitTestVisible="False" MinWidth="200" x:Name="bgIMG" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stretch="UniformToFill"/>
 
                 </controls:ParallaxView>
-
-                <!--<Grid x:Name="searchBoxGrid" Margin="35,-77,150,0" Height="40" HorizontalAlignment="Stretch" MaxWidth="440" VerticalAlignment="Top">
-                    <Grid.RenderTransform>
-                        <TranslateTransform x:Name="serchgrid"/>
-                    </Grid.RenderTransform>
-                    <AutoSuggestBox GotFocus="searchbox_GotFocus" x:Name="searchbox" BorderThickness="0,1,0,0" Translation="0,0,16" Shadow="{StaticResource SharedShadow}" HorizontalContentAlignment="Left" VerticalAlignment="Center" Height="35" UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Search current list" AutomationProperties.Name="Search"/>
-                </Grid>-->
                 <Frame x:FieldModifier="public" x:Name="ContentFrame"/>
                 <Grid MinWidth="200" Margin="-4,-84,0,0" x:FieldModifier="public" x:Name="LoadingUI" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{ThemeResource ExpanderHeaderBackground}">
