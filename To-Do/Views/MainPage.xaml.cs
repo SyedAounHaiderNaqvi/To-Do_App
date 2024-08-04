@@ -91,8 +91,6 @@ namespace To_Do.Views
             {
                 viewModel.NavViewItemsList = new ObservableCollection<CustomNavigationViewItemModel>();
                 viewModel.AddNavViewItem(await GenerateNewNavViewItem("Pending Tasks", "\uE823"));
-                viewModel.AddNavViewItem(await GenerateNewNavViewItem("Goofy Tasks", "\uE701"));
-                viewModel.AddNavViewItem(await GenerateNewNavViewItem("walterwhite", "\uE703"));
             }
         }
 
