@@ -875,12 +875,18 @@
         <ListView Grid.Row="0" Margin="35,15,19,0" x:FieldModifier="public" CanDragItems="False" CanReorderItems="False" AllowDrop="False" SelectionMode="None" BorderThickness="0" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{Binding Path=TasksList, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:TaskModel">
-                    <UserControl PointerEntered="UserControl_PointerEntered" PointerExited="UserControl_PointerExited" x:Name="UserControl">
+                    <UserControl RightTapped="UserControl_RightTapped" PointerEntered="UserControl_PointerEntered" PointerExited="UserControl_PointerExited" x:Name="UserControl">
+                        <FlyoutBase.AttachedFlyout>
+                            <MenuFlyout Placement="LeftEdgeAlignedBottom">
+                                <MenuFlyoutItem x:Name="EditButton" Click="EditFlyoutItem" Icon="Edit" Text="Edit"/>
+                                <MenuFlyoutItem x:Name="DeleteButton" Click="DeleteTaskFlyoutItem" Icon="Delete" Text="Delete"/>
+                            </MenuFlyout>
+                        </FlyoutBase.AttachedFlyout>
                         <controls:Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" IsExpanded="False">
                             <controls:Expander.HeaderTemplate>
                                 <DataTemplate>
-                                    <Grid x:Name="rootGrid">
-
+                                    <Grid x:Name="rootGrid" >
+                                        
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="70"/>
                                             <ColumnDefinition Width="*"/>
@@ -1042,56 +1048,59 @@
         </FontIcon>
         <SplitView PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}" x:Name="moreOptionsSplitView" Margin="0,-120,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
             <SplitView.Pane>
-                <Grid Margin="0,30,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15" FontSize="20" FontWeight="SemiBold" Style="{ThemeResource SubheaderTextBlockStyle}" Text="More Options"/>
-                    <StackPanel Grid.Row="1" Spacing="10" Orientation="Vertical">
-                        <Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Edit task" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <TextBox TextChanged="EditBoxTextChanged" x:Name="edittasktextbox" PlaceholderText="Type task name" Margin="8" Grid.Row="1">
+                <Grid Background="{ThemeResource SideBarColor}">
+                    <Grid Margin="0,30,0,0" Shadow="{StaticResource SharedShadow}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15" FontSize="20" FontWeight="SemiBold" Style="{ThemeResource SubheaderTextBlockStyle}" Text="More Options"/>
+                        <StackPanel Grid.Row="1" Spacing="10" Orientation="Vertical">
+                            <Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Edit task" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <TextBox TextChanged="EditBoxTextChanged" x:Name="edittasktextbox" PlaceholderText="Type task name" Margin="8" Grid.Row="1">
 
-                                </TextBox>
-                            </Grid>
-                        </Border>
-                        <!--<Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Add due date" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <CalendarDatePicker FirstDayOfWeek="Monday" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" PlaceholderText="Pick a date"/>
-                            </Grid>
-                        </Border>-->
-                    </StackPanel>
+                                    </TextBox>
+                                </Grid>
+                            </Border>
+                            <!--<Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Add due date" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <CalendarDatePicker FirstDayOfWeek="Monday" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" PlaceholderText="Pick a date"/>
+            </Grid>
+        </Border>-->
+                        </StackPanel>
 
-                    <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="50">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="60"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Height="40" Width="40" Margin="10,0,5,10" Click="CloseSplitView" ToolTipService.ToolTip="Close Pane" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="0">
-                            <FontIcon FontSize="17" Glyph="&#xE76C;"/>
-                        </Button>
-                        <Button Click="SaveChanges" Margin="0,0,0,10" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Content="Save Changes" VerticalAlignment="Center" Height="40" Width="150" HorizontalAlignment="Center" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="1" x:Name="confirmchangesBTN" Grid.Row="2">
+                        <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="50">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Height="40" Width="40" Margin="10,0,5,10" Click="CloseSplitView" ToolTipService.ToolTip="Close Pane" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="0">
+                                <FontIcon FontSize="17" Glyph="&#xE76C;"/>
+                            </Button>
+                            <Button Click="SaveChanges" Margin="0,0,0,10" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Content="Save Changes" VerticalAlignment="Center" Height="40" Width="150" HorizontalAlignment="Center" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="1" x:Name="confirmchangesBTN" Grid.Row="2">
 
-                        </Button>
-                        <!--<TextBlock Text="Created 31 months ago" Foreground="{ThemeResource SystemBaseMediumHighColor}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>-->
-                        <Button Height="40" Width="40" Margin="5,0,10,10" HorizontalAlignment="Right" Click="DeleteTask" ToolTipService.ToolTip="Delete Task" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="2">
-                            <FontIcon Foreground="{ThemeResource SystemControlErrorTextForegroundBrush}" FontSize="17" Glyph="&#xE74D;"/>
-                        </Button>
+                            </Button>
+                            <!--<TextBlock Text="Created 31 months ago" Foreground="{ThemeResource SystemBaseMediumHighColor}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>-->
+                            <Button Height="40" Width="40" Margin="5,0,10,10" HorizontalAlignment="Right" Click="DeleteTask" ToolTipService.ToolTip="Delete Task" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="2">
+                                <FontIcon Foreground="{ThemeResource SystemControlErrorTextForegroundBrush}" FontSize="17" Glyph="&#xE74D;"/>
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Grid>
+                
             </SplitView.Pane>
         </SplitView>
     </Grid>

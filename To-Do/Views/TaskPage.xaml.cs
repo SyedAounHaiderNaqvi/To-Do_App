@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using System.Linq;
 using To_Do.Models;
 using To_Do.ViewModels;
+using Windows.Devices.Input;
+using Windows.UI.Xaml.Controls.Primitives;
+using System.Diagnostics;
 
 namespace To_Do.Views
 {
@@ -404,6 +407,32 @@ namespace To_Do.Views
                 }
             }
             
+        }
+
+        private void UserControl_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            var tappedItem = (UIElement)e.OriginalSource;
+            var attachedFlyout = (MenuFlyout)FlyoutBase.GetAttachedFlyout((FrameworkElement)sender);
+
+            attachedFlyout.ShowAt(tappedItem, e.GetPosition(tappedItem));
+        }
+
+        private void EditFlyoutItem(object sender, RoutedEventArgs e)
+        {
+            var flyoutItem = sender as MenuFlyoutItem;
+            selectedTask = flyoutItem.DataContext as TaskModel;
+            edittasktextbox.Text = selectedTask.Description;
+            edittasktextbox.SelectionStart = edittasktextbox.Text.Length;
+            moreOptionsSplitView.IsPaneOpen = true;
+        }
+
+        private void DeleteTaskFlyoutItem(object sender, RoutedEventArgs e)
+        {
+            var item = sender as MenuFlyoutItem;
+            selectedTask = item.DataContext as TaskModel;
+            moreOptionsSplitView.IsPaneOpen = false;
+            viewModel.DeleteTask(selectedTask.Id);
+            selectedTask = null;
         }
     }
 }
