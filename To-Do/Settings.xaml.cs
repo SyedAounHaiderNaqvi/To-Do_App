@@ -635,19 +635,10 @@ namespace To_Do
             }
         }
 
-        public static string GetAppVersion()
-        {
-            Package package = Package.Current;
-            PackageId packageId = package.Id;
-            PackageVersion version = packageId.Version;
-
-            return string.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
-        }
-
         private void TextBlock_Loaded(object sender, RoutedEventArgs e)
         {
             var txtb = sender as TextBlock;
-            txtb.Text = $"To-Do {GetAppVersion()}";
+            txtb.Text = $"To-Do {UtilityFunctions.GetAppVersion()}";
         }
 
         private void LightModeChosen(object sender, RoutedEventArgs e)
@@ -777,6 +768,12 @@ namespace To_Do
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Dark");
                 ThemeHelper.RootTheme = App.GetEnum<ElementTheme>("Light");
             }
+        }
+
+        private async void OpenChangelog(object sender, RoutedEventArgs e)
+        {
+            ChangelogDialog dialog = new ChangelogDialog();
+            _ = await dialog.ShowAsync();
         }
     }
 

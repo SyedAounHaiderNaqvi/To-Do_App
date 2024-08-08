@@ -1,0 +1,63 @@
+﻿<ContentDialog
+    Background="{ThemeResource ExpanderContentBackground}"
+    CornerRadius="{ThemeResource OverlayCornerRadius}"
+    RequestedTheme="{x:Bind THEME}"
+    x:Class="To_Do.ChangelogDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:To_Do.Views"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentDialog.Resources>
+            <Thickness x:Key="ContentDialogPadding">0,0,0,0</Thickness>
+    </ContentDialog.Resources>
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.Resources>
+            <ThemeShadow x:Name="SharedShadow" />
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Shadow="{StaticResource SharedShadow}" Height="100" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Images/ChangelogPic.png" Grid.ColumnSpan="2" Stretch="None"/>
+            <Grid Grid.ColumnSpan="2">
+                <Grid.Background>
+                    <media:AcrylicBrush BlurAmount="1" BackgroundSource="Backdrop" TintColor="Transparent" TintOpacity="0"/>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.ColumnSpan="2">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="{ThemeResource SystemAltMediumColor}" Offset="0.0" />
+                        <GradientStop Color="Transparent" Offset="1.2" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+            </Grid>
+            <StackPanel Grid.Column="0" Spacing="4" Padding="20,12" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Opacity="0.9" Text="Changelog"/>
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Opacity="0.8" Loaded="TextBlock_Loaded"/>
+            </StackPanel>
+            <Button Click="CloseDialog" BorderBrush="Transparent" Background="Transparent" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50" Height="50" CornerRadius="{ThemeResource ControlCornerRadius}">
+                <Button.Content>
+                    <FontIcon FontWeight="ExtraBold" Glyph="&#xE711;"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="2" Opacity="0.7">
+            <Rectangle Fill="{ThemeResource SystemBaseLowColor}" Height="1" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Margin="16, 8"  Text="Hero image by Daniel Olah on Unsplash"/>
+        </Grid>
+        <!--<TextBox Grid.ColumnSpan="2" VerticalContentAlignment="Center" KeyUp="EditTextBox_KeyUp" Padding="12,8,0,0" x:FieldModifier="public" TextChanged="EditBoxTextChanged" x:Name="EditTextBox" AcceptsReturn="False" TextWrapping="Wrap" MaxWidth="400" PlaceholderText="Write description"/>
+        <Button Style="{ThemeResource AccentButtonStyle}" Grid.Row="1" VerticalAlignment="Center" x:FieldModifier="public" HorizontalAlignment="Stretch" Content="Add" x:Name="OKButton" Click="OKButton_Click" Margin="0,0,5,0"/>
+        <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" x:FieldModifier="public" Content="Cancel" x:Name="CancelButton" Click="CancelButton_Click"  Margin="5,0,0,0"/>-->
+    </Grid>
+</ContentDialog>

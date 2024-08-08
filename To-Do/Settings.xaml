@@ -781,7 +781,7 @@
                                     </HyperlinkButton.Content>
                                 </HyperlinkButton>
                             </StackPanel>
-                            <Button Content="See Changelog" VerticalAlignment="Center" Margin="10,0,16,0" Grid.Column="1" HorizontalAlignment="Right"/>
+                            <Button Click="OpenChangelog" Content="See Changelog" VerticalAlignment="Center" Margin="10,0,16,0" Grid.Column="1" HorizontalAlignment="Right"/>
                         </Grid>
                     </Border>
                 </StackPanel>

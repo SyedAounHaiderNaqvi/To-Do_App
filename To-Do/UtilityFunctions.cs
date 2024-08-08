@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Media;
 using Newtonsoft.Json;
 using Windows.Storage;
 using To_Do.Models;
+using Windows.ApplicationModel;
 
 namespace To_Do
 {
@@ -187,6 +188,15 @@ namespace To_Do
             StorageFolder specialFolder = await folder.CreateFolderAsync($"{fileTag}", CreationCollisionOption.OpenIfExists);
             StorageFile file = await specialFolder.CreateFileAsync($"{fileTag}.json", CreationCollisionOption.ReplaceExisting);
             await FileIO.WriteTextAsync(file, output);
+        }
+
+        public static string GetAppVersion()
+        {
+            Package package = Package.Current;
+            PackageId packageId = package.Id;
+            PackageVersion version = packageId.Version;
+
+            return string.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
         }
     }
 }
