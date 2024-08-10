@@ -253,6 +253,10 @@ namespace To_Do
             greyTwoTone.darkThemeVariant = CreateNewTheme(168, 180, 191, 0, 0, 0, 255);
             greyTwoTone.tooltip = "Smoky Day";
 
+            var fizzle = CreateNewTheme(253, 73, 74, 255, 247, 225, 255);
+            fizzle.darkThemeVariant = CreateNewTheme(148, 167, 249, 38, 36, 47, 255);
+            fizzle.tooltip = "Fizzle";
+
             var micaDefault = CreateNewTheme(60, 108, 176, 255, 255, 255, 0);
             micaDefault.darkThemeVariant = CreateNewTheme(51, 163, 255, 20, 20, 20, 0);
             micaDefault.tooltip = "Mica\u2122";
@@ -277,6 +281,7 @@ namespace To_Do
             gridItems.Add(kimbie);
             gridItems.Add(github);
             gridItems.Add(kde);
+            gridItems.Add(fizzle);
             gridItems.Add(orangeBlueTone);
             gridItems.Add(micaDefault);
 
