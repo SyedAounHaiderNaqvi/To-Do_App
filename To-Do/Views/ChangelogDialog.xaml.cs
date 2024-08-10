@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -7,6 +8,7 @@ namespace To_Do
 {
     public sealed partial class ChangelogDialog : ContentDialog
     {
+        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public ElementTheme THEME;
         public List<string> Visuals = new List<string>()
         {
@@ -39,6 +41,11 @@ namespace To_Do
         private void CloseDialog(object sender, RoutedEventArgs e)
         {
             this.Hide();
+        }
+
+        private void ContentDialog_Closing(ContentDialog sender, ContentDialogClosingEventArgs args)
+        {
+            localSettings.Values["firstLaunch"] = 1;
         }
     }
 }

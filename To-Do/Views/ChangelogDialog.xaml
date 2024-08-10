@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    Closing="ContentDialog_Closing"
     mc:Ignorable="d">
     <ContentDialog.Resources>
         <Thickness x:Key="ContentDialogPadding">0,0,0,0</Thickness>

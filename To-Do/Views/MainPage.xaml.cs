@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Navigation;
 using To_Do.ViewModels;
 using System.Collections.ObjectModel;
 using To_Do.Models;
+using System.Diagnostics;
 
 namespace To_Do.Views
 {
@@ -57,6 +58,15 @@ namespace To_Do.Views
             base.OnNavigatedTo(e);
             LoadingUI.Visibility = Visibility.Collapsed;
             Ring.IsActive = false;
+
+            // If loaded for the first time, show changelog
+            if (localSettings.Values["firstLaunch"] == null)
+            {
+                // First launch
+                ChangelogDialog dialog = new ChangelogDialog();
+                _ = await dialog.ShowAsync();
+            }
+
             //string argument = e.Parameter.ToString();
 
             //switch (argument)
@@ -1053,7 +1063,6 @@ namespace To_Do.Views
             Button btn = UtilityFunctions.FindControl<Button>(parentControl, typeof(Button), "deleteListButton");
             btn.Visibility = Visibility.Collapsed;
         }
-
 
         private async void DeleteList(object sender, RoutedEventArgs e)
         {

@@ -9,6 +9,7 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:ani="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
     xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Behaviors"
     mc:Ignorable="d">
@@ -76,7 +77,7 @@
             </Style>
             <media:AcrylicBrush x:Key="LightThemeBrush" BlurAmount="8" BackgroundSource="Backdrop" FallbackColor="#99ffffff" TintColor="White" TintOpacity="0.3"/>
             <media:AcrylicBrush x:Key="DarkThemeBrush" BlurAmount="8" BackgroundSource="Backdrop" FallbackColor="#99000000" TintColor="#101010" TintOpacity="0.6"/>
-
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <Style x:Key="ToggleSwitchStyle" TargetType="ToggleSwitch">
                 <Setter Property="Foreground" Value="{ThemeResource ToggleSwitchContentForeground}" />
                 <Setter Property="HorizontalAlignment" Value="Left" />
@@ -737,8 +738,8 @@
                                 <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Toggle using an image as wallpaper"/>
                             </StackPanel>
                             <ToggleSwitch Style="{ThemeResource ToggleSwitchStyle}" Margin="10,0,16,0" Grid.Row="0" VerticalAlignment="Center"  HorizontalAlignment="Right" Grid.Column="1" x:Name="btntoggle" Toggled="OnBGIMGToggled"/>
-                            <Rectangle Fill="{ThemeResource NavigationViewContentBackground}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2"/>
-                            <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                            <Rectangle Visibility="{Binding ElementName=btntoggle, Path=IsOn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" Fill="{ThemeResource NavigationViewContentBackground}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2"/>
+                            <StackPanel Visibility="{x:Bind btntoggle, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
                                 <StackPanel Orientation="Vertical" Spacing="10">
                                     <TextBlock TextWrapping="Wrap" Text="Note: Images could have bad contrast with colors"/>
                                     <Button x:Name="bgimgbutton" Click="Chooseimg" Content="Choose Image"/>
