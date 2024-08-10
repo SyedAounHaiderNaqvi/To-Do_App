@@ -738,8 +738,8 @@
                                 <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Toggle using an image as wallpaper"/>
                             </StackPanel>
                             <ToggleSwitch Style="{ThemeResource ToggleSwitchStyle}" Margin="10,0,16,0" Grid.Row="0" VerticalAlignment="Center"  HorizontalAlignment="Right" Grid.Column="1" x:Name="btntoggle" Toggled="OnBGIMGToggled"/>
-                            <Rectangle Visibility="{Binding ElementName=btntoggle, Path=IsOn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" Fill="{ThemeResource NavigationViewContentBackground}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2"/>
-                            <StackPanel Visibility="{x:Bind btntoggle, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                            <Rectangle Visibility="{Binding ElementName=btntoggle, Path=IsOn, Mode=OneWay, Converter={ThemeResource BoolToVisibilityConverter}}" Fill="{ThemeResource ExpanderHeaderBackground}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2"/>
+                            <StackPanel Visibility="{Binding ElementName=btntoggle, Path=IsOn, Mode=OneWay, Converter={ThemeResource BoolToVisibilityConverter}}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
                                 <StackPanel Orientation="Vertical" Spacing="10">
                                     <TextBlock TextWrapping="Wrap" Text="Note: Images could have bad contrast with colors"/>
                                     <Button x:Name="bgimgbutton" Click="Chooseimg" Content="Choose Image"/>

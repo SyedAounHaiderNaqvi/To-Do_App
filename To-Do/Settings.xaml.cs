@@ -229,9 +229,9 @@ namespace To_Do
             kimbie.darkThemeVariant = CreateNewTheme(179, 87, 5, 31, 19, 5, 255);
             kimbie.tooltip = "Kimbie";
 
-            var memory = CreateNewTheme(1, 1, 255, 255, 255, 255, 255);
-            memory.darkThemeVariant = CreateNewTheme(180, 180, 180, 1, 1, 255, 255);
-            memory.tooltip = "Nostalgia";
+            var github = CreateNewTheme(253, 140, 115, 255, 255, 255, 255);
+            github.darkThemeVariant = CreateNewTheme(247, 129, 102, 13, 17, 23, 255);
+            github.tooltip = "GitHub";
 
             var kde = CreateNewTheme(255, 255, 255, 61, 174, 233, 255);
             kde.darkThemeVariant = CreateNewTheme(61, 174, 233, 28, 38, 43, 255);
@@ -275,7 +275,7 @@ namespace To_Do
             gridItems.Add(discord);
             gridItems.Add(saphire);
             gridItems.Add(kimbie);
-            gridItems.Add(memory);
+            gridItems.Add(github);
             gridItems.Add(kde);
             gridItems.Add(orangeBlueTone);
             gridItems.Add(micaDefault);
