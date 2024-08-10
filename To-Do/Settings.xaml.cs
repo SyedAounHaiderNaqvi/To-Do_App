@@ -30,7 +30,7 @@ namespace To_Do
             Loaded += Settings_Loaded;
             ins = this;
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
-            //navStyleCombo.SelectedIndex = MainPage.ins.indexToParse;
+            navStyleCombo.SelectedIndex = MainPage.ins.indexToParse;
             LoadGridItems();
         }
 
@@ -171,6 +171,11 @@ namespace To_Do
             return new GridThemeItem(new SolidColorBrush(Color.FromArgb(255, borderR, borderG, borderB)), new SolidColorBrush(Color.FromArgb(bgA, bgR, bgG, bgB)));
         }
 
+        private void navStyleCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            localSettings.Values["navStyle"] = navStyleCombo.SelectedIndex;
+        }
+
         void LoadGridItems()
         {
             var lavender = CreateNewTheme(255, 255, 255, 103, 123, 202, 255);
@@ -221,9 +226,9 @@ namespace To_Do
             discord.darkThemeVariant = CreateNewTheme(104, 116, 242, 35, 37, 43, 255);
             discord.tooltip = "Discord";
 
-            var saphire = CreateNewTheme(40, 62, 97, 119, 161, 197, 255);
-            saphire.darkThemeVariant = CreateNewTheme(133, 165, 194, 42, 54, 76, 255);
-            saphire.tooltip = "Sapphire";
+            var sapphire = CreateNewTheme(40, 62, 97, 119, 161, 197, 255);
+            sapphire.darkThemeVariant = CreateNewTheme(133, 165, 194, 42, 54, 76, 255);
+            sapphire.tooltip = "Sapphire";
 
             var kimbie = CreateNewTheme(162, 125, 109, 255, 236, 211, 255);
             kimbie.darkThemeVariant = CreateNewTheme(179, 87, 5, 31, 19, 5, 255);
@@ -277,7 +282,7 @@ namespace To_Do
             gridItems.Add(aquaTwoTone);
             gridItems.Add(greyTwoTone);
             gridItems.Add(discord);
-            gridItems.Add(saphire);
+            gridItems.Add(sapphire);
             gridItems.Add(kimbie);
             gridItems.Add(github);
             gridItems.Add(kde);
@@ -592,6 +597,9 @@ namespace To_Do
             openPicker.FileTypeFilter.Add(".jpg");
             openPicker.FileTypeFilter.Add(".jpeg");
             openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".bmp");
+            openPicker.FileTypeFilter.Add(".tiff");
+            openPicker.FileTypeFilter.Add(".svg");
 
             StorageFile file = await openPicker.PickSingleFileAsync();
             if (file != null)

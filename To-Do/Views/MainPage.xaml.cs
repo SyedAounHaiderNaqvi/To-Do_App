@@ -32,8 +32,8 @@ namespace To_Do.Views
         public CustomNavigationViewItemViewModel viewModel;
         CustomNavigationViewItemModel selectedItem = null;
         bool canSearch = true;
-        public NavigationTransitionInfo info = new SuppressNavigationTransitionInfo();
-
+        public NavigationTransitionInfo info;
+        public int indexToParse;
         public NewNavigationViewItemDialog dialog;
 
         public MainPage()
@@ -44,6 +44,20 @@ namespace To_Do.Views
             viewModel = (CustomNavigationViewItemViewModel)this.DataContext;
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
             TileUpdateManager.CreateTileUpdaterForApplication().Clear();
+            UpdateTransitionCheckbox();
+        }
+
+        void UpdateTransitionCheckbox()
+        {
+            if (localSettings.Values["navStyle"] != null)
+            {
+                indexToParse = (int)localSettings.Values["navStyle"];
+            }
+            else
+            {
+                localSettings.Values["navStyle"] = 0;
+                indexToParse = 0;
+            }
         }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
@@ -725,10 +739,33 @@ namespace To_Do.Views
             Ring.IsActive = true;
             LoadingUI.Visibility = Visibility.Visible;
 
+            int styleIndex = (int)localSettings.Values["navStyle"];
+            switch (styleIndex)
+            {
+                case 0:
+                    info = new EntranceNavigationTransitionInfo();
+                    break;
+                case 1:
+                    info = new DrillInNavigationTransitionInfo();
+                    break;
+                case 2:
+                    info = new SuppressNavigationTransitionInfo();
+                    break;
+                case 3:
+                    info = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft };
+                    break;
+                case 4:
+                    info = new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight };
+                    break;
+                default:
+                    info = new EntranceNavigationTransitionInfo();
+                    break;
+            }
+
             if (args.IsSettingsSelected)
             {
                 nview.AutoSuggestBox.IsEnabled = false;
-                ContentFrame.Navigate(typeof(Settings), null, new EntranceNavigationTransitionInfo());
+                ContentFrame.Navigate(typeof(Settings), null, info);
             }
             else
             {
@@ -736,7 +773,7 @@ namespace To_Do.Views
                 selectedItem = (CustomNavigationViewItemModel)args.SelectedItem;
                 if (selectedItem != null)
                 {
-                    ContentFrame.Navigate(typeof(TaskPage), selectedItem, new EntranceNavigationTransitionInfo());
+                    ContentFrame.Navigate(typeof(TaskPage), selectedItem, info);
                 }
             }
             LoadingUI.Visibility = Visibility.Collapsed;
@@ -770,8 +807,6 @@ namespace To_Do.Views
         {
             var suggestions = new List<QueryFormat>();
             var querySplit = query.Split(" ");
-            //string currentPageTag = "PendingTasks";
-            //string currentPageTag = TaskPage.instance._tag;
             string currentPageName = TaskPage.instance.nameOfThisPage;
 
             var matchingItems = TaskPage.instance.viewModel.TasksList.ToList().Where(

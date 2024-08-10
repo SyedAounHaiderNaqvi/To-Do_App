@@ -689,7 +689,7 @@
                     </Border>
 
                     <!--DISABLED OPTION BELOW-->
-                    <!--<Border Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="170" Width="*"/>
@@ -700,7 +700,7 @@
                                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Navigation transition style"/>
                                 <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose how transitions to different pages are shown"/>
                             </StackPanel>
-                            <ComboBox VerticalAlignment="Center" Margin="10,0,54,0" HorizontalAlignment="Right" Grid.Column="1" SelectionChanged="navStyleCombo_SelectionChanged" x:Name="navStyleCombo">
+                            <ComboBox VerticalAlignment="Center" Margin="10,0,16,0" HorizontalAlignment="Right" Grid.Column="1" SelectionChanged="navStyleCombo_SelectionChanged" x:Name="navStyleCombo">
                                 <ComboBoxItem Content="Entrance"/>
                                 <ComboBoxItem Content="Drill"/>
                                 <ComboBoxItem Content="Suppress"/>
@@ -708,7 +708,7 @@
                                 <ComboBoxItem Content="Slide from right"/>
                             </ComboBox>
                         </Grid>
-                    </Border>-->
+                    </Border>
                     <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
