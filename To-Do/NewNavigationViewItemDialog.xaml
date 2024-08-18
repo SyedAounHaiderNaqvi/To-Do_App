@@ -13,43 +13,88 @@
     Title="New List"
     IsPrimaryButtonEnabled="False"
     IsSecondaryButtonEnabled="False">
+    <ContentDialog.Resources>
+        <DataTemplate x:Key="IconTemplate">
+            <UserControl
+                AutomationProperties.Name="{Binding Name}"
+                ToolTipService.ToolTip="{Binding Name}"
+                Background="{ThemeResource ExpanderHeaderBackground}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                Width="50"
+                Height="50"
+                Margin="2">
+                <Grid>
+                    <!--  Icon  -->
+                    <Viewbox
+                        Grid.Row="1"
+                        Width="16"
+                        Height="16"
+                        Margin="0,0,0,0">
+                        <FontIcon
+                            x:Name="IconGlyph"
+                            Grid.Row="1"
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="{Binding Character}" />
+                    </Viewbox>
+
+                    <!--  Icon name/descriptor  -->
+                    <!--<TextBlock
+                        x:Name="IconName"
+                        Grid.Row="2"
+                        Margin="6,0,6,8"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="{Binding Name}"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="NoWrap" />-->
+                </Grid>
+            </UserControl>
+        </DataTemplate>
+    </ContentDialog.Resources>
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="200" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBox Grid.ColumnSpan="2" KeyUp="NewListTextBox_KeyUp" VerticalContentAlignment="Center" Padding="12,8,0,0" x:FieldModifier="public" TextChanged="TextChanged" x:Name="ListNameTextBox" AcceptsReturn="False" TextWrapping="Wrap" MaxWidth="400" PlaceholderText="Enter new list name"/>
-        <Button Style="{ThemeResource AccentButtonStyle}" Grid.Row="1" VerticalAlignment="Center" x:FieldModifier="public" HorizontalAlignment="Stretch" Content="Create" x:Name="OKButton" Click="OKButton_Click" Margin="0,0,5,0"/>
-        <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" x:FieldModifier="public" Content="Cancel" x:Name="CancelButton" Click="CancelButton_Click"  Margin="5,0,0,0"/>
-        <!--<StackPanel Orientation="Vertical" Spacing="10">
-            
-            <Border Visibility="Collapsed" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="170" Width="*"/>
-                        <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Row="0" VerticalAlignment="Stretch" Grid.Column="0" Margin="17,0,0,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
-                        <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Enable Custom Icon"/>
-                    </StackPanel>
-                    <ToggleSwitch Grid.Row="0" VerticalAlignment="Center" Margin="10,0,-50,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="btntoggle"/>
-                    <Rectangle Fill="{ThemeResource SystemChromeAltHighColor}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2"/>
-                    <StackPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
-                        <StackPanel Orientation="Vertical" Spacing="10">
-                            <Button IsEnabled="{x:Bind btntoggle.IsOn, Mode=OneWay}" x:Name="iconbutton" Click="Chooseicon" Content="Choose Icon"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
+        <TextBox Grid.ColumnSpan="2" KeyUp="NewListTextBox_KeyUp" VerticalContentAlignment="Center" Padding="12,4,0,0" x:FieldModifier="public" TextChanged="TextChanged" x:Name="ListNameTextBox" AcceptsReturn="False" TextWrapping="Wrap" PlaceholderText="Enter new list name"/>
+        <StackPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="0,16,0,8"
+            Spacing="16">
+            <TextBlock Style="{ThemeResource BodyStrongTextBlockStyle}" Text="List Icon" />
+            <Border Padding="12" CornerRadius="{ThemeResource ControlCornerRadius}" HorizontalAlignment="Center" DataContext="{x:Bind}" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <FontIcon FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="{Binding SelectedItem.Character, Mode=OneWay}" />
             </Border>
-        </StackPanel>-->
+            <Button Click="OnOpeningFlyout" HorizontalAlignment="Center" Content="Pick Another Icon">
+                <Button.Flyout>
+                    <Flyout x:Name="iconChoosingFlyout" Placement="Full">
+                        <Flyout.FlyoutPresenterStyle>
+                            <Style TargetType="FlyoutPresenter">
+                                <Setter Property="MaxHeight" Value="300"/>
+                                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+                            </Style>
+                        </Flyout.FlyoutPresenterStyle>
+                        <GridView MaxHeight="230" x:Name="IconsItemsView" HorizontalAlignment="Center" HorizontalContentAlignment="Center" IsItemClickEnabled="True" ItemClick="BasicGridView_ItemClick" SelectionMode="Single" ItemTemplate="{StaticResource IconTemplate}" TabFocusNavigation="Once">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="7" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+        </StackPanel>
+        <Button Style="{ThemeResource AccentButtonStyle}" Grid.Row="2" VerticalAlignment="Center" x:FieldModifier="public" HorizontalAlignment="Stretch" Content="Create" x:Name="OKButton" Click="OKButton_Click" Margin="0,0,5,0"/>
+        <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" x:FieldModifier="public" Content="Cancel" x:Name="CancelButton" Click="CancelButton_Click"  Margin="5,0,0,0"/>
     </Grid>
 </ContentDialog>

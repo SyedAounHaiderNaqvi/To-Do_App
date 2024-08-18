@@ -2,6 +2,8 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using To_Do.Models;
+using Microsoft.Toolkit.Uwp;
 
 namespace To_Do
 {
@@ -10,23 +12,46 @@ namespace To_Do
         public CustomResult _CustomResult { get; set; }
         public ElementTheme THEME;
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-        public string defaultIconGlyph = "\uEA37";
+
+        public IconData defaultIcon = new IconData()
+        {
+            Name = "List",
+            Code = "EA37",
+            Tags = new string[0]
+        };
+        
+        private string currentSearch = null;
+
+        public IconData SelectedItem
+        {
+            get { return (IconData)GetValue(SelectedItemProperty); }
+            set
+            {
+                SetValue(SelectedItemProperty, value);
+            }
+        }
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(IconData), typeof(NewNavigationViewItemDialog), new PropertyMetadata(null));
 
         public NewNavigationViewItemDialog()
         {
             this.InitializeComponent();
             THEME = ThemeHelper.ActualTheme;
             _CustomResult = CustomResult.Nothing;
+            SelectedItem = defaultIcon;
+        }
+
+        void Load()
+        {
+            
+            var collection = new IncrementalLoadingCollection<IconsDataSource, IconData>(itemsPerPage:30);
+            this.IconsItemsView.ItemsSource = collection;
+            this.IconsItemsView.SelectedIndex = 0;
+            DataContext = collection;
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)
         {
             this.OKButton.IsEnabled = !string.IsNullOrEmpty(ListNameTextBox.Text) && !string.IsNullOrWhiteSpace(ListNameTextBox.Text);
-        }
-
-        private void Chooseicon(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void NewListTextBox_KeyUp(object sender, KeyRoutedEventArgs e)
@@ -38,7 +63,7 @@ namespace To_Do
                     {
                         //store values
                         localSettings.Values["NEWlistName"] = ListNameTextBox.Text;
-                        localSettings.Values["NEWlistIcon"] = defaultIconGlyph;
+                        localSettings.Values["NEWlistIcon"] = SelectedItem.Character;
 
                         ListNameTextBox.Text = string.Empty;
                         _CustomResult = CustomResult.OK;
@@ -51,8 +76,7 @@ namespace To_Do
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
             localSettings.Values["NEWlistName"] = ListNameTextBox.Text;
-            localSettings.Values["NEWlistIcon"] = defaultIconGlyph;
-
+            localSettings.Values["NEWlistIcon"] = SelectedItem.Character;
             ListNameTextBox.Text = string.Empty;
             _CustomResult = CustomResult.OK;
             this.Hide();
@@ -62,6 +86,18 @@ namespace To_Do
         {
             _CustomResult = CustomResult.Cancel;
             this.Hide();
+        }
+
+        private void BasicGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            SelectedItem = (IconData)e.ClickedItem;
+            this.iconChoosingFlyout.Hide();
+            this.IconsItemsView.ItemsSource = null;
+        }
+
+        private void OnOpeningFlyout(object sender, RoutedEventArgs e)
+        {
+            Load();
         }
     }
 }

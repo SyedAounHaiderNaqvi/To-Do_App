@@ -136,6 +136,7 @@
       <DependentUpon>EditDialogContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomNavigationViewItemModel.cs" />
+    <Compile Include="Models\IconsDataSource.cs" />
     <Compile Include="NewNavigationViewItemDialog.xaml.cs">
       <DependentUpon>NewNavigationViewItemDialog.xaml</DependentUpon>
     </Compile>
@@ -291,6 +292,7 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <Content Include="Models\IconsData.json" />
     <None Include="To-Do_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup />
