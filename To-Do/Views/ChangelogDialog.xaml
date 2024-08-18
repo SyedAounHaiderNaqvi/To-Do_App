@@ -83,14 +83,12 @@
                             </StackPanel>
                         </controls:Expander.Content>
                     </controls:Expander>
-                    <controls:Expander Visibility="Collapsed" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <controls:Expander HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
                             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Known Issues"/>
                         </controls:Expander.Header>
                         <controls:Expander.Content>
-                            <StackPanel Orientation="Horizontal">
-
-                            </StackPanel>
+                            <controls:ItemsRepeater ItemsSource="{x:Bind KnownIssues}" Layout="{StaticResource VerticalStackLayout}" ItemTemplate="{StaticResource LogTemplate}" />
                         </controls:Expander.Content>
                     </controls:Expander>
                 </StackPanel>
