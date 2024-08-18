@@ -24,12 +24,12 @@ Right now there's still lots of stuff to finish. Therefore I always welcome new 
 
 ## Roadmap
 - [ ] \(Pre-release) Fix backup algorithm
-<!---- [ ] \(Pre-release) Polish the loading experience for pages-->
+- [ ] Populate Task Detail Pane with more information
 - [ ] Reduce unnecessary modules and XAML controls
 - [ ] Add comments to code for ease of understanding
 
 ## Contribution
-I look forward to fixing issues pointed out by valuable users. Feel free to fork and experiment with this repository, or star it and be notified of new features. There is a [Discord server](https://discord.com/invite/PsUS2rjCtu) where I have my channel dedicated to this app, and that is where I am active almost all the time. Please feel free to chat and ask for features either there or here.
+I look forward to fixing issues pointed out by users. Feel free to fork and experiment with this repository, or star it and be notified of new features. There is a [Discord server](https://discord.com/invite/PsUS2rjCtu) where I have my channel dedicated to this app, and that is where I am active almost all the time. Please feel free to chat and ask for features either there or here.
 
 ## Screenshots
 <h3 align="center">Pending Tasks</h3>
