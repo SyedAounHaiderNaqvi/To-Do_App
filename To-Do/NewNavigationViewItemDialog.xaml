@@ -20,11 +20,11 @@
                 ToolTipService.ToolTip="{Binding Name}"
                 Background="{ThemeResource ExpanderHeaderBackground}"
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                CornerRadius="{ThemeResource ControlCornerRadius}"
                 Width="50"
                 Height="50"
                 Margin="2">
-                <Grid>
-                    <!--  Icon  -->
+                <Grid CornerRadius="{ThemeResource ControlCornerRadius}">
                     <Viewbox
                         Grid.Row="1"
                         Width="16"
@@ -36,19 +36,6 @@
                             FontFamily="{StaticResource SymbolThemeFontFamily}"
                             Glyph="{Binding Character}" />
                     </Viewbox>
-
-                    <!--  Icon name/descriptor  -->
-                    <!--<TextBlock
-                        x:Name="IconName"
-                        Grid.Row="2"
-                        Margin="6,0,6,8"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                        Style="{StaticResource CaptionTextBlockStyle}"
-                        Text="{Binding Name}"
-                        TextTrimming="CharacterEllipsis"
-                        TextWrapping="NoWrap" />-->
                 </Grid>
             </UserControl>
         </DataTemplate>
@@ -83,7 +70,7 @@
                                 <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
                             </Style>
                         </Flyout.FlyoutPresenterStyle>
-                        <GridView MaxHeight="230" x:Name="IconsItemsView" HorizontalAlignment="Center" HorizontalContentAlignment="Center" IsItemClickEnabled="True" ItemClick="BasicGridView_ItemClick" SelectionMode="Single" ItemTemplate="{StaticResource IconTemplate}" TabFocusNavigation="Once">
+                        <GridView CornerRadius="{ThemeResource ControlCornerRadius}" MaxHeight="230" x:Name="IconsItemsView" HorizontalAlignment="Center" HorizontalContentAlignment="Center" IsItemClickEnabled="True" ItemClick="BasicGridView_ItemClick" SelectionMode="Single" ItemTemplate="{StaticResource IconTemplate}" TabFocusNavigation="Once">
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="7" Orientation="Horizontal"/>

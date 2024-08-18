@@ -19,8 +19,6 @@ namespace To_Do
             Code = "EA37",
             Tags = new string[0]
         };
-        
-        private string currentSearch = null;
 
         public IconData SelectedItem
         {
@@ -42,7 +40,6 @@ namespace To_Do
 
         void Load()
         {
-            
             var collection = new IncrementalLoadingCollection<IconsDataSource, IconData>(itemsPerPage:30);
             this.IconsItemsView.ItemsSource = collection;
             this.IconsItemsView.SelectedIndex = 0;

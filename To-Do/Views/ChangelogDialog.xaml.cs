@@ -23,12 +23,17 @@ namespace To_Do
 
         public List<string> Functionality = new List<string>()
         {
-            "Improved accessibility with keyboard for some dialogs."
+            "Improved accessibility with keyboard for some dialogs.",
+            "Added the ability to assign custom icons to lists that you create! Choose from 1000+ icon glyphs included in the Segoe MDL Assets!",
         };
 
         public List<string> BugFixes = new List<string>();
 
-        public List<string> KnownIssues = new List<string>();
+        public List<string> KnownIssues = new List<string>()
+        {
+            "There is a very small chance that data from the default Pending Tasks list are lost when user rapidly deletes multiple lists from the sidebar. This bug was not reproduced on further trials.",
+            "The icons grid does not respond to the corner radius setting.",
+        };
 
         public ChangelogDialog()
         {
