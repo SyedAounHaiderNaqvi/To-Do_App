@@ -111,6 +111,7 @@ namespace To_Do.Views
                     e.Handled = true;
                     Sort((string)SortingDropDown.Content);
                     listOfTasks.ScrollIntoView(newTask);
+                    NewTaskBox.PlaceholderText = UtilityFunctions.GetRandomPlaceholder();
                 }
             }
         }
@@ -410,7 +411,9 @@ namespace To_Do.Views
             var flyoutItem = sender as MenuFlyoutItem;
             selectedTask = flyoutItem.DataContext as TaskModel;
             edittasktextbox.Text = selectedTask.Description;
+            nameOfSelectedTask = selectedTask.Description;
             edittasktextbox.SelectionStart = edittasktextbox.Text.Length;
+            DateCreatedTextBlock.Text = selectedTask.Date;
             moreOptionsSplitView.IsPaneOpen = true;
         }
 
@@ -426,6 +429,11 @@ namespace To_Do.Views
         private void OnTaskSplitViewClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
         {
             Debug.WriteLine("Closing Split View");
+            TryEditTask();
+        }
+
+        public void TryEditTask()
+        {
             if (selectedTask != null)
             {
                 int index = 0;
@@ -439,13 +447,16 @@ namespace To_Do.Views
                 }
                 if (!string.IsNullOrEmpty(edittasktextbox.Text) && !string.IsNullOrWhiteSpace(edittasktextbox.Text))
                 {
+                    Debug.WriteLine("Edited successfully");
                     viewModel.TasksList[index].Description = edittasktextbox.Text;
-                } else
+                }
+                else
                 {
                     // In this case, textbox was sus so revert to original name
+                    Debug.WriteLine("Reverted");
                     viewModel.TasksList[index].Description = nameOfSelectedTask;
                 }
-                
+
                 edittasktextbox.Text = string.Empty;
                 nameOfSelectedTask = string.Empty;
                 DateCreatedTextBlock.Text = string.Empty;
