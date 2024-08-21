@@ -688,7 +688,7 @@
                         </Grid>
                     </Border>
 
-                    <!--DISABLED OPTION BELOW-->
+                    
                     <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>

@@ -1046,16 +1046,19 @@
                 <ScalarTransition/>
             </FontIcon.OpacityTransition>
         </FontIcon>
-        <SplitView PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}" x:Name="moreOptionsSplitView" Margin="0,-120,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
+        <SplitView x:FieldModifier="public" PaneClosing="OnTaskSplitViewClosing" PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}" x:Name="moreOptionsSplitView" Margin="0,-120,-1,-20" Grid.RowSpan="2" IsPaneOpen="False" DisplayMode="Overlay" PanePlacement="Right">
             <SplitView.Pane>
                 <Grid Background="{ThemeResource SideBarColor}">
-                    <Grid Margin="0,30,0,0" Shadow="{StaticResource SharedShadow}">
+                    <Grid Margin="0,40,0,0" Shadow="{StaticResource SharedShadow}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="60"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="15" FontSize="20" FontWeight="SemiBold" Style="{ThemeResource SubheaderTextBlockStyle}" Text="More Options"/>
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" Background="Transparent" BorderBrush="Transparent" Grid.Row="0" Height="40" Width="40" Click="CloseSplitView" ToolTipService.ToolTip="Close" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="0">
+                            <FontIcon FontSize="16" Glyph="&#xE711;"/>
+                        </Button>
+                        <!--<TextBlock Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{ThemeResource SubheaderTextBlockStyle}" Text="More Options"/>-->
                         <StackPanel Grid.Row="1" Spacing="10" Orientation="Vertical">
                             <Border Margin="8,0,8,0" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch" Height="80">
                                 <Grid>
@@ -1064,7 +1067,7 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Grid.Row="0" Text="Edit task" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <TextBox TextChanged="EditBoxTextChanged" x:Name="edittasktextbox" PlaceholderText="Type task name" Margin="8" Grid.Row="1">
+                                    <TextBox  x:Name="edittasktextbox" PlaceholderText="Type task name" Margin="8" Grid.Row="1">
 
                                     </TextBox>
                                 </Grid>
@@ -1080,22 +1083,19 @@
             </Grid>
         </Border>-->
                         </StackPanel>
-
-                        <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="50">
+                        <Rectangle Margin="0,0,0,8" Grid.Row="1" Fill="{ThemeResource ExpanderHeaderBackground}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+                        <Grid Margin="0,0,8,4" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="50">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="60"/>
                             </Grid.ColumnDefinitions>
-                            <Button Height="40" Width="40" Margin="10,0,5,10" Click="CloseSplitView" ToolTipService.ToolTip="Close Pane" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="0">
-                                <FontIcon FontSize="17" Glyph="&#xE76C;"/>
-                            </Button>
-                            <Button Click="SaveChanges" Margin="0,0,0,10" IsEnabled="False" Style="{ThemeResource AccentButtonStyle}" Content="Save Changes" VerticalAlignment="Center" Height="40" Width="150" HorizontalAlignment="Center" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="1" x:Name="confirmchangesBTN" Grid.Row="2">
 
-                            </Button>
-                            <!--<TextBlock Text="Created 31 months ago" Foreground="{ThemeResource SystemBaseMediumHighColor}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>-->
-                            <Button Height="40" Width="40" Margin="5,0,10,10" HorizontalAlignment="Right" Click="DeleteTask" ToolTipService.ToolTip="Delete Task" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="2">
-                                <FontIcon Foreground="{ThemeResource SystemControlErrorTextForegroundBrush}" FontSize="17" Glyph="&#xE74D;"/>
+                            <StackPanel ToolTipService.ToolTip="Created on" Orientation="Horizontal" Margin="16,0,0,0" Spacing="8" Opacity="0.7" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <FontIcon FontSize="16" Glyph="&#xE787;"/>
+                                <TextBlock FontSize="14" x:Name="DateCreatedTextBlock" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                            <Button VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Height="40" Width="40" HorizontalAlignment="Right" Click="DeleteTask" ToolTipService.ToolTip="Delete Task" CornerRadius="{ThemeResource ControlCornerRadius}" Grid.Column="1">
+                                <FontIcon FontSize="16" Glyph="&#xE74D;"/>
                             </Button>
                         </Grid>
                     </Grid>

@@ -716,12 +716,17 @@ namespace To_Do.Views
             //    CreateThreeTileNotifications();
             //}
             //CreateThreeTileNotifications();
-            
-            // Save currently open list
+
             if (ContentFrame.Content.GetType() != typeof(Settings))
             {
+                // Close the split view of current page if opened
+                // This ensures all changes are actually saved before saving current list tasks
+                ((TaskPage)ContentFrame.Content).moreOptionsSplitView.IsPaneOpen = false;
+
+                // Save currently open list
                 await ((TaskPage)ContentFrame.Content).ManualSave();
             }
+
             await UtilityFunctions.SaveCustomNavigationViewItemsToStorage("NavigationViewItems", viewModel.NavViewItemsList);
             def.Complete();
         }

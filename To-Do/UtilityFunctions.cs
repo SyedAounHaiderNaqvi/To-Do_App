@@ -198,5 +198,30 @@ namespace To_Do
 
             return string.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
         }
+
+        static string[] samplePlaceholders = new string[]
+        {
+            "Add a task like 'Finish the report by noon'",
+            "Try entering 'Report findings to boss at 5PM'",
+            "Type 'Buy groceries after work'",
+            "Try typing 'Submit assignment by 10AM'",
+            "Add something like 'Clean the kitchen today'",
+            "Try 'Book dentist appointment for tomorrow'",
+            "Type 'Prepare presentation slides by Friday'",
+            "Try adding 'Reply to client emails by 3PM'",
+            "Add a task like 'Walk the dog at 7AM'",
+            "Try entering 'Water the plants this evening'",
+            "Type 'Pick up dry cleaning on Saturday'",
+            "Try adding 'Plan weekend trip by Wednesday'",
+            "Add something like 'Schedule team meeting at 2PM'",
+            "Try 'Read 20 pages of a book tonight'",
+            "Type 'Update resume by the end of the day'"
+        };
+
+        static Random random = new Random();
+        public static string GetRandomPlaceholder()
+        {
+            return samplePlaceholders[random.Next(0, samplePlaceholders.Length)];
+        }
     }
 }

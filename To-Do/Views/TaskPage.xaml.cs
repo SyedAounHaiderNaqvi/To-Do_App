@@ -26,6 +26,8 @@ namespace To_Do.Views
         public string nameOfThisPage;
         public string idTagOfThisPage;
 
+        string nameOfSelectedTask = string.Empty;
+
         public TaskPage()
         {
             this.InitializeComponent();
@@ -87,6 +89,9 @@ namespace To_Do.Views
             }
             
             Sort("Date Created");
+
+            // Randomly choose a placeholder for task box
+            NewTaskBox.PlaceholderText = UtilityFunctions.GetRandomPlaceholder();
 
             base.OnNavigatedTo(e);
         }
@@ -155,6 +160,7 @@ namespace To_Do.Views
             {
                 viewModel.DeleteTask(selectedTask.Id);
             }
+            nameOfSelectedTask = string.Empty;
             selectedTask = null;
         }
 
@@ -358,35 +364,17 @@ namespace To_Do.Views
             Button btn = sender as Button;
             selectedTask = btn.DataContext as TaskModel;
             edittasktextbox.Text = selectedTask.Description;
+            nameOfSelectedTask = selectedTask.Description;
             edittasktextbox.SelectionStart = edittasktextbox.Text.Length;
+            DateCreatedTextBlock.Text = selectedTask.Date;
             moreOptionsSplitView.IsPaneOpen = true;
         }
 
         private void CloseSplitView(object sender, RoutedEventArgs e)
         {
             moreOptionsSplitView.IsPaneOpen = false;
-        }
-
-        private void EditBoxTextChanged(object sender, TextChangedEventArgs e)
-        {
-            confirmchangesBTN.IsEnabled = !string.IsNullOrEmpty(edittasktextbox.Text) && !string.IsNullOrWhiteSpace(edittasktextbox.Text);
-        }
-
-        private void SaveChanges(object sender, RoutedEventArgs e)
-        {
-            int index = 0;
-            for (int i = 0; i < viewModel.TasksList.Count; i++)
-            {
-                if (viewModel.TasksList[i].Equals(selectedTask))
-                {
-                    //store index
-                    index = i;
-                }
-            }
-            viewModel.TasksList[index].Description = edittasktextbox.Text;
-            moreOptionsSplitView.IsPaneOpen = false;
-            edittasktextbox.Text = string.Empty;
-            Sort((string)SortingDropDown.Content);
+            nameOfSelectedTask = string.Empty;
+            DateCreatedTextBlock.Text = string.Empty;
         }
 
         private void TaskDesc_Loaded(object sender, RoutedEventArgs e)
@@ -433,6 +421,36 @@ namespace To_Do.Views
             moreOptionsSplitView.IsPaneOpen = false;
             viewModel.DeleteTask(selectedTask.Id);
             selectedTask = null;
+        }
+
+        private void OnTaskSplitViewClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
+        {
+            Debug.WriteLine("Closing Split View");
+            if (selectedTask != null)
+            {
+                int index = 0;
+                for (int i = 0; i < viewModel.TasksList.Count; i++)
+                {
+                    if (viewModel.TasksList[i].Equals(selectedTask))
+                    {
+                        //store index
+                        index = i;
+                    }
+                }
+                if (!string.IsNullOrEmpty(edittasktextbox.Text) && !string.IsNullOrWhiteSpace(edittasktextbox.Text))
+                {
+                    viewModel.TasksList[index].Description = edittasktextbox.Text;
+                } else
+                {
+                    // In this case, textbox was sus so revert to original name
+                    viewModel.TasksList[index].Description = nameOfSelectedTask;
+                }
+                
+                edittasktextbox.Text = string.Empty;
+                nameOfSelectedTask = string.Empty;
+                DateCreatedTextBlock.Text = string.Empty;
+                Sort((string)SortingDropDown.Content);
+            }
         }
     }
 }
