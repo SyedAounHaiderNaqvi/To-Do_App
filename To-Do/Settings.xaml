@@ -576,10 +576,18 @@
                     </Border>
                     <controls:Expander HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
-                            <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="App theme"/>
-                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Select which app theme to display"/>
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon HorizontalAlignment="Left" Glyph="&#xE793;"/>
+                                <StackPanel Grid.Column="1" Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="App theme"/>
+                                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Select which app theme to display"/>
+                                </StackPanel>
+                            </Grid>
+                            
                         </controls:Expander.Header>
                         <controls:Expander.Content>
                             <StackPanel Orientation="Horizontal">
@@ -639,10 +647,18 @@
                     </controls:Expander>
                     <controls:Expander HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
-                            <StackPanel Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Color theme"/>
-                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Polish your app experience with color themes"/>
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon HorizontalAlignment="Left" Glyph="&#xE790;"/>
+                                <StackPanel Grid.Column="1" Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Color theme"/>
+                                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Polish your app experience with color themes"/>
+                                </StackPanel>
+                            </Grid>
+                            
                         </controls:Expander.Header>
                         <controls:Expander.Content>
                             <StackPanel Orientation="Vertical" Spacing="10">
@@ -680,10 +696,18 @@
                                 <ColumnDefinition MinWidth="170" Width="*"/>
                                 <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Secondary color on backplate"/>
-                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use secondary accent color on surfaces like searchbar"/>
-                            </StackPanel>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE7C4;"/>
+                                <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Secondary color on backplate"/>
+                                    <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use secondary accent color on surfaces like searchbar"/>
+                                </StackPanel>
+                            </Grid>
+                            
                             <ToggleSwitch VerticalAlignment="Center" Style="{ThemeResource ToggleSwitchStyle}" Margin="10,0,16,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="MonetToggle" Toggled="OnMonetToggled"/>
                         </Grid>
                     </Border>
@@ -695,11 +719,18 @@
                                 <ColumnDefinition MinWidth="170" Width="*"/>
                                 <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
                             </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch"  Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Navigation transition style"/>
-                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose how transitions to different pages are shown"/>
-                            </StackPanel>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE8AB;"/>
+                                <StackPanel Grid.Column="1" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch"  Spacing="3" Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Navigation transition style"/>
+                                    <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose how transitions to different pages are shown"/>
+                                </StackPanel>
+                            </Grid>
+                            
                             <ComboBox VerticalAlignment="Center" Margin="10,0,16,0" HorizontalAlignment="Right" Grid.Column="1" SelectionChanged="navStyleCombo_SelectionChanged" x:Name="navStyleCombo">
                                 <ComboBoxItem Content="Entrance"/>
                                 <ComboBoxItem Content="Drill"/>
@@ -715,10 +746,18 @@
                                 <ColumnDefinition MinWidth="170" Width="*"/>
                                 <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel VerticalAlignment="Stretch" Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Rounded corners for controls"/>
-                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use rounded corners introduced in WinUI 2.6 (app restart needed)"/>
-                            </StackPanel>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE923;"/>
+                                <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Rounded corners for controls"/>
+                                    <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use rounded corners introduced in WinUI 2.6 (app restart needed)"/>
+                                </StackPanel>
+                            </Grid>
+                            
                             <ToggleSwitch VerticalAlignment="Center" Style="{ThemeResource ToggleSwitchStyle}" Margin="10,0,16,0" HorizontalAlignment="Right" Grid.Column="1" x:Name="RoundCornerToggle" Toggled="OnRoundedCornerToggled"/>
                         </Grid>
                     </Border>
@@ -733,10 +772,18 @@
                                 <ColumnDefinition MinWidth="170" Width="*"/>
                                 <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Row="0" VerticalAlignment="Stretch" Grid.Column="0" Margin="17,0,0,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Background image"/>
-                                <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Toggle using an image as wallpaper"/>
-                            </StackPanel>
+                            <Grid Grid.Column="0" Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE91B;"/>
+                                <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Margin="17,0,0,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Background image"/>
+                                    <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Toggle using an image as wallpaper"/>
+                                </StackPanel>
+                            </Grid>
+
                             <ToggleSwitch Style="{ThemeResource ToggleSwitchStyle}" Margin="10,0,16,0" Grid.Row="0" VerticalAlignment="Center"  HorizontalAlignment="Right" Grid.Column="1" x:Name="btntoggle" Toggled="OnBGIMGToggled"/>
                             <Rectangle Visibility="{Binding ElementName=btntoggle, Path=IsOn, Mode=OneWay, Converter={ThemeResource BoolToVisibilityConverter}}" Fill="{ThemeResource ExpanderHeaderBackground}" Height="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2"/>
                             <StackPanel Visibility="{Binding ElementName=btntoggle, Path=IsOn, Mode=OneWay, Converter={ThemeResource BoolToVisibilityConverter}}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
@@ -746,9 +793,6 @@
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
-                        <!--<controls:Expander.Content>
-                            
-                        </controls:Expander.Content>-->
                     </Border>
                     <Border Margin="0,20,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
                         <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" FontSize="18" Text="About"/>
@@ -774,14 +818,22 @@
                                 <ColumnDefinition MinWidth="170" Width="*"/>
                                 <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch" Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Loaded="TextBlock_Loaded"/>
-                                <HyperlinkButton NavigateUri="https://github.com/SyedAounHaiderNaqvi/To-Do_App" Padding="0" Background="Transparent">
-                                    <HyperlinkButton.Content>
-                                        <TextBlock FontSize="12" FontWeight="SemiBold" Foreground="{ThemeResource SystemAccentColor}" Text="View GitHub page"/>
-                                    </HyperlinkButton.Content>
-                                </HyperlinkButton>
-                            </StackPanel>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE946;"/>
+                                <StackPanel Grid.Column="1" Margin="17,0,10,14" Padding="0,13,0,0" VerticalAlignment="Stretch" Spacing="3" Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Loaded="TextBlock_Loaded"/>
+                                    <HyperlinkButton NavigateUri="https://github.com/SyedAounHaiderNaqvi/To-Do_App" Padding="0" Background="Transparent">
+                                        <HyperlinkButton.Content>
+                                            <TextBlock FontSize="12" FontWeight="SemiBold" Foreground="{ThemeResource SystemAccentColor}" Text="View GitHub page"/>
+                                        </HyperlinkButton.Content>
+                                    </HyperlinkButton>
+                                </StackPanel>
+                            </Grid>
+                            
                             <Button Click="OpenChangelog" Content="See Changelog" VerticalAlignment="Center" Margin="10,0,16,0" Grid.Column="1" HorizontalAlignment="Right"/>
                         </Grid>
                     </Border>
