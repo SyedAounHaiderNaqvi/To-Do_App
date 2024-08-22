@@ -125,6 +125,7 @@ namespace To_Do.Views
         {
             CheckBox checkbox = sender as CheckBox;
             Grid g = checkbox.Parent as Grid;
+            checkbox.IsEnabled = false;
             TextBlock block = VisualTreeHelper.GetChild(g, 3) as TextBlock;
             block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
             block.Opacity = 0.6f;
@@ -364,17 +365,13 @@ namespace To_Do.Views
         {
             Button btn = sender as Button;
             selectedTask = btn.DataContext as TaskModel;
-            edittasktextbox.Text = selectedTask.Description;
-            nameOfSelectedTask = selectedTask.Description;
-            edittasktextbox.SelectionStart = edittasktextbox.Text.Length;
-            DateCreatedTextBlock.Text = selectedTask.Date;
+            Sort((string)SortingDropDown.Content);
             moreOptionsSplitView.IsPaneOpen = true;
         }
 
         private void CloseSplitView(object sender, RoutedEventArgs e)
         {
             moreOptionsSplitView.IsPaneOpen = false;
-            nameOfSelectedTask = string.Empty;
             DateCreatedTextBlock.Text = string.Empty;
         }
 
@@ -410,10 +407,6 @@ namespace To_Do.Views
         {
             var flyoutItem = sender as MenuFlyoutItem;
             selectedTask = flyoutItem.DataContext as TaskModel;
-            edittasktextbox.Text = selectedTask.Description;
-            nameOfSelectedTask = selectedTask.Description;
-            edittasktextbox.SelectionStart = edittasktextbox.Text.Length;
-            DateCreatedTextBlock.Text = selectedTask.Date;
             moreOptionsSplitView.IsPaneOpen = true;
         }
 
@@ -430,6 +423,8 @@ namespace To_Do.Views
         {
             Debug.WriteLine("Closing Split View");
             TryEditTask();
+
+            // Set the subtasks back to selectedTask!
         }
 
         public void TryEditTask()
@@ -457,11 +452,68 @@ namespace To_Do.Views
                     viewModel.TasksList[index].Description = nameOfSelectedTask;
                 }
 
+                // If checkboxes are changed make sure to set the viewmodel to that too
+                viewModel.TasksList[index].IsCompleted = splitViewCheckbox.IsChecked ?? false;
+                viewModel.TasksList[index].IsStarred = splitViewStarbox.IsChecked ?? false;
+
+                // Set subtasks back again!
+                List<TaskModel> listItems = (List<TaskModel>)SplitViewSubTasksList.ItemsSource;
+                viewModel.TasksList[index].SubTasks = new List<TaskModel>(listItems);
+
                 edittasktextbox.Text = string.Empty;
                 nameOfSelectedTask = string.Empty;
                 DateCreatedTextBlock.Text = string.Empty;
                 Sort((string)SortingDropDown.Content);
             }
+        }
+
+        private void OnTaskSplitViewOpening(SplitView sender, object args)
+        {
+            InitializeSplitViewContent();
+        }
+
+        void InitializeSplitViewContent()
+        {
+            edittasktextbox.Text = selectedTask.Description;
+            nameOfSelectedTask = selectedTask.Description;
+            edittasktextbox.SelectionStart = edittasktextbox.Text.Length;
+            DateCreatedTextBlock.Text = selectedTask.Date;
+
+            // Now set the subtasks from the selectedTask info
+            SplitViewSubTasksList.ItemsSource = selectedTask.SubTasks;
+
+            //Initialize main checkboxes
+            splitViewCheckbox.IsChecked = selectedTask.IsCompleted;
+            splitViewStarbox.IsChecked = selectedTask.IsStarred;
+        }
+
+        private async void SplitViewSubTaskChecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkbox = sender as CheckBox;
+            Viewbox box = checkbox.Parent as Viewbox;
+            checkbox.IsEnabled = false;
+            Grid g = box.Parent as Grid;
+            TextBlock block = VisualTreeHelper.GetChild(g, 1) as TextBlock;
+            block.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+            block.Opacity = 0.6f;
+            await Task.Delay(100);
+            checkbox.IsChecked = false;
+            block.TextDecorations = Windows.UI.Text.TextDecorations.None;
+            block.Opacity = 1;
+            UserControl top = checkbox.DataContext as UserControl;
+            TaskModel step = top.DataContext as TaskModel;
+
+            List<TaskModel> listviewItems = (List<TaskModel>)SplitViewSubTasksList.ItemsSource;
+
+            for (int i = 0; i < listviewItems.Count; i++)
+            {
+                if (listviewItems[i].Equals(step))
+                {
+                    Debug.WriteLine("Removed");
+                    listviewItems.RemoveAt(i);
+                }
+            }
+            SplitViewSubTasksList.ItemsSource = new List<TaskModel>(listviewItems);
         }
     }
 }

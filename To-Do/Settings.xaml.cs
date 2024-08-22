@@ -234,7 +234,7 @@ namespace To_Do
             kimbie.darkThemeVariant = CreateNewTheme(179, 87, 5, 31, 19, 5, 255);
             kimbie.tooltip = "Kimbie";
 
-            var github = CreateNewTheme(253, 140, 115, 255, 255, 255, 255);
+            var github = CreateNewTheme(253, 140, 115, 240, 240, 240, 255);
             github.darkThemeVariant = CreateNewTheme(247, 129, 102, 13, 17, 23, 255);
             github.tooltip = "GitHub";
 

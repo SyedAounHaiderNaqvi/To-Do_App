@@ -721,10 +721,11 @@ namespace To_Do.Views
             {
                 // Close the split view of current page if opened
                 // This ensures all changes are actually saved before saving current list tasks
-                Debug.WriteLine("Closing pane");
-                Debug.WriteLine("Closed pane");
-                ((TaskPage)ContentFrame.Content).TryEditTask();
-                ((TaskPage)ContentFrame.Content).moreOptionsSplitView.IsPaneOpen = false;
+                if (((TaskPage)ContentFrame.Content).moreOptionsSplitView.IsPaneOpen)
+                {
+                    ((TaskPage)ContentFrame.Content).TryEditTask();
+                    ((TaskPage)ContentFrame.Content).moreOptionsSplitView.IsPaneOpen = false;
+                }
                 // Save currently open list
                 await ((TaskPage)ContentFrame.Content).ManualSave();
             }
