@@ -11,23 +11,21 @@ namespace To_Do
         public ElementTheme THEME;
         public List<string> Visuals = new List<string>()
         {
-            "Designed this very changelog UI to ensure all users of To-Do remain up-to-date with the newest features, as well as any known issues.",
-            "Improved the layout of the Settings cards to better match the Windows 11 Settings UX.",
-            "Added flyouts to tasks, from which currently users can edit or delete the task. More functionality will be added soon!",
-            "Replaced images used in the dark and light theme toggle buttons.",
-            "Added two new themes: GitHub and Fizzle! Give them a go!",
-            "Removed the Nostalgia theme due to accessibility issues.",
-            "The 'Choose Image' button is now hidden when the appropriate toggle is off, for visual clarity.",
-            "The ability to choose custom navigation transitions is back! Choose from Entrance, Drill, Left, Right, or Suppress animations!",
+            "Added random fun placeholders to the task creation textbox!",
+            "Added icons to promote visual clarity in settings cards.",
+            "Populated the Splitview with more information about each task."
         };
 
         public List<string> Functionality = new List<string>()
         {
-            "Improved accessibility with keyboard for some dialogs.",
-            "Added the ability to assign custom icons to lists that you create! Choose from 1000+ icon glyphs included in the Segoe MDL Assets!",
+            "You can now toggle completion and importance, as well as rename each task from its Splitview (More Options).",
+            "Completion of subtasks is also possible from the Splitview! More functionality will be added soon!",
         };
 
-        public List<string> BugFixes = new List<string>();
+        public List<string> BugFixes = new List<string>()
+        {
+            "Fixed a runtime error when users deleted subtasks too quickly."
+        };
 
         public List<string> KnownIssues = new List<string>()
         {

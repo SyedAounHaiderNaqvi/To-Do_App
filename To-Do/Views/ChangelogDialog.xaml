@@ -73,14 +73,12 @@
                             <controls:ItemsRepeater ItemsSource="{x:Bind Functionality}" Layout="{StaticResource VerticalStackLayout}" ItemTemplate="{StaticResource LogTemplate}" />
                         </controls:Expander.Content>
                     </controls:Expander>
-                    <controls:Expander Visibility="Collapsed" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <controls:Expander HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
                         <controls:Expander.Header>
                             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Bug Fixes"/>
                         </controls:Expander.Header>
                         <controls:Expander.Content>
-                            <StackPanel Orientation="Horizontal">
-
-                            </StackPanel>
+                            <controls:ItemsRepeater ItemsSource="{x:Bind BugFixes}" Layout="{StaticResource VerticalStackLayout}" ItemTemplate="{StaticResource LogTemplate}" />
                         </controls:Expander.Content>
                     </controls:Expander>
                     <controls:Expander HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" CornerRadius="{ThemeResource ControlCornerRadius}">
@@ -96,7 +94,7 @@
         </Grid>
         <Grid Grid.Row="2" Opacity="0.7">
             <Rectangle Fill="{ThemeResource SystemBaseLowColor}" Height="1" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
-            <TextBlock FontSize="12" Style="{ThemeResource BaseTextBlockStyle}" Margin="16, 8"  Text="Hero image by Daniel Olah on Unsplash"/>
+            <TextBlock FontSize="12" Style="{ThemeResource BaseTextBlockStyle}" Margin="16, 8"  Text="Hero image by Alex Perez on Unsplash"/>
         </Grid>
 
     </Grid>
