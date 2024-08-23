@@ -80,28 +80,6 @@ namespace To_Do.Views
                 ChangelogDialog dialog = new ChangelogDialog();
                 _ = await dialog.ShowAsync();
             }
-
-            //string argument = e.Parameter.ToString();
-
-            //switch (argument)
-            //{
-            //    case "GoToPending":
-            //        ContentFrame.Navigate(typeof(TaskPage), null, info);
-            //        //await Task.Delay(10);
-            //        //ContentFrame.Navigate(typeof(TaskPage));
-            //        //nview.SelectedItem = Categories[0];
-            //        parallax.Source = TaskPage.instance.listOfTasks;
-            //        break;
-            //    case "GoToSettings":
-            //        ContentFrame.Navigate(typeof(TaskPage), null, info);
-            //        await Task.Delay(10);
-            //        ContentFrame.Navigate(typeof(Settings), null, info);
-            //        nview.SelectedItem = nview.SettingsItem;
-            //        parallax.Source = Settings.ins.scroller;
-            //        break;
-            //    default:
-            //        break;
-            //}
         }
 
         public async Task LoadCustomNavigationViewItemsFromFile()
@@ -742,7 +720,7 @@ namespace To_Do.Views
             AppTitleBar.Margin = new Thickness(currMargin.Left, currMargin.Top, coreTitleBar.SystemOverlayRightInset, currMargin.Bottom);
         }
 
-        private void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
+        private async void NavigationView_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
         {
             Ring.IsActive = true;
             LoadingUI.Visibility = Visibility.Visible;
@@ -773,6 +751,10 @@ namespace To_Do.Views
             if (args.IsSettingsSelected)
             {
                 nview.AutoSuggestBox.IsEnabled = false;
+
+                // Saving the NavView lists to local storage so that the backup algorithm fires correctly
+                await UtilityFunctions.SaveCustomNavigationViewItemsToStorage("NavigationViewItems", viewModel.NavViewItemsList);
+                
                 ContentFrame.Navigate(typeof(Settings), null, info);
             }
             else

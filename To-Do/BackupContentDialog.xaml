@@ -1,7 +1,7 @@
 ﻿<ContentDialog
     Background="{ThemeResource ExpanderContentBackground}"
     CornerRadius="{ThemeResource OverlayCornerRadius}"
-    <!--RequestedTheme="{x:Bind THEME}"-->
+    RequestedTheme="{x:Bind THEME}"
     x:Class="To_Do.BackupContentDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

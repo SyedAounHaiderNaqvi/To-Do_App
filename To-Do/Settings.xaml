@@ -581,7 +581,7 @@
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <FontIcon HorizontalAlignment="Left" Glyph="&#xE793;"/>
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" HorizontalAlignment="Left" Glyph="&#xE793;"/>
                                 <StackPanel Grid.Column="1" Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
                                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="App theme"/>
                                     <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Select which app theme to display"/>
@@ -652,7 +652,7 @@
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <FontIcon HorizontalAlignment="Left" Glyph="&#xE790;"/>
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" HorizontalAlignment="Left" Glyph="&#xE790;"/>
                                 <StackPanel Grid.Column="1" Padding="0,11,0,0" Height="63" Spacing="3" Orientation="Vertical">
                                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Color theme"/>
                                     <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Polish your app experience with color themes"/>
@@ -701,7 +701,7 @@
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE7C4;"/>
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE7C4;"/>
                                 <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
                                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Secondary color on backplate"/>
                                     <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use secondary accent color on surfaces like searchbar"/>
@@ -724,7 +724,7 @@
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE8AB;"/>
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE8AB;"/>
                                 <StackPanel Grid.Column="1" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch"  Spacing="3" Orientation="Vertical">
                                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Navigation transition style"/>
                                     <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Choose how transitions to different pages are shown"/>
@@ -751,7 +751,7 @@
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE923;"/>
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE923;"/>
                                 <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Margin="17,0,10,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
                                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Rounded corners for controls"/>
                                     <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Use rounded corners introduced in WinUI 2.6 (app restart needed)"/>
@@ -777,7 +777,7 @@
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE91B;"/>
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE91B;"/>
                                 <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Margin="17,0,0,14" Padding="0,11,0,0" Spacing="3" Orientation="Vertical">
                                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Background image"/>
                                     <TextBlock TextWrapping="Wrap" Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Toggle using an image as wallpaper"/>
@@ -795,23 +795,29 @@
                         </Grid>
                     </Border>
                     <Border Margin="0,20,0,0" HorizontalAlignment="Left" CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="0">
-                        <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" FontSize="18" Text="About"/>
+                        <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Padding="8,4,8,4" HorizontalTextAlignment="Center" HorizontalAlignment="Center" FontSize="18" Text="Miscellaneous"/>
                     </Border>
-                    <!--<Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
+                    <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="170" Width="*"/>
                                 <ColumnDefinition MinWidth="170" MaxWidth="210" Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Margin="17,0,10,14" Padding="0,11,0,0" VerticalAlignment="Stretch" Spacing="3" Orientation="Vertical">
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Backup &amp; Restore"/>
-                                <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Create or restore data backup"/>
-                            </StackPanel>
-                            <Button VerticalAlignment="Center" Margin="10,0,54,0" Content="See more" Click="OpenBackupDialog" Grid.Column="1" HorizontalAlignment="Right">
 
-                            </Button>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE78C;"/>
+                                <StackPanel Grid.Column="1" Margin="17,0,10,14" Padding="0,13,0,0" VerticalAlignment="Stretch" Spacing="3" Orientation="Vertical">
+                                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="Backup &amp; Restore"/>
+                                    <TextBlock Foreground="{ThemeResource SystemBaseMediumColor}" FontSize="12" Text="Create or restore data backup"/>
+                                </StackPanel>
+                            </Grid>
+                            <Button Click="OpenBackupDialog" Content="See more" VerticalAlignment="Center" Margin="10,0,16,0" Grid.Column="1" HorizontalAlignment="Right"/>
                         </Grid>
-                    </Border>-->
+                    </Border>
                     <Border CornerRadius="{ThemeResource ControlCornerRadius}" Background="{ThemeResource ExpanderHeaderBackground}" BorderThickness="{ThemeResource ExpanderHeaderBorderThickness}" BorderBrush="{ThemeResource ExpanderHeaderBorderBrush}" HorizontalAlignment="Stretch">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -823,7 +829,7 @@
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE946;"/>
+                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" Margin="16,0,0,0" HorizontalAlignment="Left" Glyph="&#xE946;"/>
                                 <StackPanel Grid.Column="1" Margin="17,0,10,14" Padding="0,13,0,0" VerticalAlignment="Stretch" Spacing="3" Orientation="Vertical">
                                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Loaded="TextBlock_Loaded"/>
                                     <HyperlinkButton NavigateUri="https://github.com/SyedAounHaiderNaqvi/To-Do_App" Padding="0" Background="Transparent">

@@ -38,8 +38,6 @@ namespace To_Do
         {
             base.OnNavigatedTo(e);
             MainPage.ins.parallax.Source = scroller;
-            //TaskPage.instance.lastDataParseTag = "settings";
-
         }
 
         public void Settings_Loaded(object sender, RoutedEventArgs e)
@@ -686,12 +684,12 @@ namespace To_Do
             }
         }
 
-        private void OpenBackupDialog(object sender, RoutedEventArgs e)
+        private async void OpenBackupDialog(object sender, RoutedEventArgs e)
         {
-            //dialog = new BackupContentDialog();
-            //Grid.SetRowSpan(dialog, 2);
-            //dialog.PrimaryButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
-            //_ = await dialog.ShowAsync();
+            dialog = new BackupContentDialog();
+            Grid.SetRowSpan(dialog, 2);
+            dialog.PrimaryButtonStyle = (Style)Application.Current.Resources["ButtonStyle1"];
+            _ = await dialog.ShowAsync();
         }
 
         private void HideBlurredDetails(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
