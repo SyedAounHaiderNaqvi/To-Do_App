@@ -72,19 +72,14 @@ namespace To_Do.Views
             if (e != null)
             {
                 CustomNavigationViewItemModel parsed = e.Parameter as CustomNavigationViewItemModel;
-                if (parsed != null)
-                {
-                    nameOfThisPage = parsed.Name;
+                nameOfThisPage = parsed.Name;
+                idTagOfThisPage = parsed.IdTag;
+                pageTitle.Text = nameOfThisPage;
 
-                    idTagOfThisPage = parsed.IdTag;
-
-                    pageTitle.Text = nameOfThisPage;
-
-                    await LoadDataFromFile(parsed.IdTag);
-                    MainPage.ins.parallax.Source = listOfTasks;
-                    SortingDropDown.Content = "Date Created";
-                    opt1.IsChecked = true;
-                }
+                await LoadDataFromFile(parsed.IdTag);
+                MainPage.ins.parallax.Source = listOfTasks;
+                SortingDropDown.Content = "Date Created";
+                opt1.IsChecked = true;
             }
 
             // Randomly choose a placeholder for task box

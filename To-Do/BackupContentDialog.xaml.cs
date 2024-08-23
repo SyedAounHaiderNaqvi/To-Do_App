@@ -40,7 +40,7 @@ namespace To_Do
                 
                 // Then copy all the files and folders from there to the specified rootFolder
                 var itemList = await appFolder.GetItemsAsync();
-                var localContent = itemList.ToList<IStorageItem>();
+                var localContent = itemList.ToList();
                 int total = localContent.Count;
                 float step = 100 / total;
                 foreach (var item in localContent)
@@ -71,28 +71,70 @@ namespace To_Do
 
         private async void RestoreData(object sender, RoutedEventArgs e)
         {
+            bool canProceed = false;
             StorageFolder folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
             {
                 var itemList = await folder.GetItemsAsync();
-                var localContent = itemList.ToList<IStorageItem>();
+                var localContent = itemList.ToList();
+
+                // Checks to ensure local data are as original as possible
+                // Need more checks as needed
                 foreach (var item in localContent)
                 {
-                    if (item.IsOfType(StorageItemTypes.File))
+                    if (item.IsOfType(StorageItemTypes.Folder))
                     {
-                        await ((StorageFile)item).CopyAsync(appFolder, ((StorageFile)item).Name, NameCollisionOption.ReplaceExisting);
+                        StorageFolder storageFolder = (StorageFolder)item;
+                        //Check if name is NavigationViewItems and it has the file inside
+                        if (storageFolder.Name.Equals("NavigationViewItems") && await storageFolder.TryGetItemAsync("NavigationViewItems.json") != null)
+                        {
+                            canProceed = true;
+                            break;
+                        }
                     }
-                    else if (item.IsOfType(StorageItemTypes.Folder))
-                    {
-                        StorageFile file = await ((StorageFolder)item).GetFileAsync("NavigationViewItems.json");
-                        StorageFolder listFolder = await appFolder.CreateFolderAsync("NavigationViewItems", CreationCollisionOption.ReplaceExisting);
-                        await file.CopyAsync(listFolder, file.Name, NameCollisionOption.ReplaceExisting);
-                    }
-
                 }
 
-                // Manually load the navigation view lists
-                await MainPage.ins.LoadCustomNavigationViewItemsFromFile();
+                if (canProceed)
+                {
+                    RestoreErrorText.Visibility = Visibility.Collapsed;
+                    IsPrimaryButtonEnabled = false;
+                    normalrestoreui.Visibility = Visibility.Collapsed;
+                    restoringui.Visibility = Visibility.Visible;
+                    (sender as Button).IsEnabled = false;
+                    backupbtn.IsEnabled = false;
+
+                    int total = localContent.Count;
+                    float step = 100 / total;
+
+                    foreach (var item in localContent)
+                    {
+                        if (item.IsOfType(StorageItemTypes.File))
+                        {
+                            await ((StorageFile)item).CopyAsync(appFolder, ((StorageFile)item).Name, NameCollisionOption.ReplaceExisting);
+                        }
+                        else if (item.IsOfType(StorageItemTypes.Folder))
+                        {
+                            StorageFile file = await ((StorageFolder)item).GetFileAsync("NavigationViewItems.json");
+                            StorageFolder listFolder = await appFolder.CreateFolderAsync("NavigationViewItems", CreationCollisionOption.ReplaceExisting);
+                            await file.CopyAsync(listFolder, file.Name, NameCollisionOption.ReplaceExisting);
+                        }
+                        restoreprogressbar.Value += step;
+                    }
+
+                    IsPrimaryButtonEnabled = true;
+                    normalrestoreui.Visibility = Visibility.Visible;
+                    restoringui.Visibility = Visibility.Collapsed;
+                    (sender as Button).IsEnabled = true;
+                    backupbtn.IsEnabled = true;
+                    restoreprogressbar.Value = 0;
+
+                    // Manually load the navigation view lists
+                    await MainPage.ins.LoadCustomNavigationViewItemsFromFile();
+                }
+                else
+                {
+                    RestoreErrorText.Visibility = Visibility.Visible;
+                }
             }
         }
     }
