@@ -39,7 +39,6 @@ namespace To_Do.Views
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             await UtilityFunctions.SaveListDataToStorage(idTagOfThisPage, viewModel.TasksList);
-
             base.OnNavigatingFrom(e);
         }
 
@@ -87,8 +86,6 @@ namespace To_Do.Views
                     opt1.IsChecked = true;
                 }
             }
-            
-            Sort("Date Created");
 
             // Randomly choose a placeholder for task box
             NewTaskBox.PlaceholderText = UtilityFunctions.GetRandomPlaceholder();
@@ -104,13 +101,13 @@ namespace To_Do.Views
                 if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
                 {
                     string id = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
-                    TaskModel newTask = new TaskModel() { Id = id, Description = d, Date = DateTime.Now.ToString("dddd, dd-MMM-yyyy h:mm tt"), IsStarred = false, SubTasks = new List<TaskModel>() };
+                    TaskModel newTask = new TaskModel() { Id = id, Description = d, Date = DateTime.Now.ToString("dddd, dd-MMM-yyyy h:mm:ss tt"), IsStarred = false, SubTasks = new List<TaskModel>() };
                     var vm = (TaskViewModel)this.DataContext;
                     vm.AddTask(newTask);
                     NewTaskBox.Text = string.Empty;
                     e.Handled = true;
                     Sort((string)SortingDropDown.Content);
-                    listOfTasks.ScrollIntoView(newTask);
+                    //listOfTasks.ScrollIntoView(newTask);
                     NewTaskBox.PlaceholderText = UtilityFunctions.GetRandomPlaceholder();
                 }
             }
@@ -195,19 +192,9 @@ namespace To_Do.Views
             EditDialogContent dialog = new EditDialogContent();
             Grid.SetRowSpan(dialog, 2);
             dialog.CancelButton.Style = (Style)Application.Current.Resources["ButtonStyle1"];
-            dialog.Title = "Add Step";
-            int index = 0;
+            dialog.Title = "Add Subtask";
             Button btn = sender as Button;
             TaskModel task = btn.DataContext as TaskModel;
-
-            for (int i = 0; i < viewModel.TasksList.Count; i++)
-            {
-                if (viewModel.TasksList[i].Equals(task))
-                {
-                    //store index
-                    index = i;
-                }
-            }
 
             Grid grid = (Grid)dialog.Content;
             TextBox EditTextBox = (TextBox)VisualTreeHelper.GetChild(grid, 0);
@@ -217,12 +204,13 @@ namespace To_Do.Views
             if (dialog._CustomResult == CustomResult.OK)
             {
                 //do create new task
-                TaskModel newStep = new TaskModel() { Description = EditTextBox.Text };
-                var list = new List<TaskModel>(viewModel.TasksList[index].SubTasks)
-                {
-                    newStep
-                };
-                viewModel.TasksList[index].SubTasks = new List<TaskModel>(list);
+                TaskModel subTask = new TaskModel() { Description = EditTextBox.Text };
+                task.SubTasks = new List<TaskModel>(task.SubTasks) { subTask };
+                //var list = new List<TaskModel>(task.SubTasks)
+                //{
+                //    subTask
+                //};
+                //task.SubTasks = new List<TaskModel>(list);
                 EditTextBox.Text = string.Empty;
                 Sort((string)SortingDropDown.Content);
             }
@@ -309,6 +297,27 @@ namespace To_Do.Views
                 default:
                     break;
             }
+
+            // Debug
+
+            //for (int i = 0; i < list.Count; i++)
+            //{
+            //    var itemToSort = list[i];
+
+            //    if (viewModel.TasksList.IndexOf(itemToSort) == i)
+            //    {
+            //        continue;
+            //    }
+
+            //    //viewModel.TasksList.Remove(itemToSort);
+            //    //viewModel.TasksList.Insert(i, itemToSort);
+            //    viewModel.DeleteTask(itemToSort.Id);
+            //    viewModel.AddAtIndex(i, itemToSort);
+            //}
+
+
+            // Debug end
+
             viewModel.TasksList = new ObservableCollection<TaskModel>(list);
         }
 
@@ -421,10 +430,7 @@ namespace To_Do.Views
 
         private void OnTaskSplitViewClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
         {
-            Debug.WriteLine("Closing Split View");
             TryEditTask();
-
-            // Set the subtasks back to selectedTask!
         }
 
         public void TryEditTask()

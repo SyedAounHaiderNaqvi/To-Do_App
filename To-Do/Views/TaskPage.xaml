@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
     xmlns:model="using:To_Do.Models"
     xmlns:viewmodel="using:To_Do.ViewModels"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
@@ -957,6 +958,8 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <converters:DoubleToVisibilityConverter x:Key="DoubleToVisiblityConverter" LessThan="1"/>
         </ResourceDictionary>
     </Page.Resources>
     <Grid Margin="0,34,0,20">
@@ -967,7 +970,7 @@
             <RowDefinition/>
             <RowDefinition MinHeight="80" Height="80"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" Margin="35,15,19,0" x:FieldModifier="public" CanDragItems="False" CanReorderItems="False" AllowDrop="False" SelectionMode="None" BorderThickness="0" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{Binding Path=TasksList, Mode=TwoWay}">
+        <ListView ShowsScrollingPlaceholders="True" Grid.Row="0" Margin="35,15,19,0" x:FieldModifier="public" CanDragItems="False" CanReorderItems="False" AllowDrop="False" SelectionMode="None" BorderThickness="0" LayoutUpdated="listOfTasks_LayoutUpdated" x:Name="listOfTasks" ItemsSource="{Binding Path=TasksList, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="model:TaskModel">
                     <UserControl RightTapped="UserControl_RightTapped" PointerEntered="UserControl_PointerEntered" PointerExited="UserControl_PointerExited" x:Name="UserControl">
@@ -999,8 +1002,14 @@
                                                 <StackPanel.OpacityTransition>
                                                     <ScalarTransition Duration="0:0:0.13"/>
                                                 </StackPanel.OpacityTransition>
-                                                <TextBlock Text="Created on:" Foreground="{ThemeResource SystemAccentColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}"/>
-                                                <TextBlock x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}" Text="{Binding Path=Date, Mode=TwoWay}"/>
+                                                <FontIcon ToolTipService.ToolTip="Created On" Glyph="&#xE787;" Foreground="{ThemeResource SystemAccentColor}" FontSize="14"/>
+                                                <TextBlock ToolTipService.ToolTip="Created On" x:Name="TaskDate" Foreground="{ThemeResource SystemBaseMediumHighColor}" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}" Text="{Binding Path=Date, Mode=TwoWay}"/>
+                                                <StackPanel Orientation="Horizontal" Visibility="{Binding SubTasks.Count, Mode=TwoWay, Converter={StaticResource DoubleToVisiblityConverter}, ConverterParameter=True}">
+                                                    <TextBlock FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}" Text=" •"/>
+                                                    <TextBlock Margin="8,0,0,0" FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}" Text="{Binding Path=SubTasks.Count, Mode=TwoWay}"/>
+                                                    <TextBlock FontSize="14" Style="{ThemeResource CaptionTextBlockStyle}" Text=" subtask(s) left"/>
+                                                </StackPanel>
+                                                
                                             </StackPanel>
                                         </StackPanel>
                                         <StackPanel x:Name="BtnPanel" Spacing="10" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="5,10,0,10" Orientation="Horizontal">
