@@ -569,9 +569,6 @@
                         <controls:NavigationViewItem.Icon>
                             <FontIcon Glyph="{Binding Path=Glyph, Mode=TwoWay}" />
                         </controls:NavigationViewItem.Icon>
-                        <!--<controls:NavigationViewItem.InfoBadge>
-                            <controls:InfoBadge Opacity="{x:Bind opacity, Mode=OneWay}" Value="{x:Bind badgeNum, Mode=OneWay}"/>
-                        </controls:NavigationViewItem.InfoBadge>-->
                     </controls:NavigationViewItem>
                 </DataTemplate>
             </controls:NavigationView.MenuItemTemplate>

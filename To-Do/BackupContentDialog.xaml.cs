@@ -11,25 +11,26 @@ namespace To_Do
     {
         public ElementTheme THEME;
         StorageFolder appFolder = ApplicationData.Current.LocalFolder;
+        Windows.Storage.Pickers.FolderPicker folderPicker = new Windows.Storage.Pickers.FolderPicker
+        {
+            SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary
+        };
+        
 
         public BackupContentDialog()
         {
             this.InitializeComponent();
+            folderPicker.FileTypeFilter.Add("*");
             THEME = ThemeHelper.ActualTheme;
         }
 
         private async void CreateBackup(object sender, RoutedEventArgs e)
         {
-            var folderPicker = new Windows.Storage.Pickers.FolderPicker
-            {
-                SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary
-            };
-            folderPicker.FileTypeFilter.Add("*");
-
             StorageFolder folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
             {
                 StorageFolder rootFolder = await folder.CreateFolderAsync("To-Do Backup", CreationCollisionOption.ReplaceExisting);
+                
                 //disable buttons and controls
                 IsPrimaryButtonEnabled = false;
                 normalui.Visibility = Visibility.Collapsed;
@@ -70,12 +71,6 @@ namespace To_Do
 
         private async void RestoreData(object sender, RoutedEventArgs e)
         {
-            var folderPicker = new Windows.Storage.Pickers.FolderPicker
-            {
-                SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary
-            };
-            folderPicker.FileTypeFilter.Add("*");
-
             StorageFolder folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
             {

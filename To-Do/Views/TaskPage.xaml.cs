@@ -104,7 +104,7 @@ namespace To_Do.Views
                 if (!string.IsNullOrEmpty(d) && !string.IsNullOrWhiteSpace(d))
                 {
                     string id = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
-                    TaskModel newTask = new TaskModel() { Id = id, Description = d, Date = DateTime.Now.ToString("dd-MMMM-yyyy hh:mm:ss tt"), IsStarred = false, SubTasks = new List<TaskModel>() };
+                    TaskModel newTask = new TaskModel() { Id = id, Description = d, Date = DateTime.Now.ToString("dddd, dd-MMM-yyyy h:mm tt"), IsStarred = false, SubTasks = new List<TaskModel>() };
                     var vm = (TaskViewModel)this.DataContext;
                     vm.AddTask(newTask);
                     NewTaskBox.Text = string.Empty;
