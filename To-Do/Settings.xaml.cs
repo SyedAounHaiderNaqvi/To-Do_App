@@ -408,7 +408,7 @@ namespace To_Do
             {
                 Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = bgcolor.R, G = bgcolor.G, B = bgcolor.B });
 
-                Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                Application.Current.Resources["ExpanderHeaderBackground"] = new CommunityToolkit.WinUI.Media.AcrylicBrush()
                 {
                     BlurAmount = 8,
                     TintOpacity = 0.95,
@@ -416,7 +416,7 @@ namespace To_Do
                     TintColor = UtilityFunctions.ChangeColorBrightness(bgcolor, false),
                 };
 
-                Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                Application.Current.Resources["ExpanderContentBackground"] = new CommunityToolkit.WinUI.Media.AcrylicBrush()
                 {
                     BlurAmount = 8,
                     TintOpacity = 0.9,
@@ -429,7 +429,7 @@ namespace To_Do
                 if (ThemeHelper.IsDarkTheme())
                 {
                     Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 33, G = 33, B = 33 });
-                    Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                    Application.Current.Resources["ExpanderHeaderBackground"] = new CommunityToolkit.WinUI.Media.AcrylicBrush()
                     {
                         BlurAmount = 8,
                         TintOpacity = 0.95,
@@ -437,7 +437,7 @@ namespace To_Do
                         TintColor = Color.FromArgb(255, 32, 32, 32)
                     };
 
-                    Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                    Application.Current.Resources["ExpanderContentBackground"] = new CommunityToolkit.WinUI.Media.AcrylicBrush()
                     {
                         BlurAmount = 8,
                         TintOpacity = 0.95,
@@ -448,7 +448,7 @@ namespace To_Do
                 else
                 {
                     Application.Current.Resources["SideBarColor"] = new SolidColorBrush(new Color() { A = 100, R = 245, G = 245, B = 245 });
-                    Application.Current.Resources["ExpanderHeaderBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                    Application.Current.Resources["ExpanderHeaderBackground"] = new CommunityToolkit.WinUI.Media.AcrylicBrush()
                     {
                         BlurAmount = 8,
                         TintOpacity = 0.95,
@@ -456,7 +456,7 @@ namespace To_Do
                         TintColor = Colors.White
                     };
 
-                    Application.Current.Resources["ExpanderContentBackground"] = new Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush()
+                    Application.Current.Resources["ExpanderContentBackground"] = new CommunityToolkit.WinUI.Media.AcrylicBrush()
                     {
                         BlurAmount = 8,
                         TintOpacity = 0.9,
@@ -466,10 +466,10 @@ namespace To_Do
                 }
             }
 
-            Application.Current.Resources["TextControlBackground"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
-            Application.Current.Resources["TextControlBackgroundPointerOver"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
+            Application.Current.Resources["TextControlBackground"] = (CommunityToolkit.WinUI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+            Application.Current.Resources["TextControlBackgroundPointerOver"] = (CommunityToolkit.WinUI.Media.AcrylicBrush)Application.Current.Resources["ExpanderHeaderBackground"];
 
-            Application.Current.Resources["TextControlBackgroundFocused"] = (Microsoft.Toolkit.Uwp.UI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
+            Application.Current.Resources["TextControlBackgroundFocused"] = (CommunityToolkit.WinUI.Media.AcrylicBrush)Application.Current.Resources["ExpanderContentBackground"];
 
         }
 

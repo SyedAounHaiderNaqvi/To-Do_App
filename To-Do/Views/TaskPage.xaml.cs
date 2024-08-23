@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using To_Do.Models;
 using To_Do.ViewModels;
-using Windows.Devices.Input;
 using Windows.UI.Xaml.Controls.Primitives;
 using System.Diagnostics;
 

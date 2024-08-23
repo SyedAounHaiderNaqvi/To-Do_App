@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using To_Do.Models;
-using Microsoft.Toolkit.Uwp;
+using CommunityToolkit.WinUI.Collections;
 
 namespace To_Do
 {
@@ -38,9 +38,10 @@ namespace To_Do
             SelectedItem = defaultIcon;
         }
 
+        [System.Obsolete]
         void Load()
         {
-            var collection = new IncrementalLoadingCollection<IconsDataSource, IconData>(itemsPerPage:30);
+            var collection = new IncrementalLoadingCollection<IconsDataSource, IconData>(itemsPerPage: 30);
             this.IconsItemsView.ItemsSource = collection;
             this.IconsItemsView.SelectedIndex = 0;
             DataContext = collection;

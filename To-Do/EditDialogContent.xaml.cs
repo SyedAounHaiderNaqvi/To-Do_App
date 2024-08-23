@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace To_Do

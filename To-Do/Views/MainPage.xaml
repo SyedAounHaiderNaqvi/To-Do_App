@@ -10,7 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
-    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    xmlns:media="using:CommunityToolkit.WinUI.Media"
     controls:BackdropMaterial.ApplyToRootOrPageBackground="True"
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals">
     <Page.DataContext>
