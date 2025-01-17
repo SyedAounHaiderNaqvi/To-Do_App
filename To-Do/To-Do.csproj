@@ -270,23 +270,26 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Authentication.Msal">
+      <Version>7.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Graph">
+      <Version>7.1.4</Version>
+    </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Behaviors">
-      <Version>8.1.240821</Version>
+      <Version>8.1.240916</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Collections">
-      <Version>8.1.240821</Version>
+      <Version>8.1.240916</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives">
-      <Version>8.1.240821</Version>
-    </PackageReference>
-    <PackageReference Include="CommunityToolkit.Uwp.Controls.Segmented">
-      <Version>8.1.240821</Version>
+      <Version>8.1.240916</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Converters">
-      <Version>8.1.240821</Version>
+      <Version>8.1.240916</Version>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Uwp.Media">
-      <Version>8.1.240821</Version>
+      <Version>8.1.240916</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
@@ -309,6 +312,7 @@
       <Link>.editorconfig</Link>
     </None>
     <Content Include="Models\IconsData.json" />
+    <PRIResource Include="OAuth.resw" />
     <None Include="To-Do_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup />

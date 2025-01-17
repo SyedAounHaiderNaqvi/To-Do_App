@@ -22,6 +22,8 @@ using To_Do.ViewModels;
 using System.Collections.ObjectModel;
 using To_Do.Models;
 using System.Diagnostics;
+using CommunityToolkit.Authentication;
+using CommunityToolkit.Graph.Extensions;
 
 namespace To_Do.Views
 {
@@ -45,6 +47,25 @@ namespace To_Do.Views
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += OnCloseRequest;
             TileUpdateManager.CreateTileUpdaterForApplication().Clear();
             UpdateTransitionCheckbox();
+
+
+            var oauthSettings = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("OAuth");
+
+            var clientId = oauthSettings.GetString("AppId");
+            string[] scopes = new string[] { "https://graph.microsoft.us/.default" };
+            ProviderManager.Instance.GlobalProvider = new MsalProvider(clientId, scopes);
+
+            ProviderManager.Instance.ProviderStateChanged += OnProviderStateChanged;
+        }
+
+        async void OnProviderStateChanged(object sender, ProviderStateChangedEventArgs args)
+        {
+            var provider = ProviderManager.Instance.GlobalProvider;
+            if (provider?.State == ProviderState.SignedIn)
+            {
+                var graphClient = provider.GetClient();
+                var me = await graphClient.Me.Request().GetAsync();
+            }
         }
 
         void UpdateTransitionCheckbox()

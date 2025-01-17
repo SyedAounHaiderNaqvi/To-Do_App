@@ -988,6 +988,11 @@
                                             <ColumnDefinition Width="70"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
+                                        <Grid Opacity="0" Background="{ThemeResource SystemControlHighlightBaseMediumBrush}" Margin="-12,4,-60,0" x:Name="Highlight" IsHitTestVisible="False" Grid.ColumnSpan="2">
+                                            <Grid.OpacityTransition>
+                                                <ScalarTransition Duration="0:0:0.1"/>
+                                            </Grid.OpacityTransition>
+                                        </Grid>
                                         <CheckBox Height="25" Width="25" x:Name="completecheckbox" Translation="-10,0,0" IsChecked="{Binding Path=IsCompleted, Mode=TwoWay}" Style="{ThemeResource CheckBoxStyle1}" ToolTipService.ToolTip="Mark Complete" Click="CheckBox_Checked" Margin="25,0,10,0" Grid.Column="0" CornerRadius="10"/>
                                         <StackPanel Spacing="10" VerticalAlignment="Center" Margin="-5,0,150,0" HorizontalAlignment="Left" Grid.Column="1" Padding="0,15,0,15">
                                             <TextBlock Loaded="TaskDesc_Loaded" Translation="0,12,0" x:Name="TaskDesc" FontSize="20" Style="{ThemeResource BaseTextBlockStyle}" Text="{Binding Path=Description, Mode=TwoWay}">
@@ -1120,18 +1125,20 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <controls:DropDownButton CornerRadius="{ThemeResource ControlCornerRadius}" Style="{StaticResource DropDownButtonStyle1}"  ToolTipService.ToolTip="Sort By" VerticalAlignment="Center" Grid.Column="2" x:Name="SortingDropDown" Content="Date Created" >
-                    <controls:DropDownButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="t" IsChecked="True" Click="SortingOptionClicked" Text="Date Created"/>
-                            <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="t" Click="SortingOptionClicked" Text="Text"/>
-                            <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="t" Click="SortingOptionClicked" Text="Steps"/>
-                            <controls:RadioMenuFlyoutItem x:Name="opt4" GroupName="t" Click="SortingOptionClicked" Text="Completed"/>
-                            <controls:RadioMenuFlyoutItem x:Name="opt5" GroupName="t" Click="SortingOptionClicked" Text="Importance"/>
-                        </MenuFlyout>
-                    </controls:DropDownButton.Flyout>
+                <StackPanel VerticalAlignment="Center" Grid.Column="2" Orientation="Horizontal" Spacing="30">
+                    <controls:DropDownButton CornerRadius="{ThemeResource ControlCornerRadius}" Style="{StaticResource DropDownButtonStyle1}"  ToolTipService.ToolTip="Sort By"  x:Name="SortingDropDown" Content="Date Created" >
+                        <controls:DropDownButton.Flyout>
+                            <MenuFlyout Placement="Bottom">
+                                <controls:RadioMenuFlyoutItem x:Name="opt1" GroupName="t" IsChecked="True" Click="SortingOptionClicked" Text="Date Created"/>
+                                <controls:RadioMenuFlyoutItem x:Name="opt2" GroupName="t" Click="SortingOptionClicked" Text="Text"/>
+                                <controls:RadioMenuFlyoutItem x:Name="opt3" GroupName="t" Click="SortingOptionClicked" Text="Steps"/>
+                                <controls:RadioMenuFlyoutItem x:Name="opt4" GroupName="t" Click="SortingOptionClicked" Text="Completed"/>
+                                <controls:RadioMenuFlyoutItem x:Name="opt5" GroupName="t" Click="SortingOptionClicked" Text="Importance"/>
+                            </MenuFlyout>
+                        </controls:DropDownButton.Flyout>
 
-                </controls:DropDownButton>
+                    </controls:DropDownButton>
+                </StackPanel>
 
             </Grid>
         </Grid>

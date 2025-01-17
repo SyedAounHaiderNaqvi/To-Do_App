@@ -576,7 +576,7 @@
             <controls:NavigationView.AutoSuggestBox>
                 <AutoSuggestBox GotFocus="searchbox_GotFocus" x:Name="searchbox" HorizontalContentAlignment="Left" UpdateTextOnSelect="False" SuggestionChosen="AutoSuggestBox_SuggestionChosen" ItemTemplate="{StaticResource suggestionTemplate}" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="Search current list" AutomationProperties.Name="Search"/>
             </controls:NavigationView.AutoSuggestBox>
-            
+
             <controls:NavigationView.PaneCustomContent>
                 <StackPanel Orientation="Vertical">
                     <Button ToolTipService.ToolTip="Create New List" CornerRadius="{ThemeResource ControlCornerRadius}" Click="AddNewListToNavView" HorizontalContentAlignment="Left" Background="Transparent" BorderBrush="Transparent" Height="36" HorizontalAlignment="Stretch" Margin="4,2,4,2">

@@ -239,9 +239,11 @@ namespace To_Do.Views
                 var c = sender as Control;
                 var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
                 var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+                var highlight = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "Highlight");
                 panel.Translation = System.Numerics.Vector3.Zero;
                 panel.Opacity = 1;
                 block.Translation = System.Numerics.Vector3.Zero;
+                highlight.Opacity = 0.13f;
             }
         }
 
@@ -250,6 +252,8 @@ namespace To_Do.Views
             var c = sender as Control;
             var panel = UtilityFunctions.FindControl<StackPanel>(c, typeof(StackPanel), "timeStampPanel");
             var block = UtilityFunctions.FindControl<TextBlock>(c, typeof(TextBlock), "TaskDesc");
+            var highlight = UtilityFunctions.FindControl<Grid>(c, typeof(Grid), "Highlight");
+            highlight.Opacity = 0;
             panel.Translation = new System.Numerics.Vector3(0, 20, 0);
             panel.Opacity = 0;
             block.Translation = new System.Numerics.Vector3(0, 12, 0);

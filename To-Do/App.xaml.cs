@@ -6,6 +6,8 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using CommunityToolkit.Authentication;
+using CommunityToolkit.Graph.Extensions;
 
 namespace To_Do
 {
@@ -15,7 +17,13 @@ namespace To_Do
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            
+
+            
         }
+
+        
 
         public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
         {
